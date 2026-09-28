@@ -1,0 +1,81 @@
+# Fixed evaluation set for ask mode and the mode-boundary checks.
+# Written 2026-09-26 BEFORE retrieval was implemented, from a read of the raw sources.
+# This file lives outside vault/ and is never indexed, so the harness cannot retrieve the answer key.
+
+ask_tests:
+  - id: T1
+    kind: direct, one source
+    question: "What share of the final grade is attendance, and how many classes can be missed without penalty?"
+    expected_behavior: answer with citations
+    expected_answer: "Attendance is 20% of the grade; one absence carries no penalty."
+    expected_evidence:
+      - path: vault/raw/course/syllabus.html
+        section: Attendance
+        must_contain: ["20%", "one absence with no penalty"]
+      - path: vault/raw/course/syllabus.html
+        section: Grading
+        must_contain: ["Attendance", "20%"]
+
+  - id: T2
+    kind: answerable, reworded (avoids the source's vocabulary on purpose)
+    question: "In the app I built to track people I meet, what stops one user from seeing someone else's list?"
+    expected_behavior: answer with citations
+    expected_answer: >-
+      Ownership is enforced by Postgres Row Level Security (enabled and forced, four per-user policies),
+      plus the database assigning user_id from the verified token, plus application-layer checks
+      (three independent mechanisms).
+    expected_evidence:
+      - path: vault/raw/course-projects/secure-networking-tracker/README.md
+        section: Authentication and ownership
+        must_contain: ["Three independent mechanisms", "Row Level Security"]
+      - path: vault/raw/website/projects/secure-networking-tracker.md
+        section: any
+        must_contain: ["Row Level Security"]
+
+  - id: T3
+    kind: answerable, connects two sources
+    question: "What was my job title at Amazon Web Services, and by how much did the Action Hub cut sellers' time-to-insight?"
+    expected_behavior: answer with citations to BOTH sources
+    expected_answer: >-
+      Business Intelligence Engineer — Global Sales Strategy & Analytics (experience entry);
+      the Action Hub cut time-to-insight by 70% for 10,000+ sellers (project page).
+    expected_evidence:
+      - path: vault/raw/website/experience/amazon-web-services.md
+        section: properties
+        must_contain: ["Business Intelligence Engineer"]
+      - path: vault/raw/website/projects/action-hub.md
+        section: any
+        must_contain: ["70%"]
+
+  - id: T4
+    kind: unsupported (plausible, but no source states it)
+    question: "What grade did I receive on the Pac-Man assignment?"
+    expected_behavior: explicit insufficient-evidence statement, no guessed grade
+    expected_answer: "The sources do not say what grade was received."
+    distractors: "Syllabus grading policy (scored out of 10, weights) and the Pac-Man results (906 vs 492) are nearby but do not answer it."
+    expected_evidence: []
+
+mode_checks:
+  - id: M1
+    name: casual chat, capabilities
+    mode: chat
+    turns: ["what can you help me with?", "what can we do?"]
+    expected: accurate capabilities and a suggested starting point; no notes lookup, no citations, no insufficient-evidence refusal
+
+  - id: M2
+    name: conversational follow-up
+    mode: chat
+    turns: ["Draft a short plan for my week: I need to finish Assignment 4 and prep for PM internship applications.", "make that shorter"]
+    expected: second answer is a shorter version of the first plan (uses conversation history)
+
+  - id: M3
+    name: raw search
+    mode: search
+    query: "row level security"
+    expected: original passages with source paths; zero model calls; also works with the Gemma server stopped
+
+  - id: M4
+    name: ask ignores chat history
+    chat_turns: ["By the way, my favorite programming language is Rust."]
+    ask: "What is my favorite programming language?"
+    expected: ask reports insufficient evidence; the saved ask prompt contains no chat text

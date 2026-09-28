@@ -1,0 +1,56 @@
+# Where each raw source came from. Captured 2026-09-26 and stored byte-for-byte in vault/raw/.
+# The harness copies these fields into data/catalog.json and vault/Source Catalog.md.
+# A raw file matches the first entry whose `prefix` its vault-relative path starts with.
+
+[[origin]]
+prefix = "raw/website/projects/"
+collection = "Personal website - projects"
+author = "Eason Han"
+repo = "https://github.com/easonhanyc/easonhanyc.github.io"
+commit = "e8ea53c3546621c79620bbfa04bd88321fac8ec3"
+repo_dir = "src/content/projects/"
+site = "https://easonhanyc.github.io/work/"
+
+[[origin]]
+prefix = "raw/website/experience/"
+collection = "Personal website - experience"
+author = "Eason Han"
+repo = "https://github.com/easonhanyc/easonhanyc.github.io"
+commit = "e8ea53c3546621c79620bbfa04bd88321fac8ec3"
+repo_dir = "src/content/experience/"
+site = "https://easonhanyc.github.io/experience"
+
+[[origin]]
+prefix = "raw/course/syllabus.html"
+collection = "MBA 290T course site"
+author = "Alexandre Mas and Pepe Alonso (course instructors)"
+url = "https://haas-ai-classes-fall-26.vercel.app/syllabus.html"
+
+[[origin]]
+prefix = "raw/course-projects/pacman-dqn/"
+collection = "MBA 290T project - Ms. Pac-Man DQN (Assignment 2)"
+author = "Eason Han"
+repo = "https://github.com/easonhanyc/mba290t-pacman-dqn"
+commit = "92dd46e2d25e63e21bb351085e6a781a25b35841"
+repo_dir = ""
+
+[[origin]]
+prefix = "raw/course-projects/custom-llm/"
+collection = "MBA 290T project - Custom LLM (Assignment 3)"
+author = "Eason Han"
+repo = "https://github.com/easonhanyc/mba290t-custom-llm"
+commit = "b1ce9d97c798aa7cb87d8bd0ba0d18bacf9bb445"
+repo_dir = ""
+
+[[origin]]
+prefix = "raw/course-projects/secure-networking-tracker/"
+collection = "MBA 290T project - Secure Networking Tracker (Assignment 1)"
+author = "Eason Han"
+repo = "https://github.com/easonhanyc/secure-networking-tracker"
+commit = "2aa3c1e478b0ef74f03f9c5859c9f5ab8a38ce0f"
+repo_dir = ""
+
+[[origin]]
+prefix = "raw/"
+collection = "Imported local file"
+author = "unknown"

@@ -1,0 +1,59 @@
+# Harness configuration. Paths are relative to the project root.
+# Local mode is the default for every command; online mode must be selected explicitly with --mode online.
+
+[paths]
+vault = "vault"
+raw = "vault/raw"
+wiki = "vault/wiki"
+data = "data"
+runs = "runs"
+logs = "logs"
+drafts = "drafts"
+instructions = "instructions"
+
+[local]
+runtime = "llama.cpp llama-server"
+model_id = "gemma-4-e4b-it-qat-q4_0"
+model_label = "Gemma 4 E4B instruction-tuned, QAT Q4_0 GGUF"
+model_file = "~/models/gemma/gemma-4-E4B_q4_0-it.gguf"
+url = "http://127.0.0.1:8080"
+ctx = 8192
+embed_model_id = "embeddinggemma-300m-qat-q8_0"
+embed_model_file = "~/models/gemma/embeddinggemma-300m-qat-Q8_0.gguf"
+embed_url = "http://127.0.0.1:8081"
+embed_ctx = 2048
+timeout_s = 600
+
+[online]
+provider = "Gemini API (Google AI Studio)"
+model_id = "gemma-4-26b-a4b-it"
+endpoint = "https://generativelanguage.googleapis.com/v1beta/models"
+api_key_env = "GEMINI_API_KEY"
+timeout_s = 120
+
+[retrieval]
+target_words = 200      # passage size the chunker aims for
+max_words = 300         # hard cap before a paragraph is split by sentence
+top_k = 6               # passages returned by search / given to ask
+candidates = 30         # per-ranker candidates before fusion
+rrf_k = 60              # reciprocal-rank-fusion constant
+bm25_k1 = 1.5
+bm25_b = 0.75
+
+[ask]
+evidence_token_budget = 2200
+max_answer_tokens = 350
+temperature = 0.1
+
+[chat]
+history_token_budget = 2500
+notes_token_budget = 1400
+notes_top_k = 4
+max_answer_tokens = 450
+temperature = 0.6
+
+[ingest]
+direct_word_limit = 1800   # sources up to this size go to Gemma whole; larger ones are read in parts
+part_words = 1500          # size of each part for large sources
+max_facts_per_part = 8
+max_note_facts = 12

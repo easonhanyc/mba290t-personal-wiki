@@ -1,0 +1,2772 @@
+{
+  "wiki/Projects/Secure Networking Tracker.md": {
+    "title": "Secure Networking Tracker",
+    "folder": "Projects",
+    "summary": "The Secure Networking Tracker is a private networking tool designed for users at Berkeley to maintain connections. It enforces strict data ownership using Row Level Security in Postgres, ensuring users can only access their own contacts.",
+    "facts": [
+      {
+        "fact": "A private networking tracker for the people you want to stay connected with at Berkeley is the Secure Networking Tracker.",
+        "source": "raw/course-projects/secure-networking-tracker/README.md",
+        "section": "Secure Networking Tracker",
+        "heading": "Secure Networking Tracker"
+      },
+      {
+        "fact": "Every contact belongs to exactly one account, and that ownership is enforced by Postgres itself through Row Level Security.",
+        "source": "raw/course-projects/secure-networking-tracker/README.md",
+        "section": "Secure Networking Tracker",
+        "heading": "Secure Networking Tracker"
+      },
+      {
+        "fact": "The contact list can be viewed as a table on desktop and as stacked cards on mobile.",
+        "source": "raw/course-projects/secure-networking-tracker/README.md",
+        "section": "Secure Networking Tracker › Features",
+        "heading": "Features"
+      },
+      {
+        "fact": "Priority is a closed set — high, medium, low — enforced in the API and as a Postgres enum.",
+        "source": "raw/course-projects/secure-networking-tracker/README.md",
+        "section": "Secure Networking Tracker › Features",
+        "heading": "Features"
+      },
+      {
+        "fact": "Contacts persist in Neon Postgres and survive a refresh, a new tab, or a new device.",
+        "source": "raw/course-projects/secure-networking-tracker/README.md",
+        "section": "Secure Networking Tracker › Features",
+        "heading": "Features"
+      },
+      {
+        "fact": "The architecture involves React client components fetching data from Next.js Route Handlers, which then interact with the Neon Data API.",
+        "source": "raw/course-projects/secure-networking-tracker/README.md",
+        "section": "Secure Networking Tracker › Architecture",
+        "heading": "Architecture"
+      },
+      {
+        "fact": "The frontend bundle contains no database URL, no service key and no auth secret.",
+        "source": "raw/course-projects/secure-networking-tracker/README.md",
+        "section": "Secure Networking Tracker › Architecture",
+        "heading": "Architecture"
+      },
+      {
+        "fact": "The project uses Next.js 16 (App Router) as its framework.",
+        "source": "raw/course-projects/secure-networking-tracker/README.md",
+        "section": "Secure Networking Tracker › Technology stack",
+        "heading": "Technology stack"
+      },
+      {
+        "fact": "Prerequisites for local setup include Node.js 20+ and a free Neon account.",
+        "source": "raw/course-projects/secure-networking-tracker/README.md",
+        "section": "Secure Networking Tracker › Local setup",
+        "heading": "Local setup"
+      },
+      {
+        "fact": "The Neon Console must have Auth (Managed Better Auth) and the Data API enabled on the project.",
+        "source": "raw/course-projects/secure-networking-tracker/README.md",
+        "section": "Secure Networking Tracker › Local setup",
+        "heading": "Local setup"
+      },
+      {
+        "fact": "The rule is that a row belongs to the user whose JWT created it, and only that user can read or change it.",
+        "source": "raw/course-projects/secure-networking-tracker/README.md",
+        "section": "Secure Networking Tracker › Authentication and ownership",
+        "heading": "Authentication and ownership"
+      },
+      {
+        "fact": "Row Level Security is enabled and forced on contacts with four separate policies for authenticated users.",
+        "source": "raw/course-projects/secure-networking-tracker/README.md",
+        "section": "Secure Networking Tracker › Authentication and ownership",
+        "heading": "Authentication and ownership"
+      },
+      {
+        "fact": "A signed-in user gets a private list of contacts, and the browser never talks to the database.",
+        "source": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md",
+        "section": "How this app works › 1. The one-paragraph version",
+        "heading": "1. The one-paragraph version"
+      },
+      {
+        "fact": "The `user_id` column in the `public.contacts` table is of type `text` and serves as the whole security model.",
+        "source": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md",
+        "section": "How this app works › 2. The schema",
+        "heading": "2. The schema"
+      },
+      {
+        "fact": "The ownership rule states that a row belongs to whoever's JWT created it, and only that user can read or change it.",
+        "source": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md",
+        "section": "How this app works › 3. The ownership rule",
+        "heading": "3. The ownership rule"
+      },
+      {
+        "fact": "Layer 1 assigns ownership because the API never sends `user_id`, and the value can only come from the verified token.",
+        "source": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md",
+        "section": "How this app works › 3. The ownership rule › Layer 1 — the database assigns ownership",
+        "heading": "Layer 1 — the database assigns ownership"
+      },
+      {
+        "fact": "Layer 2 uses Row Level Security policies to filter every statement for the `authenticated` role.",
+        "source": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md",
+        "section": "How this app works › 3. The ownership rule › Layer 2 — Row Level Security filters every statement",
+        "heading": "Layer 2 — Row Level Security filters every statement"
+      },
+      {
+        "fact": "The distinction between `USING` and `WITH CHECK` is that `USING` filters existing rows, while `WITH CHECK` inspects the row as it will be after the write.",
+        "source": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md",
+        "section": "How this app works › 3. The ownership rule › Layer 2 — Row Level Security filters every statement",
+        "heading": "Layer 2 — Row Level Security filters every statement"
+      },
+      {
+        "fact": "Layer 3 involves the application checking routes and returning 401s, which is defense in depth but not the primary security mechanism.",
+        "source": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md",
+        "section": "How this app works › 3. The ownership rule › Layer 3 — the application checks too",
+        "heading": "Layer 3 — the application checks too"
+      },
+      {
+        "fact": "When editing a contact, the request goes from the browser to the route handler, then to Neon Auth for a JWT, and finally to Postgres.",
+        "source": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md",
+        "section": "How this app works › 4. What happens on one request",
+        "heading": "4. What happens on one request"
+      },
+      {
+        "fact": "Returning 404 instead of 403 when a row is not owned is because RLS makes the row invisible, not forbidden.",
+        "source": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md",
+        "section": "How this app works › 4. What happens on one request",
+        "heading": "4. What happens on one request"
+      },
+      {
+        "fact": "Validation happens three times: in the browser form, in the route handler using Zod, and via Postgres CHECK constraints.",
+        "source": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md",
+        "section": "How this app works › 5. Validation happens three times, on purpose",
+        "heading": "5. Validation happens three times, on purpose"
+      },
+      {
+        "fact": "The `NEXT_PUBLIC_` endpoints are safe to expose because Row Level Security is doing the work.",
+        "source": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md",
+        "section": "How this app works › 6. Secrets: what is public and why that's fine",
+        "heading": "6. Secrets: what is public and why that's fine"
+      },
+      {
+        "fact": "Going through the backend API adds an independent layer of trusted validation and controlled error messages, even if RLS protects the data.",
+        "source": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md",
+        "section": "How this app works › 7. Questions you should have an answer for",
+        "heading": "7. Questions you should have an answer for"
+      },
+      {
+        "fact": "The Secure Networking Tracker is a private contact tracker where ownership is enforced by Postgres itself, not by the API layer.",
+        "source": "raw/website/projects/secure-networking-tracker.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "The project is a networking tracker for Berkeley contacts where one user's list is unreachable to another even if the API layer were bypassed entirely — because the boundary lives in Postgres, not in application code.",
+        "source": "raw/website/projects/secure-networking-tracker.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "The stack used for the project includes Next.js 16, Neon Postgres, Better Auth, and Vercel.",
+        "source": "raw/website/projects/secure-networking-tracker.md",
+        "section": "(introduction)",
+        "heading": ""
+      },
+      {
+        "fact": "The interesting part of the tracker is where the ownership boundary sits, as every contact belongs to exactly one account, and Postgres enforces that below the application through Row Level Security.",
+        "source": "raw/website/projects/secure-networking-tracker.md",
+        "section": "(introduction)",
+        "heading": ""
+      },
+      {
+        "fact": "Three independent mechanisms enforce one rule: a row belongs to the user whose token created it.",
+        "source": "raw/website/projects/secure-networking-tracker.md",
+        "section": "2. Where the boundary actually is",
+        "heading": "2. Where the boundary actually is"
+      },
+      {
+        "fact": "The database assigns ownership by setting user_id to NOT NULL DEFAULT auth.user_id(), ensuring the value always comes from the verified token.",
+        "source": "raw/website/projects/secure-networking-tracker.md",
+        "section": "2. Where the boundary actually is",
+        "heading": "2. Where the boundary actually is"
+      },
+      {
+        "fact": "RLS filters every statement using four policies for authenticated users covering select, insert, update and delete.",
+        "source": "raw/website/projects/secure-networking-tracker.md",
+        "section": "2. Where the boundary actually is",
+        "heading": "2. Where the boundary actually is"
+      },
+      {
+        "fact": "A consequence of using RLS is that PATCH or DELETE against another user's contact returns 404, not 403, because the row is invisible to the caller.",
+        "source": "raw/website/projects/secure-networking-tracker.md",
+        "section": "2. Where the boundary actually is › The subtle one",
+        "heading": "The subtle one"
+      },
+      {
+        "fact": "The claim that no secret reaches the browser is verified by checking the actual production build for secrets like NEON_AUTH_COOKIE_SECRET and DATABASE_URL.",
+        "source": "raw/website/projects/secure-networking-tracker.md",
+        "section": "3. Verified, not asserted",
+        "heading": "3. Verified, not asserted"
+      },
+      {
+        "fact": "28 tests cover the trusted validation module, asserting that a client-supplied user_id is stripped and unknown sort parameters fall back to safe defaults.",
+        "source": "raw/website/projects/secure-networking-tracker.md",
+        "section": "3. Verified, not asserted",
+        "heading": "3. Verified, not asserted"
+      },
+      {
+        "fact": "One thing that could be done differently is implementing keyset pagination instead of loading every matching row.",
+        "source": "raw/website/projects/secure-networking-tracker.md",
+        "section": "4. What I'd do differently",
+        "heading": "4. What I'd do differently"
+      },
+      {
+        "fact": "The current search functionality uses ILIKE, which is substring matching with no ranking or typo tolerance.",
+        "source": "raw/website/projects/secure-networking-tracker.md",
+        "section": "4. What I'd do differently",
+        "heading": "4. What I'd do differently"
+      }
+    ],
+    "related": [
+      {
+        "title": "UC Berkeley",
+        "why": "Both notes are associated with UC Berkeley."
+      },
+      {
+        "title": "Ms. Pac-Man DQN",
+        "why": "Both projects involve implementing and training an agent using a Deep Q-Network."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Row Level Security",
+        "why": "The project heavily relies on Postgres RLS to enforce data ownership.",
+        "source": "raw/course-projects/secure-networking-tracker/README.md"
+      },
+      {
+        "name": "Next.js App Router",
+        "why": "The project uses Next.js 16 with the App Router for its architecture.",
+        "source": "raw/course-projects/secure-networking-tracker/README.md"
+      },
+      {
+        "name": "JWT Authentication",
+        "why": "Ownership is tied to the user's JWT, which dictates access rights.",
+        "source": "raw/course-projects/secure-networking-tracker/README.md"
+      },
+      {
+        "name": "API Security",
+        "why": "The architecture ensures sensitive credentials are never exposed on the frontend.",
+        "source": "raw/course-projects/secure-networking-tracker/README.md"
+      },
+      {
+        "name": "Row Level Security",
+        "why": "The core database mechanism used to enforce data ownership and access control.",
+        "source": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md"
+      },
+      {
+        "name": "JWT",
+        "why": "Used by Neon Auth to verify user identity and provide claims to the database.",
+        "source": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md"
+      },
+      {
+        "name": "Defense in Depth",
+        "why": "The practice of implementing multiple, overlapping security checks at different layers (browser, API, DB).",
+        "source": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md"
+      },
+      {
+        "name": "Postgres Enum",
+        "why": "Used to enforce a restricted set of values for the contact priority field.",
+        "source": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md"
+      },
+      {
+        "name": "Row Level Security",
+        "why": "The core concept used to enforce data ownership at the database level.",
+        "source": "raw/website/projects/secure-networking-tracker.md"
+      },
+      {
+        "name": "Defense in Depth",
+        "why": "The project uses multiple layers (database, server, application) to ensure security.",
+        "source": "raw/website/projects/secure-networking-tracker.md"
+      },
+      {
+        "name": "Input Validation",
+        "why": "The application layer validates and sanitizes input before it reaches the database.",
+        "source": "raw/website/projects/secure-networking-tracker.md"
+      },
+      {
+        "name": "Keyset Pagination",
+        "why": "A technique mentioned as a future improvement for handling large datasets.",
+        "source": "raw/website/projects/secure-networking-tracker.md"
+      }
+    ],
+    "sources": [
+      "raw/course-projects/secure-networking-tracker/README.md",
+      "raw/course-projects/secure-networking-tracker/docs/how-it-works.md",
+      "raw/website/projects/secure-networking-tracker.md"
+    ],
+    "property_related": []
+  },
+  "wiki/Projects/Hazardous Asteroid Screening.md": {
+    "title": "Hazardous Asteroid Screening",
+    "folder": "Projects",
+    "summary": "This project developed a triage filter to prioritize near-Earth asteroids for observation, as space agencies cannot monitor all of them. The model involved significant data selection, notably removing the most predictive variable based on operational constraints.",
+    "facts": [
+      {
+        "fact": "NASA's definition of a hazardous asteroid is made of two variables — and both were columns in the training data.",
+        "source": "raw/website/projects/asteroid-screening.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "The useful model is a triage filter, not an oracle.",
+        "source": "raw/website/projects/asteroid-screening.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "NASA's Center for Near-Earth Object Studies had identified 26,115 near-Earth asteroids and 2,185 potentially dangerous ones.",
+        "source": "raw/website/projects/asteroid-screening.md",
+        "section": "1. The question behind the question",
+        "heading": "1. The question behind the question"
+      },
+      {
+        "fact": "NASA's definition of a potentially hazardous asteroid is exact: an Earth Minimum Orbit Intersection Distance of 0.05 au or less, and an absolute magnitude of 22.0 or less.",
+        "source": "raw/website/projects/asteroid-screening.md",
+        "section": "2. The definition was sitting in the data",
+        "heading": "2. The definition was sitting in the data"
+      },
+      {
+        "fact": "The raw data was 4,687 asteroid records across 40 variables.",
+        "source": "raw/website/projects/asteroid-screening.md",
+        "section": "3. What else came out, and why",
+        "heading": "3. What else came out, and why"
+      },
+      {
+        "fact": "Seventeen survived as predictors.",
+        "source": "raw/website/projects/asteroid-screening.md",
+        "section": "3. What else came out, and why",
+        "heading": "3. What else came out, and why"
+      },
+      {
+        "fact": "Four models, evaluated on a 30% holdout, included Logistic regression, Random forest, bagged, XGBoost, and XGBoost, tuned.",
+        "source": "raw/website/projects/asteroid-screening.md",
+        "section": "4. Accuracy was the wrong headline",
+        "heading": "4. Accuracy was the wrong headline"
+      },
+      {
+        "fact": "Tuning gave up two points of accuracy and bought fifteen points of sensitivity.",
+        "source": "raw/website/projects/asteroid-screening.md",
+        "section": "4. Accuracy was the wrong headline",
+        "heading": "4. Accuracy was the wrong headline"
+      },
+      {
+        "fact": "The feature importances came back with absolute magnitude ranked top.",
+        "source": "raw/website/projects/asteroid-screening.md",
+        "section": "5. The leak that stayed in",
+        "heading": "5. The leak that stayed in"
+      },
+      {
+        "fact": "The cut-off was found by hand, not optimised.",
+        "source": "raw/website/projects/asteroid-screening.md",
+        "section": "6. Stated limitations",
+        "heading": "6. Stated limitations"
+      },
+      {
+        "fact": "Near-Earth asteroids only are in scope, and nothing here extends to meteoroids, comets and other objects without new data.",
+        "source": "raw/website/projects/asteroid-screening.md",
+        "section": "6. Stated limitations",
+        "heading": "6. Stated limitations"
+      }
+    ],
+    "related": [
+      {
+        "title": "University of Notre Dame",
+        "why": "Both notes relate to academic projects undertaken at the University of Notre Dame."
+      },
+      {
+        "title": "Custom LLM with nanoGPT",
+        "why": "Both projects involve building and evaluating models using specific training methodologies."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Triage Filter",
+        "why": "The core concept of using a model to prioritize tasks rather than achieve perfect accuracy.",
+        "source": "raw/website/projects/asteroid-screening.md"
+      },
+      {
+        "name": "Feature Selection",
+        "why": "The process of selecting relevant variables from the dataset, including removing highly predictive but operationally useless ones.",
+        "source": "raw/website/projects/asteroid-screening.md"
+      },
+      {
+        "name": "Sensitivity vs Accuracy Tradeoff",
+        "why": "The discussion on how tuning a model shifts performance between correctly identifying positives and overall correctness.",
+        "source": "raw/website/projects/asteroid-screening.md"
+      },
+      {
+        "name": "Model Operational Constraints",
+        "why": "The idea that real-world deployment dictates which data features can be used.",
+        "source": "raw/website/projects/asteroid-screening.md"
+      }
+    ],
+    "sources": [
+      "raw/website/projects/asteroid-screening.md"
+    ],
+    "property_related": []
+  },
+  "wiki/Projects/GenAI Adoption Program.md": {
+    "title": "GenAI Adoption Program",
+    "folder": "Projects",
+    "summary": "This project involved designing a gamified adoption program for 1,100 LATAM sellers to drive usage of existing GenAI tooling. The program focused on rewarding activity rather than winning, resulting in over 75% participation within 60 days.",
+    "facts": [
+      {
+        "fact": "The program was a gamified adoption programme for 1,100 LATAM sellers.",
+        "source": "raw/website/projects/genai-adoption-program.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "Over 75% of 1,100 sellers did participate inside 60 days.",
+        "source": "raw/website/projects/genai-adoption-program.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "The productivity case for sellers using GenAI in their daily work was not in dispute.",
+        "source": "raw/website/projects/genai-adoption-program.md",
+        "section": "1. The tool was never the constraint",
+        "heading": "1. The tool was never the constraint"
+      },
+      {
+        "fact": "Mandating GenAI usage produces compliance, not adoption.",
+        "source": "raw/website/projects/genai-adoption-program.md",
+        "section": "1. The tool was never the constraint",
+        "heading": "1. The tool was never the constraint"
+      },
+      {
+        "fact": "The program was partnered with the LATAM sales director and a principal seller.",
+        "source": "raw/website/projects/genai-adoption-program.md",
+        "section": "2. Why this needed the field, not the analytics team",
+        "heading": "2. Why this needed the field, not the analytics team"
+      },
+      {
+        "fact": "Points per qualifying activity makes the behavior countable.",
+        "source": "raw/website/projects/genai-adoption-program.md",
+        "section": "3. The mechanics, and what each one buys",
+        "heading": "3. The mechanics, and what each one buys"
+      },
+      {
+        "fact": "Weekly and monthly ranking cadences were used to keep competition active.",
+        "source": "raw/website/projects/genai-adoption-program.md",
+        "section": "3. The mechanics, and what each one buys",
+        "heading": "3. The mechanics, and what each one buys"
+      },
+      {
+        "fact": "Badges provided a persistent status reward that did not need to be re-bought monthly.",
+        "source": "raw/website/projects/genai-adoption-program.md",
+        "section": "3. The mechanics, and what each one buys",
+        "heading": "3. The mechanics, and what each one buys"
+      },
+      {
+        "fact": "Activity-weighted raffle entries gave everyone a return on participating rather than on winning.",
+        "source": "raw/website/projects/genai-adoption-program.md",
+        "section": "3. The mechanics, and what each one buys",
+        "heading": "3. The mechanics, and what each one buys"
+      },
+      {
+        "fact": "Standings were published provisionally with an explicit window to dispute them before being finalized.",
+        "source": "raw/website/projects/genai-adoption-program.md",
+        "section": "4. The leaderboard has to be believed",
+        "heading": "4. The leaderboard has to be believed"
+      },
+      {
+        "fact": "The program was revised to include country-level standings alongside the regional board.",
+        "source": "raw/website/projects/genai-adoption-program.md",
+        "section": "5. What changed while it ran",
+        "heading": "5. What changed while it ran"
+      },
+      {
+        "fact": "Certifications were added as an earning path, moving the program from rewarding usage to also rewarding capability.",
+        "source": "raw/website/projects/genai-adoption-program.md",
+        "section": "5. What changed while it ran",
+        "heading": "5. What changed while it ran"
+      }
+    ],
+    "related": [
+      {
+        "title": "Amazon Web Services",
+        "why": "Both notes relate to working on internal products for large organizations."
+      },
+      {
+        "title": "Action Hub",
+        "why": "Both projects involve building systems to rank or prioritize information for a specific audience."
+      },
+      {
+        "title": "Job Search Agent",
+        "why": "Both projects involve building an automated agent to scan and rank relevant opportunities."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Gamification",
+        "why": "The program used game mechanics like points, badges, and leaderboards to drive user behavior.",
+        "source": "raw/website/projects/genai-adoption-program.md"
+      },
+      {
+        "name": "Adoption Strategy",
+        "why": "The project addressed the gap between tool availability and habitual usage.",
+        "source": "raw/website/projects/genai-adoption-program.md"
+      },
+      {
+        "name": "Behavioral Incentives",
+        "why": "The mechanics were designed to encourage voluntary repetition through varied rewards.",
+        "source": "raw/website/projects/genai-adoption-program.md"
+      },
+      {
+        "name": "Trust Mechanisms",
+        "why": "Implementing a correction window for leaderboards built trust in the data.",
+        "source": "raw/website/projects/genai-adoption-program.md"
+      }
+    ],
+    "sources": [
+      "raw/website/projects/genai-adoption-program.md"
+    ],
+    "property_related": []
+  },
+  "wiki/Projects/Job Search Agent.md": {
+    "title": "Job Search Agent",
+    "folder": "Projects",
+    "summary": "This project is a daily scanner designed to find PM internships for Summer 2027. It focuses on ranking relevant roles over simply matching keywords to ensure high-quality, focused output.",
+    "facts": [
+      {
+        "fact": "The agent scans roughly 29,400 postings in about 50 seconds every weekday, and opens a GitHub issue only when something new appears.",
+        "source": "raw/website/projects/job-search-agent.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "The output is capped at two roles per company, and a run that reports nothing is considered a successful run.",
+        "source": "raw/website/projects/job-search-agent.md",
+        "section": "(introduction)",
+        "heading": ""
+      },
+      {
+        "fact": "The fix for weighting issues was to make the product-role signal deliberately dominant, weighting it 100 against 45 for \"explicitly hires MBAs\" and 15 for strategy/BizOps.",
+        "source": "raw/website/projects/job-search-agent.md",
+        "section": "1. The decision I'd point to: ranking, not matching",
+        "heading": "1. The decision I'd point to: ranking, not matching"
+      },
+      {
+        "fact": "The agent matches only on a narrow set of high-signal phrases like \"MBA students\" or \"pursuing an MBA\" from descriptions, not general keywords.",
+        "source": "raw/website/projects/job-search-agent.md",
+        "section": "2. Matching on titles, not descriptions",
+        "heading": "2. Matching on titles, not descriptions"
+      },
+      {
+        "fact": "The gate for the daily scan is set to \"at or after noon Pacific, if today has not already run,\" using committed run logs to prevent missed days.",
+        "source": "raw/website/projects/job-search-agent.md",
+        "section": "3. Silence has to be trustworthy",
+        "heading": "3. Silence has to be trustworthy"
+      },
+      {
+        "fact": "Delivery is via a GitHub issue, which uses the GITHUB_TOKEN automatically, meaning there is nothing to configure or rotate.",
+        "source": "raw/website/projects/job-search-agent.md",
+        "section": "4. Choosing a delivery channel with no secrets",
+        "heading": "4. Choosing a delivery channel with no secrets"
+      },
+      {
+        "fact": "LinkedIn, Indeed and Handshake are not covered because they are login-gated or prohibit scraping.",
+        "source": "raw/website/projects/job-search-agent.md",
+        "section": "5. Known limits",
+        "heading": "5. Known limits"
+      }
+    ],
+    "related": [
+      {
+        "title": "Action Hub",
+        "why": "Both projects involve ranking items to surface the most relevant opportunities from a large pool."
+      },
+      {
+        "title": "MBA 290T Syllabus",
+        "why": "Both notes discuss building and evaluating tool-using AI agents."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Ranking vs Matching",
+        "why": "The project emphasizes the importance of ranking relevant results over simple keyword matching.",
+        "source": "raw/website/projects/job-search-agent.md"
+      },
+      {
+        "name": "Signal Weighting",
+        "why": "The agent uses weighted signals to determine the relevance of job postings.",
+        "source": "raw/website/projects/job-search-agent.md"
+      },
+      {
+        "name": "Automated Workflow Reliability",
+        "why": "The system incorporates checks to ensure scheduled tasks run reliably and report status correctly.",
+        "source": "raw/website/projects/job-search-agent.md"
+      }
+    ],
+    "sources": [
+      "raw/website/projects/job-search-agent.md"
+    ],
+    "property_related": []
+  },
+  "wiki/Concepts/Time Series Analysis.md": {
+    "title": "Time Series Analysis",
+    "folder": "Concepts",
+    "summary": "Time Series Analysis involves analyzing data points collected over time, often requiring significant preprocessing to ensure comparability across different data points or models. In these sources, it appears in projects involving trend modeling, forecasting, and the critical step of making derived metrics comparable.",
+    "facts": [
+      {
+        "fact": "The variable that wasn't in the data required manual repair because two race times came back in a format inconsistent with the rest, and missing driver and team standings were filled by checking source pages by hand.",
+        "source": "raw/website/projects/formula-1-trends.md",
+        "section": "1. The variable that wasn't in the data",
+        "heading": "1. The variable that wasn't in the data"
+      },
+      {
+        "fact": "A pooled average of derived speed across every race in a season describes which circuits happened to be on that year's calendar rather than describing the cars.",
+        "source": "raw/website/projects/formula-1-trends.md",
+        "section": "2. Three ways the numbers weren't comparable",
+        "heading": "2. Three ways the numbers weren't comparable"
+      },
+      {
+        "fact": "To compare 1991 to 2022, the analysis held the track constant, leading to the decision to use only Spain because it had the most complete run and the most stable circuit length across the window.",
+        "source": "raw/website/projects/formula-1-trends.md",
+        "section": "2. Three ways the numbers weren't comparable",
+        "heading": "2. Three ways the numbers weren't comparable"
+      },
+      {
+        "fact": "The analysis used thirty-two data points, which was considered a thin time series, and the author chose this deliberately because a small valid comparison beats a large invalid one.",
+        "source": "raw/website/projects/formula-1-trends.md",
+        "section": "2. Three ways the numbers weren't comparable",
+        "heading": "2. Three ways the numbers weren't comparable"
+      },
+      {
+        "fact": "The project involved scraping thirty-two seasons from Formula 1's results pages, spanning 1991–2022, and the hardest part was making any two numbers comparable.",
+        "source": "raw/website/projects/formula-1-trends.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "Six candidates were fitted to the series, including linear, quadratic, cubic, quartic, quartic with an exponential transform, and Holt-Winters exponential smoothing, and they were compared on root mean squared error.",
+        "source": "raw/website/projects/formula-1-trends.md",
+        "section": "4. The model that won, and why that is worth doubting",
+        "heading": "4. The model that won, and why that is worth doubting"
+      },
+      {
+        "fact": "The quartic exponential model was the one that came out lowest when compared on root mean squared error.",
+        "source": "raw/website/projects/formula-1-trends.md",
+        "section": "4. The model that won, and why that is worth doubting",
+        "heading": "4. The model that won, and why that is worth doubting"
+      },
+      {
+        "fact": "Pipeline creation was forecasted using a least-squares linear trend fitted only on the six months where the category was genuinely active, and then projected forward by region.",
+        "source": "raw/website/projects/genai-target-setting.md",
+        "section": "3. Forecast something that does have history",
+        "heading": "3. Forecast something that does have history"
+      }
+    ],
+    "related": [
+      {
+        "title": "Formula 1 Racing Trends",
+        "why": "Formula 1 Racing Trends Analysis: The project involved fitting models to data collected over sequential time periods to identify trends."
+      },
+      {
+        "title": "GenAI Target Setting",
+        "why": "GenAI Target Setting Methodology: The use of linear trend fitting on historical data to project future values."
+      }
+    ],
+    "concepts": [],
+    "sources": [
+      "raw/website/projects/formula-1-trends.md",
+      "raw/website/projects/genai-target-setting.md"
+    ]
+  },
+  "wiki/Projects/Ms. Pac-Man DQN.md": {
+    "title": "Ms. Pac-Man DQN",
+    "folder": "Projects",
+    "summary": "This project details the implementation of a Deep Q-Network (DQN) agent trained to play Ms. Pac-Man. The agent learned to improve its performance significantly, with the mean evaluation score rising from 492 to 906 after training.",
+    "facts": [
+      {
+        "fact": "The three student-chosen settings were exploration = 0.10, episodes = 300, learning rate = 0.0001.",
+        "source": "raw/course-projects/pacman-dqn/README.md",
+        "section": "Ms. Pac-Man DQN — Class 3 Assignment",
+        "heading": "Ms. Pac-Man DQN — Class 3 Assignment"
+      },
+      {
+        "fact": "The headline result showed the mean evaluation score rose from 492 (untrained) to 906 (trained), which is a +414 / +84% increase.",
+        "source": "raw/course-projects/pacman-dqn/README.md",
+        "section": "Ms. Pac-Man DQN — Class 3 Assignment",
+        "heading": "Ms. Pac-Man DQN — Class 3 Assignment"
+      },
+      {
+        "fact": "The agent sees four stacked 84×84 grayscale game screens, picks one of nine joystick actions, and learns from the game's own score.",
+        "source": "raw/course-projects/pacman-dqn/README.md",
+        "section": "Ms. Pac-Man DQN — Class 3 Assignment › Overview and how to run",
+        "heading": "Overview and how to run"
+      },
+      {
+        "fact": "The mean evaluation score before training was 492.0 and after training it was 906.0.",
+        "source": "raw/course-projects/pacman-dqn/README.md",
+        "section": "Ms. Pac-Man DQN — Class 3 Assignment › Results: all five before/after scores",
+        "heading": "Results: all five before/after scores"
+      },
+      {
+        "fact": "The exploration setting of 0.10 was chosen because at 0.05 the agent collapsed into a degenerate, stuck policy.",
+        "source": "raw/course-projects/pacman-dqn/README.md",
+        "section": "Ms. Pac-Man DQN — Class 3 Assignment › My three hyperparameters",
+        "heading": "My three hyperparameters"
+      },
+      {
+        "fact": "The learning rate of 0.0001 was chosen because every increase made learning worse, not faster.",
+        "source": "raw/course-projects/pacman-dqn/README.md",
+        "section": "Ms. Pac-Man DQN — Class 3 Assignment › My three hyperparameters",
+        "heading": "My three hyperparameters"
+      },
+      {
+        "fact": "The mean update loss went from 0.040 (first 25 episodes) to 0.110 (last 25).",
+        "source": "raw/course-projects/pacman-dqn/README.md",
+        "section": "Ms. Pac-Man DQN — Class 3 Assignment › What I expected, and what actually happened",
+        "heading": "What I expected, and what actually happened"
+      },
+      {
+        "fact": "The trained agent's moves spread across four directions (29.6 / 28.9 / 19.3 / 12.8%) compared to the untrained baseline's 95.4% UPLEFT.",
+        "source": "raw/course-projects/pacman-dqn/README.md",
+        "section": "Ms. Pac-Man DQN — Class 3 Assignment › What I expected, and what actually happened",
+        "heading": "What I expected, and what actually happened"
+      },
+      {
+        "fact": "The untrained network is stuck, with 95.4% of its actions being a single move, UPLEFT.",
+        "source": "raw/course-projects/pacman-dqn/README.md",
+        "section": "Ms. Pac-Man DQN — Class 3 Assignment › Gameplay › Before training (untrained network)",
+        "heading": "Before training (untrained network)"
+      },
+      {
+        "fact": "The trained agent's action mix was UPLEFT 29.6%, DOWN 28.9%, DOWNRIGHT 19.3%, and DOWNLEFT 12.8%.",
+        "source": "raw/course-projects/pacman-dqn/README.md",
+        "section": "Ms. Pac-Man DQN — Class 3 Assignment › Gameplay › Best trained game (best of the five evaluation games)",
+        "heading": "Best trained game (best of the five evaluation games)"
+      },
+      {
+        "fact": "Observations consist of four game screens, shrunk to 84x84 and turned grayscale, stacked together.",
+        "source": "raw/course-projects/pacman-dqn/README.md",
+        "section": "Ms. Pac-Man DQN — Class 3 Assignment › What the agent observes, does, and is rewarded for",
+        "heading": "What the agent observes, does, and is rewarded for"
+      },
+      {
+        "fact": "The reward is the Ms. Pac-Man score itself, which is clipped to the range -1 to +1 during learning.",
+        "source": "raw/course-projects/pacman-dqn/README.md",
+        "section": "Ms. Pac-Man DQN — Class 3 Assignment › What the agent observes, does, and is rewarded for",
+        "heading": "What the agent observes, does, and is rewarded for"
+      },
+      {
+        "fact": "Mean score across five fixed evaluation seeds rose from 492 to 906.",
+        "source": "raw/website/projects/pacman-dqn.md",
+        "section": "1. The headline number, and why it flatters",
+        "heading": "1. The headline number, and why it flatters"
+      },
+      {
+        "fact": "95.4% of its moves were a single action — UPLEFT.",
+        "source": "raw/website/projects/pacman-dqn.md",
+        "section": "1. The headline number, and why it flatters",
+        "heading": "1. The headline number, and why it flatters"
+      },
+      {
+        "fact": "The trained agent's moves spread across four directions (29.6 / 28.9 / 19.3 / 12.8%).",
+        "source": "raw/website/projects/pacman-dqn.md",
+        "section": "1. The headline number, and why it flatters",
+        "heading": "1. The headline number, and why it flatters"
+      },
+      {
+        "fact": "I expected a bigger replay buffer to be the single largest available win.",
+        "source": "raw/website/projects/pacman-dqn.md",
+        "section": "2. Three things I expected that were wrong",
+        "heading": "2. Three things I expected that were wrong"
+      },
+      {
+        "fact": "It is violently non-monotonic.",
+        "source": "raw/website/projects/pacman-dqn.md",
+        "section": "2. Three things I expected that were wrong",
+        "heading": "2. Three things I expected that were wrong"
+      },
+      {
+        "fact": "Loss rose, from 0.040 to 0.110, while the score nearly doubled.",
+        "source": "raw/website/projects/pacman-dqn.md",
+        "section": "2. Three things I expected that were wrong",
+        "heading": "2. Three things I expected that were wrong"
+      },
+      {
+        "fact": "I extracted the notebook's exact training and evaluation logic into a standalone harness and searched — 8 runs, roughly 1.6 million agent decisions.",
+        "source": "raw/website/projects/pacman-dqn.md",
+        "section": "3. How the settings were chosen",
+        "heading": "3. How the settings were chosen"
+      },
+      {
+        "fact": "At 30 episodes, every configuration sat at or below the untrained baseline.",
+        "source": "raw/website/projects/pacman-dqn.md",
+        "section": "3. How the settings were chosen",
+        "heading": "3. How the settings were chosen"
+      },
+      {
+        "fact": "My first full run scored +12, not +414.",
+        "source": "raw/website/projects/pacman-dqn.md",
+        "section": "4. What I'd want a reviewer to know",
+        "heading": "4. What I'd want a reviewer to know"
+      },
+      {
+        "fact": "The episode budget was selected using the same five seeds used for grading.",
+        "source": "raw/website/projects/pacman-dqn.md",
+        "section": "4. What I'd want a reviewer to know",
+        "heading": "4. What I'd want a reviewer to know"
+      },
+      {
+        "fact": "Change one setting: decay exploration from 1.0 to about 0.05 across training, instead of holding it at a constant 0.10.",
+        "source": "raw/website/projects/pacman-dqn.md",
+        "section": "5. The next experiment",
+        "heading": "5. The next experiment"
+      },
+      {
+        "fact": "The three values in the notebook were not guessed. They came from 8 training runs totalling roughly 1.6 million agent decisions, scored with the notebook's own evaluation protocol.",
+        "source": "raw/course-projects/pacman-dqn/docs/METHODOLOGY.md",
+        "section": "Methodology: how the three settings were chosen",
+        "heading": "Methodology: how the three settings were chosen"
+      },
+      {
+        "fact": "The replay buffer holds only 5,000 transitions — about seven games.",
+        "source": "raw/course-projects/pacman-dqn/docs/METHODOLOGY.md",
+        "section": "Methodology: how the three settings were chosen › The problem with guessing",
+        "heading": "The problem with guessing"
+      },
+      {
+        "fact": "The target network sync only every 1,000 decisions.",
+        "source": "raw/course-projects/pacman-dqn/docs/METHODOLOGY.md",
+        "section": "Methodology: how the three settings were chosen › The problem with guessing",
+        "heading": "The problem with guessing"
+      },
+      {
+        "fact": "The harness extracts the notebook's logic cell-for-cell — make_env, DQN, ReplayMemory, choose_action, learn, and evaluate, plus every fixed constant.",
+        "source": "raw/course-projects/pacman-dqn/docs/METHODOLOGY.md",
+        "section": "Methodology: how the three settings were chosen › The harness",
+        "heading": "The harness"
+      },
+      {
+        "fact": "Apple M2, 8 cores, 16 GB RAM, macOS 26.6.2 arm64, Python 3.12.14, PyTorch 2.14.0.",
+        "source": "raw/course-projects/pacman-dqn/docs/METHODOLOGY.md",
+        "section": "Methodology: how the three settings were chosen › Hardware and measured throughput",
+        "heading": "Hardware and measured throughput"
+      },
+      {
+        "fact": "MPS is ~2.7× faster than CPU for this network, so a 300-episode run costs about 19 minutes rather than the hour a CPU estimate suggests.",
+        "source": "raw/course-projects/pacman-dqn/docs/METHODOLOGY.md",
+        "section": "Methodology: how the three settings were chosen › Hardware and measured throughput",
+        "heading": "Hardware and measured throughput"
+      },
+      {
+        "fact": "Every learning rate above 1e-4 was worse, monotonically, at the 60-episode mark.",
+        "source": "raw/course-projects/pacman-dqn/docs/METHODOLOGY.md",
+        "section": "Methodology: how the three settings were chosen › Stage 1 — exploration × learning rate",
+        "heading": "Stage 1 — exploration × learning rate"
+      },
+      {
+        "fact": "Exploration of 0.05 produced the worst agent in the whole study (224 at 30 episodes).",
+        "source": "raw/course-projects/pacman-dqn/docs/METHODOLOGY.md",
+        "section": "Methodology: how the three settings were chosen › Stage 1 — exploration × learning rate",
+        "heading": "Stage 1 — exploration × learning rate"
+      },
+      {
+        "fact": "The larger buffer was worse at three of the four checkpoints when comparing 5,000 transitions to 50,000 transitions.",
+        "source": "raw/course-projects/pacman-dqn/docs/METHODOLOGY.md",
+        "section": "Methodology: how the three settings were chosen › Stage 2 — episode budget, and one test of a \"fixed\" setting",
+        "heading": "Stage 2 — episode budget, and one test of a \"fixed\" setting"
+      },
+      {
+        "fact": "Episode count is strongly non-monotonic — 454 → 906 → 656 across 200/300/400 episodes.",
+        "source": "raw/course-projects/pacman-dqn/docs/METHODOLOGY.md",
+        "section": "Methodology: how the three settings were chosen › Stage 2 — episode budget, and one test of a \"fixed\" setting",
+        "heading": "Stage 2 — episode budget, and one test of a \"fixed\" setting"
+      },
+      {
+        "fact": "The untrained network is not random — it is stuck.",
+        "source": "raw/course-projects/pacman-dqn/docs/METHODOLOGY.md",
+        "section": "Methodology: how the three settings were chosen › Behaviour probe",
+        "heading": "Behaviour probe"
+      },
+      {
+        "fact": "What training bought, most visibly, is the ability to steer.",
+        "source": "raw/course-projects/pacman-dqn/docs/METHODOLOGY.md",
+        "section": "Methodology: how the three settings were chosen › Behaviour probe",
+        "heading": "Behaviour probe"
+      }
+    ],
+    "related": [
+      {
+        "title": "MBA 290T Syllabus",
+        "why": "This project is an application of the concepts taught in the From Zero to AI Agents course."
+      },
+      {
+        "title": "Deep Learning",
+        "why": "The core reinforcement learning technique used to train the agent."
+      },
+      {
+        "title": "Deep Q-Network",
+        "why": "The core algorithm used to train the agent."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Deep Q-Learning",
+        "why": "The core reinforcement learning technique used to train the agent.",
+        "source": "raw/course-projects/pacman-dqn/README.md"
+      },
+      {
+        "name": "Exploration vs Exploitation",
+        "why": "The choice of the exploration setting (epsilon) directly relates to this concept.",
+        "source": "raw/course-projects/pacman-dqn/README.md"
+      },
+      {
+        "name": "Reinforcement Learning Loop",
+        "why": "The process described (choosing a move, playing it, remembering experience, learning) constitutes the RL loop.",
+        "source": "raw/course-projects/pacman-dqn/README.md"
+      },
+      {
+        "name": "Loss Function Interpretation",
+        "why": "The note highlights that loss measures prediction accuracy, not gameplay performance.",
+        "source": "raw/course-projects/pacman-dqn/README.md"
+      },
+      {
+        "name": "Deep Q-Network",
+        "why": "The core algorithm used to train the agent.",
+        "source": "raw/website/projects/pacman-dqn.md"
+      },
+      {
+        "name": "Reinforcement Learning",
+        "why": "The general field of study this project falls under.",
+        "source": "raw/website/projects/pacman-dqn.md"
+      },
+      {
+        "name": "Exploration vs Exploitation",
+        "why": "The project investigates the impact of exploration rates on agent performance.",
+        "source": "raw/website/projects/pacman-dqn.md"
+      },
+      {
+        "name": "Non-monotonic Learning",
+        "why": "The project observed that performance improvement was not smooth.",
+        "source": "raw/website/projects/pacman-dqn.md"
+      },
+      {
+        "name": "Deep Q-Network",
+        "why": "The core reinforcement learning algorithm used for the agent.",
+        "source": "raw/course-projects/pacman-dqn/docs/METHODOLOGY.md"
+      },
+      {
+        "name": "Replay Buffer",
+        "why": "The memory structure used to store and sample past agent transitions.",
+        "source": "raw/course-projects/pacman-dqn/docs/METHODOLOGY.md"
+      },
+      {
+        "name": "Exploration Rate",
+        "why": "A hyperparameter controlling the agent's tendency to try new actions versus known good actions.",
+        "source": "raw/course-projects/pacman-dqn/docs/METHODOLOGY.md"
+      },
+      {
+        "name": "Target Network Sync",
+        "why": "A technique used in DQN to stabilize the learning process by periodically updating the target network.",
+        "source": "raw/course-projects/pacman-dqn/docs/METHODOLOGY.md"
+      }
+    ],
+    "sources": [
+      "raw/course-projects/pacman-dqn/README.md",
+      "raw/website/projects/pacman-dqn.md",
+      "raw/course-projects/pacman-dqn/docs/METHODOLOGY.md"
+    ],
+    "property_related": [],
+    "merged_from": [
+      "Pac-Man DQN Methodology Study"
+    ]
+  },
+  "wiki/Course/MBA 290T Syllabus.md": {
+    "title": "MBA 290T Syllabus",
+    "folder": "Course",
+    "summary": "This seven-class course guides students from basic programming concepts to building and evaluating tool-using AI agents. It covers a broad range of topics including machine learning, deep learning, LLM behavior, and agent architecture.",
+    "facts": [
+      {
+        "fact": "Fundamental of Agentic AI is not a survey course about AI, and it is not a prompt-engineering workshop.",
+        "source": "raw/course/syllabus.html",
+        "section": "MBA 290T: Fundamental of Agentic AI › Course Objective",
+        "heading": "Course Objective"
+      },
+      {
+        "fact": "In seven sessions we go from “what is a variable” to building and evaluating a tool-using AI agent — covering programming foundations, full-stack software systems, machine learning, deep learning and transformers, LLM behavior and retrieval, and agent architecture.",
+        "source": "raw/course/syllabus.html",
+        "section": "MBA 290T: Fundamental of Agentic AI › Course Objective",
+        "heading": "Course Objective"
+      },
+      {
+        "fact": "The course targets Level 2 fluency: you do not need a PhD to reason about AI systems, but knowing how to use ChatGPT is not a differentiator either.",
+        "source": "raw/course/syllabus.html",
+        "section": "MBA 290T: Fundamental of Agentic AI › Course Objective",
+        "heading": "Course Objective"
+      },
+      {
+        "fact": "A student who successfully completes this course will be able to read, modify, test, and debug real code, and explain what a program does before running it.",
+        "source": "raw/course/syllabus.html",
+        "section": "MBA 290T: Fundamental of Agentic AI › Learning Outcomes",
+        "heading": "Learning Outcomes"
+      },
+      {
+        "fact": "The course is assessed entirely through attendance and five graded assignments.",
+        "source": "raw/course/syllabus.html",
+        "section": "MBA 290T: Fundamental of Agentic AI › Class Schedule",
+        "heading": "Class Schedule"
+      },
+      {
+        "fact": "Attendance is required and is worth 20% of your grade.",
+        "source": "raw/course/syllabus.html",
+        "section": "MBA 290T: Fundamental of Agentic AI › Attendance",
+        "heading": "Attendance"
+      },
+      {
+        "fact": "Assignments 1–4 are the end-of-class deliverables for Classes 2 through 5.",
+        "source": "raw/course/syllabus.html",
+        "section": "MBA 290T: Fundamental of Agentic AI › Graded Assignments",
+        "heading": "Graded Assignments"
+      },
+      {
+        "fact": "Assignment 5 is the course capstone and spans Classes 6 and 7.",
+        "source": "raw/course/syllabus.html",
+        "section": "MBA 290T: Fundamental of Agentic AI › Graded Assignments",
+        "heading": "Graded Assignments"
+      },
+      {
+        "fact": "Every assignment is scored out of 10 using the same broad framework.",
+        "source": "raw/course/syllabus.html",
+        "section": "MBA 290T: Fundamental of Agentic AI › Graded Assignments › How Assignments Are Graded",
+        "heading": "How Assignments Are Graded"
+      },
+      {
+        "fact": "The grading framework includes Deliverable quality, Testing & evaluation, and Working result.",
+        "source": "raw/course/syllabus.html",
+        "section": "MBA 290T: Fundamental of Agentic AI › Graded Assignments › How Assignments Are Graded",
+        "heading": "How Assignments Are Graded"
+      },
+      {
+        "fact": "Performance will be graded with Attendance at 20%, Assignments 1–4 (lowest score dropped) at 50%, and Assignment 5 at 30%.",
+        "source": "raw/course/syllabus.html",
+        "section": "MBA 290T: Fundamental of Agentic AI › Grading",
+        "heading": "Grading"
+      },
+      {
+        "fact": "Class 7 is on Tue 10/6 and covers Multi-Agent Systems, Ops & Safety.",
+        "source": "raw/course/syllabus.html",
+        "section": "MBA 290T: Fundamental of Agentic AI › Class Schedule",
+        "heading": "Class Schedule"
+      },
+      {
+        "fact": "The focus is conceptual fluency that survives the tools.",
+        "source": "raw/course/syllabus.html",
+        "section": "MBA 290T: Fundamental of Agentic AI › Course Objective",
+        "heading": "Course Objective"
+      },
+      {
+        "fact": "Concretely, the course targets Level 2 fluency: you do not need a PhD to reason about AI systems, but knowing how to use ChatGPT is not a differentiator either.",
+        "source": "raw/course/syllabus.html",
+        "section": "MBA 290T: Fundamental of Agentic AI › Course Objective",
+        "heading": "Course Objective"
+      },
+      {
+        "fact": "Assignments are individual.",
+        "source": "raw/course/syllabus.html",
+        "section": "MBA 290T: Fundamental of Agentic AI › Graded Assignments",
+        "heading": "Graded Assignments"
+      },
+      {
+        "fact": "You are expected to use AI coding agents (see the AI policy below); you are also expected to understand and be able to explain everything you submit.",
+        "source": "raw/course/syllabus.html",
+        "section": "MBA 290T: Fundamental of Agentic AI › Graded Assignments",
+        "heading": "Graded Assignments"
+      },
+      {
+        "fact": "The distinction this course cares about is not “did a human or an AI write this.” It is “does the person submitting it understand the system well enough to be responsible for it.”",
+        "source": "raw/course/syllabus.html",
+        "section": "MBA 290T: Fundamental of Agentic AI › AI / LLM Policy",
+        "heading": "AI / LLM Policy"
+      },
+      {
+        "fact": "Every assignment is designed to be built with an AI coding agent.",
+        "source": "raw/course/syllabus.html",
+        "section": "MBA 290T: Fundamental of Agentic AI › AI / LLM Policy",
+        "heading": "AI / LLM Policy"
+      }
+    ],
+    "related": [
+      {
+        "title": "Ms. Pac-Man DQN",
+        "why": "Both notes discuss implementing and training an agent using Deep Q-Networks."
+      },
+      {
+        "title": "Deep Learning",
+        "why": "The course covers deep learning and transformers."
+      },
+      {
+        "title": "Pull-Request Automation",
+        "why": "Pull-Request Automation Skill: The project is categorized under Agentic AI."
+      },
+      {
+        "title": "Custom LLM with nanoGPT",
+        "why": "Both notes involve building and evaluating custom AI models."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Agentic AI",
+        "why": "The course focuses on building and evaluating tool-using AI agents.",
+        "source": "raw/course/syllabus.html"
+      },
+      {
+        "name": "LLM Behavior and Retrieval",
+        "why": "The curriculum covers LLM behavior and retrieval mechanisms.",
+        "source": "raw/course/syllabus.html"
+      },
+      {
+        "name": "Deep Learning",
+        "why": "The course covers deep learning and transformers.",
+        "source": "raw/course/syllabus.html"
+      },
+      {
+        "name": "Multi-Agent Systems",
+        "why": "The final class covers Multi-Agent Systems.",
+        "source": "raw/course/syllabus.html"
+      }
+    ],
+    "sources": [
+      "raw/course/syllabus.html"
+    ],
+    "property_related": [],
+    "merged_from": [
+      "Agentic AI"
+    ]
+  },
+  "wiki/Experience/Amazon Web Services.md": {
+    "title": "Amazon Web Services",
+    "folder": "Experience",
+    "summary": "This role involved working on internal products for over 10,000 sellers within an $80B business. The focus was on transforming a reporting function into one that drives decision-making.",
+    "facts": [
+      {
+        "fact": "org: Amazon Web Services",
+        "source": "raw/website/experience/amazon-web-services.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "role: Business Intelligence Engineer — Global Sales Strategy & Analytics",
+        "source": "raw/website/experience/amazon-web-services.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "location: Seattle, WA",
+        "source": "raw/website/experience/amazon-web-services.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "start: Jul 2023",
+        "source": "raw/website/experience/amazon-web-services.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "end: May 2026",
+        "source": "raw/website/experience/amazon-web-services.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "summary: Internal products for 10,000+ sellers across an $80B business. Three years spent turning a reporting function that produced reports into one that produced decisions.",
+        "source": "raw/website/experience/amazon-web-services.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "outcomes: Raised on-time delivery of business stakeholder requests from 56% to 82% by establishing recurring roadmap reviews that published the backlog",
+        "source": "raw/website/experience/amazon-web-services.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "outcomes: Launched a Business-Influence Tracker that lifted customer opportunity coverage 12% and became a standing Monthly Business Review KPI",
+        "source": "raw/website/experience/amazon-web-services.md",
+        "section": "Properties",
+        "heading": null
+      }
+    ],
+    "related": [
+      {
+        "title": "Action Hub",
+        "why": "Both projects involve building internal tools to improve processes for a large organization."
+      },
+      {
+        "title": "Pull-Request Automation",
+        "why": "Both projects involve building internal tools on Amazon's platform to automate workflows."
+      },
+      {
+        "title": "GenAI Adoption Program",
+        "why": "Both projects involve driving adoption or usage of new technologies within a large business context."
+      },
+      {
+        "title": "Allowlist Data Access App",
+        "why": "Listed as related work in this subject's source."
+      },
+      {
+        "title": "GenAI Target Setting",
+        "why": "Listed as related work in this subject's source."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Business Intelligence",
+        "why": "The role focused on transforming reporting functions into decision-making tools.",
+        "source": "raw/website/experience/amazon-web-services.md"
+      },
+      {
+        "name": "Roadmap Management",
+        "why": "The role involved establishing recurring roadmap reviews to publish backlogs.",
+        "source": "raw/website/experience/amazon-web-services.md"
+      }
+    ],
+    "sources": [
+      "raw/website/experience/amazon-web-services.md"
+    ],
+    "property_related": [
+      "action-hub",
+      "allowlist",
+      "genai-adoption-program",
+      "genai-target-setting",
+      "pr-automation"
+    ]
+  },
+  "wiki/Experience/Seaside Sustainability.md": {
+    "title": "Seaside Sustainability",
+    "folder": "Experience",
+    "summary": "This role involved founding and leading the fundraising function for a beach-cleaning robot. The responsibilities spanned from the initial concept through to the final launch.",
+    "facts": [
+      {
+        "fact": "org: Clean-shores.org — Seaside Sustainability",
+        "source": "raw/website/experience/clean-shores.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "role: Fundraising Team Lead",
+        "source": "raw/website/experience/clean-shores.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "location: Gloucester, MA",
+        "source": "raw/website/experience/clean-shores.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "start: Apr 2025",
+        "source": "raw/website/experience/clean-shores.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "end: Jan 2026",
+        "source": "raw/website/experience/clean-shores.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "kind: volunteer",
+        "source": "raw/website/experience/clean-shores.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "summary: Founded and led the fundraising function for a beach-cleaning robot, from concept through launch.",
+        "source": "raw/website/experience/clean-shores.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "outcomes: Built and led a 6-person team from nothing",
+        "source": "raw/website/experience/clean-shores.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "outcomes: Translated strategic objectives into delivery milestones the team could actually work against",
+        "source": "raw/website/experience/clean-shores.md",
+        "section": "Properties",
+        "heading": null
+      }
+    ],
+    "related": [
+      {
+        "title": "Amazon Web Services",
+        "why": "Both involve roles at a major technology company."
+      },
+      {
+        "title": "GenAI Adoption Program",
+        "why": "Both involve projects focused on driving adoption or usage of new technologies."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Fundraising",
+        "why": "The role was centered on leading the fundraising function for a project.",
+        "source": "raw/website/experience/clean-shores.md"
+      },
+      {
+        "name": "Team Leadership",
+        "why": "The individual built and led a 6-person team.",
+        "source": "raw/website/experience/clean-shores.md"
+      }
+    ],
+    "sources": [
+      "raw/website/experience/clean-shores.md"
+    ],
+    "property_related": []
+  },
+  "wiki/Experience/IDG Capital.md": {
+    "title": "IDG Capital",
+    "folder": "Experience",
+    "summary": "This role involved serving as a Venture Capital Analyst Intern at IDG Capital in Beijing, China. The responsibilities included conducting diligence on early-stage SaaS and food-supply companies. The intern contributed to investment decisions by pressure-testing growth stories.",
+    "facts": [
+      {
+        "fact": "org: IDG Capital",
+        "source": "raw/website/experience/idg-capital.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "role: Venture Capital Analyst Intern",
+        "source": "raw/website/experience/idg-capital.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "location: Beijing, China",
+        "source": "raw/website/experience/idg-capital.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "start: Jun 2020",
+        "source": "raw/website/experience/idg-capital.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "end: Aug 2020",
+        "source": "raw/website/experience/idg-capital.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "summary: Diligence on early-stage SaaS and food-supply companies.",
+        "source": "raw/website/experience/idg-capital.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "outcomes: Evaluated 20+ startups on market position, product differentiation and operations, building a sector database that benchmarked new companies against it;",
+        "source": "raw/website/experience/idg-capital.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "outcomes: Informed 3 investment decisions by pressure-testing each growth story against executive interviews, industry-expert calls and IPO filings",
+        "source": "raw/website/experience/idg-capital.md",
+        "section": "Properties",
+        "heading": null
+      }
+    ],
+    "related": [
+      {
+        "title": "TikTok Internship",
+        "why": "Both roles were internships at companies located in Beijing, China."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Venture Capital",
+        "why": "The role involved performing diligence on early-stage companies for investment.",
+        "source": "raw/website/experience/idg-capital.md"
+      },
+      {
+        "name": "Market Position Analysis",
+        "why": "The intern evaluated startups on their market position and product differentiation.",
+        "source": "raw/website/experience/idg-capital.md"
+      }
+    ],
+    "sources": [
+      "raw/website/experience/idg-capital.md"
+    ],
+    "property_related": []
+  },
+  "wiki/Experience/University of Notre Dame.md": {
+    "title": "University of Notre Dame",
+    "folder": "Experience",
+    "summary": "This entry details the educational experience at the University of Notre Dame's Mendoza College of Business. The individual pursued a double major in business analytics and applied mathematics, combining quantitative methods with business framing.",
+    "facts": [
+      {
+        "fact": "The role was B.B.A. Business Analytics · B.S. Applied Mathematics.",
+        "source": "raw/website/experience/notre-dame.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "The location was Notre Dame, IN.",
+        "source": "raw/website/experience/notre-dame.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "The start date was Aug 2019.",
+        "source": "raw/website/experience/notre-dame.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "The end date was May 2023.",
+        "source": "raw/website/experience/notre-dame.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "The summary was a double major in business analytics and applied mathematics — the quantitative methods on one side, the business framing for them on the other.",
+        "source": "raw/website/experience/notre-dame.md",
+        "section": null,
+        "heading": null
+      },
+      {
+        "fact": "The outcomes included winning Best Insight against a field of 10–15 competing teams.",
+        "source": "raw/website/experience/notre-dame.md",
+        "section": null,
+        "heading": null
+      }
+    ],
+    "related": [
+      {
+        "title": "DataFest 2023",
+        "why": "Both are listed as related projects in the source text for this educational experience."
+      },
+      {
+        "title": "Formula 1 Racing Trends",
+        "why": "Both are listed as related projects in the source text for this educational experience."
+      },
+      {
+        "title": "Hazardous Asteroid Screening",
+        "why": "Both are listed as related projects in the source text for this educational experience."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Business Analytics",
+        "why": "The subject involved applying quantitative methods to business framing.",
+        "source": "raw/website/experience/notre-dame.md"
+      },
+      {
+        "name": "Applied Mathematics",
+        "why": "The subject involved the study of quantitative methods.",
+        "source": "raw/website/experience/notre-dame.md"
+      }
+    ],
+    "sources": [
+      "raw/website/experience/notre-dame.md"
+    ],
+    "property_related": [
+      "asteroid-screening",
+      "datafest-2023",
+      "formula-1-trends",
+      "kickstarter-scraper"
+    ]
+  },
+  "wiki/Experience/UC Berkeley.md": {
+    "title": "UC Berkeley",
+    "folder": "Experience",
+    "summary": "This entry details a concurrent MBA and M.Eng. program at UC Berkeley's Haas School of Business & IEOR. The program is designed to allow product judgment and engineering to be learned in the same place rather than sequentially.",
+    "facts": [
+      {
+        "fact": "org: UC Berkeley — Haas School of Business & IEOR",
+        "source": "raw/website/experience/uc-berkeley.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "role: MBA / M.Eng., Industrial Engineering & Operations Research",
+        "source": "raw/website/experience/uc-berkeley.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "location: Berkeley, CA",
+        "source": "raw/website/experience/uc-berkeley.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "start: Aug 2026",
+        "source": "raw/website/experience/uc-berkeley.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "end: Expected May 2028",
+        "source": "raw/website/experience/uc-berkeley.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "kind: education",
+        "source": "raw/website/experience/uc-berkeley.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "summary: A concurrent MBA and M.Eng., taken together so the product judgment and the engineering are learned in the same place rather than sequentially.",
+        "source": "raw/website/experience/uc-berkeley.md",
+        "section": "Properties",
+        "heading": null
+      }
+    ],
+    "related": [
+      {
+        "title": "Ms. Pac-Man DQN",
+        "why": "Both subjects relate to reinforcement learning applications in AI."
+      },
+      {
+        "title": "Secure Networking Tracker",
+        "why": "Both subjects are associated with UC Berkeley."
+      },
+      {
+        "title": "MBA 290T Syllabus",
+        "why": "This course covers building and evaluating tool-using AI agents, a concept relevant to advanced AI work."
+      },
+      {
+        "title": "TripMatch Rides Board",
+        "why": "Listed as related work in this subject's source."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "MBA",
+        "why": "The source mentions the MBA as part of the concurrent degree.",
+        "source": "raw/website/experience/uc-berkeley.md"
+      },
+      {
+        "name": "M.Eng.",
+        "why": "The source mentions the M.Eng. as part of the concurrent degree.",
+        "source": "raw/website/experience/uc-berkeley.md"
+      },
+      {
+        "name": "Industrial Engineering & Operations Research",
+        "why": "The source lists this as the specialization for the degree.",
+        "source": "raw/website/experience/uc-berkeley.md"
+      }
+    ],
+    "sources": [
+      "raw/website/experience/uc-berkeley.md"
+    ],
+    "property_related": [
+      "pacman-dqn",
+      "secure-networking-tracker",
+      "tripmatch"
+    ]
+  },
+  "wiki/Projects/Action Hub.md": {
+    "title": "Action Hub",
+    "folder": "Projects",
+    "summary": "Action Hub was built to replace a manual sweep across roughly 200 dashboards for a technical sales organization. It ranks every open issue across a seller's accounts and puts the next action on each one, cutting time-to-insight by 70% for over 10,000 sellers.",
+    "facts": [
+      {
+        "fact": "A technical sales org had roughly 200 dashboards and no agreed place to start the day.",
+        "source": "raw/website/projects/action-hub.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "The Action Hub ranks every open issue across a seller's accounts and puts the next action on each one — cutting time-to-insight 70% for 10,000+ sellers.",
+        "source": "raw/website/projects/action-hub.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "Sellers had dashboards but no prescribed action; finding what was wrong took a manual sweep across 5–10 of them.",
+        "source": "raw/website/projects/action-hub.md",
+        "section": "1. The problem: two hundred dashboards and no front door",
+        "heading": "1. The problem: two hundred dashboards and no front door"
+      },
+      {
+        "fact": "A company-wide effort was set up to replace the sprawl with one source of truth, structured as a book: each org owns a chapter — technical sales, partner sales, revenue, attainment, marketing, usage, startups.",
+        "source": "raw/website/projects/action-hub.md",
+        "section": "1. The problem: two hundred dashboards and no front door",
+        "heading": "1. The problem: two hundred dashboards and no front door"
+      },
+      {
+        "fact": "I ran 20 user interviews across segments before writing requirements, then scoped the build from a PRD and Figma prototypes.",
+        "source": "raw/website/projects/action-hub.md",
+        "section": "2. Discovery: what twenty interviews changed",
+        "heading": "2. Discovery: what twenty interviews changed"
+      },
+      {
+        "fact": "Sellers didn't distrust the data; they distrusted their own reading of it.",
+        "source": "raw/website/projects/action-hub.md",
+        "section": "2. Discovery: what twenty interviews changed",
+        "heading": "2. Discovery: what twenty interviews changed"
+      },
+      {
+        "fact": "Detection is threshold-based, not modelled.",
+        "source": "raw/website/projects/action-hub.md",
+        "section": "3. How the product actually works",
+        "heading": "3. How the product actually works"
+      },
+      {
+        "fact": "Ranking is severity multiplied by account value.",
+        "source": "raw/website/projects/action-hub.md",
+        "section": "3. How the product actually works",
+        "heading": "3. How the product actually works"
+      },
+      {
+        "fact": "Every alert carries its own destination.",
+        "source": "raw/website/projects/action-hub.md",
+        "section": "3. How the product actually works",
+        "heading": "3. How the product actually works"
+      },
+      {
+        "fact": "The hardest part was not the design. It was that the launch date was fixed and the requests substantially exceeded it.",
+        "source": "raw/website/projects/action-hub.md",
+        "section": "4. Prioritization: a fixed date and more asks than fit",
+        "heading": "4. Prioritization: a fixed date and more asks than fit"
+      },
+      {
+        "fact": "Anything that changed only what a seller *knew* went below the line.",
+        "source": "raw/website/projects/action-hub.md",
+        "section": "4. Prioritization: a fixed date and more asks than fit",
+        "heading": "4. Prioritization: a fixed date and more asks than fit"
+      },
+      {
+        "fact": "I under-invested in instrumenting the \"action taken\" step.",
+        "source": "raw/website/projects/action-hub.md",
+        "section": "5. What I'd do differently",
+        "heading": "5. What I'd do differently"
+      }
+    ],
+    "related": [
+      {
+        "title": "Amazon Web Services",
+        "why": "Both notes relate to working on internal products for a large organization like AWS."
+      },
+      {
+        "title": "GenAI Adoption Program",
+        "why": "Both notes involve driving adoption or usage of new technologies within a sales organization."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Threshold-based Detection",
+        "why": "This is a method of identifying issues based on predefined metric cut-offs rather than complex modeling.",
+        "source": "raw/website/projects/action-hub.md"
+      },
+      {
+        "name": "Severity Multiplier Ranking",
+        "why": "This technique ranks issues by multiplying an alert's severity weight by the associated account's value.",
+        "source": "raw/website/projects/action-hub.md"
+      },
+      {
+        "name": "Actionable Redirection",
+        "why": "This concept dictates that an alert must resolve directly to the place where work can be done, rather than just pointing out a problem.",
+        "source": "raw/website/projects/action-hub.md"
+      },
+      {
+        "name": "Information Architecture Alignment",
+        "why": "This is the idea that an organization's internal structure can negatively impact the usability of a product.",
+        "source": "raw/website/projects/action-hub.md"
+      }
+    ],
+    "sources": [
+      "raw/website/projects/action-hub.md"
+    ],
+    "property_related": []
+  },
+  "wiki/Projects/Allowlist Data Access App.md": {
+    "title": "Allowlist Data Access App",
+    "folder": "Projects",
+    "summary": "Allowlist is a constrained application built to replace a shared spreadsheet that governed data access exceptions. It allows users to read all records and submit or withdraw records, but prevents in-place edits, ensuring every action is logged. This design transforms the register from a statement of the present into a record of how the present came about.",
+    "facts": [
+      {
+        "fact": "Allowlist replaced a freely editable shared spreadsheet that governed who could see whose data with a constrained, logged application.",
+        "source": "raw/website/projects/allowlist.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "Sellers see data for the territories and accounts they are assigned, and exceptions to that are managed in a shared spreadsheet that anyone could open and edit.",
+        "source": "raw/website/projects/allowlist.md",
+        "section": "(introduction)",
+        "heading": ""
+      },
+      {
+        "fact": "The risk with the spreadsheet was that it was unaccountable because any row could be changed by anyone at any time with no way to establish who changed it, when, or what it had said before.",
+        "source": "raw/website/projects/allowlist.md",
+        "section": "1. The thing that was actually broken",
+        "heading": "1. The thing that was actually broken"
+      },
+      {
+        "fact": "Allowlist is a central application for the same records, with a deliberately narrow set of things a non-admin can do: Read every record, Submit a record, or withdraw one.",
+        "source": "raw/website/projects/allowlist.md",
+        "section": "2. What replaced it",
+        "heading": "2. What replaced it"
+      },
+      {
+        "fact": "Forcing a change to happen as withdraw, then submit means the same change leaves two entries behind, and the sequence stays reconstructable.",
+        "source": "raw/website/projects/allowlist.md",
+        "section": "3. Why removing \"edit\" is the decision",
+        "heading": "3. Why removing \"edit\" is the decision"
+      },
+      {
+        "fact": "A constrained form moves the cost of data quality to the point of entry, where the person filling it in knows what was meant.",
+        "source": "raw/website/projects/allowlist.md",
+        "section": "4. The form is a data-quality instrument",
+        "heading": "4. The form is a data-quality instrument"
+      },
+      {
+        "fact": "Every action on the application, and on the data access it governs, is recorded.",
+        "source": "raw/website/projects/allowlist.md",
+        "section": "5. The log is the product",
+        "heading": "5. The log is the product"
+      },
+      {
+        "fact": "Allowlist was built end to end through spec-driven development in the Kiro agentic IDE.",
+        "source": "raw/website/projects/allowlist.md",
+        "section": "6. Built spec-first",
+        "heading": "6. Built spec-first"
+      }
+    ],
+    "related": [
+      {
+        "title": "Amazon Web Services",
+        "why": "Both notes relate to building and managing internal products for large organizations."
+      },
+      {
+        "title": "Action Hub",
+        "why": "Both projects involve building applications to replace manual, unconstrained processes."
+      },
+      {
+        "title": "Pull-Request Automation",
+        "why": "Both projects involve building internal tools to automate processes."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Data Governance",
+        "why": "The project is fundamentally about managing and controlling access to data.",
+        "source": "raw/website/projects/allowlist.md"
+      },
+      {
+        "name": "Spec-Driven Development",
+        "why": "The development process prioritized writing a detailed specification before writing the code.",
+        "source": "raw/website/projects/allowlist.md"
+      },
+      {
+        "name": "Audit Trail",
+        "why": "The system relies on logging every action to provide a complete history of data access changes.",
+        "source": "raw/website/projects/allowlist.md"
+      },
+      {
+        "name": "Data Validation",
+        "why": "The use of structured forms instead of free text enforces data quality at the point of entry.",
+        "source": "raw/website/projects/allowlist.md"
+      }
+    ],
+    "sources": [
+      "raw/website/projects/allowlist.md"
+    ],
+    "property_related": []
+  },
+  "wiki/Projects/Custom LLM with nanoGPT.md": {
+    "title": "Custom LLM with nanoGPT",
+    "folder": "Projects",
+    "summary": "This project details the process of building and evaluating a custom Large Language Model (LLM) using nanoGPT. Several experiments were conducted, varying corpus size, learning rates, and training steps to observe the model's performance on language evaluation suites.",
+    "facts": [
+      {
+        "fact": "nanoGPT has 2 blocks, 4 heads, 64-number embeddings, and a 48-token context.",
+        "source": "raw/course-projects/custom-llm/README.md",
+        "section": "Building a Custom LLM › One-page summary",
+        "heading": "One-page summary"
+      },
+      {
+        "fact": "Experiment A uses only the classroom corpus, while Experiment B uses the classroom corpus plus 5,005 new passages.",
+        "source": "raw/course-projects/custom-llm/README.md",
+        "section": "Building a Custom LLM › One-page summary",
+        "heading": "One-page summary"
+      },
+      {
+        "fact": "Both Experiment A and Experiment B use 3,000 steps at a learning rate of 0.001.",
+        "source": "raw/course-projects/custom-llm/README.md",
+        "section": "Building a Custom LLM › One-page summary",
+        "heading": "One-page summary"
+      },
+      {
+        "fact": "The delivered model D has seven taught categories and a learning rate of 0.004.",
+        "source": "raw/course-projects/custom-llm/README.md",
+        "section": "Building a Custom LLM › One-page summary",
+        "heading": "One-page summary"
+      },
+      {
+        "fact": "The delivered model D scores 40/48 on the unchanged 48-case language eval suite.",
+        "source": "raw/course-projects/custom-llm/README.md",
+        "section": "Building a Custom LLM › One-page summary",
+        "heading": "One-page summary"
+      },
+      {
+        "fact": "The delivered model D scores 12/16 on a held-out suite written after the corpus was frozen.",
+        "source": "raw/course-projects/custom-llm/README.md",
+        "section": "Building a Custom LLM › One-page summary",
+        "heading": "One-page summary"
+      },
+      {
+        "fact": "Reproduce experiment A can be done using the command python tools/run_experiment.py --experiment starter.",
+        "source": "raw/course-projects/custom-llm/README.md",
+        "section": "Building a Custom LLM › 1. How to run everything",
+        "heading": "1. How to run everything"
+      },
+      {
+        "fact": "Reproduce experiment D requires the command python tools/run_experiment.py --experiment tuned --corpus-dir corpus_seven --lr 0.004.",
+        "source": "raw/course-projects/custom-llm/README.md",
+        "section": "Building a Custom LLM › 1. How to run everything",
+        "heading": "1. How to run everything"
+      },
+      {
+        "fact": "The delivered model D is defined as using the `corpus_seven`, 3,000 steps, and learning rate 0.004.",
+        "source": "raw/course-projects/custom-llm/README.md",
+        "section": "Building a Custom LLM › Overview of all five experiments",
+        "heading": "Overview of all five experiments"
+      },
+      {
+        "fact": "The choice of corpus was classroom; + 4-category; + 7-category; + 7-category with unpaired relations because the assignment requires the first two.",
+        "source": "raw/course-projects/custom-llm/README.md",
+        "section": "Building a Custom LLM › 3. My three choices and my prediction",
+        "heading": "3. My three choices and my prediction"
+      },
+      {
+        "fact": "The most surprising result was that adding grammar and spatial text made the model better at rephrasings of the original business sentences.",
+        "source": "raw/course-projects/custom-llm/README.md",
+        "section": "Building a Custom LLM › 3. My three choices and my prediction › What actually happened",
+        "heading": "What actually happened"
+      },
+      {
+        "fact": "Half the training budget produced no visible difference in sampled text — a concrete reason not to treat \"the samples look good\" as evidence of learning.",
+        "source": "raw/course-projects/custom-llm/README.md",
+        "section": "Building a Custom LLM › 5. Loss, samples, and temperature › Untrained → halfway → final samples",
+        "heading": "Untrained → halfway → final samples"
+      }
+    ],
+    "related": [
+      {
+        "title": "MBA 290T Syllabus",
+        "why": "Both notes relate to the process of building and evaluating AI systems."
+      },
+      {
+        "title": "Ms. Pac-Man DQN",
+        "why": "Both notes detail training a model using a specific architecture (DQN/LLM)."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Language Model Training",
+        "why": "The core subject involves training a model on text corpora.",
+        "source": "raw/course-projects/custom-llm/README.md"
+      },
+      {
+        "name": "Evaluation Suites",
+        "why": "The project uses specific suites to measure the model's performance.",
+        "source": "raw/course-projects/custom-llm/README.md"
+      },
+      {
+        "name": "Learning Rate Tuning",
+        "why": "The experiments systematically varied the learning rate to find optimal performance.",
+        "source": "raw/course-projects/custom-llm/README.md"
+      },
+      {
+        "name": "Corpus Curation",
+        "why": "The quality and composition of the training data (corpus) were varied across experiments.",
+        "source": "raw/course-projects/custom-llm/README.md"
+      }
+    ],
+    "sources": [
+      "raw/course-projects/custom-llm/README.md"
+    ],
+    "property_related": []
+  },
+  "wiki/Projects/DataFest 2023.md": {
+    "title": "DataFest 2023",
+    "folder": "Projects",
+    "summary": "This project involved analyzing data from the American Bar Association's legal advice platform over 48 hours. The team found that categories with the fewest cases had the highest non-response rates, which contradicted the initial expectation that busy areas were falling behind.",
+    "facts": [
+      {
+        "fact": "The American Bar Association platform connects low-income clients with volunteer attorneys for free advice.",
+        "source": "raw/website/projects/datafest-2023.md",
+        "section": "1. The brief, and the clock",
+        "heading": "1. The brief, and the clock"
+      },
+      {
+        "fact": "The brief asked the team to advise the ABA and its state partners on general trends, identify where expertise was short, and help prepare volunteers for the questions coming at them.",
+        "source": "raw/website/projects/datafest-2023.md",
+        "section": "1. The brief, and the clock",
+        "heading": "1. The brief, and the clock"
+      },
+      {
+        "fact": "Education carried the largest share of unresolved questions across Southern states.",
+        "source": "raw/website/projects/datafest-2023.md",
+        "section": "3. What the data said",
+        "heading": "3. What the data said"
+      },
+      {
+        "fact": "Juvenile and individual rights had the highest proportion of non-response nationally.",
+        "source": "raw/website/projects/datafest-2023.md",
+        "section": "3. What the data said",
+        "heading": "3. What the data said"
+      },
+      {
+        "fact": "Family and children, the single largest category by volume, had a relatively low proportion of non-response.",
+        "source": "raw/website/projects/datafest-2023.md",
+        "section": "3. What the data said",
+        "heading": "3. What the data said"
+      },
+      {
+        "fact": "The worst single wait was work, employment and unemployment questions in South Carolina, at a median of 26 days.",
+        "source": "raw/website/projects/datafest-2023.md",
+        "section": "3. What the data said",
+        "heading": "3. What the data said"
+      },
+      {
+        "fact": "The data said the opposite of the intuitive read, which was that the busiest areas of law fall furthest behind.",
+        "source": "raw/website/projects/datafest-2023.md",
+        "section": "(introduction)",
+        "heading": ""
+      },
+      {
+        "fact": "The categories with fewer cases were the ones going unanswered.",
+        "source": "raw/website/projects/datafest-2023.md",
+        "section": "4. The finding that inverted the expectation",
+        "heading": "4. The finding that inverted the expectation"
+      },
+      {
+        "fact": "A retrieval system that surfaces similar past cases can only be as good as the corpus it draws from.",
+        "source": "raw/website/projects/datafest-2023.md",
+        "section": "5. Turning it on our own system",
+        "heading": "5. Turning it on our own system"
+      },
+      {
+        "fact": "The submission carried two worked retrievals: a family law question and an education question from South Carolina.",
+        "source": "raw/website/projects/datafest-2023.md",
+        "section": "5. Turning it on our own system",
+        "heading": "5. Turning it on our own system"
+      },
+      {
+        "fact": "Including the weak case made the strong case credible by demonstrating the scores separate cases that genuinely differ.",
+        "source": "raw/website/projects/datafest-2023.md",
+        "section": "6. Why the failing example was the point",
+        "heading": "6. Why the failing example was the point"
+      }
+    ],
+    "related": [
+      {
+        "title": "University of Notre Dame",
+        "why": "This project was conducted as part of the educational experience at the University of Notre Dame."
+      },
+      {
+        "title": "Formula 1 Racing Trends",
+        "why": "Both projects involve analyzing large datasets to identify trends over time."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Trend Analysis",
+        "why": "The core of the project involved analyzing descriptive trends in the legal advice platform data.",
+        "source": "raw/website/projects/datafest-2023.md"
+      },
+      {
+        "name": "Non-Response Rate",
+        "why": "The project focused on identifying categories with high non-response rates in the legal advice platform.",
+        "source": "raw/website/projects/datafest-2023.md"
+      },
+      {
+        "name": "Retrieval System Evaluation",
+        "why": "The team tested a recommendation system and demonstrated its failure modes on sparse data.",
+        "source": "raw/website/projects/datafest-2023.md"
+      },
+      {
+        "name": "Corpus Sparsity",
+        "why": "The analysis linked the lack of case volume (sparse corpus) to poor retrieval performance.",
+        "source": "raw/website/projects/datafest-2023.md"
+      }
+    ],
+    "sources": [
+      "raw/website/projects/datafest-2023.md"
+    ],
+    "property_related": []
+  },
+  "wiki/Projects/Formula 1 Racing Trends.md": {
+    "title": "Formula 1 Racing Trends",
+    "folder": "Projects",
+    "summary": "This project analyzed thirty-two seasons of Formula 1 data to determine if car speeds have increased over time. The analysis required significant preprocessing to make disparate data points comparable, focusing on derived speed metrics and handling changes in regulations and circuits.",
+    "facts": [
+      {
+        "fact": "The variable needed, car speed, is not published by Formula 1.",
+        "source": "raw/website/projects/formula-1-trends.md",
+        "section": "1. The variable that wasn't in the data",
+        "heading": "1. The variable that wasn't in the data"
+      },
+      {
+        "fact": "Speed was derived by calculating race distance divided by the winner's completion time, with time values converted to minutes for consistency.",
+        "source": "raw/website/projects/formula-1-trends.md",
+        "section": "1. The variable that wasn't in the data",
+        "heading": "1. The variable that wasn't in the data"
+      },
+      {
+        "fact": "The analysis used data scraped from the official results archive covering seasons from 1991 to 2022.",
+        "source": "raw/website/projects/formula-1-trends.md",
+        "section": "1. The variable that wasn't in the data",
+        "heading": "1. The variable that wasn't in the data"
+      },
+      {
+        "fact": "To compare seasons, the analysis held the track constant, selecting the Spanish Grand Prix as the only circuit used for the speed analysis.",
+        "source": "raw/website/projects/formula-1-trends.md",
+        "section": "2. Three ways the numbers weren't comparable",
+        "heading": "2. Three ways the numbers weren't comparable"
+      },
+      {
+        "fact": "The points system changed in 2010, requiring points to be normalized within each era separately before being combined by their mean.",
+        "source": "raw/website/projects/formula-1-trends.md",
+        "section": "2. Three ways the numbers weren't comparable",
+        "heading": "2. Three ways the numbers weren't comparable"
+      },
+      {
+        "fact": "The fitted trend line showed that the winner's average speed at Spain rose steadily to around 2005, fell sharply, and recovered partially in the mid-2010s.",
+        "source": "raw/website/projects/formula-1-trends.md",
+        "section": "3. What the speed curve actually shows",
+        "heading": "3. What the speed curve actually shows"
+      },
+      {
+        "fact": "Six candidates were fitted to the time series data, including linear, quadratic, cubic, quartic, quartic with an exponential transform, and Holt-Winters exponential smoothing.",
+        "source": "raw/website/projects/formula-1-trends.md",
+        "section": "4. The model that won, and why that is worth doubting",
+        "heading": "4. The model that won, and why that is worth doubting"
+      },
+      {
+        "fact": "K-means clustering was used over two features—average annual standing and normalized points—to analyze teams and drivers.",
+        "source": "raw/website/projects/formula-1-trends.md",
+        "section": "5. Clustering, and what unsupervised output is worth",
+        "heading": "5. Clustering, and what unsupervised output is worth"
+      },
+      {
+        "fact": "The clustering returned Mercedes as the strongest team of the period, with Ferrari and Red Bull in the same top tier.",
+        "source": "raw/website/projects/formula-1-trends.md",
+        "section": "5. Clustering, and what unsupervised output is worth",
+        "heading": "5. Clustering, and what unsupervised output is worth"
+      },
+      {
+        "fact": "The number of clusters was chosen by silhouette score rather than by habit, resulting in three tiers for teams but only two for drivers.",
+        "source": "raw/website/projects/formula-1-trends.md",
+        "section": "5. Clustering, and what unsupervised output is worth",
+        "heading": "5. Clustering, and what unsupervised output is worth"
+      },
+      {
+        "fact": "Weather is missing entirely from the data, which means race times reflect conditions that are not accounted for in the trend line.",
+        "source": "raw/website/projects/formula-1-trends.md",
+        "section": "6. What I'd do differently",
+        "heading": "6. What I'd do differently"
+      },
+      {
+        "fact": "The two points eras need proper weighting rather than an equal average because drivers and teams competing after 2010 still score higher.",
+        "source": "raw/website/projects/formula-1-trends.md",
+        "section": "6. What I'd do differently",
+        "heading": "6. What I'd do differently"
+      }
+    ],
+    "related": [
+      {
+        "title": "University of Notre Dame",
+        "why": "This project was completed as part of the coursework at the Mendoza College of Business."
+      },
+      {
+        "title": "Ms. Pac-Man DQN",
+        "why": "Both notes involve using a Deep Q-Network for an agent to learn a task."
+      },
+      {
+        "title": "Time Series Analysis",
+        "why": "The project involved fitting models to data collected over sequential time periods to identify trends."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Time series analysis",
+        "why": "The project involved fitting models to data collected over sequential time periods to identify trends.",
+        "source": "raw/website/projects/formula-1-trends.md"
+      },
+      {
+        "name": "Clustering",
+        "why": "K-means was used to group teams and drivers based on performance metrics.",
+        "source": "raw/website/projects/formula-1-trends.md"
+      },
+      {
+        "name": "Data preprocessing",
+        "why": "Significant effort was spent making raw, inconsistent data comparable across different races and years.",
+        "source": "raw/website/projects/formula-1-trends.md"
+      },
+      {
+        "name": "Root Mean Squared Error",
+        "why": "RMSE was used as the metric to compare the performance of different trend models.",
+        "source": "raw/website/projects/formula-1-trends.md"
+      }
+    ],
+    "sources": [
+      "raw/website/projects/formula-1-trends.md"
+    ],
+    "property_related": []
+  },
+  "wiki/Projects/GenAI Target Setting.md": {
+    "title": "GenAI Target Setting",
+    "folder": "Projects",
+    "summary": "This project involved setting the first annual target for a business with almost no history by forecasting a leading indicator instead of the final goal. The methodology used 55,000 data points and four scenario simulations, emphasizing a quarterly review cadence to correct the initial target.",
+    "facts": [
+      {
+        "fact": "2024 was the first year AWS Sales carried a Generative AI goal.",
+        "source": "raw/website/projects/genai-target-setting.md",
+        "section": "1. How a goal becomes a number",
+        "heading": "1. How a goal becomes a number"
+      },
+      {
+        "fact": "The model forecast a leading indicator that did have history and converted through it.",
+        "source": "raw/website/projects/genai-target-setting.md",
+        "section": null,
+        "heading": null
+      },
+      {
+        "fact": "The model was built across 55,000 data points and four scenario simulations.",
+        "source": "raw/website/projects/genai-target-setting.md",
+        "section": null,
+        "heading": null
+      },
+      {
+        "fact": "The first real decision was to stop trying to forecast the target metric directly.",
+        "source": "raw/website/projects/genai-target-setting.md",
+        "section": "2. Why the obvious approach fails",
+        "heading": "2. Why the obvious approach fails"
+      },
+      {
+        "fact": "Pipeline creation had been running long enough to have a real series.",
+        "source": "raw/website/projects/genai-target-setting.md",
+        "section": "3. Forecast something that does have history",
+        "heading": "3. Forecast something that does have history"
+      },
+      {
+        "fact": "The model forecasts pipeline creation using a least-squares linear trend fitted only on the months where the category was genuinely active.",
+        "source": "raw/website/projects/genai-target-setting.md",
+        "section": "3. Forecast something that does have history",
+        "heading": "3. Forecast something that does have history"
+      },
+      {
+        "fact": "The median open-to-close for opportunities in this category was about three months, so pipeline created in month N lands in month N+3.",
+        "source": "raw/website/projects/genai-target-setting.md",
+        "section": "3. Forecast something that does have history",
+        "heading": "3. Forecast something that does have history"
+      },
+      {
+        "fact": "Attach and win rates came from the later months only — the first period with enough launches per month to compute a rate that wasn't noise.",
+        "source": "raw/website/projects/genai-target-setting.md",
+        "section": "4. The judgment calls inside that",
+        "heading": "4. The judgment calls inside that"
+      },
+      {
+        "fact": "A single blended rate would have quietly misallocated quota — over-targeting regions that convert poorly and under-targeting the ones that convert well.",
+        "source": "raw/website/projects/genai-target-setting.md",
+        "section": "4. The judgment calls inside that",
+        "heading": "4. The judgment calls inside that"
+      },
+      {
+        "fact": "Four scenario simulations were run as sensitivity analysis across the model's assumptions.",
+        "source": "raw/website/projects/genai-target-setting.md",
+        "section": "5. What the scenarios are for",
+        "heading": "5. What the scenarios are for"
+      },
+      {
+        "fact": "The deliverable was not the target, but the target plus a quarterly review cadence.",
+        "source": "raw/website/projects/genai-target-setting.md",
+        "section": "6. The part that mattered most: planning to be wrong",
+        "heading": "6. The part that mattered most: planning to be wrong"
+      }
+    ],
+    "related": [
+      {
+        "title": "Amazon Web Services",
+        "why": "Both notes relate to strategic analytics and goal setting within the AWS organization."
+      },
+      {
+        "title": "GenAI Adoption Program",
+        "why": "Both notes deal with driving adoption and setting goals related to Generative AI."
+      },
+      {
+        "title": "Time Series Analysis",
+        "why": "The use of linear trend fitting on historical data to project future values."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Leading Indicator Forecasting",
+        "why": "The core technique used to predict future goals by modeling a measurable precursor.",
+        "source": "raw/website/projects/genai-target-setting.md"
+      },
+      {
+        "name": "Sensitivity Analysis",
+        "why": "Using multiple scenarios to test the robustness of a forecast against changing assumptions.",
+        "source": "raw/website/projects/genai-target-setting.md"
+      },
+      {
+        "name": "Time Series Analysis",
+        "why": "The use of linear trend fitting on historical data to project future values.",
+        "source": "raw/website/projects/genai-target-setting.md"
+      },
+      {
+        "name": "Iterative Goal Correction",
+        "why": "Implementing a mechanism to adjust targets based on actual performance over time.",
+        "source": "raw/website/projects/genai-target-setting.md"
+      }
+    ],
+    "sources": [
+      "raw/website/projects/genai-target-setting.md"
+    ],
+    "property_related": []
+  },
+  "wiki/Projects/Pull-Request Automation.md": {
+    "title": "Pull-Request Automation",
+    "folder": "Projects",
+    "summary": "This project involved building a skill on Amazon's internal OpenClaw platform to automate the mandatory steps between finishing a code change and getting it reviewed. The automation reduced the manual processing time by 80%, leaving only about five minutes of human decision-making.",
+    "facts": [
+      {
+        "fact": "The skill automates the eight ceremony steps up to publishing the review; peer review and the merge to production stay human.",
+        "source": "raw/website/projects/pr-automation.md",
+        "section": "2. What is automated, and where it stops",
+        "heading": "2. What is automated, and where it stops"
+      },
+      {
+        "fact": "Getting a finished change into code review took eight mandatory steps and 30–60 minutes, none of it thinking.",
+        "source": "raw/website/projects/pr-automation.md",
+        "section": "(introduction)",
+        "heading": ""
+      },
+      {
+        "fact": "The skill covers the whole span from opening the cloud desktop to publishing the review.",
+        "source": "raw/website/projects/pr-automation.md",
+        "section": "2. What is automated, and where it stops",
+        "heading": "2. What is automated, and where it stops"
+      },
+      {
+        "fact": "The useful test is not \"can this be automated\" but \"does this step have more than one correct outcome.\"",
+        "source": "raw/website/projects/pr-automation.md",
+        "section": "3. The five minutes that stay human",
+        "heading": "3. The five minutes that stay human"
+      },
+      {
+        "fact": "The skill builds the change in the beta environment, runs it, and validates the output before it pushes anything.",
+        "source": "raw/website/projects/pr-automation.md",
+        "section": "4. Validation stops being skippable",
+        "heading": "4. Validation stops being skippable"
+      },
+      {
+        "fact": "Cutting per-change overhead removes the incentive to batch.",
+        "source": "raw/website/projects/pr-automation.md",
+        "section": "5. Why the 80% understates it",
+        "heading": "5. Why the 80% understates it"
+      }
+    ],
+    "related": [
+      {
+        "title": "Action Hub",
+        "why": "Both projects involve building automated systems to manage complex workflows."
+      },
+      {
+        "title": "Amazon Web Services",
+        "why": "Both notes relate to work experience at Amazon."
+      },
+      {
+        "title": "MBA 290T Syllabus",
+        "why": "Both notes discuss building and evaluating automated systems."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Agentic AI",
+        "why": "The project is categorized under Agentic AI.",
+        "source": "raw/website/projects/pr-automation.md"
+      },
+      {
+        "name": "Automation Boundary Definition",
+        "why": "The design principle of stopping automation where human judgment begins is a key concept.",
+        "source": "raw/website/projects/pr-automation.md"
+      },
+      {
+        "name": "Process Optimization",
+        "why": "The core of the project is optimizing a multi-step workflow.",
+        "source": "raw/website/projects/pr-automation.md"
+      }
+    ],
+    "sources": [
+      "raw/website/projects/pr-automation.md"
+    ],
+    "property_related": []
+  },
+  "wiki/Experience/TikTok Internship.md": {
+    "title": "TikTok Internship",
+    "folder": "Experience",
+    "summary": "This role involved working as an Ads Risk Integrity Intern at TikTok in Beijing, China. The responsibilities focused on ad moderation and risk analysis across Data Science, Engineering, and Policy.",
+    "facts": [
+      {
+        "fact": "org: TikTok",
+        "source": "raw/website/experience/tiktok.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "role: Ads Risk Integrity Intern",
+        "source": "raw/website/experience/tiktok.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "location: Beijing, China",
+        "source": "raw/website/experience/tiktok.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "start: May 2021",
+        "source": "raw/website/experience/tiktok.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "end: Aug 2021",
+        "source": "raw/website/experience/tiktok.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "kind: work",
+        "source": "raw/website/experience/tiktok.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "summary: Ad moderation and risk analysis, working across Data Science, Engineering and Policy.",
+        "source": "raw/website/experience/tiktok.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "outcomes: Drove a 35% reduction in high-risk ad exposure by analysing flagged ads and presenting risk patterns to weekly cross-functional reviews",
+        "source": "raw/website/experience/tiktok.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "outcomes: Cut unidentified-language ad violations by 95% by partnering with R&D to add 15+ minority-language models and a phrase glossary to the moderation system",
+        "source": "raw/website/experience/tiktok.md",
+        "section": "Properties",
+        "heading": null
+      }
+    ],
+    "related": [
+      {
+        "title": "Amazon Web Services",
+        "why": "Both notes describe roles within a large technology company."
+      },
+      {
+        "title": "GenAI Adoption Program",
+        "why": "Both notes involve working on programs related to AI adoption or usage."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Ad Moderation",
+        "why": "The role involved ad moderation.",
+        "source": "raw/website/experience/tiktok.md"
+      },
+      {
+        "name": "Risk Analysis",
+        "why": "The role involved risk analysis.",
+        "source": "raw/website/experience/tiktok.md"
+      }
+    ],
+    "sources": [
+      "raw/website/experience/tiktok.md"
+    ],
+    "property_related": []
+  },
+  "wiki/Projects/TripMatch Rides Board.md": {
+    "title": "TripMatch Rides Board",
+    "folder": "Projects",
+    "summary": "TripMatch was a verified, Berkeley-only rides board designed to solve the problem of unstructured ride coordination in group chats. The project evolved from a simple prototype to a robust system using a GitHub Pages, Cloudflare Worker, and D1 architecture.",
+    "facts": [
+      {
+        "fact": "A 400-person class coordinates rides by scrolling a WhatsApp chat, where requests get buried and matching seats go unused.",
+        "source": "raw/website/projects/tripmatch.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "The project was a verified, Berkeley-only rides board.",
+        "source": "raw/website/projects/tripmatch.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "The timeline for the project was August 22–27, 2026.",
+        "source": "raw/website/projects/tripmatch.md",
+        "section": "(introduction)",
+        "heading": ""
+      },
+      {
+        "fact": "The problem was that ride coordination lived in an unstructured group chat, and matches were found by luck, not by search.",
+        "source": "raw/website/projects/tripmatch.md",
+        "section": "(introduction)",
+        "heading": ""
+      },
+      {
+        "fact": "Three costs of using the WhatsApp chat were that requests get buried, there is no way to see overlap, and the failure mode is silent waste.",
+        "source": "raw/website/projects/tripmatch.md",
+        "section": "1. The problem, and why it wasn't already solved",
+        "heading": "1. The problem, and why it wasn't already solved"
+      },
+      {
+        "fact": "The project was scoped to replace a group chat's search function for approximately 400 people who already know each other.",
+        "source": "raw/website/projects/tripmatch.md",
+        "section": "1. The problem, and why it wasn't already solved",
+        "heading": "1. The problem, and why it wasn't already solved"
+      },
+      {
+        "fact": "The PRD's non-goals included not being a payments/cost-splitting tool, not real-time dispatch, not a WhatsApp replacement, no public/open matching, and no native mobile app.",
+        "source": "raw/website/projects/tripmatch.md",
+        "section": "2. What I deliberately chose *not* to build",
+        "heading": "2. What I deliberately chose *not* to build"
+      },
+      {
+        "fact": "Three gaps surfaced within days of V1 going to a slice of the class, leading to the implementation of owner-scoped delete, an edit control, and date chips for better volume scaling.",
+        "source": "raw/website/projects/tripmatch.md",
+        "section": "3. From prototype to launch: what real users changed",
+        "heading": "3. From prototype to launch: what real users changed"
+      },
+      {
+        "fact": "V1 stored the whole board as one JSON document in a hosted-JSON service.",
+        "source": "raw/website/projects/tripmatch.md",
+        "section": "4. The launch-hardening call: killing my own v1 architecture",
+        "heading": "4. The launch-hardening call: killing my own v1 architecture"
+      },
+      {
+        "fact": "Against the expected load of ~400 students and ~200 concurrent posts, V1 had three defects.",
+        "source": "raw/website/projects/tripmatch.md",
+        "section": "4. The launch-hardening call: killing my own v1 architecture",
+        "heading": "4. The launch-hardening call: killing my own v1 architecture"
+      },
+      {
+        "fact": "The second defect involved simultaneous posts silently overwriting each other because two people acting inside one HTTP round trip meant one post vanished.",
+        "source": "raw/website/projects/tripmatch.md",
+        "section": "4. The launch-hardening call: killing my own v1 architecture",
+        "heading": "4. The launch-hardening call: killing my own v1 architecture"
+      },
+      {
+        "fact": "The rebuilt storage layer behind an API used the architecture: GitHub Pages (static) → Cloudflare Worker → D1 (SQLite).",
+        "source": "raw/website/projects/tripmatch.md",
+        "section": "4. The launch-hardening call: killing my own v1 architecture",
+        "heading": "4. The launch-hardening call: killing my own v1 architecture"
+      }
+    ],
+    "related": [
+      {
+        "title": "Secure Networking Tracker",
+        "why": "Both projects involve tools designed for the Berkeley community."
+      },
+      {
+        "title": "UC Berkeley",
+        "why": "This note describes a project from a program at UC Berkeley."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Server-Side Identity Verification",
+        "why": "The project implemented Google Sign-In restricted to the berkeley.edu domain, verified server-side against Google's published keys.",
+        "source": "raw/website/projects/tripmatch.md"
+      },
+      {
+        "name": "API Architecture Design",
+        "why": "The project involved rebuilding the storage layer using a specific stack: GitHub Pages (static) → Cloudflare Worker → D1 (SQLite).",
+        "source": "raw/website/projects/tripmatch.md"
+      },
+      {
+        "name": "Data Integrity in Concurrent Systems",
+        "why": "The project addressed defects where simultaneous posts silently overwrote each other.",
+        "source": "raw/website/projects/tripmatch.md"
+      }
+    ],
+    "sources": [
+      "raw/website/projects/tripmatch.md"
+    ],
+    "property_related": []
+  },
+  "wiki/Concepts/Deep Q-Network.md": {
+    "title": "Deep Q-Network",
+    "folder": "Concepts",
+    "summary": "Deep Q-Network is a reinforcement learning technique used to train an agent to play Ms. Pac-Man by observing game screens, selecting actions, and learning from the resulting rewards. In this implementation, the agent uses a convolutional network to estimate the future reward for each possible move, while a target network provides a stable learning goal.",
+    "facts": [
+      {
+        "fact": "The agent observes four game screens, which are shrunk to 84x84 and turned grayscale and stacked together for decision-making.",
+        "source": "raw/course-projects/pacman-dqn/README.md",
+        "section": "Ms. Pac-Man DQN — Class 3 Assignment › What the agent observes, does, and is rewarded for",
+        "heading": "What the agent observes, does, and is rewarded for"
+      },
+      {
+        "fact": "The agent has nine possible actions: no-op, four directions, and four diagonals.",
+        "source": "raw/course-projects/pacman-dqn/README.md",
+        "section": "Ms. Pac-Man DQN — Class 3 Assignment › What the agent observes, does, and is rewarded for",
+        "heading": "What the agent observes, does, and is rewarded for"
+      },
+      {
+        "fact": "The reward used for learning is the Ms. Pac-Man score, which is clipped to the range of -1 to +1 during learning.",
+        "source": "raw/course-projects/pacman-dqn/README.md",
+        "section": "Ms. Pac-Man DQN — Class 3 Assignment › What the agent observes, does, and is rewarded for",
+        "heading": "What the agent observes, does, and is rewarded for"
+      },
+      {
+        "fact": "The exploration rate was set to 0.10, which was chosen as the measured sweet spot for the agent's performance.",
+        "source": "raw/course-projects/pacman-dqn/README.md",
+        "section": "Ms. Pac-Man DQN — Class 3 Assignment › My three hyperparameters",
+        "heading": "My three hyperparameters"
+      },
+      {
+        "fact": "The training ran for 300 episodes, which was the point where the measured evaluation score peaked.",
+        "source": "raw/course-projects/pacman-dqn/README.md",
+        "section": "Ms. Pac-Man DQN — Class 3 Assignment › My three hyperparameters",
+        "heading": "My three hyperparameters"
+      },
+      {
+        "fact": "The learning rate was set to 0.0001, as increasing it made the learning process worse.",
+        "source": "raw/course-projects/pacman-dqn/README.md",
+        "section": "Ms. Pac-Man DQN — Class 3 Assignment › My three hyperparameters",
+        "heading": "My three hyperparameters"
+      },
+      {
+        "fact": "The headline result showed the mean evaluation score rose from 492 (untrained) to 906 (trained).",
+        "source": "raw/course-projects/pacman-dqn/README.md",
+        "section": "Ms. Pac-Man DQN — Class 3 Assignment",
+        "heading": "Ms. Pac-Man DQN — Class 3 Assignment"
+      },
+      {
+        "fact": "The agent learns by comparing the network's guess for a move against the actual points earned plus an estimate of the resulting screen's worth, allowing credit to travel backward in time.",
+        "source": "raw/course-projects/pacman-dqn/README.md",
+        "section": "Ms. Pac-Man DQN — Class 3 Assignment › What the agent observes, does, and is rewarded for › How the learning actually works, in plain language",
+        "heading": "How the learning actually works, in plain language"
+      }
+    ],
+    "related": [
+      {
+        "title": "Ms. Pac-Man DQN",
+        "why": "Ms. Pac-Man DQN Implementation: The core algorithm used to train the agent."
+      }
+    ],
+    "concepts": [],
+    "sources": [
+      "raw/course-projects/pacman-dqn/README.md"
+    ]
+  },
+  "wiki/Concepts/Deep Learning.md": {
+    "title": "Deep Learning",
+    "folder": "Concepts",
+    "summary": "Deep Learning involves training layers of weights with non-linearities, guided by gradient descent to minimize prediction loss. In this context, it is demonstrated through the transformation of text into tokens and IDs, the calculation of gradients, and the subsequent parameter updates using optimizers like AdamW.",
+    "facts": [
+      {
+        "fact": "The parameters are arranged in layers, including an embedding table, two transformer blocks with 4 attention heads and a small MLP, and an output layer mapping 64 dimensions back to vocabulary scores.",
+        "source": "raw/course-projects/custom-llm/README.md",
+        "section": "Building a Custom LLM › 6. From a word to a prediction: tokens, IDs, vectors, gradients › What makes it a neural network, and what attention does",
+        "heading": "What makes it a neural network, and what attention does"
+      },
+      {
+        "fact": "Attention allows the prediction at each position to be a weighted blend of earlier positions.",
+        "source": "raw/course-projects/custom-llm/README.md",
+        "section": "Building a Custom LLM › 6. From a word to a prediction: tokens, IDs, vectors, gradients › What makes it a neural network, and what attention does",
+        "heading": "What makes it a neural network, and what attention does"
+      },
+      {
+        "fact": "A causal mask sets future positions to -inf before the softmax, preventing the model from looking at future tokens during training.",
+        "source": "raw/course-projects/custom-llm/README.md",
+        "section": "Building a Custom LLM › 6. From a word to a prediction: tokens, IDs, vectors, gradients › What makes it a neural network, and what attention does",
+        "heading": "What makes it a neural network, and what attention does"
+      },
+      {
+        "fact": "A token is a piece of text, an ID is its arbitrary row number, a vector is 64 numbers, and the embedding is the learned vector for that row.",
+        "source": "raw/course-projects/custom-llm/README.md",
+        "section": "Building a Custom LLM › 14. What I learned, one limitation, and my next experiment",
+        "heading": "14. What I learned, one limitation, and my next experiment"
+      },
+      {
+        "fact": "A neural network is characterized by layers of weights with non-linearities, trained by gradient descent, where the loss scores each next-token prediction and the gradient dictates parameter movement.",
+        "source": "raw/course-projects/custom-llm/README.md",
+        "section": "Building a Custom LLM › 14. What I learned, one limitation, and my next experiment",
+        "heading": "14. What I learned, one limitation, and my next experiment"
+      },
+      {
+        "fact": "The gradient answers whether increasing a specific number would raise or lower the loss, and the weight update is the action taken to lower the loss.",
+        "source": "raw/course-projects/custom-llm/README.md",
+        "section": "Building a Custom LLM › 6. From a word to a prediction: tokens, IDs, vectors, gradients › One real gradient and one real weight update",
+        "heading": "One real gradient and one real weight update"
+      },
+      {
+        "fact": "The learning rate is set to 1e-05 at step 0 because it is part of a 100-step warmup where the initial rate of 0.001 is scaled by (1/100).",
+        "source": "raw/course-projects/custom-llm/README.md",
+        "section": "Building a Custom LLM › 6. From a word to a prediction: tokens, IDs, vectors, gradients › One real gradient and one real weight update",
+        "heading": "One real gradient and one real weight update"
+      },
+      {
+        "fact": "The corpus is the pile of text the model may learn from, which is cut into passages of at most 47 word tokens and then split 90/10.",
+        "source": "raw/course-projects/custom-llm/README.md",
+        "section": "Building a Custom LLM › 6. From a word to a prediction: tokens, IDs, vectors, gradients › Corpus → passage → tokens → IDs",
+        "heading": "Corpus → passage → tokens → IDs"
+      }
+    ],
+    "related": [
+      {
+        "title": "MBA 290T Syllabus",
+        "why": "From Zero to AI Agents: The course covers deep learning and transformers."
+      },
+      {
+        "title": "Ms. Pac-Man DQN",
+        "why": "Ms. Pac-Man DQN Implementation: The core reinforcement learning technique used to train the agent."
+      },
+      {
+        "title": "Custom LLM with nanoGPT",
+        "why": "This project details the process of building and evaluating a custom Large Language Model (LLM), which is a form of neural network training discussed in Deep Learning."
+      }
+    ],
+    "concepts": [],
+    "sources": [
+      "raw/course-projects/custom-llm/README.md"
+    ]
+  },
+  "wiki/Projects/Kickstarter Scraper.md": {
+    "title": "Kickstarter Scraper",
+    "folder": "Projects",
+    "summary": "This project addressed the issue where a standard web scraper returned empty results for Kickstarter pages because the campaign content is assembled by JavaScript in the browser. The solution involved creating a two-stage pipeline: using a real browser to snapshot the fully rendered document, and then parsing that snapshot with the scraper.",
+    "facts": [
+      {
+        "fact": "The tool the course taught returns an empty result on this page — and not an error.",
+        "source": "raw/website/projects/kickstarter-scraper.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "rvest cannot scrape this page on its own, and it fails silently: Kickstarter builds its campaign body in the browser, so parsing the server's reply finds nothing and reports nothing.",
+        "source": "raw/website/projects/kickstarter-scraper.md",
+        "section": "Properties",
+        "heading": null
+      },
+      {
+        "fact": "The project is really about why that happens, and what you do instead: let a real browser execute the page, capture the document it builds, and parse that.",
+        "source": "raw/website/projects/kickstarter-scraper.md",
+        "section": "(introduction)",
+        "heading": ""
+      },
+      {
+        "fact": "Kickstarter's don't. The campaign body — the part carrying the actual pitch — sits under #react-campaign.",
+        "source": "raw/website/projects/kickstarter-scraper.md",
+        "section": "1. Why the obvious approach finds nothing",
+        "heading": "1. Why the obvious approach finds nothing"
+      },
+      {
+        "fact": "html_elements() on a selector matching nothing does not raise.",
+        "source": "raw/website/projects/kickstarter-scraper.md",
+        "section": "1. Why the obvious approach finds nothing",
+        "heading": "1. Why the obvious approach finds nothing"
+      },
+      {
+        "fact": "html_text() on a zero-length node set returns character(0).",
+        "source": "raw/website/projects/kickstarter-scraper.md",
+        "section": "1. Why the obvious approach finds nothing",
+        "heading": "1. Why the obvious approach finds nothing"
+      },
+      {
+        "fact": "Stage one is a real browser.",
+        "source": "raw/website/projects/kickstarter-scraper.md",
+        "section": "2. Treating the page as a program, not a document",
+        "heading": "2. Treating the page as a program, not a document"
+      },
+      {
+        "fact": "Stage two is the rvest script that was always going to work, pointed at the file on disk instead of at the URL.",
+        "source": "raw/website/projects/kickstarter-scraper.md",
+        "section": "2. Treating the page as a program, not a document",
+        "heading": "2. Treating the page as a program, not a document"
+      },
+      {
+        "fact": "With the document already on disk, iteration costs nothing and the site sees a single visit.",
+        "source": "raw/website/projects/kickstarter-scraper.md",
+        "section": "3. Splitting fetch from parse pays twice",
+        "heading": "3. Splitting fetch from parse pays twice"
+      },
+      {
+        "fact": "rvest offers html_text() and html_text2().",
+        "source": "raw/website/projects/kickstarter-scraper.md",
+        "section": "4. Two ways to read text, and the difference shows",
+        "heading": "4. Two ways to read text, and the difference shows"
+      },
+      {
+        "fact": "What transfers here is not a library.",
+        "source": "raw/website/projects/kickstarter-scraper.md",
+        "section": "5. The part worth carrying",
+        "heading": "5. The part worth carrying"
+      },
+      {
+        "fact": "View-source and inspect-element disagree exactly when the answer is assembled.",
+        "source": "raw/website/projects/kickstarter-scraper.md",
+        "section": "5. The part worth carrying",
+        "heading": "5. The part worth carrying"
+      }
+    ],
+    "related": [
+      {
+        "title": "University of Notre Dame",
+        "why": "This project was completed as part of coursework at the University of Notre Dame."
+      },
+      {
+        "title": "MBA 290T Syllabus",
+        "why": "This project was completed as part of the course taught in MBA 290T."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Browser Automation",
+        "why": "The project required driving a real browser to execute JavaScript before scraping.",
+        "source": "raw/website/projects/kickstarter-scraper.md"
+      },
+      {
+        "name": "Two-Stage Pipeline",
+        "why": "The solution involved separating the process of fetching the rendered content from the process of parsing it.",
+        "source": "raw/website/projects/kickstarter-scraper.md"
+      },
+      {
+        "name": "DOM Snapshotting",
+        "why": "The technique of capturing the fully built Document Object Model (DOM) to parse offline was central to the fix.",
+        "source": "raw/website/projects/kickstarter-scraper.md"
+      },
+      {
+        "name": "Web Scraping Techniques",
+        "why": "The project compared different methods of extracting data from web pages.",
+        "source": "raw/website/projects/kickstarter-scraper.md"
+      }
+    ],
+    "sources": [
+      "raw/website/projects/kickstarter-scraper.md"
+    ],
+    "property_related": []
+  }
+}

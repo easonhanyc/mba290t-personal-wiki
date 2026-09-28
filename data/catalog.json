@@ -1,0 +1,598 @@
+{
+  "sources": {
+    "raw/course/syllabus.html": {
+      "source_id": "course-syllabus-b400645c",
+      "sha256": "b400645ca89c932ea3f197e8cd04ae595b5c2f6814d758f9dc465c06c54508da",
+      "bytes": 57371,
+      "title": "Syllabus – From Zero to AI Agents — Seven-Class Edition",
+      "origin": {
+        "collection": "MBA 290T course site",
+        "author": "Alexandre Mas and Pepe Alonso (course instructors)",
+        "url": "https://haas-ai-classes-fall-26.vercel.app/syllabus.html"
+      },
+      "notes": [
+        "wiki/Course/MBA 290T Syllabus.md",
+        "wiki/Concepts/Deep Learning.md"
+      ],
+      "ingested_at": "2026-09-26T23:30:30",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/course-projects/custom-llm/README.md": {
+      "source_id": "course-projects-custom-llm-readme-11b5c49c",
+      "sha256": "11b5c49c8f481844311ba580dbf1e31268365959af7ea69da8fbd3435fd703a1",
+      "bytes": 126936,
+      "title": "Building a Custom LLM",
+      "origin": {
+        "collection": "MBA 290T project - Custom LLM (Assignment 3)",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/mba290t-custom-llm",
+        "commit": "b1ce9d97c798aa7cb87d8bd0ba0d18bacf9bb445",
+        "repo_dir": "",
+        "url": "https://github.com/easonhanyc/mba290t-custom-llm/blob/b1ce9d97c798aa7cb87d8bd0ba0d18bacf9bb445/README.md"
+      },
+      "notes": [
+        "wiki/Projects/Custom LLM with nanoGPT.md",
+        "wiki/Concepts/Deep Learning.md"
+      ],
+      "ingested_at": "2026-09-26T23:52:08",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/course-projects/pacman-dqn/README.md": {
+      "source_id": "course-projects-pacman-dqn-readme-4b724349",
+      "sha256": "4b724349cd4ac689449f79321b89b5b06e31ce2de3031633fa290309ae100401",
+      "bytes": 29868,
+      "title": "Ms. Pac-Man DQN — Class 3 Assignment",
+      "origin": {
+        "collection": "MBA 290T project - Ms. Pac-Man DQN (Assignment 2)",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/mba290t-pacman-dqn",
+        "commit": "92dd46e2d25e63e21bb351085e6a781a25b35841",
+        "repo_dir": "",
+        "url": "https://github.com/easonhanyc/mba290t-pacman-dqn/blob/92dd46e2d25e63e21bb351085e6a781a25b35841/README.md"
+      },
+      "notes": [
+        "wiki/Projects/Ms. Pac-Man DQN.md",
+        "wiki/Concepts/Deep Learning.md",
+        "wiki/Concepts/Deep Q-Network.md"
+      ],
+      "ingested_at": "2026-09-26T23:57:08",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/course-projects/pacman-dqn/docs/METHODOLOGY.md": {
+      "source_id": "course-projects-pacman-dqn-docs-methodology-b14e34e7",
+      "sha256": "b14e34e7414beca5cf07a7ff1ef0d2e01a831cc2ee11613cc29ba7a5a7fb6290",
+      "bytes": 8371,
+      "title": "Methodology: how the three settings were chosen",
+      "origin": {
+        "collection": "MBA 290T project - Ms. Pac-Man DQN (Assignment 2)",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/mba290t-pacman-dqn",
+        "commit": "92dd46e2d25e63e21bb351085e6a781a25b35841",
+        "repo_dir": "",
+        "url": "https://github.com/easonhanyc/mba290t-pacman-dqn/blob/92dd46e2d25e63e21bb351085e6a781a25b35841/docs/METHODOLOGY.md"
+      },
+      "notes": [
+        "wiki/Projects/Ms. Pac-Man DQN.md"
+      ],
+      "ingested_at": "2026-09-26T23:59:24",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/course-projects/secure-networking-tracker/README.md": {
+      "source_id": "course-projects-secure-networking-tracker-readme-4b2dc6a2",
+      "sha256": "4b2dc6a22bd026b3b7eb9a5e12d96ec59610ce08edf74bf395f9b470d9db0403",
+      "bytes": 28666,
+      "title": "Secure Networking Tracker",
+      "origin": {
+        "collection": "MBA 290T project - Secure Networking Tracker (Assignment 1)",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/secure-networking-tracker",
+        "commit": "2aa3c1e478b0ef74f03f9c5859c9f5ab8a38ce0f",
+        "repo_dir": "",
+        "url": "https://github.com/easonhanyc/secure-networking-tracker/blob/2aa3c1e478b0ef74f03f9c5859c9f5ab8a38ce0f/README.md"
+      },
+      "notes": [
+        "wiki/Projects/Secure Networking Tracker.md"
+      ],
+      "ingested_at": "2026-09-27T00:04:15",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/course-projects/secure-networking-tracker/docs/how-it-works.md": {
+      "source_id": "course-projects-secure-networking-tracker-docs-how-it-works-5ab70ce2",
+      "sha256": "5ab70ce209d7786d6c97403a3a50142886337415d7fb572858915c4c4bea7691",
+      "bytes": 11139,
+      "title": "How this app works",
+      "origin": {
+        "collection": "MBA 290T project - Secure Networking Tracker (Assignment 1)",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/secure-networking-tracker",
+        "commit": "2aa3c1e478b0ef74f03f9c5859c9f5ab8a38ce0f",
+        "repo_dir": "",
+        "url": "https://github.com/easonhanyc/secure-networking-tracker/blob/2aa3c1e478b0ef74f03f9c5859c9f5ab8a38ce0f/docs/how-it-works.md"
+      },
+      "notes": [
+        "wiki/Projects/Secure Networking Tracker.md"
+      ],
+      "ingested_at": "2026-09-27T00:06:21",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/website/experience/amazon-web-services.md": {
+      "source_id": "website-experience-amazon-web-services-6b6451e8",
+      "sha256": "6b6451e8b3a05adc2c21953caba71e39c736b7905a9ab37ede7c31ea4fcd96b2",
+      "bytes": 771,
+      "title": "Amazon Web Services",
+      "origin": {
+        "collection": "Personal website - experience",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/easonhanyc.github.io",
+        "commit": "e8ea53c3546621c79620bbfa04bd88321fac8ec3",
+        "repo_dir": "src/content/experience/",
+        "site": "https://easonhanyc.github.io/experience",
+        "url": "https://github.com/easonhanyc/easonhanyc.github.io/blob/e8ea53c3546621c79620bbfa04bd88321fac8ec3/src/content/experience/amazon-web-services.md"
+      },
+      "notes": [
+        "wiki/Experience/Amazon Web Services.md"
+      ],
+      "ingested_at": "2026-09-27T00:07:18",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/website/experience/clean-shores.md": {
+      "source_id": "website-experience-clean-shores-1fa66d70",
+      "sha256": "1fa66d70f0813b6746472ea23b5361e3084e26dda29b7a6e3f8401eeac090ace",
+      "bytes": 457,
+      "title": "Clean-shores.org — Seaside Sustainability",
+      "origin": {
+        "collection": "Personal website - experience",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/easonhanyc.github.io",
+        "commit": "e8ea53c3546621c79620bbfa04bd88321fac8ec3",
+        "repo_dir": "src/content/experience/",
+        "site": "https://easonhanyc.github.io/experience",
+        "url": "https://github.com/easonhanyc/easonhanyc.github.io/blob/e8ea53c3546621c79620bbfa04bd88321fac8ec3/src/content/experience/clean-shores.md"
+      },
+      "notes": [
+        "wiki/Experience/Seaside Sustainability.md"
+      ],
+      "ingested_at": "2026-09-27T00:08:10",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/website/experience/idg-capital.md": {
+      "source_id": "website-experience-idg-capital-a3dca453",
+      "sha256": "a3dca45382027434812498e763625f91626abf77e178c27719f0f25df950987c",
+      "bytes": 541,
+      "title": "IDG Capital",
+      "origin": {
+        "collection": "Personal website - experience",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/easonhanyc.github.io",
+        "commit": "e8ea53c3546621c79620bbfa04bd88321fac8ec3",
+        "repo_dir": "src/content/experience/",
+        "site": "https://easonhanyc.github.io/experience",
+        "url": "https://github.com/easonhanyc/easonhanyc.github.io/blob/e8ea53c3546621c79620bbfa04bd88321fac8ec3/src/content/experience/idg-capital.md"
+      },
+      "notes": [
+        "wiki/Experience/IDG Capital.md"
+      ],
+      "ingested_at": "2026-09-27T00:09:01",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/website/experience/notre-dame.md": {
+      "source_id": "website-experience-notre-dame-3814314d",
+      "sha256": "3814314d1781f419894efbf46334131dfad64720cc6c88b5fd1b12039decb5f0",
+      "bytes": 549,
+      "title": "University of Notre Dame — Mendoza College of Business",
+      "origin": {
+        "collection": "Personal website - experience",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/easonhanyc.github.io",
+        "commit": "e8ea53c3546621c79620bbfa04bd88321fac8ec3",
+        "repo_dir": "src/content/experience/",
+        "site": "https://easonhanyc.github.io/experience",
+        "url": "https://github.com/easonhanyc/easonhanyc.github.io/blob/e8ea53c3546621c79620bbfa04bd88321fac8ec3/src/content/experience/notre-dame.md"
+      },
+      "notes": [
+        "wiki/Experience/University of Notre Dame.md"
+      ],
+      "ingested_at": "2026-09-27T00:09:59",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/website/experience/tiktok.md": {
+      "source_id": "website-experience-tiktok-506c7ec1",
+      "sha256": "506c7ec1a979ef40585b7508e88a7887b0a8648bfe087c411dc85c7a3ff518ef",
+      "bytes": 559,
+      "title": "TikTok",
+      "origin": {
+        "collection": "Personal website - experience",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/easonhanyc.github.io",
+        "commit": "e8ea53c3546621c79620bbfa04bd88321fac8ec3",
+        "repo_dir": "src/content/experience/",
+        "site": "https://easonhanyc.github.io/experience",
+        "url": "https://github.com/easonhanyc/easonhanyc.github.io/blob/e8ea53c3546621c79620bbfa04bd88321fac8ec3/src/content/experience/tiktok.md"
+      },
+      "notes": [
+        "wiki/Experience/TikTok Internship.md"
+      ],
+      "ingested_at": "2026-09-27T00:10:51",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/website/experience/uc-berkeley.md": {
+      "source_id": "website-experience-uc-berkeley-c2a9c503",
+      "sha256": "c2a9c5038e7f6494834d17c9af389ea501344eaf7cd0d86420404b4de85e6eea",
+      "bytes": 458,
+      "title": "UC Berkeley — Haas School of Business & IEOR",
+      "origin": {
+        "collection": "Personal website - experience",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/easonhanyc.github.io",
+        "commit": "e8ea53c3546621c79620bbfa04bd88321fac8ec3",
+        "repo_dir": "src/content/experience/",
+        "site": "https://easonhanyc.github.io/experience",
+        "url": "https://github.com/easonhanyc/easonhanyc.github.io/blob/e8ea53c3546621c79620bbfa04bd88321fac8ec3/src/content/experience/uc-berkeley.md"
+      },
+      "notes": [
+        "wiki/Experience/UC Berkeley.md"
+      ],
+      "ingested_at": "2026-09-27T00:11:52",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/website/projects/action-hub.md": {
+      "source_id": "website-projects-action-hub-c6c9d5e9",
+      "sha256": "c6c9d5e9923905957c0f62ed78fd7650a5859ddaa918013f86ce6aec7f83342a",
+      "bytes": 13153,
+      "title": "Action Hub — Ranked Alerts with Next Actions",
+      "origin": {
+        "collection": "Personal website - projects",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/easonhanyc.github.io",
+        "commit": "e8ea53c3546621c79620bbfa04bd88321fac8ec3",
+        "repo_dir": "src/content/projects/",
+        "site": "https://easonhanyc.github.io/work/",
+        "url": "https://github.com/easonhanyc/easonhanyc.github.io/blob/e8ea53c3546621c79620bbfa04bd88321fac8ec3/src/content/projects/action-hub.md"
+      },
+      "notes": [
+        "wiki/Projects/Action Hub.md"
+      ],
+      "ingested_at": "2026-09-27T00:14:01",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/website/projects/allowlist.md": {
+      "source_id": "website-projects-allowlist-4567a2ef",
+      "sha256": "4567a2efe10e069437f63093bd3c35d50f33bb426a0103939f09430fd09b2c73",
+      "bytes": 9358,
+      "title": "Allowlist — Data Access Management App",
+      "origin": {
+        "collection": "Personal website - projects",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/easonhanyc.github.io",
+        "commit": "e8ea53c3546621c79620bbfa04bd88321fac8ec3",
+        "repo_dir": "src/content/projects/",
+        "site": "https://easonhanyc.github.io/work/",
+        "url": "https://github.com/easonhanyc/easonhanyc.github.io/blob/e8ea53c3546621c79620bbfa04bd88321fac8ec3/src/content/projects/allowlist.md"
+      },
+      "notes": [
+        "wiki/Projects/Allowlist Data Access App.md"
+      ],
+      "ingested_at": "2026-09-27T00:15:57",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/website/projects/asteroid-screening.md": {
+      "source_id": "website-projects-asteroid-screening-b2f6998b",
+      "sha256": "b2f6998b38c77a1513cb037010e410f60230de5d83ce3d69294a5b04fd496535",
+      "bytes": 9766,
+      "title": "Hazardous Asteroid Screening",
+      "origin": {
+        "collection": "Personal website - projects",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/easonhanyc.github.io",
+        "commit": "e8ea53c3546621c79620bbfa04bd88321fac8ec3",
+        "repo_dir": "src/content/projects/",
+        "site": "https://easonhanyc.github.io/work/",
+        "url": "https://github.com/easonhanyc/easonhanyc.github.io/blob/e8ea53c3546621c79620bbfa04bd88321fac8ec3/src/content/projects/asteroid-screening.md"
+      },
+      "notes": [
+        "wiki/Projects/Hazardous Asteroid Screening.md"
+      ],
+      "ingested_at": "2026-09-27T00:17:50",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/website/projects/datafest-2023.md": {
+      "source_id": "website-projects-datafest-2023-308b95c8",
+      "sha256": "308b95c8268645e76583546a65168b585f18c9ba8554337a89b025e1b6e9defc",
+      "bytes": 9745,
+      "title": "DataFest 2023 — ASA Data Analysis Competition",
+      "origin": {
+        "collection": "Personal website - projects",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/easonhanyc.github.io",
+        "commit": "e8ea53c3546621c79620bbfa04bd88321fac8ec3",
+        "repo_dir": "src/content/projects/",
+        "site": "https://easonhanyc.github.io/work/",
+        "url": "https://github.com/easonhanyc/easonhanyc.github.io/blob/e8ea53c3546621c79620bbfa04bd88321fac8ec3/src/content/projects/datafest-2023.md"
+      },
+      "notes": [
+        "wiki/Projects/DataFest 2023.md"
+      ],
+      "ingested_at": "2026-09-27T00:19:39",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/website/projects/formula-1-trends.md": {
+      "source_id": "website-projects-formula-1-trends-9c8ef2b2",
+      "sha256": "9c8ef2b2753dc0266ce5233731f92c3256f44c39130eb9b496789c8f883b3ef7",
+      "bytes": 11055,
+      "title": "Formula 1 Racing Trends",
+      "origin": {
+        "collection": "Personal website - projects",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/easonhanyc.github.io",
+        "commit": "e8ea53c3546621c79620bbfa04bd88321fac8ec3",
+        "repo_dir": "src/content/projects/",
+        "site": "https://easonhanyc.github.io/work/",
+        "url": "https://github.com/easonhanyc/easonhanyc.github.io/blob/e8ea53c3546621c79620bbfa04bd88321fac8ec3/src/content/projects/formula-1-trends.md"
+      },
+      "notes": [
+        "wiki/Projects/Formula 1 Racing Trends.md",
+        "wiki/Concepts/Time Series Analysis.md"
+      ],
+      "ingested_at": "2026-09-27T00:21:37",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/website/projects/genai-adoption-program.md": {
+      "source_id": "website-projects-genai-adoption-program-24dc0351",
+      "sha256": "24dc0351e0afd4a614f81dcbfce9da1bf2869836977ddfb6a834254211bb691f",
+      "bytes": 10480,
+      "title": "GenAI Adoption Program",
+      "origin": {
+        "collection": "Personal website - projects",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/easonhanyc.github.io",
+        "commit": "e8ea53c3546621c79620bbfa04bd88321fac8ec3",
+        "repo_dir": "src/content/projects/",
+        "site": "https://easonhanyc.github.io/work/",
+        "url": "https://github.com/easonhanyc/easonhanyc.github.io/blob/e8ea53c3546621c79620bbfa04bd88321fac8ec3/src/content/projects/genai-adoption-program.md"
+      },
+      "notes": [
+        "wiki/Projects/GenAI Adoption Program.md"
+      ],
+      "ingested_at": "2026-09-27T00:23:16",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/website/projects/genai-target-setting.md": {
+      "source_id": "website-projects-genai-target-setting-e80c6f2c",
+      "sha256": "e80c6f2cc4f236432b61aab0a672a4d97e3e8ca393c8431f254a1ae1161288cb",
+      "bytes": 10343,
+      "title": "GenAI Target Setting",
+      "origin": {
+        "collection": "Personal website - projects",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/easonhanyc.github.io",
+        "commit": "e8ea53c3546621c79620bbfa04bd88321fac8ec3",
+        "repo_dir": "src/content/projects/",
+        "site": "https://easonhanyc.github.io/work/",
+        "url": "https://github.com/easonhanyc/easonhanyc.github.io/blob/e8ea53c3546621c79620bbfa04bd88321fac8ec3/src/content/projects/genai-target-setting.md"
+      },
+      "notes": [
+        "wiki/Projects/GenAI Target Setting.md",
+        "wiki/Concepts/Time Series Analysis.md"
+      ],
+      "ingested_at": "2026-09-27T00:25:00",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/website/projects/job-search-agent.md": {
+      "source_id": "website-projects-job-search-agent-13c384c5",
+      "sha256": "13c384c532b962b3a41bfa1d79a91f5daa653816a0edcc7586b88556b4a65b73",
+      "bytes": 7168,
+      "title": "Job Search Agent",
+      "origin": {
+        "collection": "Personal website - projects",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/easonhanyc.github.io",
+        "commit": "e8ea53c3546621c79620bbfa04bd88321fac8ec3",
+        "repo_dir": "src/content/projects/",
+        "site": "https://easonhanyc.github.io/work/",
+        "url": "https://github.com/easonhanyc/easonhanyc.github.io/blob/e8ea53c3546621c79620bbfa04bd88321fac8ec3/src/content/projects/job-search-agent.md"
+      },
+      "notes": [
+        "wiki/Projects/Job Search Agent.md"
+      ],
+      "ingested_at": "2026-09-27T00:26:19",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/website/projects/pacman-dqn.md": {
+      "source_id": "website-projects-pacman-dqn-6c3cd8ae",
+      "sha256": "6c3cd8aecdb8a7c7eeceb74b748cdf8a40c1470a571d362d705990531de00d4c",
+      "bytes": 7736,
+      "title": "Ms. Pac-Man DQN",
+      "origin": {
+        "collection": "Personal website - projects",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/easonhanyc.github.io",
+        "commit": "e8ea53c3546621c79620bbfa04bd88321fac8ec3",
+        "repo_dir": "src/content/projects/",
+        "site": "https://easonhanyc.github.io/work/",
+        "url": "https://github.com/easonhanyc/easonhanyc.github.io/blob/e8ea53c3546621c79620bbfa04bd88321fac8ec3/src/content/projects/pacman-dqn.md"
+      },
+      "notes": [
+        "wiki/Projects/Ms. Pac-Man DQN.md",
+        "wiki/Concepts/Deep Learning.md",
+        "wiki/Concepts/Deep Q-Network.md"
+      ],
+      "ingested_at": "2026-09-27T00:28:08",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/website/projects/pr-automation.md": {
+      "source_id": "website-projects-pr-automation-cfba0828",
+      "sha256": "cfba08280fdab5cf6c1693725221feb4733ff71ac15bc0451dd50db0b7eb3831",
+      "bytes": 9173,
+      "title": "Pull-Request Automation",
+      "origin": {
+        "collection": "Personal website - projects",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/easonhanyc.github.io",
+        "commit": "e8ea53c3546621c79620bbfa04bd88321fac8ec3",
+        "repo_dir": "src/content/projects/",
+        "site": "https://easonhanyc.github.io/work/",
+        "url": "https://github.com/easonhanyc/easonhanyc.github.io/blob/e8ea53c3546621c79620bbfa04bd88321fac8ec3/src/content/projects/pr-automation.md"
+      },
+      "notes": [
+        "wiki/Projects/Pull-Request Automation.md"
+      ],
+      "ingested_at": "2026-09-27T00:29:21",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/website/projects/secure-networking-tracker.md": {
+      "source_id": "website-projects-secure-networking-tracker-fb399686",
+      "sha256": "fb3996868f0d02d7a33649fbff5a97cd7843951c9fb8205cc190d9ae27833838",
+      "bytes": 8025,
+      "title": "Secure Networking Tracker",
+      "origin": {
+        "collection": "Personal website - projects",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/easonhanyc.github.io",
+        "commit": "e8ea53c3546621c79620bbfa04bd88321fac8ec3",
+        "repo_dir": "src/content/projects/",
+        "site": "https://easonhanyc.github.io/work/",
+        "url": "https://github.com/easonhanyc/easonhanyc.github.io/blob/e8ea53c3546621c79620bbfa04bd88321fac8ec3/src/content/projects/secure-networking-tracker.md"
+      },
+      "notes": [
+        "wiki/Projects/Secure Networking Tracker.md"
+      ],
+      "ingested_at": "2026-09-27T00:31:11",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/website/projects/tripmatch.md": {
+      "source_id": "website-projects-tripmatch-c8542a2c",
+      "sha256": "c8542a2ca92bca393a12e43886bbd9c6d2b9afd13bf258d4ccd15f7e9ee82adf",
+      "bytes": 17359,
+      "title": "TripMatch",
+      "origin": {
+        "collection": "Personal website - projects",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/easonhanyc.github.io",
+        "commit": "e8ea53c3546621c79620bbfa04bd88321fac8ec3",
+        "repo_dir": "src/content/projects/",
+        "site": "https://easonhanyc.github.io/work/",
+        "url": "https://github.com/easonhanyc/easonhanyc.github.io/blob/e8ea53c3546621c79620bbfa04bd88321fac8ec3/src/content/projects/tripmatch.md"
+      },
+      "notes": [
+        "wiki/Projects/TripMatch Rides Board.md"
+      ],
+      "ingested_at": "2026-09-27T00:35:34",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/website/projects/kickstarter-scraper.md": {
+      "source_id": "website-projects-kickstarter-scraper-1a197c60",
+      "sha256": "1a197c6079274012265036b82bd3c0a530846f05e8b0f6cd1a5891a7ada01dbc",
+      "bytes": 9112,
+      "title": "Kickstarter Scraper",
+      "origin": {
+        "collection": "Personal website - projects",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/easonhanyc.github.io",
+        "commit": "e8ea53c3546621c79620bbfa04bd88321fac8ec3",
+        "repo_dir": "src/content/projects/",
+        "site": "https://easonhanyc.github.io/work/",
+        "url": "https://github.com/easonhanyc/easonhanyc.github.io/blob/e8ea53c3546621c79620bbfa04bd88321fac8ec3/src/content/projects/kickstarter-scraper.md"
+      },
+      "notes": [
+        "wiki/Projects/Kickstarter Scraper.md"
+      ],
+      "ingested_at": "2026-09-28T14:07:47",
+      "model": "gemma-4-e4b-it-qat-q4_0"
+    }
+  },
+  "notes": {
+    "wiki/Projects/Secure Networking Tracker.md": {
+      "title": "Secure Networking Tracker"
+    },
+    "wiki/Projects/Hazardous Asteroid Screening.md": {
+      "title": "Hazardous Asteroid Screening"
+    },
+    "wiki/Projects/GenAI Adoption Program.md": {
+      "title": "GenAI Adoption Program"
+    },
+    "wiki/Projects/Job Search Agent.md": {
+      "title": "Job Search Agent"
+    },
+    "wiki/Concepts/Deep Learning.md": {
+      "title": "Deep Learning"
+    },
+    "wiki/Concepts/Deep Q-Network.md": {
+      "title": "Deep Q-Network"
+    },
+    "wiki/Concepts/Time Series Analysis.md": {
+      "title": "Time Series Analysis"
+    },
+    "wiki/Projects/Ms. Pac-Man DQN.md": {
+      "title": "Ms. Pac-Man DQN"
+    },
+    "wiki/Course/MBA 290T Syllabus.md": {
+      "title": "MBA 290T Syllabus"
+    },
+    "wiki/Experience/Amazon Web Services.md": {
+      "title": "Amazon Web Services"
+    },
+    "wiki/Experience/Seaside Sustainability.md": {
+      "title": "Seaside Sustainability"
+    },
+    "wiki/Experience/IDG Capital.md": {
+      "title": "IDG Capital"
+    },
+    "wiki/Experience/University of Notre Dame.md": {
+      "title": "University of Notre Dame"
+    },
+    "wiki/Experience/UC Berkeley.md": {
+      "title": "UC Berkeley"
+    },
+    "wiki/Projects/Action Hub.md": {
+      "title": "Action Hub"
+    },
+    "wiki/Projects/Allowlist Data Access App.md": {
+      "title": "Allowlist Data Access App"
+    },
+    "wiki/Projects/Custom LLM with nanoGPT.md": {
+      "title": "Custom LLM with nanoGPT"
+    },
+    "wiki/Projects/DataFest 2023.md": {
+      "title": "DataFest 2023"
+    },
+    "wiki/Projects/Formula 1 Racing Trends.md": {
+      "title": "Formula 1 Racing Trends"
+    },
+    "wiki/Projects/GenAI Target Setting.md": {
+      "title": "GenAI Target Setting"
+    },
+    "wiki/Projects/Pull-Request Automation.md": {
+      "title": "Pull-Request Automation"
+    },
+    "wiki/Experience/TikTok Internship.md": {
+      "title": "TikTok Internship"
+    },
+    "wiki/Projects/TripMatch Rides Board.md": {
+      "title": "TripMatch Rides Board"
+    },
+    "wiki/Projects/Kickstarter Scraper.md": {
+      "title": "Kickstarter Scraper"
+    }
+  },
+  "redirects": {
+    "Pac-Man DQN Methodology Study": "Ms. Pac-Man DQN",
+    "Ms. Pac-Man DQN Implementation": "Ms. Pac-Man DQN",
+    "Agentic AI": "MBA 290T Syllabus",
+    "From Zero to AI Agents": "MBA 290T Syllabus",
+    "Amazon Web Services Role": "Amazon Web Services",
+    "Clean Shores Fundraising Lead": "Seaside Sustainability",
+    "IDG Capital Venture Capital Intern": "IDG Capital",
+    "Notre Dame Business Analytics Education": "University of Notre Dame",
+    "TikTok Ads Risk Integrity Intern": "TikTok Internship",
+    "TikTok": "TikTok Internship",
+    "UC Berkeley Haas MBA MEng": "UC Berkeley",
+    "Action Hub Ranked Alerts": "Action Hub",
+    "Allowlist Data Access Management App": "Allowlist Data Access App",
+    "Custom LLM Training Experiments": "Custom LLM with nanoGPT",
+    "DataFest ASA Analysis Competition": "DataFest 2023",
+    "Formula 1 Racing Trends Analysis": "Formula 1 Racing Trends",
+    "GenAI Target Setting Methodology": "GenAI Target Setting",
+    "Pull-Request Automation Skill": "Pull-Request Automation",
+    "TripMatch": "TripMatch Rides Board"
+  }
+}

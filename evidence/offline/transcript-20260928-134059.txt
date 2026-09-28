@@ -1,0 +1,45 @@
+
+================================================================
+== 0. When and where
+================================================================
+
+$ date
+Mon Sep 28 13:40:59 PDT 2026
+[exit code 0]
+
+$ sw_vers
+ProductName:		macOS
+ProductVersion:		26.6.2
+BuildVersion:		25G83
+[exit code 0]
+
+$ sysctl -n machdep.cpu.brand_string
+Apple M2
+[exit code 0]
+RAM: 16 GB unified memory
+
+$ df -h /
+Filesystem        Size    Used   Avail Capacity iused ifree %iused  Mounted on
+/dev/disk3s1s1   460Gi    12Gi    79Gi    14%    459k  825M    0%   /
+[exit code 0]
+
+================================================================
+== 1. Proof the internet is disconnected
+================================================================
+
+$ networksetup -getairportpower en0
+Wi-Fi Power (en0): Off
+[exit code 0]
+
+$ route -n get default
+route: writing to routing socket: not in table
+[exit code 0]
+
+$ curl -sS -m 5 -o /dev/null https://huggingface.co
+curl: (6) Could not resolve host: huggingface.co
+[exit code 6]
+
+$ python -c import socket; socket.create_connection(('1.1.1.1', 53), timeout=3); print('ONLINE')
+ONLINE
+[exit code 0]
+!! The internet is reachable. Turn Wi-Fi off and run again.

@@ -1,0 +1,22 @@
+{
+  "time": "2026-09-28T14:09:17",
+  "files": {
+    "raw/website/projects/kickstarter-scraper.md": "unchanged"
+  },
+  "notes_changed": [],
+  "model": "gemma-4-e4b-it-qat-q4_0",
+  "mode": "local",
+  "model_calls": 0,
+  "seconds": 0.2,
+  "dropped_facts": [],
+  "failures": [],
+  "calls": [],
+  "index": {
+    "passages": 514,
+    "sources": 25,
+    "wiki_notes": 23,
+    "embedded_new": 0,
+    "reused_vectors": 514,
+    "vectors": true
+  }
+}

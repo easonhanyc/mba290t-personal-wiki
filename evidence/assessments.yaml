@@ -1,0 +1,53 @@
+# Manual assessments, written after reading every cited passage against the answer.
+# scripts/run_evals.py --cards-only merges these into the evidence cards; the first sentence of each
+# entry is the short verdict shown in summary tables.
+
+offline:
+  T1: >-
+    Pass. Correct and fully supported. "20% of the final grade" is stated in S1 (Attendance: "worth 20% of your
+    grade") and S2 (Grading table: "Attendance | 20%"), and S5 is the reviewed syllabus note repeating it with a link
+    back to the same section. "One absence without penalty, no explanation required" is S1 verbatim ("one absence with
+    no penalty, no explanation required"); S2 adds "a pass on one missed session". Both expected passages were
+    retrieved at ranks 1 and 2.
+  T2: >-
+    Pass, but incomplete. Every claim is supported: Postgres Row Level Security [S1][S2]; the browser only calls the
+    app's /api routes, which mint a short-lived JWT that Postgres reads [S4, verbatim]; a query for all contacts cannot
+    return another user's rows [S4]; the update policy needs USING and WITH CHECK so user_id cannot be changed [S5][S6].
+    But the expected passage that lists all three ownership mechanisms (README, Authentication and ownership) was not
+    retrieved for this reworded question, so the answer covers Row Level Security and omits the other two layers (the
+    database assigning user_id, and the application's 401 checks). This is a retrieval miss, not an invented claim.
+  T3: >-
+    Pass. Correct, fully supported, and it uses both sources. The job title "Business Intelligence Engineer — Global
+    Sales Strategy & Analytics" comes from the original experience entry [S5] (and its reviewed note [S3]); "70% for
+    10,000+ sellers" comes from the Action Hub page's own front matter [S1] (and its reviewed note [S4]).
+  T4: >-
+    Pass. The expected refusal. The retriever offered the Pac-Man README and note (training settings, results, the
+    assignment checklist); none states a grade, and the answer says so without guessing. The check's note about one
+    uncited sentence is expected for a refusal, which has nothing to cite.
+  M1: >-
+    Pass. Both capability questions were answered from the persona with no notes lookup, no citations and no
+    insufficient-evidence refusal, and each ends with a starting point. The capability list matches the harness
+    (drafting, planning, /notes lookups).
+  M2: >-
+    Pass. The week plan was drafted without a notes lookup (nothing personal was needed), and "make that shorter"
+    produced a condensed version of the same plan from the conversation history. This re-runs the check that failed in
+    the dry run (fix 7 in evidence/changes.md).
+  M3: >-
+    Pass. With the Gemma server stopped, search returned six original passages with paths and line numbers and made
+    zero model calls.
+  M4: >-
+    Pass. The chat acknowledged "my favorite programming language is Rust" without a lookup; the separate ask answered
+    "Insufficient evidence", and the claim does not appear anywhere in the ask prompt.
+
+local-dryrun:
+  T1: Pass. Same answer as the offline run; both expected passages retrieved at ranks 1 and 2.
+  T2: Pass, but incomplete. Supported claims about Row Level Security; the three-mechanisms passage was not retrieved.
+  T3: Pass. Both sources cited; the title and the 70% figure match the originals.
+  T4: Pass. Correct insufficient-evidence refusal.
+  M1: Pass. Capabilities explained with no notes lookup.
+  M2: >-
+    Failed as a routing check (kept as evidence). The planning request looked up notes because the word "internship"
+    matched the note "TikTok Internship"; the resulting plan was sensible and its one note-based claim (Assignment 4
+    due 9/29) was cited, but the lookup reason was wrong. Fixed (fix 7) and re-run offline.
+  M3: Pass. Search returned passages with the Gemma server stopped and zero model calls.
+  M4: Pass. Insufficient evidence; the chat claim was not in the ask prompt.

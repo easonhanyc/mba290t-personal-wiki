@@ -1,0 +1,322 @@
+{
+  "label": "local",
+  "time": "2026-09-27T01:12:52",
+  "system_before": {
+    "used_gb": 6.56,
+    "swap_used_mb": 7434.25
+  },
+  "gemma_load_seconds": 3.1,
+  "llama_cpp_breakdown": {
+    "projected_at_load": {
+      "gpu": {
+        "self_mib": 2980,
+        "model_mib": 2696,
+        "context_mib": 168,
+        "compute_mib": 116
+      },
+      "host": {
+        "self_mib": 2810,
+        "model_mib": 2730,
+        "context_mib": 0,
+        "compute_mib": 80
+      }
+    },
+    "actual_at_shutdown": {
+      "gpu": {
+        "self_mib": 5185,
+        "model_mib": 4901,
+        "context_mib": 168,
+        "compute_mib": 116
+      },
+      "host": {
+        "self_mib": 2770,
+        "model_mib": 2730,
+        "context_mib": 0,
+        "compute_mib": 40
+      }
+    },
+    "layers_on_gpu": "43/43"
+  },
+  "after_load": {
+    "system_used_gb": 11.82,
+    "swap_used_mb": 7434.25,
+    "gemma": {
+      "rss_mb": 5277.1,
+      "phys_footprint_mb": 268.0
+    },
+    "embed": {
+      "rss_mb": 445.2,
+      "phys_footprint_mb": 90.0
+    }
+  },
+  "during_asks_peak": {
+    "gemma": {
+      "rss_mb": 5772.5,
+      "phys_footprint_mb": 769.0
+    },
+    "embed": {
+      "rss_mb": 480.1,
+      "phys_footprint_mb": 127.0
+    }
+  },
+  "after_asks": {
+    "system_used_gb": 11.8,
+    "swap_used_mb": 7354.25
+  },
+  "ask_runs": [
+    {
+      "test": "T1",
+      "repeat": 1,
+      "total_s": 19.47,
+      "retrieval_s": 0.25,
+      "model_s": 19.22,
+      "prompt_tokens": 2004,
+      "prompt_tok_s": 135.6,
+      "answer_tokens": 45,
+      "gen_tok_s": 10.0
+    },
+    {
+      "test": "T2",
+      "repeat": 1,
+      "total_s": 30.2,
+      "retrieval_s": 0.24,
+      "model_s": 29.95,
+      "prompt_tokens": 1601,
+      "prompt_tok_s": 121.3,
+      "answer_tokens": 168,
+      "gen_tok_s": 10.0
+    },
+    {
+      "test": "T3",
+      "repeat": 1,
+      "total_s": 18.49,
+      "retrieval_s": 0.04,
+      "model_s": 18.45,
+      "prompt_tokens": 1454,
+      "prompt_tok_s": 113.4,
+      "answer_tokens": 56,
+      "gen_tok_s": 9.8
+    },
+    {
+      "test": "T4",
+      "repeat": 1,
+      "total_s": 16.12,
+      "retrieval_s": 0.03,
+      "model_s": 16.08,
+      "prompt_tokens": 1525,
+      "prompt_tok_s": 121.6,
+      "answer_tokens": 36,
+      "gen_tok_s": 10.0
+    },
+    {
+      "test": "T1",
+      "repeat": 2,
+      "total_s": 20.8,
+      "retrieval_s": 0.03,
+      "model_s": 20.77,
+      "prompt_tokens": 2004,
+      "prompt_tok_s": 122.5,
+      "answer_tokens": 45,
+      "gen_tok_s": 10.1
+    },
+    {
+      "test": "T2",
+      "repeat": 2,
+      "total_s": 28.04,
+      "retrieval_s": 0.03,
+      "model_s": 28.01,
+      "prompt_tokens": 1601,
+      "prompt_tok_s": 122.0,
+      "answer_tokens": 148,
+      "gen_tok_s": 9.9
+    },
+    {
+      "test": "T3",
+      "repeat": 2,
+      "total_s": 17.34,
+      "retrieval_s": 0.04,
+      "model_s": 17.3,
+      "prompt_tokens": 1454,
+      "prompt_tok_s": 124.1,
+      "answer_tokens": 56,
+      "gen_tok_s": 9.9
+    },
+    {
+      "test": "T4",
+      "repeat": 2,
+      "total_s": 15.97,
+      "retrieval_s": 0.03,
+      "model_s": 15.94,
+      "prompt_tokens": 1525,
+      "prompt_tok_s": 122.3,
+      "answer_tokens": 36,
+      "gen_tok_s": 10.1
+    },
+    {
+      "test": "T1",
+      "repeat": 3,
+      "total_s": 21.14,
+      "retrieval_s": 0.03,
+      "model_s": 21.11,
+      "prompt_tokens": 2004,
+      "prompt_tok_s": 120.1,
+      "answer_tokens": 45,
+      "gen_tok_s": 10.0
+    },
+    {
+      "test": "T2",
+      "repeat": 3,
+      "total_s": 29.85,
+      "retrieval_s": 0.03,
+      "model_s": 29.82,
+      "prompt_tokens": 1601,
+      "prompt_tok_s": 122.3,
+      "answer_tokens": 166,
+      "gen_tok_s": 9.9
+    },
+    {
+      "test": "T3",
+      "repeat": 3,
+      "total_s": 17.37,
+      "retrieval_s": 0.04,
+      "model_s": 17.32,
+      "prompt_tokens": 1454,
+      "prompt_tok_s": 123.8,
+      "answer_tokens": 56,
+      "gen_tok_s": 9.9
+    },
+    {
+      "test": "T4",
+      "repeat": 3,
+      "total_s": 16.15,
+      "retrieval_s": 0.03,
+      "model_s": 16.12,
+      "prompt_tokens": 1525,
+      "prompt_tok_s": 121.2,
+      "answer_tokens": 36,
+      "gen_tok_s": 9.9
+    }
+  ],
+  "ask_summary": {
+    "runs": 12,
+    "median_total_s": 18.979999999999997,
+    "min_total_s": 15.97,
+    "max_total_s": 30.2,
+    "median_retrieval_s": 0.03,
+    "median_prompt_tok_s": 122.15,
+    "median_gen_tok_s": 9.95,
+    "per_test_median_s": {
+      "T1": 20.8,
+      "T2": 29.85,
+      "T3": 17.37,
+      "T4": 16.12
+    }
+  },
+  "ingest": [
+    {
+      "record": "runs/ingest-20260926-231200.json",
+      "time": "2026-09-26T23:12:00",
+      "files_ingested": 1,
+      "files_unchanged": 0,
+      "wall_seconds": 57.6,
+      "model_calls": 1,
+      "prompt_tokens": 764,
+      "output_tokens": 489,
+      "per_source_seconds": {
+        "raw/website/experience/amazon-web-services.md": 57.5
+      }
+    },
+    {
+      "record": "runs/ingest-20260927-004831.json",
+      "time": "2026-09-27T00:48:31",
+      "files_ingested": 24,
+      "files_unchanged": 0,
+      "wall_seconds": 4913.4,
+      "model_calls": 81,
+      "prompt_tokens": 132343,
+      "output_tokens": 35394,
+      "per_source_seconds": {
+        "raw/course/syllabus.html": 233.2,
+        "raw/course-projects/custom-llm/README.md": 1297.1,
+        "raw/course-projects/pacman-dqn/README.md": 299.8,
+        "raw/course-projects/pacman-dqn/docs/METHODOLOGY.md": 136.2,
+        "raw/course-projects/secure-networking-tracker/README.md": 291.6,
+        "raw/course-projects/secure-networking-tracker/docs/how-it-works.md": 125.4,
+        "raw/website/experience/amazon-web-services.md": 56.8,
+        "raw/website/experience/clean-shores.md": 52.2,
+        "raw/website/experience/idg-capital.md": 50.8,
+        "raw/website/experience/notre-dame.md": 57.9,
+        "raw/website/experience/tiktok.md": 52.5,
+        "raw/website/experience/uc-berkeley.md": 60.7,
+        "raw/website/projects/action-hub.md": 129.3,
+        "raw/website/projects/allowlist.md": 115.8,
+        "raw/website/projects/asteroid-screening.md": 113.3,
+        "raw/website/projects/datafest-2023.md": 108.6,
+        "raw/website/projects/formula-1-trends.md": 118.2,
+        "raw/website/projects/genai-adoption-program.md": 98.5,
+        "raw/website/projects/genai-target-setting.md": 103.9,
+        "raw/website/projects/job-search-agent.md": 79.5,
+        "raw/website/projects/pacman-dqn.md": 109.0,
+        "raw/website/projects/pr-automation.md": 73.2,
+        "raw/website/projects/secure-networking-tracker.md": 109.3,
+        "raw/website/projects/tripmatch.md": 262.8,
+        "concept:Agentic AI": 72.1,
+        "concept:Deep Learning": 70.6,
+        "concept:Deep Q-Network": 64.2,
+        "concept:Time Series Analysis": 73.7,
+        "wiki/Concepts/Agentic AI.md": 23.8,
+        "wiki/Concepts/Deep Learning.md": 31.3,
+        "wiki/Concepts/Deep Q-Network.md": 24.5,
+        "wiki/Concepts/Time Series Analysis.md": 18.4,
+        "wiki/Course/From Zero to AI Agents.md": 22.3,
+        "wiki/Experience/Amazon Web Services Role.md": 22.5,
+        "wiki/Experience/Clean Shores Fundraising Lead.md": 16.3,
+        "wiki/Experience/IDG Capital Venture Capital Intern.md": 13.7,
+        "wiki/Experience/Notre Dame Business Analytics Education.md": 21.7,
+        "wiki/Experience/TikTok Ads Risk Integrity Intern.md": 16.3,
+        "wiki/Experience/UC Berkeley Haas MBA MEng.md": 22.5,
+        "wiki/Projects/Action Hub Ranked Alerts.md": 19.8,
+        "wiki/Projects/Allowlist Data Access Management App.md": 19.5,
+        "wiki/Projects/Custom LLM Training Experiments.md": 19.0,
+        "wiki/Projects/DataFest ASA Analysis Competition.md": 18.2,
+        "wiki/Projects/Formula 1 Racing Trends Analysis.md": 18.3,
+        "wiki/Projects/GenAI Adoption Program.md": 17.1,
+        "wiki/Projects/GenAI Target Setting Methodology.md": 17.2,
+        "wiki/Projects/Hazardous Asteroid Screening.md": 17.1,
+        "wiki/Projects/Job Search Agent.md": 17.9,
+        "wiki/Projects/Ms. Pac-Man DQN Implementation.md": 25.5,
+        "wiki/Projects/Pac-Man DQN Methodology Study.md": 22.0,
+        "wiki/Projects/Pull-Request Automation Skill.md": 16.6,
+        "wiki/Projects/Secure Networking Tracker.md": 18.8,
+        "wiki/Projects/TripMatch Rides Board.md": 14.6
+      }
+    },
+    {
+      "record": "runs/ingest-20260927-005410-concepts.json",
+      "time": "2026-09-27T00:54:10",
+      "files_ingested": 0,
+      "files_unchanged": 0,
+      "wall_seconds": 271.3,
+      "model_calls": 8,
+      "prompt_tokens": 3471,
+      "output_tokens": 2457,
+      "per_source_seconds": {
+        "concept:Agentic AI": 44.2,
+        "concept:Deep Learning": 47.5,
+        "concept:Deep Q-Network": 49.4,
+        "concept:Time Series Analysis": 51.5,
+        "wiki/Concepts/Agentic AI.md": 12.7,
+        "wiki/Concepts/Deep Learning.md": 27.8,
+        "wiki/Concepts/Deep Q-Network.md": 21.7,
+        "wiki/Concepts/Time Series Analysis.md": 15.3
+      }
+    }
+  ],
+  "cli_search_process": {
+    "peak_rss_mb": 47.9,
+    "wall_s": 0.32
+  },
+  "llama_cpp_breakdown_log": "evidence/metrics/measure-gemma-server.log",
+  "gemma_first_start_seconds": 42.1,
+  "note": "llama_cpp_breakdown recomputed from the saved server log after fixing how the two memory-mapped views are reported; no measurement was re-run or changed."
+}

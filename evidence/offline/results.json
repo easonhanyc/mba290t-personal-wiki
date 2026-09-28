@@ -1,0 +1,1109 @@
+{
+  "meta": {
+    "label": "offline",
+    "time": "2026-09-28T14:12:39",
+    "execution": "local",
+    "network": {
+      "https://1.1.1.1": "unreachable (URLError)",
+      "https://huggingface.co": "unreachable (URLError)",
+      "tcp 1.1.1.1:53 (informational)": "answered",
+      "internet": "offline"
+    },
+    "device": {
+      "os": "macOS 26.6.2 (arm64)",
+      "chip": "Apple M2",
+      "memory_gb": 16.0,
+      "llama_server": [
+        "unavailable: Command '['llama-server', '--version']' timed out after 20 seconds"
+      ]
+    },
+    "model": {
+      "id": "gemma-4-e4b-it-qat-q4_0",
+      "file": "gemma-4-E4B_q4_0-it.gguf",
+      "hf_repo": "google/gemma-4-E4B-it-qat-q4_0-gguf",
+      "sha256_expected": "676c35070db6dbe52f93e9c864ee0fba4eddea94b9c875d9cb10daff453fbaee",
+      "sha256_actual": "676c35070db6dbe52f93e9c864ee0fba4eddea94b9c875d9cb10daff453fbaee",
+      "sha256_match": true,
+      "runtime": "0.5.0 (build 11146, commit 7fe450e19), Metal backend, Apple M2",
+      "embedding_model": "embeddinggemma-300m-qat-q8_0"
+    },
+    "passages_indexed": 514
+  },
+  "ask": [
+    {
+      "test": {
+        "id": "T1",
+        "kind": "direct, one source",
+        "question": "What share of the final grade is attendance, and how many classes can be missed without penalty?",
+        "expected_behavior": "answer with citations",
+        "expected_answer": "Attendance is 20% of the grade; one absence carries no penalty.",
+        "expected_evidence": [
+          {
+            "path": "vault/raw/course/syllabus.html",
+            "section": "Attendance",
+            "must_contain": [
+              "20%",
+              "one absence with no penalty"
+            ]
+          },
+          {
+            "path": "vault/raw/course/syllabus.html",
+            "section": "Grading",
+            "must_contain": [
+              "Attendance",
+              "20%"
+            ]
+          }
+        ]
+      },
+      "answer": "Attendance is worth 20% of the final grade [S1][S2][S5]. Students are allowed one absence without penalty, and no explanation is required for this absence [S1][S2].",
+      "mode": "local",
+      "model": "gemma-4-e4b-it-qat-q4_0",
+      "method": "hybrid (BM25 + EmbeddingGemma, reciprocal-rank fusion)",
+      "passages": [
+        {
+          "id": "S1",
+          "kind": "source",
+          "path": "raw/course/syllabus.html",
+          "lines": [
+            492,
+            494
+          ],
+          "section": "MBA 290T: Fundamental of Agentic AI › Attendance",
+          "fused_score": 0.03252,
+          "bm25_rank": 1,
+          "vector_rank": 2,
+          "cosine": 0.7095,
+          "text": "Attendance is required and is worth 20% of your grade.\nMuch of this course happens in the room: live coding, debugging together, and working through exercises. Slides alone are a poor substitute.\nYou get one absence with no penalty, no explanation required. Beyond that, each missed session reduces the attendance component. If you know in advance you will miss more than one session, talk to me early.",
+          "expected": [
+            "E1"
+          ]
+        },
+        {
+          "id": "S2",
+          "kind": "source",
+          "path": "raw/course/syllabus.html",
+          "lines": [
+            593,
+            621
+          ],
+          "section": "MBA 290T: Fundamental of Agentic AI › Grading",
+          "fused_score": 0.03252,
+          "bm25_rank": 2,
+          "vector_rank": 1,
+          "cosine": 0.7166,
+          "text": "Performance will be graded as follows:\n| Component | Weight\n| Attendance | 20%\n| Assignments 1–4 (lowest score dropped) | 50%\n| Assignment 5 | 30%\n| Total | 100%\nEach assignment is scored out of 10 points using the shared framework above, applied to the specific assignment brief. For Assignments 1–4, the lowest of the four scores is dropped and the remaining three scores are combined equally to make 50% of the final grade. Assignment 5 makes up 30%; attendance makes up 20%. You get a pass on one missed session in the attendance grade, so you are not penalized for missing a single class.\nEach assignment will have a current Definition of Done in its assignment brief or class deck. That brief may be updated as the course develops; clearly announced updates supersede this syllabus overview. The shared grading categories and the assignment’s overall weight remain the consistent structure.",
+          "expected": [
+            "E2"
+          ]
+        },
+        {
+          "id": "S3",
+          "kind": "wiki",
+          "path": "wiki/Course/MBA 290T Syllabus.md",
+          "lines": [
+            28,
+            36
+          ],
+          "section": "MBA 290T Syllabus › Key facts",
+          "fused_score": 0.0315,
+          "bm25_rank": 4,
+          "vector_rank": 3,
+          "cosine": 0.5994,
+          "text": "- Assignment 5 is the course capstone and spans Classes 6 and 7. ([[raw/course/syllabus.html|course/syllabus.html › Graded Assignments]])\n- Every assignment is scored out of 10 using the same broad framework. ([[raw/course/syllabus.html|course/syllabus.html › How Assignments Are Graded]])\n- Each assignment is scored on deliverable quality (4 points), testing & evaluation (3) and working result (3). ([[raw/course/syllabus.html|course/syllabus.html › How Assignments Are Graded]])\n- The final grade weights attendance 20%, Assignments 1–4 50% (lowest score dropped) and Assignment 5 30%. ([[raw/course/syllabus.html|course/syllabus.html › Grading]])\n- Class 7 is on Tue 10/6 and covers Multi-Agent Systems, Ops & Safety. ([[raw/course/syllabus.html|course/syllabus.html › Class Schedule]])\n- The focus is conceptual fluency that survives the tools. ([[raw/course/syllabus.html|course/syllabus.html › Course Objective]])\n- Assignments are individual. ([[raw/course/syllabus.html|course/syllabus.html › Graded Assignments]])\n- Students are expected to use AI coding agents, and also to understand and be able to explain everything they submit. ([[raw/course/syllabus.html|course/syllabus.html › Graded Assignments]])\n- The distinction this course cares about is not “did a human or an AI write this.” It is “does the person submitting it understand the system well enough to be responsible for it.” ([[raw/course/syllabus.html|course/syllabus.html › AI / LLM Policy]])",
+          "expected": []
+        },
+        {
+          "id": "S4",
+          "kind": "source",
+          "path": "raw/course/syllabus.html",
+          "lines": [
+            413,
+            418
+          ],
+          "section": "MBA 290T: Fundamental of Agentic AI › Class Schedule",
+          "fused_score": 0.03101,
+          "bm25_rank": 5,
+          "vector_rank": 4,
+          "cosine": 0.5572,
+          "text": "Lectures: Tuesdays 4:00 – 6:00 pm PT in N570\nFirst class: Tuesday, August 25, 2026\nLast class: Tuesday, October 6, 2026\nFinal assignment (Assignment 5) due: Tuesday, October 13, 2026\nSeven Tuesday sessions, beginning with Class 1 on 8/25 and ending with Class 7 on 10/6.\nThere is no final exam and no final presentation. The course is assessed entirely through attendance and five graded assignments.",
+          "expected": []
+        },
+        {
+          "id": "S5",
+          "kind": "wiki",
+          "path": "wiki/Course/MBA 290T Syllabus.md",
+          "lines": [
+            21,
+            27
+          ],
+          "section": "MBA 290T Syllabus › Key facts",
+          "fused_score": 0.03058,
+          "bm25_rank": 3,
+          "vector_rank": 8,
+          "cosine": 0.5079,
+          "text": "- Fundamental of Agentic AI is not a survey course about AI, and it is not a prompt-engineering workshop. ([[raw/course/syllabus.html|course/syllabus.html › Course Objective]])\n- In seven sessions the course goes from “what is a variable” to building and evaluating a tool-using AI agent, covering programming foundations, full-stack software systems, machine learning, deep learning and transformers, LLM behavior and retrieval, and agent architecture. ([[raw/course/syllabus.html|course/syllabus.html › Course Objective]])\n- The course targets Level 2 fluency: you do not need a PhD to reason about AI systems, but knowing how to use ChatGPT is not a differentiator either. ([[raw/course/syllabus.html|course/syllabus.html › Course Objective]])\n- A student who successfully completes this course will be able to read, modify, test, and debug real code, and explain what a program does before running it. ([[raw/course/syllabus.html|course/syllabus.html › Learning Outcomes]])\n- The course is assessed entirely through attendance and five graded assignments. ([[raw/course/syllabus.html|course/syllabus.html › Class Schedule]])\n- Attendance is required and is worth 20% of the grade. ([[raw/course/syllabus.html|course/syllabus.html › Attendance]])\n- Assignments 1–4 are the end-of-class deliverables for Classes 2 through 5. ([[raw/course/syllabus.html|course/syllabus.html › Graded Assignments]])",
+          "expected": []
+        },
+        {
+          "id": "S6",
+          "kind": "source",
+          "path": "raw/course/syllabus.html",
+          "lines": [
+            498,
+            536
+          ],
+          "section": "MBA 290T: Fundamental of Agentic AI › Graded Assignments",
+          "fused_score": 0.03031,
+          "bm25_rank": 7,
+          "vector_rank": 5,
+          "cosine": 0.5434,
+          "text": "Every class ends with an implementable build. Five of them are graded assignments. Assignments 1–4 are the end-of-class deliverables for Classes 2 through 5. Assignment 5 is the course capstone and spans Classes 6 and 7.\n| # | Assigned | Due (11:59 pm PT)\n| 1 | Class 2 — 9/1 | Tue 9/8\n| 2 | Class 3 — 9/8 | Tue 9/15\n| 3 | Class 4 — 9/15 | Tue 9/22\n| 4 | Class 5 — 9/22 | Tue 9/29\n| 5 | Classes 6 & 7 — 9/29 & 10/6 | Tue 10/13\nAssignments 1–4 are due one week after they are assigned: the following Tuesday at 11:59 pm PT. Assignment 5 spans two classes — part 1 is assigned in Class 6 and part 2 in Class 7 — and the combined deliverable is due one week after Class 7: Tuesday 10/13 at 11:59 pm PT. This creates a consistent weekly submission schedule from 9/8 through 10/13.\nClass 1 has an in-class exercise that is not graded, as do the prediction-model exercise inside Class 3 and the attention-by-hand exercise inside Class 4. They still matter — but you are not submitting them.",
+          "expected": []
+        }
+      ],
+      "expected_found": [
+        {
+          "id": "E1",
+          "path": "vault/raw/course/syllabus.html",
+          "section": "Attendance",
+          "must_contain": [
+            "20%",
+            "one absence with no penalty"
+          ],
+          "found_as": "S1"
+        },
+        {
+          "id": "E2",
+          "path": "vault/raw/course/syllabus.html",
+          "section": "Grading",
+          "must_contain": [
+            "Attendance",
+            "20%"
+          ],
+          "found_as": "S2"
+        }
+      ],
+      "checks": {
+        "status": "ok",
+        "cited": [
+          1,
+          2,
+          5
+        ],
+        "unknown_ids": [],
+        "uncited_sentences": [],
+        "numbers_not_in_cited_passages": [],
+        "insufficient_evidence": false
+      },
+      "timings": {
+        "retrieval_s": 0.07,
+        "model_s": 6.16,
+        "total_s": 6.24,
+        "llama_cache_n": 1999,
+        "llama_prompt_n": 5,
+        "llama_prompt_ms": 287.138,
+        "llama_prompt_per_token_ms": 57.4276,
+        "llama_prompt_per_second": 17.413229875530234,
+        "llama_predicted_n": 45,
+        "llama_predicted_ms": 5769.7,
+        "llama_predicted_per_token_ms": 131.12954545454545,
+        "llama_predicted_per_second": 7.626046414891589
+      },
+      "run_file": "runs/ask-20260928-141305-355.json",
+      "model_called": true
+    },
+    {
+      "test": {
+        "id": "T2",
+        "kind": "answerable, reworded (avoids the source's vocabulary on purpose)",
+        "question": "In the app I built to track people I meet, what stops one user from seeing someone else's list?",
+        "expected_behavior": "answer with citations",
+        "expected_answer": "Ownership is enforced by Postgres Row Level Security (enabled and forced, four per-user policies), plus the database assigning user_id from the verified token, plus application-layer checks (three independent mechanisms).",
+        "expected_evidence": [
+          {
+            "path": "vault/raw/course-projects/secure-networking-tracker/README.md",
+            "section": "Authentication and ownership",
+            "must_contain": [
+              "Three independent mechanisms",
+              "Row Level Security"
+            ]
+          },
+          {
+            "path": "vault/raw/website/projects/secure-networking-tracker.md",
+            "section": "any",
+            "must_contain": [
+              "Row Level Security"
+            ]
+          }
+        ]
+      },
+      "answer": "Ownership is enforced by Postgres through Row Level Security [S1][S2]. A signed-in user receives a private list of contacts, and the browser communicates only with the application's `/api/*` routes, not directly with the database [S4]. Postgres reads the user's ID from a short-lived JWT and applies Row Level Security, which prevents a query for \"all contacts\" from returning another user's rows [S4]. Furthermore, the update policy requires both `USING` and `WITH CHECK` to prevent a user from changing a row's `user_id` to another person's ID [S5][S6].",
+      "mode": "local",
+      "model": "gemma-4-e4b-it-qat-q4_0",
+      "method": "hybrid (BM25 + EmbeddingGemma, reciprocal-rank fusion)",
+      "passages": [
+        {
+          "id": "S1",
+          "kind": "source",
+          "path": "raw/course-projects/secure-networking-tracker/README.md",
+          "lines": [
+            3,
+            5
+          ],
+          "section": "Secure Networking Tracker",
+          "fused_score": 0.03279,
+          "bm25_rank": 1,
+          "vector_rank": 1,
+          "cosine": 0.6582,
+          "text": "A private networking tracker for the people you want to stay connected with at Berkeley. Sign up, add the people you meet — where you met them, what they do, how much you want to prioritise the relationship, and what you talked about — then sort, filter and search that list as it grows. Every contact belongs to exactly one account, and that ownership is enforced by Postgres itself through Row Level Security, so one user's list is unreachable to another even if the API layer were bypassed entirely.\n**Live app:** ** **",
+          "expected": []
+        },
+        {
+          "id": "S2",
+          "kind": "source",
+          "path": "raw/website/projects/secure-networking-tracker.md",
+          "lines": [
+            28,
+            30
+          ],
+          "section": "(introduction)",
+          "fused_score": 0.03175,
+          "bm25_rank": 4,
+          "vector_rank": 2,
+          "cosine": 0.6484,
+          "text": "**Stack:** Next.js 16 · Neon Postgres · Better Auth · Vercel\n> **The 30-second version.** A private tracker for the people I meet at Berkeley — where we met, what they do, how much I want to prioritise the relationship. The CRUD is not the interesting part. The interesting part is where the ownership boundary sits: every contact belongs to exactly one account, and Postgres enforces that below the application through Row Level Security, so a bug in my own API code cannot hand one person's list to another.",
+          "expected": [
+            "E2"
+          ]
+        },
+        {
+          "id": "S3",
+          "kind": "source",
+          "path": "raw/course-projects/secure-networking-tracker/README.md",
+          "lines": [
+            345,
+            351
+          ],
+          "section": "Secure Networking Tracker › Authentication and ownership",
+          "fused_score": 0.03175,
+          "bm25_rank": 3,
+          "vector_rank": 3,
+          "cosine": 0.624,
+          "text": "`USING` decides which rows a statement may *see or target*; `WITH CHECK` decides what a row is allowed to *look like afterwards*. The update policy needs both: without `WITH CHECK`, a user could edit a row they own and set `user_id` to someone else's id — handing the row away, or planting a row in another user's list. `WITH CHECK` makes that fail, and the `BEFORE UPDATE` trigger blocks it a second time. The `anon` role is granted nothing on the table.\n**3. The application layer checks too.** Route handlers reject unauthenticated requests with 401 before touching the database, and the contacts page redirects signed-out visitors. This is convenience and defence in depth — it is not what makes the data private.\nA consequence worth noting: `PATCH`/`DELETE` on someone else's contact id returns **404, not 403**. The row is invisible under RLS, so from the caller's point of view it does not exist — which also avoids confirming that a given id exists at all.\nFor a fuller walkthrough — `USING` vs `WITH CHECK`, why the update policy needs both, why deleting someone else's contact returns 404, and where validation happens — see **docs/how-it-works.md**.",
+          "expected": []
+        },
+        {
+          "id": "S4",
+          "kind": "source",
+          "path": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md",
+          "lines": [
+            9,
+            9
+          ],
+          "section": "How this app works › 1. The one-paragraph version",
+          "fused_score": 0.03031,
+          "bm25_rank": 7,
+          "vector_rank": 5,
+          "cosine": 0.6183,
+          "text": "A signed-in user gets a private list of contacts. The browser never talks to the database. It calls our own `/api/*` routes; those routes check the session cookie, validate the request body, mint a short-lived JWT for that user from Neon Auth, and call the Neon Data API with it. Postgres reads the user's id out of that JWT and applies Row Level Security, so a query for \"all contacts\" physically cannot return another user's rows. Ownership is decided by the database, not by our code.",
+          "expected": []
+        },
+        {
+          "id": "S5",
+          "kind": "source",
+          "path": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md",
+          "lines": [
+            85,
+            89
+          ],
+          "section": "How this app works › 3. The ownership rule › Layer 2 — Row Level Security filters every statement",
+          "fused_score": 0.02929,
+          "bm25_rank": 2,
+          "vector_rank": 16,
+          "cosine": 0.5655,
+          "text": "**Why `UPDATE` needs both.** With only `USING`, a user could target a row they legitimately own and change `user_id` to someone else's id. `USING` was satisfied — they did own it at the start. Nothing would check the result, so the row would silently move into another person's list. That is both a data-loss bug and a way to plant rows in someone else's account. `WITH CHECK` re-evaluates the rule against the *new* row and rejects it.\nThere is also a `BEFORE UPDATE` trigger that resets `NEW.user_id = OLD.user_id`, so ownership is pinned even if a policy were later loosened.\n**`anonymous` is granted nothing** on this table, so an unauthenticated caller has no privileges to exercise in the first place.",
+          "expected": []
+        },
+        {
+          "id": "S6",
+          "kind": "source",
+          "path": "raw/website/projects/secure-networking-tracker.md",
+          "lines": [
+            77,
+            88
+          ],
+          "section": "2. Where the boundary actually is › The subtle one",
+          "fused_score": 0.0284,
+          "bm25_rank": 8,
+          "vector_rank": 13,
+          "cosine": 0.5684,
+          "text": "The update policy needs both `USING` and `WITH CHECK`:\n```sql\nCREATE POLICY contacts_update_own ON public.contacts\n  FOR UPDATE TO authenticated\n  USING       ((SELECT auth.user_id()) = user_id)\n  WITH CHECK  ((SELECT auth.user_id()) = user_id);\n```\n`USING` decides which rows a statement may *see or target*. `WITH CHECK` decides what a row is allowed to *look like afterwards*. Without the second clause, a user could edit a row they legitimately own and set `user_id` to somebody else's — handing the row away, or planting a row inside another user's list. A `BEFORE UPDATE` trigger pins `user_id` to its previous value as well, so that specific attack fails twice.\n**A consequence worth noticing:** `PATCH` or `DELETE` against another user's contact returns **404, not 403**. Under RLS the row is invisible, so from the caller's side it does not exist — which also avoids confirming that a given id is real. The status code is an information-disclosure decision, not an accident.",
+          "expected": []
+        }
+      ],
+      "expected_found": [
+        {
+          "id": "E1",
+          "path": "vault/raw/course-projects/secure-networking-tracker/README.md",
+          "section": "Authentication and ownership",
+          "must_contain": [
+            "Three independent mechanisms",
+            "Row Level Security"
+          ],
+          "found_as": null
+        },
+        {
+          "id": "E2",
+          "path": "vault/raw/website/projects/secure-networking-tracker.md",
+          "section": "any",
+          "must_contain": [
+            "Row Level Security"
+          ],
+          "found_as": "S2"
+        }
+      ],
+      "checks": {
+        "status": "ok",
+        "cited": [
+          1,
+          2,
+          4,
+          5,
+          6
+        ],
+        "unknown_ids": [],
+        "uncited_sentences": [],
+        "numbers_not_in_cited_passages": [],
+        "insufficient_evidence": false
+      },
+      "timings": {
+        "retrieval_s": 0.03,
+        "model_s": 13.59,
+        "total_s": 13.62,
+        "llama_cache_n": 1596,
+        "llama_prompt_n": 5,
+        "llama_prompt_ms": 261.616,
+        "llama_prompt_per_token_ms": 52.3232,
+        "llama_prompt_per_second": 19.111980918598253,
+        "llama_predicted_n": 136,
+        "llama_predicted_ms": 13257.351,
+        "llama_predicted_per_token_ms": 98.2026,
+        "llama_predicted_per_second": 10.183029777215674
+      },
+      "run_file": "runs/ask-20260928-141318-983.json",
+      "model_called": true
+    },
+    {
+      "test": {
+        "id": "T3",
+        "kind": "answerable, connects two sources",
+        "question": "What was my job title at Amazon Web Services, and by how much did the Action Hub cut sellers' time-to-insight?",
+        "expected_behavior": "answer with citations to BOTH sources",
+        "expected_answer": "Business Intelligence Engineer — Global Sales Strategy & Analytics (experience entry); the Action Hub cut time-to-insight by 70% for 10,000+ sellers (project page).",
+        "expected_evidence": [
+          {
+            "path": "vault/raw/website/experience/amazon-web-services.md",
+            "section": "properties",
+            "must_contain": [
+              "Business Intelligence Engineer"
+            ]
+          },
+          {
+            "path": "vault/raw/website/projects/action-hub.md",
+            "section": "any",
+            "must_contain": [
+              "70%"
+            ]
+          }
+        ]
+      },
+      "answer": "The job title at Amazon Web Services was Business Intelligence Engineer — Global Sales Strategy & Analytics [S3][S5]. The Action Hub cut time-to-insight by 70% for over 10,000 sellers [S1][S4].",
+      "mode": "local",
+      "model": "gemma-4-e4b-it-qat-q4_0",
+      "method": "hybrid (BM25 + EmbeddingGemma, reciprocal-rank fusion)",
+      "passages": [
+        {
+          "id": "S1",
+          "kind": "source",
+          "path": "raw/website/projects/action-hub.md",
+          "lines": [
+            1,
+            23
+          ],
+          "section": "Properties",
+          "fused_score": 0.03252,
+          "bm25_rank": 1,
+          "vector_rank": 2,
+          "cosine": 0.7166,
+          "text": "title: Action Hub — Ranked Alerts with Next Actions\ndescription: A technical sales org had roughly 200 dashboards and no agreed place to start the day. This is the screen that replaced a manual sweep across five to ten of them.\nsummary: A sales org with roughly 200 dashboards and no agreed starting point. The Action Hub ranks every open issue across a seller's accounts and puts the next action on each one — cutting time-to-insight 70% for 10,000+ sellers.\nrole: Product owner · AWS Global Sales Strategy & Analytics\nperiod: Jul 2023 – May 2026\ndepth: case-study\norg: Amazon Web Services\nbadges: 0 → 1 at scale\ntags: product; ai; analytics\nmetrics: 70% less time-to-insight; 10,000 sellers served; $80B business supported\nlinks: prd: /artifacts/prioritization-framework",
+          "expected": [
+            "E2"
+          ]
+        },
+        {
+          "id": "S2",
+          "kind": "wiki",
+          "path": "wiki/Projects/Action Hub.md",
+          "lines": [
+            35,
+            37
+          ],
+          "section": "Action Hub › Related notes",
+          "fused_score": 0.03105,
+          "bm25_rank": 2,
+          "vector_rank": 7,
+          "cosine": 0.6654,
+          "text": "- [[Amazon Web Services]] — Built in this role at AWS Global Sales Strategy & Analytics.\n- [[Allowlist Data Access App]] — Both scope what each seller may see through the territory and account assignments.\n- [[Job Search Agent]] — Both rank a long list and cap it on purpose: fifty alerts per seller here, two roles per company there.",
+          "expected": []
+        },
+        {
+          "id": "S3",
+          "kind": "wiki",
+          "path": "wiki/Experience/Amazon Web Services.md",
+          "lines": [
+            21,
+            26
+          ],
+          "section": "Amazon Web Services › Key facts",
+          "fused_score": 0.03102,
+          "bm25_rank": 3,
+          "vector_rank": 6,
+          "cosine": 0.6656,
+          "text": "- Job title: Business Intelligence Engineer — Global Sales Strategy & Analytics. ([[raw/website/experience/amazon-web-services|website/experience/amazon-web-services.md › front matter]])\n- Based in Seattle, WA. ([[raw/website/experience/amazon-web-services|website/experience/amazon-web-services.md › front matter]])\n- Dates: Jul 2023 to May 2026. ([[raw/website/experience/amazon-web-services|website/experience/amazon-web-services.md › front matter]])\n- Built internal products for 10,000+ sellers across an $80B business; three years spent turning a reporting function that produced reports into one that produced decisions. ([[raw/website/experience/amazon-web-services|website/experience/amazon-web-services.md › front matter]])\n- Raised on-time delivery of business stakeholder requests from 56% to 82% by establishing recurring roadmap reviews that published the backlog. ([[raw/website/experience/amazon-web-services|website/experience/amazon-web-services.md › front matter]])\n- Launched a Business-Influence Tracker that lifted customer opportunity coverage 12% and became a standing Monthly Business Review KPI. ([[raw/website/experience/amazon-web-services|website/experience/amazon-web-services.md › front matter]])",
+          "expected": []
+        },
+        {
+          "id": "S4",
+          "kind": "wiki",
+          "path": "wiki/Projects/Action Hub.md",
+          "lines": [
+            18,
+            18
+          ],
+          "section": "Action Hub",
+          "fused_score": 0.03012,
+          "bm25_rank": 9,
+          "vector_rank": 4,
+          "cosine": 0.6916,
+          "text": "Action Hub was built to replace a manual sweep across roughly 200 dashboards for a technical sales organization. It ranks every open issue across a seller's accounts and puts the next action on each one, cutting time-to-insight by 70% for over 10,000 sellers.",
+          "expected": []
+        },
+        {
+          "id": "S5",
+          "kind": "source",
+          "path": "raw/website/experience/amazon-web-services.md",
+          "lines": [
+            1,
+            14
+          ],
+          "section": "Properties",
+          "fused_score": 0.02986,
+          "bm25_rank": 6,
+          "vector_rank": 8,
+          "cosine": 0.6628,
+          "text": "org: Amazon Web Services\nrole: Business Intelligence Engineer — Global Sales Strategy & Analytics\nlocation: Seattle, WA\nstart: Jul 2023\nend: May 2026\nkind: work\nsummary: Internal products for 10,000+ sellers across an $80B business. Three years spent turning a reporting function that produced reports into one that produced decisions.\noutcomes: Raised on-time delivery of business stakeholder requests from 56% to 82% by establishing recurring roadmap reviews that published the backlog; Launched a Business-Influence Tracker that lifted customer opportunity coverage 12% and became a standing Monthly Business Review KPI\nrelated: action-hub; pr-automation; genai-target-setting; allowlist; genai-adoption-program",
+          "expected": [
+            "E1"
+          ]
+        },
+        {
+          "id": "S6",
+          "kind": "source",
+          "path": "raw/website/projects/action-hub.md",
+          "lines": [
+            28,
+            33
+          ],
+          "section": "(introduction)",
+          "fused_score": 0.02976,
+          "bm25_rank": 12,
+          "vector_rank": 3,
+          "cosine": 0.6939,
+          "text": "| | |\n|---|---|\n| **Problem** | Sellers had dashboards but no prescribed action; finding what was wrong took a manual sweep across 5–10 of them |\n| **My role** | End-to-end: discovery, PRD, mockups, alert design and ranking model, roadmap prioritization, launch |\n| **Outcome** | 70% reduction in time-to-insight · 10,000+ sellers |\n| **Core decision** | Rank by **severity × account value**, and attach a destination to every alert — the alert is not the product, the redirect is |",
+          "expected": [
+            "E2"
+          ]
+        }
+      ],
+      "expected_found": [
+        {
+          "id": "E1",
+          "path": "vault/raw/website/experience/amazon-web-services.md",
+          "section": "properties",
+          "must_contain": [
+            "Business Intelligence Engineer"
+          ],
+          "found_as": "S5"
+        },
+        {
+          "id": "E2",
+          "path": "vault/raw/website/projects/action-hub.md",
+          "section": "any",
+          "must_contain": [
+            "70%"
+          ],
+          "found_as": "S1"
+        }
+      ],
+      "checks": {
+        "status": "ok",
+        "cited": [
+          1,
+          3,
+          4,
+          5
+        ],
+        "unknown_ids": [],
+        "uncited_sentences": [],
+        "numbers_not_in_cited_passages": [],
+        "insufficient_evidence": false
+      },
+      "timings": {
+        "retrieval_s": 0.04,
+        "model_s": 5.65,
+        "total_s": 5.69,
+        "llama_cache_n": 1449,
+        "llama_prompt_n": 5,
+        "llama_prompt_ms": 253.872,
+        "llama_prompt_per_token_ms": 50.7744,
+        "llama_prompt_per_second": 19.694964391504378,
+        "llama_predicted_n": 56,
+        "llama_predicted_ms": 5334.13,
+        "llama_predicted_per_token_ms": 96.98418181818182,
+        "llama_predicted_per_second": 10.310959800379818
+      },
+      "run_file": "runs/ask-20260928-141324-679.json",
+      "model_called": true
+    },
+    {
+      "test": {
+        "id": "T4",
+        "kind": "unsupported (plausible, but no source states it)",
+        "question": "What grade did I receive on the Pac-Man assignment?",
+        "expected_behavior": "explicit insufficient-evidence statement, no guessed grade",
+        "expected_answer": "The sources do not say what grade was received.",
+        "distractors": "Syllabus grading policy (scored out of 10, weights) and the Pac-Man results (906 vs 492) are nearby but do not answer it.",
+        "expected_evidence": []
+      },
+      "answer": "Insufficient evidence: The provided passages detail the training parameters, results, and methodology for the Ms. Pac-Man DQN assignment, but they do not state what grade was received.",
+      "mode": "local",
+      "model": "gemma-4-e4b-it-qat-q4_0",
+      "method": "hybrid (BM25 + EmbeddingGemma, reciprocal-rank fusion)",
+      "passages": [
+        {
+          "id": "S1",
+          "kind": "source",
+          "path": "raw/course-projects/pacman-dqn/README.md",
+          "lines": [
+            3,
+            9
+          ],
+          "section": "Ms. Pac-Man DQN — Class 3 Assignment",
+          "fused_score": 0.03105,
+          "bm25_rank": 7,
+          "vector_rank": 2,
+          "cosine": 0.6395,
+          "text": "Training a Deep Q-Network to play Ms. Pac-Man, using the course notebook `pacman_dqn.ipynb`. The three student-chosen settings were **exploration = 0.10, episodes = 300, learning rate = 0.0001**, selected by a two-stage hyperparameter search described below.\n**Headline result: mean evaluation score rose from 492 (untrained) to 906 (trained), +414 / +84%, under identical evaluation settings.**",
+          "expected": []
+        },
+        {
+          "id": "S2",
+          "kind": "wiki",
+          "path": "wiki/Projects/Ms. Pac-Man DQN.md",
+          "lines": [
+            24,
+            24
+          ],
+          "section": "Ms. Pac-Man DQN",
+          "fused_score": 0.03078,
+          "bm25_rank": 6,
+          "vector_rank": 4,
+          "cosine": 0.6305,
+          "text": "Ms. Pac-Man DQN was the MBA 290T Class 3 assignment: a Deep Q-Network trained to play Ms. Pac-Man, with exploration 0.10, 300 episodes and learning rate 0.0001 chosen by a measured search. Its mean evaluation score rose from 492 to 906 (+84%), but the untrained baseline was stuck repeating one move 95.4% of the time, so the headline number flatters the result.",
+          "expected": []
+        },
+        {
+          "id": "S3",
+          "kind": "wiki",
+          "path": "wiki/Projects/Ms. Pac-Man DQN.md",
+          "lines": [
+            29,
+            33
+          ],
+          "section": "Ms. Pac-Man DQN › Key facts › From course-projects/pacman-dqn/README.md",
+          "fused_score": 0.02967,
+          "bm25_rank": 10,
+          "vector_rank": 5,
+          "cosine": 0.6186,
+          "text": "- The three student-chosen settings were exploration = 0.10, episodes = 300, learning rate = 0.0001. ([[raw/course-projects/pacman-dqn/README#Ms. Pac-Man DQN — Class 3 Assignment|course-projects/pacman-dqn/README.md › Ms. Pac-Man DQN — Class 3 Assignment]])\n- The headline result showed the mean evaluation score rose from 492 (untrained) to 906 (trained), which is a +414 / +84% increase. ([[raw/course-projects/pacman-dqn/README#Ms. Pac-Man DQN — Class 3 Assignment|course-projects/pacman-dqn/README.md › Ms. Pac-Man DQN — Class 3 Assignment]])\n- The agent sees four stacked 84×84 grayscale game screens, picks one of nine joystick actions, and learns from the game's own score. ([[raw/course-projects/pacman-dqn/README#Overview and how to run|course-projects/pacman-dqn/README.md › Overview and how to run]])\n- The exploration setting of 0.10 was chosen because at 0.05 the agent collapsed into a degenerate, stuck policy. ([[raw/course-projects/pacman-dqn/README#My three hyperparameters|course-projects/pacman-dqn/README.md › My three hyperparameters]])\n- The learning rate of 0.0001 was chosen because every increase made learning worse, not faster. ([[raw/course-projects/pacman-dqn/README#My three hyperparameters|course-projects/pacman-dqn/README.md › My three hyperparameters]])",
+          "expected": []
+        },
+        {
+          "id": "S4",
+          "kind": "source",
+          "path": "raw/course-projects/pacman-dqn/README.md",
+          "lines": [
+            137,
+            138
+          ],
+          "section": "Ms. Pac-Man DQN — Class 3 Assignment › What I expected, and what actually happened",
+          "fused_score": 0.02957,
+          "bm25_rank": 3,
+          "vector_rank": 13,
+          "cosine": 0.5928,
+          "text": "Training-score progression, averaged in blocks of 50 episodes: 677 → 742 → 784 → 668 → 728 → **844**.",
+          "expected": []
+        },
+        {
+          "id": "S5",
+          "kind": "wiki",
+          "path": "wiki/Projects/Ms. Pac-Man DQN.md",
+          "lines": [
+            64,
+            66
+          ],
+          "section": "Ms. Pac-Man DQN › Sources",
+          "fused_score": 0.02921,
+          "bm25_rank": 1,
+          "vector_rank": 18,
+          "cosine": 0.5768,
+          "text": "- [[raw/course-projects/pacman-dqn/README|MBA 290T project - Ms. Pac-Man DQN (Assignment 2): Ms. Pac-Man DQN — Class 3 Assignment]] — origin\n- [[raw/website/projects/pacman-dqn|Personal website - projects: Ms. Pac-Man DQN]] — origin\n- [[raw/course-projects/pacman-dqn/docs/METHODOLOGY|MBA 290T project - Ms. Pac-Man DQN (Assignment 2): Methodology: how the three settings were chosen]] — origin",
+          "expected": []
+        },
+        {
+          "id": "S6",
+          "kind": "source",
+          "path": "raw/course-projects/pacman-dqn/README.md",
+          "lines": [
+            433,
+            440
+          ],
+          "section": "Ms. Pac-Man DQN — Class 3 Assignment › Assignment requirements checklist",
+          "fused_score": 0.02831,
+          "bm25_rank": 16,
+          "vector_rank": 6,
+          "cosine": 0.6129,
+          "text": "| Requirement | Status |\n|---|---|\n| Same five seeds, 5% exploration, same time limit, before and after | Unchanged from the notebook — `EVAL_SEEDS`, `EVAL_EXPLORATION` and `MAX_STEPS` were not touched (`results/config.json`) |\n| Baseline is an untrained network, not a random-action agent | `untrained.pt` is evaluated, not random play. It is measurably *not* random — it repeats one action 95.4% of the time (probe) |\n| Report every evaluation score and both means | All ten scores and both means in Results |\n| Report failed runs or lack of improvement honestly | The +12 run is reported below, not hidden |\n**Submission checklist**",
+          "expected": []
+        }
+      ],
+      "expected_found": [],
+      "checks": {
+        "status": "insufficient-evidence",
+        "cited": [],
+        "unknown_ids": [],
+        "uncited_sentences": [
+          "Pac-Man DQN assignment, but they do not state what grade was received."
+        ],
+        "numbers_not_in_cited_passages": [],
+        "insufficient_evidence": true
+      },
+      "timings": {
+        "retrieval_s": 0.03,
+        "model_s": 3.96,
+        "total_s": 4.0,
+        "llama_cache_n": 1520,
+        "llama_prompt_n": 5,
+        "llama_prompt_ms": 265.847,
+        "llama_prompt_per_token_ms": 53.169399999999996,
+        "llama_prompt_per_second": 18.807810507547575,
+        "llama_predicted_n": 36,
+        "llama_predicted_ms": 3643.927,
+        "llama_predicted_per_token_ms": 104.1122,
+        "llama_predicted_per_second": 9.605022274046654
+      },
+      "run_file": "runs/ask-20260928-141328-681.json",
+      "model_called": true
+    }
+  ],
+  "mode_checks": [
+    {
+      "check": {
+        "id": "M1",
+        "name": "casual chat, capabilities",
+        "mode": "chat",
+        "turns": [
+          "what can you help me with?",
+          "what can we do?"
+        ],
+        "expected": "accurate capabilities and a suggested starting point; no notes lookup, no citations, no insufficient-evidence refusal"
+      },
+      "turns": [
+        {
+          "user": "what can you help me with?",
+          "reply": "I'm here to help you manage your workflow, Eason. Think of me as your Chief of Staff running off your laptop.\n\nI can assist with:\n\n*   **Drafting and Refining:** Brainstorming, drafting, and rewriting emails, reports, or presentation content.\n*   **Organization:** Keeping track of projects, notes, and action items based on what you tell me or what's in the wiki.\n*   **Information Retrieval:** Pulling specific details from your stored notes using commands like `/notes` or `wiki ask`.\n*   **Planning:** Helping you outline next steps for assignments or work.\n\nBasically, anything that requires organization, drafting, or accessing the information you've given me.\n\nWhat's on your mind right now?",
+          "route": {
+            "retrieve": false,
+            "query": "",
+            "reason": "casual, capability or edit request: answered from the conversation",
+            "model_used": false
+          },
+          "notes": [],
+          "checks": {
+            "status": "no notes used"
+          },
+          "timings": {
+            "total_s": 16.06,
+            "model_s": 16.06,
+            "llama_cache_n": 610,
+            "llama_prompt_n": 13,
+            "llama_prompt_ms": 473.87,
+            "llama_prompt_per_token_ms": 36.45153846153846,
+            "llama_prompt_per_second": 27.43368434380737,
+            "llama_predicted_n": 161,
+            "llama_predicted_ms": 15548.01,
+            "llama_predicted_per_token_ms": 97.1750625,
+            "llama_predicted_per_second": 10.290706013181108
+          }
+        },
+        {
+          "user": "what can we do?",
+          "reply": "We can tackle whatever is currently taking up space in your head. To give you a concrete suggestion, I need a little context.\n\nAre you working on:\n\n*   **A specific assignment** (e.g., for MBA 290T)?\n*   **A work project**?\n*   **General planning** for the week?\n*   **Just need to clear some mental clutter**?\n\nIf you tell me the domain, I can offer a few immediate options. Otherwise, let me know if you want to start drafting something or reviewing some notes.",
+          "route": {
+            "retrieve": false,
+            "query": "",
+            "reason": "casual, capability or edit request: answered from the conversation",
+            "model_used": false
+          },
+          "notes": [],
+          "checks": {
+            "status": "no notes used"
+          },
+          "timings": {
+            "total_s": 12.16,
+            "model_s": 12.15,
+            "llama_cache_n": 783,
+            "llama_prompt_n": 15,
+            "llama_prompt_ms": 601.967,
+            "llama_prompt_per_token_ms": 40.13113333333333,
+            "llama_prompt_per_second": 24.91830947543636,
+            "llama_predicted_n": 120,
+            "llama_predicted_ms": 11542.675,
+            "llama_predicted_per_token_ms": 96.99726890756303,
+            "llama_predicted_per_second": 10.309568622524674
+          }
+        }
+      ],
+      "log": "runs/chat-20260928-141328-709.jsonl"
+    },
+    {
+      "check": {
+        "id": "M2",
+        "name": "conversational follow-up",
+        "mode": "chat",
+        "turns": [
+          "Draft a short plan for my week: I need to finish Assignment 4 and prep for PM internship applications.",
+          "make that shorter"
+        ],
+        "expected": "second answer is a shorter version of the first plan (uses conversation history)"
+      },
+      "turns": [
+        {
+          "user": "Draft a short plan for my week: I need to finish Assignment 4 and prep for PM internship applications.",
+          "reply": "Here is a draft plan for the week. I've kept it high-level; we can drill down on specific tasks once you confirm the priorities.\n\n**Focus Areas:**\n1.  **Assignment 4 Completion:** Dedicate focused time to wrapping this up.\n2.  **PM Internship Applications:** Systematically build out application materials and target roles.\n\n**Suggested Breakdown:**\n\n*   **Mon/Tues:** Deep work on Assignment 4. Block out dedicated time slots.\n*   **Wed:** Review and refine core application materials (e.g., resume, PM case study examples).\n*   **Thurs:** Target and apply to 2-3 specific PM roles.\n*   **Fri:** Final review of Assignment 4; outline next steps for applications/interview prep.\n\nLet me know if this structure works, or if you want me to flesh out the Assignment 4 milestones or suggest a structure for your application targeting.",
+          "route": {
+            "retrieve": false,
+            "query": "",
+            "reason": "drafting/planning from what you said: no personal facts needed",
+            "model_used": false
+          },
+          "notes": [],
+          "checks": {
+            "status": "no notes used"
+          },
+          "timings": {
+            "total_s": 19.43,
+            "model_s": 19.43,
+            "llama_cache_n": 610,
+            "llama_prompt_n": 28,
+            "llama_prompt_ms": 483.993,
+            "llama_prompt_per_token_ms": 17.285464285714287,
+            "llama_prompt_per_second": 57.8520763730054,
+            "llama_predicted_n": 198,
+            "llama_predicted_ms": 18942.696,
+            "llama_predicted_per_token_ms": 96.15581725888325,
+            "llama_predicted_per_second": 10.399786809649482
+          }
+        },
+        {
+          "user": "make that shorter",
+          "reply": "Here is a tighter version:\n\n*   **Mon-Tues:** Finish Assignment 4.\n*   **Wed:** Polish PM application materials.\n*   **Thurs:** Apply to target PM roles.\n*   **Fri:** Review/Next steps.\n\nDoes this work, or should I prioritize one over the other?",
+          "route": {
+            "retrieve": false,
+            "query": "",
+            "reason": "casual, capability or edit request: answered from the conversation",
+            "model_used": false
+          },
+          "notes": [],
+          "checks": {
+            "status": "no notes used"
+          },
+          "timings": {
+            "total_s": 7.24,
+            "model_s": 7.24,
+            "llama_cache_n": 835,
+            "llama_prompt_n": 13,
+            "llama_prompt_ms": 670.85,
+            "llama_prompt_per_token_ms": 51.603846153846156,
+            "llama_prompt_per_second": 19.37840053663263,
+            "llama_predicted_n": 70,
+            "llama_predicted_ms": 6553.949,
+            "llama_predicted_per_token_ms": 94.98476811594202,
+            "llama_predicted_per_second": 10.528003803508389
+          }
+        }
+      ],
+      "log": "runs/chat-20260928-141356-948.jsonl"
+    },
+    {
+      "check": {
+        "id": "M3",
+        "name": "raw search",
+        "mode": "search",
+        "query": "row level security",
+        "expected": "original passages with source paths; zero model calls; also works with the Gemma server stopped"
+      },
+      "gemma_server_running_during_search": false,
+      "method": "hybrid (BM25 + EmbeddingGemma, reciprocal-rank fusion)",
+      "seconds": 0.023,
+      "model_calls": 0,
+      "passages": [
+        {
+          "id": "1",
+          "kind": "source",
+          "path": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md",
+          "lines": [
+            52,
+            83
+          ],
+          "section": "How this app works › 3. The ownership rule › Layer 2 — Row Level Security filters every statement",
+          "fused_score": 0.03279,
+          "bm25_rank": 1,
+          "vector_rank": 1,
+          "cosine": 0.672,
+          "text": "```sql\nALTER TABLE public.contacts ENABLE ROW LEVEL SECURITY;\nALTER TABLE public.contacts FORCE  ROW LEVEL SECURITY;\n```\n`ENABLE` turns policies on. `FORCE` also applies them to the table's *owner* — without it, `neondb_owner` would bypass every policy.\nFour policies, one per operation, all for the `authenticated` role:\n```sql\nCREATE POLICY contacts_select_own ON public.contacts\n  FOR SELECT TO authenticated\n  USING ((SELECT auth.user_id()) = user_id);\n\nCREATE POLICY contacts_insert_own ON public.contacts\n  FOR INSERT TO authenticated\n  WITH CHECK ((SELECT auth.user_id()) = user_id);\n\nCREATE POLICY contacts_update_own ON public.contacts\n  FOR UPDATE TO authenticated\n  USING      ((SELECT auth.user_id()) = user_id)\n  WITH CHECK ((SELECT auth.user_id()) = user_id);\n\nCREATE POLICY contacts_delete_own ON public.contacts\n  FOR DELETE TO authenticated\n  USING ((SELECT auth.user_id()) = user_id);\n```\n**`USING` vs `WITH CHECK` — the distinction to have ready:**\n- `USING` filters rows that already exist. It answers *\"which rows may this statement see or touch?\"* It is silently added to `SELECT`, `UPDATE` and `DELETE` as an extra `WHERE` clause.\n- `WITH CHECK` inspects the row *as it will be after the write*. It answers *\"is this row allowed to exist looking like that?\"* It applies to `INSERT` and `UPDATE`."
+        },
+        {
+          "id": "2",
+          "kind": "source",
+          "path": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md",
+          "lines": [
+            85,
+            89
+          ],
+          "section": "How this app works › 3. The ownership rule › Layer 2 — Row Level Security filters every statement",
+          "fused_score": 0.03175,
+          "bm25_rank": 4,
+          "vector_rank": 2,
+          "cosine": 0.6579,
+          "text": "**Why `UPDATE` needs both.** With only `USING`, a user could target a row they legitimately own and change `user_id` to someone else's id. `USING` was satisfied — they did own it at the start. Nothing would check the result, so the row would silently move into another person's list. That is both a data-loss bug and a way to plant rows in someone else's account. `WITH CHECK` re-evaluates the rule against the *new* row and rejects it.\nThere is also a `BEFORE UPDATE` trigger that resets `NEW.user_id = OLD.user_id`, so ownership is pinned even if a policy were later loosened.\n**`anonymous` is granted nothing** on this table, so an unauthenticated caller has no privileges to exercise in the first place."
+        },
+        {
+          "id": "3",
+          "kind": "wiki",
+          "path": "wiki/Projects/Secure Networking Tracker.md",
+          "lines": [
+            39,
+            42
+          ],
+          "section": "Secure Networking Tracker › Key facts › From course-projects/secure-networking-tracker/docs/how-it-works.md",
+          "fused_score": 0.03083,
+          "bm25_rank": 2,
+          "vector_rank": 8,
+          "cosine": 0.5733,
+          "text": "- A signed-in user gets a private list of contacts, and the browser never talks to the database. ([[raw/course-projects/secure-networking-tracker/docs/how-it-works#1. The one-paragraph version|course-projects/secure-networking-tracker/docs/how-it-works.md › 1. The one-paragraph version]])\n- The `user_id` column in the `public.contacts` table is of type `text` and serves as the whole security model. ([[raw/course-projects/secure-networking-tracker/docs/how-it-works#2. The schema|course-projects/secure-networking-tracker/docs/how-it-works.md › 2. The schema]])\n- The distinction between `USING` and `WITH CHECK` is that `USING` filters existing rows, while `WITH CHECK` inspects the row as it will be after the write. ([[raw/course-projects/secure-networking-tracker/docs/how-it-works#Layer 2 — Row Level Security filters every statement|course-projects/secure-networking-tracker/docs/how-it-works.md › Layer 2 — Row Level Security filters every statement]])\n- Layer 3 involves the application checking routes and returning 401s, which is defense in depth but not the primary security mechanism. ([[raw/course-projects/secure-networking-tracker/docs/how-it-works#Layer 3 — the application checks too|course-projects/secure-networking-tracker/docs/how-it-works.md › Layer 3 — the application checks too]])"
+        },
+        {
+          "id": "4",
+          "kind": "source",
+          "path": "raw/website/projects/secure-networking-tracker.md",
+          "lines": [
+            46,
+            73
+          ],
+          "section": "2. Where the boundary actually is",
+          "fused_score": 0.03033,
+          "bm25_rank": 8,
+          "vector_rank": 4,
+          "cosine": 0.5911,
+          "text": "Three independent mechanisms enforce one rule: a row belongs to the user whose token created it.\n[Figure: Two request paths: one through the API and one bypassing it entirely. Both are stopped at Postgres by row level security, which returns not found rather than forbidden]\nRedrawn for this portfolio.\n1. **The database assigns ownership.** `user_id` is `NOT NULL DEFAULT auth.user_id()`. The API never sends it, and the validation schema strips it if a client tries — so the value always comes from the verified token.\n2. **RLS filters every statement.** Four policies for `authenticated`, covering select, insert, update and delete.\n3. **The application checks too.** Route handlers reject unauthenticated requests before touching the database. Convenience and depth — not the boundary."
+        },
+        {
+          "id": "5",
+          "kind": "source",
+          "path": "raw/course-projects/secure-networking-tracker/README.md",
+          "lines": [
+            318,
+            343
+          ],
+          "section": "Secure Networking Tracker › Authentication and ownership",
+          "fused_score": 0.02996,
+          "bm25_rank": 11,
+          "vector_rank": 3,
+          "cosine": 0.6221,
+          "text": "**The rule:** a row belongs to the user whose JWT created it, and only that user can read or change it.\nThree independent mechanisms enforce it:\n**1. The database assigns ownership.** `user_id` is `NOT NULL DEFAULT auth.user_id()`. The API never sends `user_id` — the Zod schema strips it if a client tries — so the value always comes from the verified token.\n**2. Row Level Security filters every statement.** RLS is enabled *and forced* on `contacts`, with four separate policies for `authenticated`:\n```sql\nCREATE POLICY contacts_select_own ON public.contacts\n  FOR SELECT TO authenticated\n  USING ((SELECT auth.user_id()) = user_id);\n\nCREATE POLICY contacts_insert_own ON public.contacts\n  FOR INSERT TO authenticated\n  WITH CHECK ((SELECT auth.user_id()) = user_id);\n\nCREATE POLICY contacts_update_own ON public.contacts\n  FOR UPDATE TO authenticated\n  USING ((SELECT auth.user_id()) = user_id)\n  WITH CHECK ((SELECT auth.user_id()) = user_id);\n\nCREATE POLICY contacts_delete_own ON public.contacts\n  FOR DELETE TO authenticated\n  USING ((SELECT auth.user_id()) = user_id);\n```"
+        },
+        {
+          "id": "6",
+          "kind": "source",
+          "path": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md",
+          "lines": [
+            9,
+            9
+          ],
+          "section": "How this app works › 1. The one-paragraph version",
+          "fused_score": 0.02881,
+          "bm25_rank": 7,
+          "vector_rank": 12,
+          "cosine": 0.5507,
+          "text": "A signed-in user gets a private list of contacts. The browser never talks to the database. It calls our own `/api/*` routes; those routes check the session cookie, validate the request body, mint a short-lived JWT for that user from Neon Auth, and call the Neon Data API with it. Postgres reads the user's id out of that JWT and applies Row Level Security, so a query for \"all contacts\" physically cannot return another user's rows. Ownership is decided by the database, not by our code."
+        }
+      ]
+    },
+    {
+      "check": {
+        "id": "M4",
+        "name": "ask ignores chat history",
+        "chat_turns": [
+          "By the way, my favorite programming language is Rust."
+        ],
+        "ask": "What is my favorite programming language?",
+        "expected": "ask reports insufficient evidence; the saved ask prompt contains no chat text"
+      },
+      "turns": [
+        {
+          "user": "By the way, my favorite programming language is Rust.",
+          "reply": "Got it. Rust. I'll keep that in mind.\n\nDo you need me to look for any resources, articles, or potential projects related to Rust for your work or studies?",
+          "route": {
+            "retrieve": false,
+            "query": "",
+            "reason": "model router decided no notes needed",
+            "model_used": true
+          },
+          "notes": [],
+          "checks": {
+            "status": "no notes used"
+          },
+          "timings": {
+            "total_s": 11.25,
+            "model_s": 9.04,
+            "llama_cache_n": 0,
+            "llama_prompt_n": 627,
+            "llama_prompt_ms": 5410.208,
+            "llama_prompt_per_token_ms": 8.628720893141946,
+            "llama_prompt_per_second": 115.89203224718902,
+            "llama_predicted_n": 39,
+            "llama_predicted_ms": 3624.668,
+            "llama_predicted_per_token_ms": 95.38600000000001,
+            "llama_predicted_per_second": 10.48371878472732
+          }
+        }
+      ],
+      "log": "runs/chat-20260928-141427-028.jsonl",
+      "ask_answer": "Insufficient evidence: The provided passages describe course materials, project structures, and technical concepts related to AI and programming, but they do not state what the user's favorite programming language is.",
+      "ask_checks": {
+        "status": "insufficient-evidence",
+        "cited": [],
+        "unknown_ids": [],
+        "uncited_sentences": [],
+        "numbers_not_in_cited_passages": [],
+        "insufficient_evidence": true
+      },
+      "ask_run_file": "runs/ask-20260928-141458-515.json",
+      "chat_claim_in_ask_prompt": false,
+      "ask_passages": [
+        {
+          "id": "S1",
+          "kind": "source",
+          "path": "raw/course/syllabus.html",
+          "lines": [
+            658,
+            659
+          ],
+          "section": "MBA 290T: Fundamental of Agentic AI › What Each Class Covers",
+          "fused_score": 0.03227,
+          "bm25_rank": 3,
+          "vector_rank": 1,
+          "cosine": 0.4583,
+          "text": "Class 1 — Code & Programming Foundations. What code actually is and how it runs. Variables, types, conditionals, loops, and functions. Lists vs. dictionaries, and why data shape is a management decision. Errors, tracebacks, and debugging as hypothesis testing. Tests as executable promises. Programming languages and why Python. The terminal. Clean code: readability as throughput, the WTF-per-minute metric, guard clauses, magic numbers, and comments that explain why. Organizing a project across files, with an entry point that orchestrates and separation of concerns. Git, GitHub, branches, diffs, and pull requests. AI coding agents: plan mode, YOLO mode, and when not to reach for the agent.\nClass 2 — Software Systems. Frontend: HTML, CSS, JavaScript, the DOM, components, and state. Backend: servers, APIs, HTTP methods, status codes, and JSON. Databases: tables, relationships, SQL, transactions, migrations, indexes, and caching. Environment variables and secrets, and why a frontend cannot keep one. Authentication vs. authorization, and OAuth. Cloud platforms and latency. Testing and the test pyramid. CI, deployment, environments, rollback, logs, and alerts. Tech stacks and the tradeoffs behind them."
+        },
+        {
+          "id": "S2",
+          "kind": "source",
+          "path": "raw/course/syllabus.html",
+          "lines": [
+            442,
+            443
+          ],
+          "section": "MBA 290T: Fundamental of Agentic AI › Prerequisites",
+          "fused_score": 0.03202,
+          "bm25_rank": 1,
+          "vector_rank": 4,
+          "cosine": 0.4194,
+          "text": "None. This course assumes no programming background. Class 1 starts at “what is a variable.”\nYou do need to bring a laptop you can install software on (macOS, Windows, or Linux), and a willingness to work in a terminal. Everything else is taught."
+        },
+        {
+          "id": "S3",
+          "kind": "source",
+          "path": "raw/course-projects/custom-llm/README.md",
+          "lines": [
+            1844,
+            1864
+          ],
+          "section": "Building a Custom LLM › 15. Repository map",
+          "fused_score": 0.02822,
+          "bm25_rank": 8,
+          "vector_rank": 14,
+          "cosine": 0.4084,
+          "text": "```\ncustom_llm.ipynb                    the starter notebook, unexecuted (run it yourself)\nnanogpt_model.py                    Karpathy's nanoGPT, pinned commit 3adf61e, unmodified\nrun_evals.py  chat.py               the starter's eval runner and chat interface, unmodified\nevals/language_evals.json           the 48 fixed cases, unmodified (sha256 e8affcd7…)\nevals/heldout_language_evals.json   my 16 held-out cases, written after the corpus was first frozen\ncorpus/                             experiment B's teaching material - 4 categories\ncorpus_seven/                       experiments C and D - 7 categories\ncorpus_unpaired/                    experiment E - 7 categories, unpaired relations\ndocs/                               the PDFs' source text, kept OUTSIDE every training input\n\nexperiments/starter/   A: classroom corpus\nexperiments/expanded/  B: classroom + corpus/\nexperiments/seven/     C: classroom + corpus_seven/\nexperiments/tuned/     D: same as C at lr 0.004\nexperiments/unpaired/  E: same as D with corpus_unpaired/\n  custom_llm_*.executed.ipynb         executed notebook, all outputs kept\n  llm_run/                            config, corpus.txt, history, samples/, model.pt,\n                                      model_untrained.pt, checkpoint.json, language_evals/…\n  *_results.zip                       the complete results ZIP\nexperiments/sweep_*/   the five-seed sweeps (summaries; D's also keep per-case results)"
+        },
+        {
+          "id": "S4",
+          "kind": "source",
+          "path": "raw/course-projects/custom-llm/README.md",
+          "lines": [
+            1011,
+            1015
+          ],
+          "section": "Building a Custom LLM › 7. The 48 fixed language evals: all ten result sets › By group",
+          "fused_score": 0.02807,
+          "bm25_rank": 22,
+          "vector_rank": 3,
+          "cosine": 0.4347,
+          "text": "| Group | Cases | A untr. | A trained | B untr. | B trained | C untr. | C trained | D untr. | D trained | E untr. | E trained |\n|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|\n| `starter_patterns` | 16 | 6 | **16** | 6 | **16** | 6 | **16** | 6 | **16** | 6 | **16** |\n| `starter_transfer` | 8 | 3 | **4** | 0 | **8** | 2 | **7** | 2 | **8** | 2 | **8** |\n| `extend_corpus` | 24 | 0 (s0) | **0 (s0)** | 1 (s11) | **10 (s11)** | 6 (s20) | **13 (s20)** | 6 (s20) | **16 (s20)** | 6 (s20) | **13 (s20)** |"
+        },
+        {
+          "id": "S5",
+          "kind": "wiki",
+          "path": "wiki/Concepts/Deep Learning.md",
+          "lines": [
+            31,
+            33
+          ],
+          "section": "Deep Learning › Related notes",
+          "fused_score": 0.02778,
+          "bm25_rank": 12,
+          "vector_rank": 12,
+          "cosine": 0.4101,
+          "text": "- [[Custom LLM with nanoGPT]] — The project these facts come from: a small nanoGPT language model built for MBA 290T.\n- [[Deep Q-Network]] — Another neural-network method in this wiki; there the network estimates action values, not next tokens.\n- [[MBA 290T Syllabus]] — Class 4 of the course covers deep learning and transformers."
+        },
+        {
+          "id": "S6",
+          "kind": "source",
+          "path": "raw/course-projects/custom-llm/README.md",
+          "lines": [
+            976,
+            989
+          ],
+          "section": "Building a Custom LLM › 7. The 48 fixed language evals: all ten result sets",
+          "fused_score": 0.02765,
+          "bm25_rank": 16,
+          "vector_rank": 9,
+          "cosine": 0.4134,
+          "text": "The suite is `evals/language_evals.json`, **unchanged** (sha256 `e8affcd72841e3ed…`, byte-identical to the starter repo's file). The runner is `run_evals.py`, also unchanged. All ten result sets recorded the same `suite_sha256` (`1d7c503f…`, the runner's hash of the parsed suite rather than of the file), which `tools/verify_separation.py` checks.\n**Scoring rules, as implemented in `run_evals.py`:** only the prompt enters the model — never the four choices, the answer or the explanation. The next-token probability is read for each of the four single-word choices; the highest wins; correct = 1, incorrect = 0, an exact tie = 0. Separately, an unconstrained continuation is generated at temperature 0.8 with a fixed per-case seed and a 24-token cap; **that free text is saved and inspected but is not what the score measures.** If any prompt word or answer choice is outside the model's vocabulary the case is marked `out_of_vocabulary` and scores 0 in the all-case rate rather than being dropped — so a model cannot raise its all-case percentage by having a smaller vocabulary. Random guessing would average 25% among scorable cases."
+        }
+      ]
+    }
+  ]
+}

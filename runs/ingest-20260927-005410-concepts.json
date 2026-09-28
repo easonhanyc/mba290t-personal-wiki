@@ -1,0 +1,91 @@
+{
+  "time": "2026-09-27T00:54:10",
+  "purpose": "regenerate concept notes after fixing passage-marker stripping",
+  "files": {},
+  "notes_changed": [
+    "wiki/Concepts/Agentic AI.md",
+    "wiki/Concepts/Deep Learning.md",
+    "wiki/Concepts/Deep Q-Network.md",
+    "wiki/Concepts/Time Series Analysis.md"
+  ],
+  "model": "gemma-4-e4b-it-qat-q4_0",
+  "mode": "local",
+  "model_calls": 8,
+  "seconds": 271.3,
+  "dropped_facts": [],
+  "failures": [],
+  "calls": [
+    {
+      "stage": "concept",
+      "source": "concept:Agentic AI",
+      "seconds": 44.2,
+      "prompt_tokens": 5,
+      "output_tokens": 447,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "concept",
+      "source": "concept:Deep Learning",
+      "seconds": 47.5,
+      "prompt_tokens": 5,
+      "output_tokens": 482,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "concept",
+      "source": "concept:Deep Q-Network",
+      "seconds": 49.4,
+      "prompt_tokens": 5,
+      "output_tokens": 505,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "concept",
+      "source": "concept:Time Series Analysis",
+      "seconds": 51.5,
+      "prompt_tokens": 5,
+      "output_tokens": 524,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Concepts/Agentic AI.md",
+      "seconds": 12.7,
+      "prompt_tokens": 5,
+      "output_tokens": 125,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Concepts/Deep Learning.md",
+      "seconds": 27.8,
+      "prompt_tokens": 1141,
+      "output_tokens": 187,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Concepts/Deep Q-Network.md",
+      "seconds": 21.7,
+      "prompt_tokens": 1118,
+      "output_tokens": 131,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Concepts/Time Series Analysis.md",
+      "seconds": 15.3,
+      "prompt_tokens": 1187,
+      "output_tokens": 56,
+      "finish": "stop",
+      "attempt": 1
+    }
+  ]
+}

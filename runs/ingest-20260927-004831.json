@@ -1,0 +1,837 @@
+{
+  "time": "2026-09-27T00:48:31",
+  "files": {
+    "raw/course/syllabus.html": "ingested",
+    "raw/course-projects/custom-llm/README.md": "ingested",
+    "raw/course-projects/pacman-dqn/README.md": "ingested",
+    "raw/course-projects/pacman-dqn/docs/METHODOLOGY.md": "ingested",
+    "raw/course-projects/secure-networking-tracker/README.md": "ingested",
+    "raw/course-projects/secure-networking-tracker/docs/how-it-works.md": "ingested",
+    "raw/website/experience/amazon-web-services.md": "ingested",
+    "raw/website/experience/clean-shores.md": "ingested",
+    "raw/website/experience/idg-capital.md": "ingested",
+    "raw/website/experience/notre-dame.md": "ingested",
+    "raw/website/experience/tiktok.md": "ingested",
+    "raw/website/experience/uc-berkeley.md": "ingested",
+    "raw/website/projects/action-hub.md": "ingested",
+    "raw/website/projects/allowlist.md": "ingested",
+    "raw/website/projects/asteroid-screening.md": "ingested",
+    "raw/website/projects/datafest-2023.md": "ingested",
+    "raw/website/projects/formula-1-trends.md": "ingested",
+    "raw/website/projects/genai-adoption-program.md": "ingested",
+    "raw/website/projects/genai-target-setting.md": "ingested",
+    "raw/website/projects/job-search-agent.md": "ingested",
+    "raw/website/projects/pacman-dqn.md": "ingested",
+    "raw/website/projects/pr-automation.md": "ingested",
+    "raw/website/projects/secure-networking-tracker.md": "ingested",
+    "raw/website/projects/tripmatch.md": "ingested"
+  },
+  "notes_changed": [
+    "wiki/Concepts/Agentic AI.md",
+    "wiki/Concepts/Deep Learning.md",
+    "wiki/Concepts/Deep Q-Network.md",
+    "wiki/Concepts/Time Series Analysis.md",
+    "wiki/Course/From Zero to AI Agents.md",
+    "wiki/Experience/Amazon Web Services Role.md",
+    "wiki/Experience/Clean Shores Fundraising Lead.md",
+    "wiki/Experience/IDG Capital Venture Capital Intern.md",
+    "wiki/Experience/Notre Dame Business Analytics Education.md",
+    "wiki/Experience/TikTok Ads Risk Integrity Intern.md",
+    "wiki/Experience/UC Berkeley Haas MBA MEng.md",
+    "wiki/Projects/Action Hub Ranked Alerts.md",
+    "wiki/Projects/Allowlist Data Access Management App.md",
+    "wiki/Projects/Custom LLM Training Experiments.md",
+    "wiki/Projects/DataFest ASA Analysis Competition.md",
+    "wiki/Projects/Formula 1 Racing Trends Analysis.md",
+    "wiki/Projects/GenAI Adoption Program.md",
+    "wiki/Projects/GenAI Target Setting Methodology.md",
+    "wiki/Projects/Hazardous Asteroid Screening.md",
+    "wiki/Projects/Job Search Agent.md",
+    "wiki/Projects/Ms. Pac-Man DQN Implementation.md",
+    "wiki/Projects/Pac-Man DQN Methodology Study.md",
+    "wiki/Projects/Pull-Request Automation Skill.md",
+    "wiki/Projects/Secure Networking Tracker.md",
+    "wiki/Projects/TripMatch Rides Board.md"
+  ],
+  "model": "gemma-4-e4b-it-qat-q4_0",
+  "mode": "local",
+  "model_calls": 81,
+  "seconds": 4913.4,
+  "dropped_facts": [
+    {
+      "source": "raw/website/projects/formula-1-trends.md",
+      "fact": "The variable that wasn't in the data required manual repair because two race times came back in a format inconsistent with the rest, and missing driver and team standings were filled by checking source pages by hand (P1).",
+      "reason": "numbers not in passage: ['1']"
+    },
+    {
+      "source": "raw/website/projects/formula-1-trends.md",
+      "fact": "A pooled average of derived speed across every race in a season describes which circuits happened to be on that year's calendar rather than describing the cars (P2).",
+      "reason": "numbers not in passage: ['2']"
+    },
+    {
+      "source": "raw/website/projects/formula-1-trends.md",
+      "fact": "To compare 1991 to 2022, the analysis held the track constant, leading to the decision to use only Spain as the circuit for the speed analysis (P2).",
+      "reason": "numbers not in passage: ['2']"
+    },
+    {
+      "source": "raw/website/projects/formula-1-trends.md",
+      "fact": "Six trend models were fitted to the series, including linear, quadratic, cubic, quartic, quartic with an exponential transform, and Holt-Winters exponential smoothing, and they were compared on root mean squared error (P5).",
+      "reason": "numbers not in passage: ['5']"
+    },
+    {
+      "source": "raw/website/projects/formula-1-trends.md",
+      "fact": "The quartic exponential model resulted in the lowest root mean squared error, but this result was questioned because the exponential transform changes the scale on which residuals are measured (P5).",
+      "reason": "numbers not in passage: ['5']"
+    },
+    {
+      "source": "raw/website/projects/genai-target-setting.md",
+      "fact": "Pipeline creation was forecasted using a least-squares linear trend fitted only on the six months where the category was genuinely active and then projected forward by region (P6).",
+      "reason": "numbers not in passage: ['6']"
+    },
+    {
+      "source": "raw/website/projects/genai-target-setting.md",
+      "fact": "The final target for a month was calculated by taking the pipeline created three months earlier, multiplying it by the attach rate and win rate, and then lagging by the median open-to-close cycle time of about three months (P6).",
+      "reason": "numbers not in passage: ['6']"
+    }
+  ],
+  "failures": [],
+  "calls": [
+    {
+      "stage": "facts",
+      "source": "raw/course/syllabus.html",
+      "seconds": 55.7,
+      "prompt_tokens": 2070,
+      "output_tokens": 389,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course/syllabus.html",
+      "seconds": 57.3,
+      "prompt_tokens": 2152,
+      "output_tokens": 398,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course/syllabus.html",
+      "seconds": 36.2,
+      "prompt_tokens": 346,
+      "output_tokens": 340,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/course/syllabus.html",
+      "seconds": 84.0,
+      "prompt_tokens": 865,
+      "output_tokens": 784,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/custom-llm/README.md",
+      "seconds": 77.1,
+      "prompt_tokens": 2847,
+      "output_tokens": 410,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/custom-llm/README.md",
+      "seconds": 68.1,
+      "prompt_tokens": 2071,
+      "output_tokens": 446,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/custom-llm/README.md",
+      "seconds": 74.5,
+      "prompt_tokens": 1959,
+      "output_tokens": 455,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/custom-llm/README.md",
+      "seconds": 73.7,
+      "prompt_tokens": 1709,
+      "output_tokens": 451,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/custom-llm/README.md",
+      "seconds": 90.4,
+      "prompt_tokens": 3405,
+      "output_tokens": 497,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/custom-llm/README.md",
+      "seconds": 74.7,
+      "prompt_tokens": 1790,
+      "output_tokens": 536,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/custom-llm/README.md",
+      "seconds": 69.5,
+      "prompt_tokens": 1767,
+      "output_tokens": 485,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/custom-llm/README.md",
+      "seconds": 97.5,
+      "prompt_tokens": 2890,
+      "output_tokens": 646,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/custom-llm/README.md",
+      "seconds": 59.6,
+      "prompt_tokens": 2052,
+      "output_tokens": 364,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/custom-llm/README.md",
+      "seconds": 59.4,
+      "prompt_tokens": 1944,
+      "output_tokens": 443,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/custom-llm/README.md",
+      "seconds": 50.0,
+      "prompt_tokens": 1884,
+      "output_tokens": 359,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/custom-llm/README.md",
+      "seconds": 69.1,
+      "prompt_tokens": 1372,
+      "output_tokens": 593,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/custom-llm/README.md",
+      "seconds": 68.0,
+      "prompt_tokens": 2249,
+      "output_tokens": 507,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/custom-llm/README.md",
+      "seconds": 64.8,
+      "prompt_tokens": 2157,
+      "output_tokens": 486,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/custom-llm/README.md",
+      "seconds": 55.2,
+      "prompt_tokens": 1635,
+      "output_tokens": 434,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/custom-llm/README.md",
+      "seconds": 76.9,
+      "prompt_tokens": 2611,
+      "output_tokens": 558,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/custom-llm/README.md",
+      "seconds": 63.2,
+      "prompt_tokens": 2538,
+      "output_tokens": 435,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/course-projects/custom-llm/README.md",
+      "seconds": 105.4,
+      "prompt_tokens": 2071,
+      "output_tokens": 900,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/pacman-dqn/README.md",
+      "seconds": 72.8,
+      "prompt_tokens": 2974,
+      "output_tokens": 491,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/pacman-dqn/README.md",
+      "seconds": 64.2,
+      "prompt_tokens": 2550,
+      "output_tokens": 444,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/pacman-dqn/README.md",
+      "seconds": 54.1,
+      "prompt_tokens": 2130,
+      "output_tokens": 373,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/course-projects/pacman-dqn/README.md",
+      "seconds": 108.7,
+      "prompt_tokens": 1115,
+      "output_tokens": 1014,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/course-projects/pacman-dqn/docs/METHODOLOGY.md",
+      "seconds": 136.2,
+      "prompt_tokens": 2563,
+      "output_tokens": 995,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/secure-networking-tracker/README.md",
+      "seconds": 68.3,
+      "prompt_tokens": 2462,
+      "output_tokens": 342,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/secure-networking-tracker/README.md",
+      "seconds": 63.0,
+      "prompt_tokens": 2000,
+      "output_tokens": 390,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/course-projects/secure-networking-tracker/README.md",
+      "seconds": 70.6,
+      "prompt_tokens": 2786,
+      "output_tokens": 398,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/course-projects/secure-networking-tracker/README.md",
+      "seconds": 89.7,
+      "prompt_tokens": 1008,
+      "output_tokens": 735,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/course-projects/secure-networking-tracker/docs/how-it-works.md",
+      "seconds": 125.4,
+      "prompt_tokens": 3111,
+      "output_tokens": 948,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/website/experience/amazon-web-services.md",
+      "seconds": 56.8,
+      "prompt_tokens": 481,
+      "output_tokens": 517,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/website/experience/clean-shores.md",
+      "seconds": 52.2,
+      "prompt_tokens": 453,
+      "output_tokens": 443,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/website/experience/idg-capital.md",
+      "seconds": 50.8,
+      "prompt_tokens": 495,
+      "output_tokens": 458,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/website/experience/notre-dame.md",
+      "seconds": 57.9,
+      "prompt_tokens": 557,
+      "output_tokens": 523,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/website/experience/tiktok.md",
+      "seconds": 52.5,
+      "prompt_tokens": 569,
+      "output_tokens": 468,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/website/experience/uc-berkeley.md",
+      "seconds": 60.7,
+      "prompt_tokens": 593,
+      "output_tokens": 549,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/website/projects/action-hub.md",
+      "seconds": 129.3,
+      "prompt_tokens": 2692,
+      "output_tokens": 933,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/website/projects/allowlist.md",
+      "seconds": 115.8,
+      "prompt_tokens": 2020,
+      "output_tokens": 740,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/website/projects/asteroid-screening.md",
+      "seconds": 113.3,
+      "prompt_tokens": 2302,
+      "output_tokens": 820,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/website/projects/datafest-2023.md",
+      "seconds": 108.6,
+      "prompt_tokens": 2164,
+      "output_tokens": 810,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/website/projects/formula-1-trends.md",
+      "seconds": 118.2,
+      "prompt_tokens": 2685,
+      "output_tokens": 974,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/website/projects/genai-adoption-program.md",
+      "seconds": 98.5,
+      "prompt_tokens": 2177,
+      "output_tokens": 815,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/website/projects/genai-target-setting.md",
+      "seconds": 103.9,
+      "prompt_tokens": 2337,
+      "output_tokens": 853,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/website/projects/job-search-agent.md",
+      "seconds": 79.5,
+      "prompt_tokens": 2069,
+      "output_tokens": 639,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/website/projects/pacman-dqn.md",
+      "seconds": 109.0,
+      "prompt_tokens": 2452,
+      "output_tokens": 903,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/website/projects/pr-automation.md",
+      "seconds": 73.2,
+      "prompt_tokens": 2214,
+      "output_tokens": 544,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/website/projects/secure-networking-tracker.md",
+      "seconds": 109.3,
+      "prompt_tokens": 2206,
+      "output_tokens": 927,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/website/projects/tripmatch.md",
+      "seconds": 56.0,
+      "prompt_tokens": 1543,
+      "output_tokens": 439,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "facts",
+      "source": "raw/website/projects/tripmatch.md",
+      "seconds": 80.2,
+      "prompt_tokens": 1951,
+      "output_tokens": 473,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "note",
+      "source": "raw/website/projects/tripmatch.md",
+      "seconds": 126.6,
+      "prompt_tokens": 1470,
+      "output_tokens": 928,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "concept",
+      "source": "concept:Agentic AI",
+      "seconds": 72.1,
+      "prompt_tokens": 936,
+      "output_tokens": 447,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "concept",
+      "source": "concept:Deep Learning",
+      "seconds": 70.6,
+      "prompt_tokens": 1592,
+      "output_tokens": 480,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "concept",
+      "source": "concept:Deep Q-Network",
+      "seconds": 64.2,
+      "prompt_tokens": 1317,
+      "output_tokens": 465,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "concept",
+      "source": "concept:Time Series Analysis",
+      "seconds": 73.7,
+      "prompt_tokens": 1373,
+      "output_tokens": 560,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Concepts/Agentic AI.md",
+      "seconds": 23.8,
+      "prompt_tokens": 1104,
+      "output_tokens": 126,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Concepts/Deep Learning.md",
+      "seconds": 31.3,
+      "prompt_tokens": 1139,
+      "output_tokens": 191,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Concepts/Deep Q-Network.md",
+      "seconds": 24.5,
+      "prompt_tokens": 1110,
+      "output_tokens": 131,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Concepts/Time Series Analysis.md",
+      "seconds": 18.4,
+      "prompt_tokens": 925,
+      "output_tokens": 92,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Course/From Zero to AI Agents.md",
+      "seconds": 22.3,
+      "prompt_tokens": 1098,
+      "output_tokens": 99,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Experience/Amazon Web Services Role.md",
+      "seconds": 22.5,
+      "prompt_tokens": 1053,
+      "output_tokens": 133,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Experience/Clean Shores Fundraising Lead.md",
+      "seconds": 16.3,
+      "prompt_tokens": 956,
+      "output_tokens": 86,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Experience/IDG Capital Venture Capital Intern.md",
+      "seconds": 13.7,
+      "prompt_tokens": 1002,
+      "output_tokens": 54,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Experience/Notre Dame Business Analytics Education.md",
+      "seconds": 21.7,
+      "prompt_tokens": 1012,
+      "output_tokens": 136,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Experience/TikTok Ads Risk Integrity Intern.md",
+      "seconds": 16.3,
+      "prompt_tokens": 967,
+      "output_tokens": 87,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Experience/UC Berkeley Haas MBA MEng.md",
+      "seconds": 22.5,
+      "prompt_tokens": 994,
+      "output_tokens": 140,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Projects/Action Hub Ranked Alerts.md",
+      "seconds": 19.8,
+      "prompt_tokens": 1106,
+      "output_tokens": 95,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Projects/Allowlist Data Access Management App.md",
+      "seconds": 19.5,
+      "prompt_tokens": 1137,
+      "output_tokens": 88,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Projects/Custom LLM Training Experiments.md",
+      "seconds": 19.0,
+      "prompt_tokens": 1100,
+      "output_tokens": 98,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Projects/DataFest ASA Analysis Competition.md",
+      "seconds": 18.2,
+      "prompt_tokens": 1055,
+      "output_tokens": 98,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Projects/Formula 1 Racing Trends Analysis.md",
+      "seconds": 18.3,
+      "prompt_tokens": 1110,
+      "output_tokens": 93,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Projects/GenAI Adoption Program.md",
+      "seconds": 17.1,
+      "prompt_tokens": 1022,
+      "output_tokens": 92,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Projects/GenAI Target Setting Methodology.md",
+      "seconds": 17.2,
+      "prompt_tokens": 1071,
+      "output_tokens": 86,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Projects/Hazardous Asteroid Screening.md",
+      "seconds": 17.1,
+      "prompt_tokens": 1073,
+      "output_tokens": 86,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Projects/Job Search Agent.md",
+      "seconds": 17.9,
+      "prompt_tokens": 1091,
+      "output_tokens": 94,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Projects/Ms. Pac-Man DQN Implementation.md",
+      "seconds": 25.5,
+      "prompt_tokens": 1161,
+      "output_tokens": 164,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Projects/Pac-Man DQN Methodology Study.md",
+      "seconds": 22.0,
+      "prompt_tokens": 1134,
+      "output_tokens": 130,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Projects/Pull-Request Automation Skill.md",
+      "seconds": 16.6,
+      "prompt_tokens": 1022,
+      "output_tokens": 83,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Projects/Secure Networking Tracker.md",
+      "seconds": 18.8,
+      "prompt_tokens": 1052,
+      "output_tokens": 103,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Projects/TripMatch Rides Board.md",
+      "seconds": 14.6,
+      "prompt_tokens": 1118,
+      "output_tokens": 55,
+      "finish": "stop",
+      "attempt": 1
+    }
+  ],
+  "index": {
+    "passages": 388,
+    "sources": 24,
+    "wiki_notes": 0,
+    "embedded_new": 0,
+    "reused_vectors": 388,
+    "vectors": true
+  }
+}

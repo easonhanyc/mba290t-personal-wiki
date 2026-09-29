@@ -36,8 +36,10 @@ def eval_table(root: Path, label: str) -> str:
     assess = (yaml.safe_load((root / "evidence" / "assessments.yaml").read_text()) or {}).get(label, {}) \
         if (root / "evidence" / "assessments.yaml").exists() else {}
     meta = data["meta"]
+    where = (f"(file sha256 matches Hugging Face: {meta['model']['sha256_match']})" if meta.get("execution", "local") == "local"
+             else f"(hosted: {meta['model']['runtime']})")
     rows = [f"Run `{label}` at {meta['time']}; internet **{meta['network']['internet']}**; model `{meta['model']['id']}` "
-            f"(file sha256 matches Hugging Face: {meta['model']['sha256_match']}); {meta['passages_indexed']} passages indexed.", "",
+            f"{where}; {meta['passages_indexed']} passages indexed.", "",
             "| Test | Question | Expected evidence retrieved | Answer (first sentence) | Citation check | Time | Assessment |",
             "|---|---|---|---|---|---|---|"]
     for r in data["ask"]:
@@ -47,6 +49,8 @@ def eval_table(root: Path, label: str) -> str:
         verdict = (assess.get(t["id"]) or "pending review").split(".")[0]
         rows.append(f"| [{t['id']}](evidence/{label}/ask/{t['id']}.md) | {t['question']} | {found} | {first} | "
                     f"{r['checks']['status']} | {r['timings'].get('total_s')} s | {verdict} |")
+    if not data["mode_checks"]:
+        return "\n".join(rows)
     rows += ["", "| Check | Result | Assessment |", "|---|---|---|"]
     for m in data["mode_checks"]:
         c = m["check"]
@@ -152,6 +156,7 @@ def main() -> int:
     readme_path = root / "README.md"
     text = readme_path.read_text()
     text = block(text, "eval", eval_table(root, args.eval_label))
+    text = block(text, "online", eval_table(root, "online"))
     text = block(text, "metrics", metrics_table(root, args.metrics_label))
     text = block(text, "vault", vault_table(root))
     readme_path.write_text(text)

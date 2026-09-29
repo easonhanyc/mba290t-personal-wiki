@@ -177,6 +177,14 @@ CAPABILITIES = """- Talk things through with you: brainstorm, plan, draft and re
   messages or take actions outside this terminal, or know facts about you that are not in the notes or
   this conversation."""
 
+# Where Wren says it runs; filled into persona.md per mode. The local wording (line break included) is
+# exactly what the offline run used.
+RUNTIME = {
+    "local": "running entirely on his laptop as a small local\nmodel",
+    "online": "running in this session as hosted Gemma on Google's servers (online mode, selected with\n"
+              "--mode online), so this conversation is sent to Google",
+}
+
 _CASUAL = re.compile(
     r"^\s*(hi|hello|hey|thanks|thank you|ok|okay|cool|great|good (morning|afternoon|evening))\b"
     r"|what can (you|we|i) do|what can you help|help me with\?|who are you|what are you|how do(es)? (this|you) work"
@@ -224,7 +232,8 @@ class ChatSession:
         self.index = index
         self.history: list[dict] = []
         self.last: ChatTurn | None = None
-        self.system = instructions("persona.md").replace("{capabilities}", CAPABILITIES)
+        self.system = (instructions("persona.md").replace("{capabilities}", CAPABILITIES)
+                       .replace("{runtime}", RUNTIME[self.model.mode]))
         self.titles = [n.title for n in vault.all_notes(self.settings)]
         self.log_path = _runs() / f"chat-{_stamp()}.jsonl"
         self.turns = 0

@@ -1,0 +1,59 @@
+── wiki chat · gemma-4-26b-a4b-it · ONLINE · https://generativelanguage.googleapis.com/v1beta/models ──
+Wren here, your chief of staff. Ask me anything, or type /help. /exit to quit.
+
+you › Draft a short plan for my week: I need to finish Assignment 4 and prep for PM internship applications.
+  (no notes lookup: drafting/planning from what you said: no personal facts needed)
+
+Wren › Since I don't have your specific deadlines or the scope of Assignment 4 in my notes yet, I've drafted a high-level "sprint" structure. This assumes you want to knock out the heavy academic lifting early so you can focus on the high-stakes applications later in the week.
+
+### Weekly Sprint Plan
+
+**Mon – Tue: The Deep Work Phase (Assignment 4)**
+*   **Goal:** Get a solid draft finished.
+*   **Focus:** Block out 3-4 hour chunks of uninterrupted time. 
+*   **Milestone:** Aim to have a "messy first draft" by Tuesday night so you aren't staring at a blank screen on Wednesday.
+
+**Wed: The Pivot & Review**
+*   **Morning:** Final polish/editing on Assignment 4. Submit it.
+*   **Afternoon:** Low-energy PM prep (e.g., updating your master list of target companies or cleaning up your LinkedIn profile).
+
+**Thu – Fri: The PM Application Push**
+*   **Goal:** Quality over quantity.
+*   **Focus:** 
+    *   Tailoring your resume for 2-3 specific roles.
+    *   Drafting/customizing cover letters or "Why us?" blurbs.
+    *   Reviewing common PM interview frameworks (product sense, execution, etc.) for 1 hour each morning.
+
+**Weekend: Buffer & Networking**
+*   Catch up on anything that spilled over.
+*   Reach out to one or two people in your network for coffee chats/referrals.
+
+***
+
+**Next step:** If you give me the specific deadline for Assignment 4 or tell me which companies you're targeting, I can tighten this up into a daily schedule.
+
+  8.3s
+you › make that shorter
+  (no notes lookup: casual, capability or edit request: answered from the conversation)
+
+Wren › Here is the condensed version:
+
+**Mon–Tue: Assignment 4 Focus**
+*   Deep work blocks to finish a solid draft.
+*   Goal: Submit by Wednesday morning.
+
+**Wed: Transition Day**
+*   AM: Final polish and submission.
+*   PM: Low-lift PM prep (company research/list building).
+
+**Thu–Fri: PM Application Sprint**
+*   Targeted applications (tailored resumes/cover letters).
+*   Daily 1-hour PM interview prep (Product Sense/Execution).
+
+**Weekend: Buffer & Networking**
+*   Catch up on spillover and reach out for referrals.
+
+**Next step:** Give me your Assignment 4 deadline and I'll fix the timeline.
+
+  3.8s
+  chat log: /Users/easonhan/Desktop/研一上/MBA 290T Fundamentals of Agentic AI/personal-wiki/runs/chat-20260928-195456-364.jsonl

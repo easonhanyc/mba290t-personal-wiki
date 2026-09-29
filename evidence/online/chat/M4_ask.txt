@@ -1,0 +1,15 @@
+── wiki ask · gemma-4-26b-a4b-it · online (HOSTED: prompt and passages sent to Google) ──
+
+Insufficient evidence: The provided documents do not contain information regarding the user's favorite programming language.
+
+Sources
+  [S1] raw/course/syllabus.html:658-659 › MBA 290T: Fundamental of Agentic AI › What Each Class Covers
+  [S2] raw/course/syllabus.html:442-443 › MBA 290T: Fundamental of Agentic AI › Prerequisites
+  [S3] raw/course-projects/custom-llm/README.md:1844-1864 › Building a Custom LLM › 15. Repository map
+  [S4] raw/course-projects/custom-llm/README.md:1011-1015 › Building a Custom LLM › 7. The 48 fixed language evals: all ten result sets › By group
+  [S5] wiki/Concepts/Deep Learning.md:31-33 › Deep Learning › Related notes  (wiki note)
+  [S6] raw/course-projects/custom-llm/README.md:976-989 › Building a Custom LLM › 7. The 48 fixed language evals: all ten result sets
+  * = cited in the answer
+
+Citation check: insufficient-evidence
+Retrieval: hybrid (BM25 + EmbeddingGemma, reciprocal-rank fusion). Time: 1.3s (retrieval 0.07s). Saved: runs/ask-20260928-195513-308.json

@@ -368,9 +368,12 @@ people I meet, what stops one user from seeing someone else's list?"* never retr
 answer in full ("Three independent mechanisms enforce it…"). Among the 520 indexed passages it ranks 80th by BM25
 and 19th by vector similarity, because it is written in the source's vocabulary (JWT, `user_id`, policies) while the
 question uses none of it. Gemma
-did the right thing with what it was given: every claim in its answer is supported, and it explained Row Level
-Security, but it could not mention the other two mechanisms it never saw. A fluent, correct and cited answer can
-still be incomplete, and only the retrieval check makes that visible. **Improvement I would try:** retrieve at two
+did the right thing with most of what it was given: every claim in its answer is supported and it explained Row
+Level Security, but it never saw the first mechanism, the database assigning `user_id`. (The third, the app's 401
+checks, was at the end of one passage; the answer left it out, and the source itself calls it "not what makes the
+data private".) Hosted Gemma 4 26B, given the same six passages, left out the same two (§9), so a larger model
+does not close this gap; retrieval would. A fluent, correct and cited answer can still be incomplete, and only the
+retrieval check makes that visible. **Improvement I would try:** retrieve at two
 levels. First match the question to wiki notes (searching notes only, *Secure Networking Tracker* already ranks 2nd,
 behind *Allowlist*, which is also about who may see which records), then search only within those notes' sources.
 The notes would become an index into the originals, which is what they are for; whether that recovers the missing
@@ -399,9 +402,34 @@ not fit on this laptop.
 - Data sent to Google: the instruction file for the mode, the retrieved passages and the question (ask), or
   the persona, recent conversation and any retrieved notes (chat). Retrieval, the index and the vault stay local.
 - Online results are labelled `online` in every header and record, and kept apart from the offline evidence.
-- **Status: implemented but not exercised for this submission** (no API key was used). `./scripts/online_check.sh`
-  runs the four ask tests online into `evidence/online/` once a key is exported. Nothing in the required local
-  workflow depends on it.
+- Nothing in the required local workflow depends on it; the offline demonstration never touched it.
+
+**Tested on 2026-09-28** with Eason's own key, which the harness reads from `$GEMINI_API_KEY` and never prints, logs
+or saves. `./scripts/online_check.sh` ran the four ask tests through the same `harness.ask` code and the same local
+retrieval ([cards](evidence/online/summary.md)):
+
+<!-- BEGIN:online -->
+Run `online` at 2026-09-28T19:52:29; internet **ONLINE**; model `gemma-4-26b-a4b-it` (hosted: Gemini API (Google AI Studio) — retrieval and embeddings still local); 520 passages indexed.
+
+| Test | Question | Expected evidence retrieved | Answer (first sentence) | Citation check | Time | Assessment |
+|---|---|---|---|---|---|---|
+| [T1](evidence/online/ask/T1.md) | What share of the final grade is attendance, and how many classes can be missed without penalty? | E1 yes (S1); E2 yes (S2) | Attendance is worth 20% of the final grade [S1][S2][S3][S5]. | ok | 1.37 s | Pass |
+| [T2](evidence/online/ask/T2.md) | In the app I built to track people I meet, what stops one user from seeing someone else's list? | E1 no; E2 yes (S2) | Ownership is enforced by Postgres through Row Level Security (RLS), which ensures that every contact belongs to exactly one account [S1][S2]. | ok | 3.23 s | Pass, but incomplete |
+| [T3](evidence/online/ask/T3.md) | What was my job title at Amazon Web Services, and by how much did the Action Hub cut sellers' time-to-insight? | E1 yes (S5); E2 yes (S1) | Your job title at Amazon Web Services was Business Intelligence Engineer — Global Sales Strategy & Analytics [S3][S5]. | ok | 1.59 s | Pass |
+| [T4](evidence/online/ask/T4.md) | What grade did I receive on the Pac-Man assignment? | n/a | Insufficient evidence: The provided documents do not contain information regarding the grade received on the Ms. Pac-Man assignment. | insufficient-evidence | 1.11 s | Pass |
+<!-- END:online -->
+
+What the comparison shows:
+
+- **Same evidence, same verdicts.** For every test, retrieval handed both models the identical six passages, so the
+  only difference is the model. Hosted 26B gave the same results as local E4B: T1, T3 and T4 pass, and T2 is correct
+  but incomplete in the same way (§8).
+- **Speed.** 1.1–3.2 s per answer online (one run each, network included), against the local model's 19 s median
+  (§2.4). Chat replies took 3–10 s.
+- **One bug only online mode could expose** ([chat checks](evidence/online/chat_checks.md)). The persona told
+  every model it ran "entirely on his laptop", so hosted Wren said *"I don't have internet access"* while running
+  on Google's servers. That sentence now depends on the mode; the local wording is unchanged byte for byte. Re-run
+  after the fix, with the first transcript kept (fix 13).
 
 ## 10. Reproduce the checks
 

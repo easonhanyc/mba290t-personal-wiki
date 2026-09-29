@@ -1,0 +1,12 @@
+── wiki chat · gemma-4-26b-a4b-it · ONLINE · https://generativelanguage.googleapis.com/v1beta/models ──
+Wren here, your chief of staff. Ask me anything, or type /help. /exit to quit.
+
+you › By the way, my favorite programming language is Rust.
+  (no notes lookup: model router decided no notes needed)
+
+Wren › Noted. I'll keep that in mind for whenever we're drafting technical specs or looking at code snippets. 
+
+Since you're into Rust, let me know if you want to use it as a framework for any of your upcoming projects or if you just want me to keep the syntax suggestions memory-efficient and type-safe.
+
+  3.0s
+  chat log: /Users/easonhan/Desktop/研一上/MBA 290T Fundamentals of Agentic AI/personal-wiki/runs/chat-20260928-195508-728.jsonl

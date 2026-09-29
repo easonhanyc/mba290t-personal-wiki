@@ -1,0 +1,58 @@
+── wiki chat · gemma-4-26b-a4b-it · ONLINE · https://generativelanguage.googleapis.com/v1beta/models ──
+Wren here, your chief of staff. Ask me anything, or type /help. /exit to quit.
+
+you › what can you help me with?
+  (no notes lookup: casual, capability or edit request: answered from the conversation)
+
+Wren › Think of me as your digital Chief of Staff. Since I live on your laptop, I'm here to help you manage the chaos of grad school and your various projects without the fluff.
+
+Here is how we can work together:
+
+**1. Knowledge Management**
+I can tap into your wiki to find specific details about your projects, schoolwork, or MBA 290T. 
+*   Use `/notes <topic>` to see what I know.
+*   Use `wiki ask "question"` if you want a factual answer pulled directly from your files.
+
+**2. Brainstorming & Drafting**
+If you're staring at a blank page for a paper or a project proposal, let's talk it through. I can:
+*   Draft emails, outlines, or reports.
+*   Rewrite existing text to change the tone or tighten the logic.
+*   Play devil's advocate on your ideas to help you refine them.
+
+**3. Organization & Planning**
+I can help you structure your thoughts into actionable plans. If you have a messy list of tasks or a vague goal, I can turn it into a structured roadmap.
+
+**A few ground rules:**
+*   I don't have internet access, so I only know what's in your notes or what you tell me.
+*   If I don't know something about your life, I'll tell you rather than guessing.
+*   I can save our best outputs to your `drafts/` folder using `/save`.
+
+Where should we start? If you have a specific project on your mind, tell me about it, or try `/notes MBA 290T` to see what's already in the system.
+
+  8.2s
+you › what can we do?
+  (no notes lookup: casual, capability or edit request: answered from the conversation)
+
+Wren › Since I'm running locally, we can get hands-on with whatever is currently taking up your mental bandwidth. 
+
+Here are a few ways we can spend this session:
+
+**If you're feeling overwhelmed by school:**
+* **Synthesize notes:** Give me a topic, and I'll pull from your wiki to summarize what you've already captured.
+* **Prep for class:** We can brainstorm discussion points or outline a response to a reading.
+* **Structure assignments:** We can turn a vague prompt into a concrete project timeline.
+
+**If you're working on projects:**
+* **Refine ideas:** Pitch me a concept, and I'll poke holes in it or help you expand the logic.
+* **Drafting:** I can write the first version of a memo, an email, or a project brief so you aren't starting from scratch.
+* **Cleanup:** Send me a messy brain dump, and I'll turn it into a structured list of action items.
+
+**If you just want to organize:**
+* **Audit your notes:** We can check if your current documentation for a specific project is missing anything crucial.
+* **Plan your week:** Tell me what's on your plate, and I'll help you prioritize.
+
+**Want to test the waters?** 
+Try `/notes` on something you're currently studying, or just tell me: *"I have this idea for [X], help me outline it."*
+
+  7.0s
+  chat log: /Users/easonhan/Desktop/研一上/MBA 290T Fundamentals of Agentic AI/personal-wiki/runs/chat-20260928-195440-862.jsonl

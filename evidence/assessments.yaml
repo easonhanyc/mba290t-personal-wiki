@@ -13,9 +13,11 @@ offline:
     Pass, but incomplete. Every claim is supported: Postgres Row Level Security [S1][S2]; the browser only calls the
     app's /api routes, which mint a short-lived JWT that Postgres reads [S4, verbatim]; a query for all contacts cannot
     return another user's rows [S4]; the update policy needs USING and WITH CHECK so user_id cannot be changed [S5][S6].
-    But the expected passage that lists all three ownership mechanisms (README, Authentication and ownership) was not
-    retrieved for this reworded question, so the answer covers Row Level Security and omits the other two layers (the
-    database assigning user_id, and the application's 401 checks). This is a retrieval miss, not an invented claim.
+    But it covers only Row Level Security, not the other two ownership mechanisms. The database assigning user_id is in
+    no retrieved passage: the README passage that lists all three mechanisms (Authentication and ownership) was not
+    retrieved for this reworded question. The application's 401 checks are at the end of S3, but the answer leaves them
+    out (the source itself says they are "not what makes the data private"). Mostly a retrieval miss, partly an
+    omission; nothing is invented. (Wording corrected on 2026-09-28: it first called the whole gap a retrieval miss.)
   T3: >-
     Pass. Correct, fully supported, and it uses both sources. The job title "Business Intelligence Engineer — Global
     Sales Strategy & Analytics" comes from the original experience entry [S5] (and its reviewed note [S3]); "70% for
@@ -38,6 +40,24 @@ offline:
   M4: >-
     Pass. The chat acknowledged "my favorite programming language is Rust" without a lookup; the separate ask answered
     "Insufficient evidence", and the claim does not appear anywhere in the ask prompt.
+
+online:
+  T1: >-
+    Pass. Correct and fully supported, from the same six passages as the offline run. All four cited passages state
+    the 20%: the original Attendance [S1] and Grading [S2] sections and two blocks of the reviewed syllabus note [S3]
+    [S5]. "One session without penalty" is in S1 and S2.
+  T2: >-
+    Pass, but incomplete. Same gap as the local model, on the same passages. Every claim is supported: Row Level
+    Security with each contact owned by exactly one account [S1][S2]; Postgres reads the user id from a short-lived
+    JWT so a query for all contacts cannot return another user's rows [S4]; PATCH/DELETE on someone else's contact
+    returns 404, not 403, because the row is invisible under RLS [S3][S6]. Like the local answer, it omits the database
+    assigning user_id (not retrieved) and the 401 checks (in S3). It swaps the local answer's USING/WITH CHECK point
+    for the 404 consequence.
+  T3: >-
+    Pass. Correct, fully supported, and it uses both sources: the job title from the original experience entry [S5] and
+    its note [S3]; "70%" from the Action Hub page's front matter [S1] and outcome table [S6] and its note [S4].
+  T4: >-
+    Pass. The expected refusal, without guessing, from the same Pac-Man passages the local model saw.
 
 local-dryrun:
   T1: Pass. Same answer as the offline run; both expected passages retrieved at ranks 1 and 2.

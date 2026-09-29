@@ -1,0 +1,42 @@
+── wiki chat · gemma-4-26b-a4b-it · ONLINE · https://generativelanguage.googleapis.com/v1beta/models ──
+Wren here, your chief of staff. Ask me anything, or type /help. /exit to quit.
+
+you › what can you help me with?
+  (no notes lookup: casual, capability or edit request: answered from the conversation)
+
+Wren › Think of me as your digital chief of staff. I’m here to help you manage the mental load of grad school and your various projects so you can focus on the actual work.
+
+Specifically, I can help with:
+
+*   **Synthesizing your notes:** If you need to connect the dots between your MBA 290T coursework and your other projects, I can pull from your wiki and summarize the relevant bits.
+*   **Drafting and refining:** Whether it's an email, a research memo, or a project proposal, I can brainstorm ideas with you or polish your drafts.
+*   **Planning and organization:** We can map out study schedules, break down complex project milestones, or prep for upcoming meetings.
+*   **Information retrieval:** Instead of digging through your own files, you can ask me to find specific details from your notes using `/notes <topic>` or `wiki ask`.
+
+**One concrete next step:**
+If you have a specific project or a class assignment weighing on you right now, tell me a bit about it. We can start by outlining what needs to get done.
+
+  5.4s
+you › what can we do?
+  (no notes lookup: casual, capability or edit request: answered from the conversation)
+
+Wren › Since I'm essentially your sounding board and organizational layer, "what we can do" depends on what's currently sitting on your desk. 
+
+Here are three ways we can dive in right now:
+
+**1. The "Brain Dump" (Planning)**
+If you're feeling overwhelmed by a specific class or project, just list everything you're thinking about. I'll organize it into a structured plan, identify dependencies, and help you figure out what to tackle first.
+
+**2. The "Deep Dive" (Research & Synthesis)**
+If you're starting a new assignment or looking for connections in your work, we can use your wiki. 
+*   Use `/notes <topic>` to see what you've already documented.
+*   Use `wiki ask "question"` to query your existing knowledge base.
+*   We can then brainstorm how that existing info applies to your current problem.
+
+**3. The "Drafting Session" (Execution)**
+If you have the ideas but hate the blank page, give me the "ugly version." Tell me the points you want to make, and I'll turn it into a professional memo, an email, or a structured outline.
+
+**To get us moving, tell me: are you in "organizing mode" (trying to figure out what to do) or "execution mode" (trying to actually get something done)?**
+
+  9.8s
+  chat log: /Users/easonhan/Desktop/研一上/MBA 290T Fundamentals of Agentic AI/personal-wiki/runs/chat-20260928-195623-970.jsonl

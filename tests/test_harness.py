@@ -43,6 +43,16 @@ def test_ask_has_no_history_parameter_and_sends_only_rules_and_evidence(project)
     assert saved["messages_sent_to_model"] == sent and saved["execution"] == "local"
 
 
+def test_persona_states_where_the_model_runs(project):
+    local = harness.ChatSession(model=FakeModel(), index=_small_index(project)).system
+    online_model = FakeModel()
+    online_model.mode = "online"
+    online = harness.ChatSession(model=online_model, index=_small_index(project)).system
+    assert "on his laptop" in local and "Google" not in local
+    assert "sent to Google" in online and "on his laptop" not in online
+    assert "{runtime}" not in local + online
+
+
 def test_chat_claim_does_not_reach_ask(project):
     idx = _small_index(project)
     chat_model = FakeModel(lambda m, s: "Noted!" if s is None else {"needs_notes": False, "query": ""})

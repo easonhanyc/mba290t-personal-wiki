@@ -201,9 +201,12 @@ def ask_card(res: dict, meta: dict, assessment: str | None) -> str:
               assessment or "_Pending manual review._", "",
               "## 5. Timing", ""]
     tm = res["timings"]
-    lines.append(f"Total {tm.get('total_s')} s = retrieval {tm.get('retrieval_s')} s + model {tm.get('model_s', 0)} s "
-                 f"(prompt {tm.get('llama_prompt_n', '-')} tokens at {round(tm.get('llama_prompt_per_second', 0), 1)} tok/s; "
-                 f"answer {tm.get('llama_predicted_n', '-')} tokens at {round(tm.get('llama_predicted_per_second', 0), 1)} tok/s).")
+    total = f"Total {tm.get('total_s')} s = retrieval {tm.get('retrieval_s')} s + model {tm.get('model_s', 0)} s"
+    if "llama_prompt_n" in tm:
+        lines.append(total + f" (prompt {tm['llama_prompt_n']} tokens at {round(tm['llama_prompt_per_second'], 1)} tok/s; "
+                     f"answer {tm['llama_predicted_n']} tokens at {round(tm['llama_predicted_per_second'], 1)} tok/s).")
+    else:
+        lines.append(total + " (hosted model: includes the network round trip; no token timings reported).")
     lines += ["", f"Full record including the exact messages sent to the model: [`{res['run_file']}`](../../../{res['run_file']})", ""]
     return "\n".join(lines)
 
@@ -266,8 +269,13 @@ def write_cards(label: str) -> None:
     meta = data["meta"]
     summary = [f"# Evaluation run `{label}`", "",
                f"{meta['time']} · internet **{meta['network']['internet']}** · {meta['device']['os']} · {meta['device']['chip']} · "
-               f"{meta['device']['memory_gb']} GB · model `{meta['model']['id']}` (sha256 match: {meta['model']['sha256_match']}) · "
-               f"{meta['model']['runtime']}", "", *rows, "", "Mode checks: [mode_checks.md](mode_checks.md)", ""]
+               f"{meta['device']['memory_gb']} GB · model `{meta['model']['id']}` "
+               f"{'(sha256 match: ' + str(meta['model']['sha256_match']) + ')' if meta.get('execution', 'local') == 'local' else '(hosted)'} · "
+               f"{meta['model']['runtime']}", "", *rows, ""]
+    if data["mode_checks"]:
+        summary += ["Mode checks: [mode_checks.md](mode_checks.md)", ""]
+    elif (base / "chat_checks.md").exists():
+        summary += ["Chat checks (run separately, assessed by hand): [chat_checks.md](chat_checks.md)", ""]
     (base / "summary.md").write_text("\n".join(summary))
     print(f"cards written to {config.rel(base)}")
 

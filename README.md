@@ -2,7 +2,7 @@
 
 MBA 290T · Class 5 · Assignment 4 — Eason Han
 
-## Overview for graders
+## Overview
 
 **What it is.** My own command-line tool and harness (about 3,000 lines of Python in [`src/wiki/`](src/wiki/), 26 unit
 tests) that turns my own material into an Obsidian wiki and answers from it with **Gemma 4 E4B running on my

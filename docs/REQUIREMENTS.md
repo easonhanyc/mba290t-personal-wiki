@@ -60,13 +60,13 @@ where this project meets it; the README links the evidence for each.
 | T7 | Inspect retrieval first, then the answer; record missing evidence, irrelevant retrieval, invented details, unsupported citations as failures | `evidence/retrieval/`, card assessments |
 | T8 | Mode checks: casual chat, conversational follow-up, raw search, ask not using chat claims | `evidence/offline-2/mode_checks.md` (M1–M4, plus M5: a draft from notes stays traceable) |
 | T9 | If a setting changes after a failure: document it, rerun, keep the earlier result | README › Evidence and change log |
-| T10 | Measure memory use and response time for local ingestion and an answer | `evidence/metrics/` |
+| T10 | Measure memory use and response time for local ingestion and an answer | `evidence/metrics/` (answer: `local.json`; ingestion: `ingest-memory.json`), README › 2.4 |
 
 ## Offline demonstration
 
 | # | Requirement | Where it is met |
 |---|---|---|
-| O1 | Download weights, packages, tokenizer, embedding model while online; confirm stored locally | `config/models.lock.json` (sha256 verified against Hugging Face) |
+| O1 | Download weights, packages, tokenizer, embedding model while online; confirm stored locally | `config/models.lock.json` (sha256 verified against Hugging Face); the tokenizers are inside the GGUF files |
 | O2 | Disconnect internet, restart the CLI in local mode, ingest a local source, run all four ask tests and the chat/search checks | `scripts/offline_demo.sh`, run twice: `evidence/offline/` and, after fixes 14–17, `evidence/offline-2/` |
 | O3 | No hosted embeddings, remote search or cloud fallback | local endpoints enforced by `llm.assert_local` |
 | O4 | Terminal recording or screenshots + saved evidence cards | transcripts in `evidence/offline/` and `evidence/offline-2/`; 11 Terminal screenshots of the second run in `evidence/offline-2/screenshots/`; evidence cards in both |
@@ -97,3 +97,14 @@ Redact private information.
 - Open the repository signed out and confirm README, code, wiki and evidence links work.
 - Do not commit model weights or credentials. Give the official download source and exact model identifier.
 - Scope: model training, MCP, agents and public deployment are not required. A notebook or web UI is optional.
+
+## Submission status (checked 2026-09-28)
+
+| Checklist item | Status |
+|---|---|
+| 1. Own public repository with code, README, shareable wiki sources and pages, test evidence | https://github.com/easonhanyc/mba290t-personal-wiki (public; sources are my own public site and repos and the public syllabus page) |
+| 2. Follow the documented setup once more; downloads complete before going offline | fresh-clone run of the README steps: `evidence/setup-check-20260928-215251.txt`; model checksums in the same log |
+| 3. Open the repository signed out; README, code, wiki and evidence links work | anonymous clone and HTTP checks of every README link target and image (all 200) |
+| 4. No model weights or credentials committed; official download source and exact identifier given | no `.gguf` or keys in the repository (scanned); README › 2.2–2.3 |
+| 5. Submit through the course portal | Eason submits the URL |
+

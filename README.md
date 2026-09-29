@@ -2,23 +2,70 @@
 
 MBA 290T · Class 5 · Assignment 4 — Eason Han
 
-A command-line personal wiki that runs **entirely on my laptop**. My own material (portfolio write-ups,
-three MBA 290T project reports and the course syllabus) is kept unchanged in an Obsidian vault; a local
-**Gemma 4 E4B** model turns it into linked, human-readable wiki notes; and my own harness answers from it in
-three modes: **chat** (a personal assistant with a voice and memory of the conversation), **ask** (a neutral,
-cited answer or an explicit "insufficient evidence"), and **search** (the original passages, no model).
-The required demonstration (a fresh ingest, the four ask tests and the chat/search checks) ran twice on a 16 GB
-MacBook Air with Wi-Fi switched off, the second time after fixing what the first run showed: see [§7](#7-evidence).
+## Overview for graders
+
+**What it is.** My own command-line tool and harness (about 3,000 lines of Python in [`src/wiki/`](src/wiki/), 26 unit
+tests) that turns my own material into an Obsidian wiki and answers from it with **Gemma 4 E4B running on my
+laptop**. The sources are 26 unchanged originals: my portfolio write-ups, three MBA 290T project reports and the course
+syllabus. Local Gemma wrote 25 linked notes from them, and I reviewed every note against its sources. The harness offers
+three modes: **chat** (Wren, a personal assistant that remembers the conversation and looks up notes only when needed),
+**ask** (a neutral, cited answer, or "Insufficient evidence") and **search** (original passages, no model).
+llama.cpp is used only to run the model; retrieval, prompts, routing, citation checks and logging are my code.
+
+**Model and device.** `google/gemma-4-E4B-it-qat-q4_0-gguf` (Gemma 4 E4B, instruction-tuned, 4-bit QAT Q4_0) in
+llama.cpp `llama-server` 0.5.0 on a MacBook Air M2 with 16 GB unified memory. Measured: 5.3–5.8 GB resident; answers in 8–30 s
+(median 19.0 s over 12 timed runs); one new source ingested offline in 50 s and 3.4 min in the two offline runs. Retrieval is my BM25 plus EmbeddingGemma-300M vectors,
+all on `127.0.0.1`.
+
+**What the evidence shows**, by grading component:
+
+| Component | What the brief asks for | Where it is | Result |
+|---|---|---|---|
+| Deliverable quality (4) | Readable harness code | [`src/wiki/`](src/wiki/): `cli` → `harness` → `retrieval` / `llm`; one command traced in [§4](#4-architecture) | modular, 26 tests pass |
+| | Wiki usable in Obsidian: short names, topic navigation, readable graph, meaningful links | [`vault/`](vault/), [§6](#6-the-wiki-in-obsidian), 16 screenshots | 25 notes in 4 folders, grouped `index.md`, graph filtered to `path:wiki/`, 436 links, 0 broken |
+| | Traceable sources | [Source Catalog](vault/Source%20Catalog.md); every fact links to the section it came from | all 26 originals byte-identical to their upstream copies (25 at pinned repo commits, the syllabus to the live page; re-checked 2026-09-28) |
+| | Clear setup | [§2.3](#23-install-exact-commands) exact commands | re-run from a fresh clone ([log](evidence/setup-check-20260928-215251.txt)) |
+| | How my data reaches the model | [§4](#4-architecture), [§5](#5-design-choices) | chunking, hybrid retrieval, token budgets, prompts |
+| Testing & evaluation (3) | 3 answerable + 1 unsupported ask test with expected evidence, retrieved passages, answers, checked citations | [§7](#7-evidence), [cards](evidence/offline-2/summary.md) | T1, T3, T4 pass; T2 passes but is incomplete (explained) |
+| | Retrieval checked before answers | [`evidence/retrieval/`](evidence/retrieval/) | the T2 miss was found this way and fixed (fix 14) |
+| | Chat/search mode checks | [mode checks](evidence/offline-2/mode_checks.md) | M2–M5 pass; M1 partly failed on a stray tag, fixed (fix 16) |
+| | Proof of offline execution | [§7](#7-evidence): 2 transcripts, 11 screenshots | Wi-Fi off, no route, HTTPS failing, before and after |
+| | Failures explained honestly | [changes.md](evidence/changes.md) (17 fixes), [§8](#8-reflection) | every earlier result kept |
+| Working result (3) | Local Gemma, ingestion, chat, ask and search through my harness with no internet | [second offline run](#the-second-offline-run) | a new source ingested offline (50 s), all tests and checks run, plus a live chat |
+
+**Run it** (after the [setup](#23-install-exact-commands); everything runs on `127.0.0.1`):
+
+```bash
+wiki serve start                                   # start local Gemma and EmbeddingGemma
+wiki --help                                        # commands, configuration, inputs
+wiki search "row level security"                   # original passages, no model
+wiki ask "What share of the final grade is attendance?"
+wiki chat                                          # Wren; try "what can you help me with?"
+wiki ingest path/to/new-note.md                    # add a source; re-ingesting creates no duplicates
+```
+
+**Online mode** (optional extension, off by default): the same CLI with `--mode online`, which sends the prompt to
+hosted Gemma 4 26B through the Gemini API. There is no website; a web interface is optional in the brief.
+`export GEMINI_API_KEY=…` then `wiki ask "…" --mode online` or `wiki chat --mode online`. Details and tested
+results: [§9](#9-optional-online-mode-extension), [`evidence/online/`](evidence/online/summary.md).
+
+**Known limitations, stated up front:**
+- T2 now retrieves every passage it needs, but E4B still leaves out two of the three mechanisms they list.
+- M1's stray `[N1]` tag was fixed after the second offline run and re-checked with the internet on.
+- The note sections that list related notes compete with real evidence in retrieval.
+
+All three are in [§8](#8-reflection).
 
 | Start here | |
 |---|---|
 | CLI and harness code | [`src/wiki/`](src/wiki/) — entry point [`cli.py`](src/wiki/cli.py), core [`harness.py`](src/wiki/harness.py) |
 | The wiki (open this folder in Obsidian) | [`vault/`](vault/) — landing page [`vault/index.md`](vault/index.md), [`Source Catalog`](vault/Source%20Catalog.md) |
-| Setup and commands | [Setup](#2-setup-and-device) · [Commands](#3-commands) |
+| Setup and commands | [Setup](#2-setup-and-device) · [Commands](#3-commands) · setup re-run from a fresh clone, with error messages: [log](evidence/setup-check-20260928-215251.txt) |
 | Four ask-mode evidence cards (second offline run) | [T1](evidence/offline-2/ask/T1.md) · [T2](evidence/offline-2/ask/T2.md) · [T3](evidence/offline-2/ask/T3.md) · [T4](evidence/offline-2/ask/T4.md) · [summary](evidence/offline-2/summary.md) — first offline run, kept: [summary](evidence/offline/summary.md) |
 | Chat/search mode checks (second offline run) | [evidence/offline-2/mode_checks.md](evidence/offline-2/mode_checks.md) — first run: [evidence/offline/mode_checks.md](evidence/offline/mode_checks.md) |
 | Offline demonstration | Second run: [transcript](evidence/offline-2/transcript-20260928-210530.txt) and [11 screenshots](#the-second-offline-run) (Wi-Fi off, 21:05–21:22). First run: [transcript](evidence/offline/transcript-20260928-140540.txt) (14:05–15:06) |
 | Obsidian screenshots | [§6](#6-the-wiki-in-obsidian) · [`evidence/screenshots/obsidian-2026-09-28/`](evidence/screenshots/obsidian-2026-09-28/) |
+| Optional online mode | [§9](#9-optional-online-mode-extension) · [`evidence/online/`](evidence/online/summary.md) (labelled separately from the offline evidence) |
 | What went wrong and what I changed | [evidence/changes.md](evidence/changes.md) · wiki review log [evidence/wiki_review.md](evidence/wiki_review.md) |
 | Measured memory and response time | [§2.4](#24-measured-memory-and-response-time) |
 | Requirement-by-requirement checklist | [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) |
@@ -38,6 +85,9 @@ received. The scope is small enough to verify by hand.
 | Personal website: artifacts | `website/artifacts/prioritization-framework.md`, held back and ingested during the second offline run | same repo and commit |
 | MBA 290T course | `course/syllabus.html` | [course site syllabus](https://haas-ai-classes-fall-26.vercel.app/syllabus.html), captured 2026-09-26 (lecture slides deliberately excluded) |
 | MBA 290T projects | Pac-Man DQN (README + methodology), Custom LLM (README), Secure Networking Tracker (README + how-it-works) | my public repos at pinned commits |
+
+All sources are shareable: my own website and repositories (all public) and the course's public syllabus page;
+the instructors' lecture slides were deliberately left out.
 
 **How originals connect to generated pages.** Each original is stored byte-for-byte and listed with its
 origin and sha256 in [`vault/Source Catalog.md`](vault/Source%20Catalog.md) (machine copy:
@@ -60,19 +110,25 @@ file and section it came from, e.g. `[[raw/website/projects/pacman-dqn#1. The he
 
 ### 2.2 Choosing the Gemma model
 
-"B" is billions of parameters. Google's Gemma 4 memory table (weights only, Q4_0 4-bit):
+"B" is billions of parameters. From the official Gemma documentation's
+[memory table](https://ai.google.dev/gemma/docs/core#gemma-4-inference-memory-requirements) (weights only, Q4_0 4-bit):
 
 | Model | Load size at Q4_0 | What the name means | On this Mac |
 |---|---|---|---|
-| E2B | ~2.9 GB | "Effective" 2B: extra per-layer embedding tables make it larger than 2B in memory | fits easily; weaker at writing structured notes |
+| E2B | ~2.9 GB | "Effective" 2B: extra per-layer embedding tables make it larger than 2B in memory | fits easily; not tested |
 | **E4B** | **~4.5 GB** | Effective 4B, same per-layer-embedding design | **chosen**: fits with an 8K context and the embedder |
 | 26B A4B (MoE) | ~14.4 GB | Mixture of experts: only ~4B parameters are *active* per token, but all 26B must be *loaded* | does not fit: above the ~12 GB the GPU may use, before context and apps |
 
 The MoE's active-parameter count is about compute per token, not memory: routing can pick any expert for
-any token, so every expert stays resident. I chose **E4B** because it is the largest size that leaves room
-for the context, the embedding model and my other apps on 16 GB; ingestion needs a model that reliably
-follows a JSON schema and keeps facts faithful to the source. The measured footprint (§2.4) confirms it fits.
-E2B remains the fallback if memory pressure became a problem; I did not need to test it or the 26B.
+any token, so every expert stays resident.
+
+**Why E4B.** The brief asks for the smallest model that works for the wiki. E4B is the smallest I verified: it wrote
+all 25 notes through a JSON schema (with the checks in §5), answered the four tests as assessed in §7, and peaked at
+5.8 GB on this 16 GB Mac while answering and 5.5 GB while ingesting (§2.4). I did not test E2B, so I make no claim
+that it would fail. I started with E4B because ingestion is the harder job (following a schema and keeping facts
+faithful over long sources) and E4B fits with room to spare; E2B is the documented fallback if memory runs short. The
+26B does not fit here and runs only in the optional online mode. The GGUF files contain their own tokenizers, so the
+two model files are the only downloads a model needs.
 
 **Exact model and runtime** ([`config/models.lock.json`](config/models.lock.json)):
 
@@ -144,6 +200,13 @@ Measured 2026-09-27T01:12:52 with `scripts/measure.py` ([raw](evidence/metrics/l
 | [2026-09-28T21:06:58](runs/ingest-20260928-210658-465.json) | 1 (+0 unchanged) | 2 | 0.8 min | 3,378 / 934 | **second offline demonstration, Wi-Fi off**: the held-back `prioritization-framework.md` (the note itself took 42 s) |
 | [offline transcript](evidence/offline/transcript-20260928-140540.txt) | 1 | (record overwritten, fix 12) | 3.4 min | — | **first offline demonstration, Wi-Fi off**: the held-back Kickstarter source; the note itself took 113 s, the rest was the concept and link passes |
 <!-- END:metrics -->
+
+**Memory while ingesting** ([`scripts/measure_ingest_memory.py`](scripts/measure_ingest_memory.py),
+[raw](evidence/metrics/ingest-memory.json)): with the Gemma server freshly restarted, as for the answer measurement
+(macOS pages an idle model out, so `ps` figures are only comparable right after a load),
+re-ingesting one source (41.7 s, 1 model call, on a throwaway copy of the project) took its resident memory from
+5,277 MB to a peak of **5,451 MB**. Ingesting needs no more memory than answering, because both use the same loaded
+model and the KV cache is allocated for the whole 8,192-token context at load time.
 
 The ask timings above were measured on 2026-09-27, before section openings were added (fix 14). In the second offline
 run the four CLI asks, each the first run of its prompt on a freshly restarted server, took 10.3, 13.9, 8.2 and
@@ -346,7 +409,20 @@ and the notes built from it. `wiki check` confirms every link resolves to exactl
 its file name and every note cites at least one original; re-ingesting all sources leaves every note byte-identical
 ([evidence/reingest_check.md](evidence/reingest_check.md)).
 
+**Cleaning up the generated notes.** Gemma's first titles were long and descriptive ("Amazon Web Services Role",
+"From Zero to AI Agents", "Notre Dame Business Analytics Education"), and it split one project into two notes. Before
+changing anything I backed up the generated notes ([`backups/pre-cleanup-20260927-005439/`](backups/pre-cleanup-20260927-005439/)).
+Then 18 `wiki rename` and 3 `wiki merge` commands ([cleanup log](evidence/cleanup_log.md)) renamed and merged them,
+updating incoming links, the index, the catalog's source mappings and redirects. The retrieval index was rebuilt and
+the question tests re-run ([retrieval](evidence/retrieval/with-reviewed-notes.md), [answers](evidence/local-dryrun/summary.md)), and re-ingesting every source restored no old names or duplicates
+([reingest check](evidence/reingest_check.md)). The originals were never touched.
+
 ## 7. Evidence
+
+The four questions, their expected passages and expected behaviour were written on 2026-09-26, before retrieval
+existed, in [`tests/questions.yaml`](tests/questions.yaml). That file is outside the vault and never indexed, so the
+harness cannot retrieve the answer key. Retrieval was scored on its own first ([`evidence/retrieval/`](evidence/retrieval/)),
+then each answer was judged claim by claim against the passages it cites.
 
 <!-- BEGIN:eval -->
 Run `offline-2` at 2026-09-28T21:12:24; internet **offline**; model `gemma-4-e4b-it-qat-q4_0` (file sha256 matches Hugging Face: True); 529 passages indexed.
@@ -366,6 +442,107 @@ Run `offline-2` at 2026-09-28T21:12:24; internet **offline**; model `gemma-4-e4b
 | [M4 ask ignores chat history](evidence/offline-2/mode_checks.md) | ask: "Insufficient evidence: The provided passages describe course…"; chat claim in ask prompt: False | Pass |
 | [M5 draft from notes, traceable](evidence/offline-2/mode_checks.md) | "Draft a 3-line LinkedIn post about my Ms" → notes looked up (tags: no-citations, notes listed by the harness); "make that shorter" → no lookup | Pass |
 <!-- END:eval -->
+
+**Each test in full** (second offline run): the passages Gemma received, its answer and my assessment. Click to open.
+
+<!-- BEGIN:details -->
+<details><summary><b>T1</b> (direct, one source): What share of the final grade is attendance, and how many classes can be missed without penalty?</summary>
+
+Expected: Attendance is 20% of the grade; one absence carries no penalty.
+
+| Id | Passage given to Gemma | Section | How it was retrieved | Expected evidence |
+|---|---|---|---|---|
+| S1 | `raw/course/syllabus.html:492-494` | MBA 290T: Fundamental of Agentic AI › Attendance | BM25 #1 · vector #2 | E1 |
+| S2 | `raw/course/syllabus.html:593-621` | MBA 290T: Fundamental of Agentic AI › Grading | BM25 #2 · vector #1 | E2 |
+| S3 | `wiki/Course/MBA 290T Syllabus.md:28-36` | MBA 290T Syllabus › Key facts | BM25 #4 · vector #3 |  |
+| S4 | `raw/course/syllabus.html:413-418` | MBA 290T: Fundamental of Agentic AI › Class Schedule | BM25 #5 · vector #4 |  |
+| S5 | `wiki/Course/MBA 290T Syllabus.md:21-27` | MBA 290T Syllabus › Key facts | BM25 #3 · vector #8 |  |
+| S6 | `raw/course/syllabus.html:498-536` | MBA 290T: Fundamental of Agentic AI › Graded Assignments | BM25 #7 · vector #5 |  |
+
+Gemma's answer, verbatim (citation check: **ok**):
+
+> Attendance is worth 20% of the final grade [S1][S2][S5]. Students are allowed one absence without penalty, and no explanation is required for this absence [S1][S2].
+
+**Do the cited passages support it?** Pass. The same answer as both earlier runs, from the same six passages (each one opens its section, so none was added). "20% of the final grade" is in the original Attendance [S1] and Grading [S2] sections and in the syllabus note [S5] ("Attendance is required and is worth 20% of the grade"); one absence without penalty and with no explanation required is S1 verbatim, and S2 repeats it.
+
+Full card with every passage's text: [T1](evidence/offline-2/ask/T1.md)
+
+</details>
+
+<details><summary><b>T2</b> (answerable, reworded (avoids the source's vocabulary on purpose)): In the app I built to track people I meet, what stops one user from seeing someone else's list?</summary>
+
+Expected: Ownership is enforced by Postgres Row Level Security (enabled and forced, four per-user policies), plus the database assigning user_id from the verified token, plus application-layer checks (three independent mechanisms).
+
+| Id | Passage given to Gemma | Section | How it was retrieved | Expected evidence |
+|---|---|---|---|---|
+| S1 | `raw/course-projects/secure-networking-tracker/README.md:3-5` | Secure Networking Tracker | BM25 #1 · vector #1 |  |
+| S2 | `raw/website/projects/secure-networking-tracker.md:28-30` | (introduction) | BM25 #4 · vector #2 | E2 |
+| S3 | `raw/course-projects/secure-networking-tracker/README.md:318-343` | Secure Networking Tracker › Authentication and ownership | added: opening of the section of S4 | E1 |
+| S4 | `raw/course-projects/secure-networking-tracker/README.md:345-351` | Secure Networking Tracker › Authentication and ownership | BM25 #3 · vector #3 |  |
+| S5 | `raw/course-projects/secure-networking-tracker/docs/how-it-works.md:9-9` | How this app works › 1. The one-paragraph version | BM25 #7 · vector #5 |  |
+| S6 | `raw/course-projects/secure-networking-tracker/docs/how-it-works.md:52-83` | How this app works › 3. The ownership rule › Layer 2 — Row Level Security filters every statement | added: opening of the section of S7 |  |
+| S7 | `raw/course-projects/secure-networking-tracker/docs/how-it-works.md:85-89` | How this app works › 3. The ownership rule › Layer 2 — Row Level Security filters every statement | BM25 #2 · vector #16 |  |
+| S8 | `raw/website/projects/secure-networking-tracker.md:77-88` | 2. Where the boundary actually is › The subtle one | BM25 #8 · vector #13 |  |
+
+Gemma's answer, verbatim (citation check: **ok**):
+
+> Ownership is enforced by Postgres through Row Level Security (RLS) [S1][S2]. Every contact belongs to exactly one account, and this ownership is enforced by the database [S1][S2]. Specifically, RLS policies are enabled and forced on the `contacts` table, with policies for `authenticated` users that ensure a row belongs to the user whose JWT created it, and only that user can read or change it [S3][S6]. A query for "all contacts" physically cannot return another user's rows because Postgres reads the user's ID from the JWT and applies RLS [S5].
+
+**Do the cited passages support it?** Pass; more complete than before, but still not all three mechanisms. The passage that was never retrieved before now arrives as S3, the opening of the README's Authentication and ownership section, added because its later passage S4 was retrieved (fix 14). Every claim is supported: Row Level Security, with each contact belonging to exactly one account and ownership enforced by the database [S1][S2]; RLS enabled and forced on contacts, with policies for authenticated users, so a row belongs to the user whose JWT created it and only that user can read or change it [S3][S6]; a query for all contacts cannot return another user's rows because Postgres reads the user id from the JWT [S5, verbatim]. New compared with the earlier runs: the ownership rule and RLS being enabled and forced with per-user policies. Still left out: the database assigning user_id (NOT NULL DEFAULT auth.user_id(); the API never sends it), which is in S3, and the application's 401 checks, which are in S4. Retrieval now supplies both, so the remaining gap is the model's omission, not retrieval.
+
+Full card with every passage's text: [T2](evidence/offline-2/ask/T2.md)
+
+</details>
+
+<details><summary><b>T3</b> (answerable, connects two sources): What was my job title at Amazon Web Services, and by how much did the Action Hub cut sellers' time-to-insight?</summary>
+
+Expected: Business Intelligence Engineer — Global Sales Strategy & Analytics (experience entry); the Action Hub cut time-to-insight by 70% for 10,000+ sellers (project page).
+
+| Id | Passage given to Gemma | Section | How it was retrieved | Expected evidence |
+|---|---|---|---|---|
+| S1 | `raw/website/projects/action-hub.md:1-23` | Properties | BM25 #1 · vector #2 | E2 |
+| S2 | `wiki/Projects/Action Hub.md:35-37` | Action Hub › Related notes | BM25 #2 · vector #7 |  |
+| S3 | `wiki/Experience/Amazon Web Services.md:21-26` | Amazon Web Services › Key facts | BM25 #3 · vector #6 |  |
+| S4 | `wiki/Projects/Action Hub.md:18-18` | Action Hub | BM25 #9 · vector #4 |  |
+| S5 | `raw/website/experience/amazon-web-services.md:1-14` | Properties | BM25 #6 · vector #8 | E1 |
+| S6 | `raw/website/projects/action-hub.md:24-26` | (introduction) | added: opening of the section of S7 | E2 |
+| S7 | `raw/website/projects/action-hub.md:28-33` | (introduction) | BM25 #12 · vector #3 | E2 |
+
+Gemma's answer, verbatim (citation check: **ok**):
+
+> The job title at Amazon Web Services was Business Intelligence Engineer — Global Sales Strategy & Analytics [S3][S5]. The Action Hub cut time-to-insight by 70% for over 10,000 sellers [S1][S4][S6].
+
+**Do the cited passages support it?** Pass. Correct, fully supported, and it uses both sources. The job title comes from the original experience entry [S5] and its note [S3]; "70% for over 10,000 sellers" from the Action Hub front matter [S1], its note [S4] and the page's opening summary [S6], an added section opening that states "Time-to-insight fell 70% for 10,000+ sellers".
+
+Full card with every passage's text: [T3](evidence/offline-2/ask/T3.md)
+
+</details>
+
+<details><summary><b>T4</b> (unsupported (plausible, but no source states it)): What grade did I receive on the Pac-Man assignment?</summary>
+
+Expected: The sources do not say what grade was received.
+
+| Id | Passage given to Gemma | Section | How it was retrieved | Expected evidence |
+|---|---|---|---|---|
+| S1 | `raw/course-projects/pacman-dqn/README.md:3-9` | Ms. Pac-Man DQN — Class 3 Assignment | BM25 #7 · vector #2 |  |
+| S2 | `wiki/Projects/Ms. Pac-Man DQN.md:24-24` | Ms. Pac-Man DQN | BM25 #6 · vector #4 |  |
+| S3 | `wiki/Projects/Ms. Pac-Man DQN.md:29-33` | Ms. Pac-Man DQN › Key facts › From course-projects/pacman-dqn/README.md | BM25 #10 · vector #5 |  |
+| S4 | `raw/course-projects/pacman-dqn/README.md:114-118` | Ms. Pac-Man DQN — Class 3 Assignment › What I expected, and what actually happened | added: opening of the section of S5 |  |
+| S5 | `raw/course-projects/pacman-dqn/README.md:137-138` | Ms. Pac-Man DQN — Class 3 Assignment › What I expected, and what actually happened | BM25 #3 · vector #13 |  |
+| S6 | `wiki/Projects/Ms. Pac-Man DQN.md:64-66` | Ms. Pac-Man DQN › Sources | BM25 #1 · vector #18 |  |
+| S7 | `raw/course-projects/pacman-dqn/README.md:397-410` | Ms. Pac-Man DQN — Class 3 Assignment › Assignment requirements checklist | added: opening of the section of S8 |  |
+| S8 | `raw/course-projects/pacman-dqn/README.md:433-440` | Ms. Pac-Man DQN — Class 3 Assignment › Assignment requirements checklist | BM25 #16 · vector #6 |  |
+
+Gemma's answer, verbatim (citation check: **insufficient-evidence**):
+
+> Insufficient evidence: The provided passages detail the setup, results, and requirements of the Ms. Pac-Man DQN assignment, but they do not contain any information regarding the grade received.
+
+**Do the cited passages support it?** Pass. The expected refusal, without guessing. Neither the six retrieved Pac-Man passages nor the two added section openings (What I expected, and what actually happened; Assignment requirements checklist) mention a grade.
+
+Full card with every passage's text: [T4](evidence/offline-2/ask/T4.md)
+
+</details>
+<!-- END:details -->
 
 The table above is the second offline run (529 passages were indexed then; reviewing the note it added brought
 the index to 535). The first offline run's cards are kept unchanged:
@@ -439,15 +616,15 @@ exact prompt under `runs/`.
 
 **The main limitation: T2, first a retrieval miss, then a model omission.** The reworded question *"In the app I
 built to track people I meet, what stops one user from seeing someone else's list?"* at first never retrieved the
-passage that states the answer in full ("Three independent mechanisms enforce it…"): among 520 passages it ranked
+passage that states the answer in full ("Three independent mechanisms enforce it…"): among the 520 passages indexed then it ranked
 80th by BM25 and 19th by vector similarity, because it is written in the source's vocabulary (JWT, `user_id`,
 policies) and the question uses none of it. Gemma answered correctly from what it had, and hosted Gemma 4 26B, given
 the same six passages, left out the same mechanisms (§9), so a larger model was not the fix.
 
 I measured two remedies before changing anything. Searching only the best-matching notes' sources, which I had
 proposed first, left the passage at position 30–37 ([experiment](evidence/retrieval/two-level-notes-first.md)). The
-cause was structural: the retrieved passage S4 was the *tail* of the README section whose *opening* passage was the
-missing one. Adding each retrieved section's opening passage (fix 14) brought it in at position 3 without changing
+cause was structural: the README passage that was retrieved (lines 345–351) was the *tail* of the section whose
+*opening* passage (lines 318–343) was the missing one. Adding each retrieved section's opening passage (fix 14) brought it in at position 3 without changing
 T1 or T3, and the second offline run confirmed it. The answer is now more complete (RLS enabled and forced, per-user
 policies, the ownership rule), but it still leaves out the database assigning `user_id` and the app's 401 checks,
 although both are now in its passages (S3, S4). The remaining gap is the model summarising, not retrieval.
@@ -469,7 +646,7 @@ Other failures are logged with their fixes in [evidence/changes.md](evidence/cha
   correctly but tagged none of the facts `[N#]`, although its instructions say to; now the harness lists the notes
   under such a reply (fix 15, check M5). The reverse also happened once: a capability answer carried an `[N1]` with
   no notes behind it; the harness now removes such tags and says so (fix 16).
-- **A merged note came back** during the offline ingest; merges now leave redirects (fix 10).
+- **A merged note came back** during the first offline ingest; merges now leave redirects (fix 10).
 
 ## 9. Optional online mode (extension)
 

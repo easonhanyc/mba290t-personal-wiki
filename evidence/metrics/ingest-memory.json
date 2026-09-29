@@ -1,0 +1,27 @@
+{
+  "time": "2026-09-28T21:58:29",
+  "source": "raw/website/artifacts/prioritization-framework.md",
+  "wall_seconds": 41.7,
+  "gemma_restarted_first": true,
+  "swap_after": "total = 7168.00M  used = 6229.75M  free = 938.25M  (encrypted)",
+  "model_calls": 1,
+  "exit_code": 0,
+  "rss_mb_before": {
+    "gemma": 5277.0,
+    "embed": 15.4
+  },
+  "rss_mb_peak_during": {
+    "gemma": 5451.3,
+    "embed": 15.6
+  },
+  "samples": {
+    "gemma": 80,
+    "embed": 80
+  },
+  "cli_output_tail": [
+    "  concept 'Agentic AI' was merged away or renamed earlier; not re-created",
+    "",
+    "Ingest finished in 42s with gemma-4-e4b-it-qat-q4_0 (local): 1 ingested",
+    "Index: 537 passages (26 sources, 25 reviewed notes); 2 newly embedded. index.md and Source Catalog.md rebuilt."
+  ]
+}

@@ -1,0 +1,170 @@
+Setup check from a fresh clone, Mon Sep 28 21:52:51 PDT 2026
+
+$ env GIT_TERMINAL_PROMPT=0 git -c credential.helper= clone -q https://github.com/easonhanyc/mba290t-personal-wiki.git
+[exit code 0]
+
+$ git log --oneline -1
+ba38228 Second offline run with screenshots; fix T2 retrieval, chat citations
+[exit code 0]
+
+$ python3 -m venv .venv
+[exit code 0]
+
+$ pip install -q -e .[test]
+[exit code 0]
+
+$ pytest -q
+..........................                                               [100%]
+26 passed in 0.20s
+[exit code 0]
+
+$ shasum -a 256 /Users/easonhan/models/gemma/gemma-4-E4B_q4_0-it.gguf /Users/easonhan/models/gemma/embeddinggemma-300m-qat-Q8_0.gguf
+676c35070db6dbe52f93e9c864ee0fba4eddea94b9c875d9cb10daff453fbaee  /Users/easonhan/models/gemma/gemma-4-E4B_q4_0-it.gguf
+6fa0c02a9c302be6f977521d399b4de3a46310a4f2621ee0063747881b673f67  /Users/easonhan/models/gemma/embeddinggemma-300m-qat-Q8_0.gguf
+[exit code 0]
+
+$ wiki serve status
+gemma: running (http://127.0.0.1:8080, pid None)
+embed: running (http://127.0.0.1:8081, pid None)
+[exit code 0]
+
+$ wiki status
+── wiki status · /private/var/folders/hb/7rcvxm9d2dn22bvj12pr0nzm0000gn/T/tmp.TXVBRD8ipa/mba290t-personal-wiki ──
+  local model   gemma-4-e4b-it-qat-q4_0  file /Users/easonhan/models/gemma/gemma-4-E4B_q4_0-it.gguf  (present)
+  embeddings    embeddinggemma-300m-qat-q8_0  (present)
+  gemma         running at http://127.0.0.1:8080
+  embed         running at http://127.0.0.1:8081
+  online model  gemma-4-26b-a4b-it via Gemini API (Google AI Studio) (only with --mode online)
+  vault         26 originals in vault/raw, 25 notes in vault/wiki, 535 indexed passages
+[exit code 0]
+
+$ wiki check
+── wiki check · vault lint ──
+  warn   wiki/Experience/Seaside Sustainability.md: no related-note links
+  warn   wiki/Experience/Seaside Sustainability.md: no incoming links from other notes (only the index)
+
+25 notes, 436 links checked, 0 broken/ambiguous, 0 errors, 2 warnings.
+[exit code 0]
+
+$ wiki ingest vault/raw
+= raw/course/syllabus.html: unchanged (sha256 b400645ca89c), notes up to date: MBA 290T Syllabus, Deep Learning
+= raw/course-projects/custom-llm/README.md: unchanged (sha256 11b5c49c8f48), notes up to date: Custom LLM with nanoGPT, Deep Learning
+= raw/course-projects/pacman-dqn/README.md: unchanged (sha256 4b724349cd4a), notes up to date: Ms. Pac-Man DQN, Deep Learning, Deep Q-Network
+= raw/course-projects/pacman-dqn/docs/METHODOLOGY.md: unchanged (sha256 b14e34e7414b), notes up to date: Ms. Pac-Man DQN
+= raw/course-projects/secure-networking-tracker/README.md: unchanged (sha256 4b2dc6a22bd0), notes up to date: Secure Networking Tracker
+= raw/course-projects/secure-networking-tracker/docs/how-it-works.md: unchanged (sha256 5ab70ce209d7), notes up to date: Secure Networking Tracker
+= raw/website/artifacts/prioritization-framework.md: unchanged (sha256 ba375a97db9f), notes up to date: Prioritization Framework
+= raw/website/experience/amazon-web-services.md: unchanged (sha256 6b6451e8b3a0), notes up to date: Amazon Web Services
+= raw/website/experience/clean-shores.md: unchanged (sha256 1fa66d70f081), notes up to date: Seaside Sustainability
+= raw/website/experience/idg-capital.md: unchanged (sha256 a3dca4538202), notes up to date: IDG Capital
+= raw/website/experience/notre-dame.md: unchanged (sha256 3814314d1781), notes up to date: University of Notre Dame
+= raw/website/experience/tiktok.md: unchanged (sha256 506c7ec1a979), notes up to date: TikTok Internship
+= raw/website/experience/uc-berkeley.md: unchanged (sha256 c2a9c5038e7f), notes up to date: UC Berkeley
+= raw/website/projects/action-hub.md: unchanged (sha256 c6c9d5e99239), notes up to date: Action Hub
+= raw/website/projects/allowlist.md: unchanged (sha256 4567a2efe10e), notes up to date: Allowlist Data Access App
+= raw/website/projects/asteroid-screening.md: unchanged (sha256 b2f6998b38c7), notes up to date: Hazardous Asteroid Screening
+= raw/website/projects/datafest-2023.md: unchanged (sha256 308b95c82686), notes up to date: DataFest 2023
+= raw/website/projects/formula-1-trends.md: unchanged (sha256 9c8ef2b2753d), notes up to date: Formula 1 Racing Trends, Time Series Analysis
+= raw/website/projects/genai-adoption-program.md: unchanged (sha256 24dc0351e0af), notes up to date: GenAI Adoption Program
+= raw/website/projects/genai-target-setting.md: unchanged (sha256 e80c6f2cc4f2), notes up to date: GenAI Target Setting, Time Series Analysis
+= raw/website/projects/job-search-agent.md: unchanged (sha256 13c384c532b9), notes up to date: Job Search Agent
+= raw/website/projects/kickstarter-scraper.md: unchanged (sha256 1a197c607927), notes up to date: Kickstarter Scraper
+= raw/website/projects/pacman-dqn.md: unchanged (sha256 6c3cd8aecdb8), notes up to date: Ms. Pac-Man DQN, Deep Learning, Deep Q-Network
+= raw/website/projects/pr-automation.md: unchanged (sha256 cfba08280fda), notes up to date: Pull-Request Automation
+= raw/website/projects/secure-networking-tracker.md: unchanged (sha256 fb3996868f0d), notes up to date: Secure Networking Tracker
+= raw/website/projects/tripmatch.md: unchanged (sha256 c8542a2ca92b), notes up to date: TripMatch Rides Board
+
+Ingest finished in 0s with gemma-4-e4b-it-qat-q4_0 (local): 26 unchanged
+Index: 535 passages (26 sources, 25 reviewed notes); 0 newly embedded. index.md and Source Catalog.md rebuilt.
+[exit code 0]
+
+$ wiki search row level security -k 2
+── wiki search · hybrid (BM25 + EmbeddingGemma, reciprocal-rank fusion) · no language model ──
+
+[1] raw/course-projects/secure-networking-tracker/docs/how-it-works.md:52-83  (original; BM25 #1 · vector #1)
+    How this app works › 3. The ownership rule › Layer 2 — Row Level Security filters every statement
+    ```sql
+    ALTER TABLE public.contacts ENABLE ROW LEVEL SECURITY;
+    ALTER TABLE public.contacts FORCE  ROW LEVEL SECURITY;
+    ```
+    `ENABLE` turns policies on. `FORCE` also applies them to the table's *owner* — without it, `neondb_owner` would bypass every policy.
+    Four policies, one per operation, all for the `authenticated` role:
+    ```sql
+    CREATE POLICY contacts_select_own ON public.contacts
+      FOR SELECT TO authenticated
+      USING ((SELECT auth.user_id()) = user_id);
+
+    CREATE POLICY contacts_insert_own ON public.contacts
+      FOR INSERT TO authenticated
+      WITH CHECK ((SELECT auth.user_id()) = user_id);
+
+    CREATE POLICY contacts_update_own ON public.contacts
+      FOR UPDATE TO authenticated
+      USING      ((SELECT auth.user_id()) = user_id)
+      WITH CHECK ((SELECT auth.user_id()) = user_id);
+
+    CREATE POLICY contacts_delete_own ON public.contacts
+      FOR DELETE TO authenticated
+      USING ((SELECT auth.user_id()) = user_id);
+    ```
+    **`USING` vs `WITH CHECK` — the distinction to have ready:**
+    - `USING` filters rows that already exist. It answers *"which rows may this statement see or touch?"* It is silently added to `SELECT`, `UPDATE` and `DELETE` as an extra `WHERE` clause.
+    - `WITH CHECK` inspects the row *as it will be after the write*. It answers *"is this row allowed to exist looking like that?"* It applies to `INSERT` and `UPDATE`.
+
+[2] raw/course-projects/secure-networking-tracker/docs/how-it-works.md:85-89  (original; BM25 #4 · vector #2)
+    How this app works › 3. The ownership rule › Layer 2 — Row Level Security filters every statement
+    **Why `UPDATE` needs both.** With only `USING`, a user could target a row they legitimately own and change `user_id` to someone else's id. `USING` was satisfied — they did own it at the start. Nothing would check the result, so the row would silently move into another person's list. That is both a data-loss bug and a way to plant rows in someone else's account. `WITH CHECK` re-evaluates the rule against the *new* row and rejects it.
+    There is also a `BEFORE UPDATE` trigger that resets `NEW.user_id = OLD.user_id`, so ownership is pinned even if a policy were later loosened.
+    **`anonymous` is granted nothing** on this table, so an unauthenticated caller has no privileges to exercise in the first place.
+
+2 passages from 535 indexed. No answer generated; open the paths above to read more.
+[exit code 0]
+
+$ wiki ask What share of the final grade is attendance?
+── wiki ask · gemma-4-e4b-it-qat-q4_0 · local (llama.cpp, this machine) ──
+
+Attendance accounts for 20% of the final grade [S1][S2][S3]. Students are not penalized for missing a single class, as there is a pass on one missed session in the attendance grade [S1].
+
+Sources
+ *[S1] raw/course/syllabus.html:593-621 › MBA 290T: Fundamental of Agentic AI › Grading
+ *[S2] raw/course/syllabus.html:492-494 › MBA 290T: Fundamental of Agentic AI › Attendance
+ *[S3] wiki/Course/MBA 290T Syllabus.md:28-36 › MBA 290T Syllabus › Key facts  (wiki note)
+  [S4] raw/course/syllabus.html:413-418 › MBA 290T: Fundamental of Agentic AI › Class Schedule
+  [S5] wiki/Course/MBA 290T Syllabus.md:21-27 › MBA 290T Syllabus › Key facts  (wiki note)
+  [S6] raw/course-projects/custom-llm/README.md:1285-1298 › Building a Custom LLM › 10. Keeping the exam out of the textbook  (opening of this section, added)
+  [S7] raw/course-projects/custom-llm/README.md:1368-1382 › Building a Custom LLM › 10. Keeping the exam out of the textbook
+  * = cited in the answer
+
+Citation check: ok
+Retrieval: hybrid (BM25 + EmbeddingGemma, reciprocal-rank fusion) + the opening passage of each retrieved section. Time: 14.9s (retrieval 0.04s). Saved: runs/ask-20260928-215332-788.json
+[exit code 0]
+
+-- errors: a missing file, and online mode without a key (no request is sent) --
+
+$ wiki ingest notes/does-not-exist.md
+error: No such file or folder: /private/var/folders/hb/7rcvxm9d2dn22bvj12pr0nzm0000gn/T/tmp.TXVBRD8ipa/mba290t-personal-wiki/notes/does-not-exist.md
+[exit code 2]
+
+$ env -u GEMINI_API_KEY wiki ask What share of the final grade is attendance? --mode online
+error: Online mode needs an API key in $GEMINI_API_KEY. Create one in Google AI Studio and export it,
+  or drop --mode online to use the local model (the default).
+[exit code 3]
+
+$ wiki help ask
+usage: wiki [-h] [--version] COMMAND ... ask [-h] [--mode {local,online}]
+                                             [-k K] [--json]
+                                             question
+
+Standalone factual question: retrieve passages, apply instructions/research-
+rules.md, call Gemma, check citations. Uses no chat history and no persona.
+Saved to runs/ask-*.json.
+
+positional arguments:
+  question
+
+options:
+  -h, --help            show this help message and exit
+  --mode {local,online}
+  -k K
+  --json
+[exit code 0]

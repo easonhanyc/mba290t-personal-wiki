@@ -68,6 +68,32 @@ def eval_table(root: Path, label: str) -> str:
     return "\n".join(rows)
 
 
+def details_block(root: Path, label: str) -> str:
+    """Per test, collapsed: retrieved passages with paths, the verbatim answer, and the manual assessment."""
+    p = root / "evidence" / label / "results.json"
+    if not p.exists():
+        return f"_No evaluation run `{label}` yet._"
+    data = json.loads(p.read_text())
+    assess = (yaml.safe_load((root / "evidence" / "assessments.yaml").read_text()) or {}).get(label, {})
+    out = []
+    for r in data["ask"]:
+        t = r["test"]
+        ids = {f"{x['path']}:{x['lines'][0]}-{x['lines'][1]}": x["id"] for x in r["passages"]}
+        out += [f"<details><summary><b>{t['id']}</b> ({t['kind']}): {t['question']}</summary>", "",
+                f"Expected: {t['expected_answer']}", "",
+                "| Id | Passage given to Gemma | Section | How it was retrieved | Expected evidence |", "|---|---|---|---|---|"]
+        for x in r["passages"]:
+            how = (f"added: opening of the section of {ids.get(x['opens_section_of'], x['opens_section_of'])}"
+                   if x.get("opens_section_of") else f"BM25 #{x['bm25_rank'] or '-'} · vector #{x['vector_rank'] or '-'}")
+            out.append(f"| {x['id']} | `{x['path']}:{x['lines'][0]}-{x['lines'][1]}` | {x['section'].replace('|', '/')} | "
+                       f"{how} | {', '.join(x['expected'])} |")
+        answer = "\n".join("> " + line if line else ">" for line in r["answer"].splitlines())
+        out += ["", "Gemma's answer, verbatim (citation check: **" + r["checks"]["status"] + "**):", "", answer, "",
+                "**Do the cited passages support it?** " + (assess.get(t["id"]) or "pending review"), "",
+                f"Full card with every passage's text: [{t['id']}](evidence/{label}/ask/{t['id']}.md)", "", "</details>", ""]
+    return "\n".join(out)
+
+
 INGEST_NOTES = {
     "20260926-231200": "trial on one small source before the full run (that note was discarded and rebuilt)",
     "concepts": "4 concept notes regenerated after fix #2 in evidence/changes.md",
@@ -160,6 +186,7 @@ def main() -> int:
     text = readme_path.read_text()
     text = block(text, "eval", eval_table(root, args.eval_label))
     text = block(text, "online", eval_table(root, "online"))
+    text = block(text, "details", details_block(root, args.eval_label))
     text = block(text, "metrics", metrics_table(root, args.metrics_label))
     text = block(text, "vault", vault_table(root))
     readme_path.write_text(text)

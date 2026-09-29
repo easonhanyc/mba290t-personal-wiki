@@ -2768,5 +2768,113 @@
       "raw/website/projects/kickstarter-scraper.md"
     ],
     "property_related": []
+  },
+  "wiki/Concepts/Prioritization Framework.md": {
+    "title": "Prioritization Framework",
+    "folder": "Concepts",
+    "summary": "This framework uses four ordered gates to cut a roadmap, prioritizing decision-making over generating scores that are easily argued. Features that fail an early gate are not scored, saving expensive analysis time.",
+    "facts": [
+      {
+        "fact": "Most prioritization frameworks fail in practice for the same reason: they produce a *score* when what the room actually needs is a *decision*, and scores are easy to argue with.",
+        "source": "raw/website/artifacts/prioritization-framework.md",
+        "section": "(introduction)",
+        "heading": ""
+      },
+      {
+        "fact": "Order matters. Each gate is cheaper to evaluate than the one after it, so failing early saves the expensive analysis.",
+        "source": "raw/website/artifacts/prioritization-framework.md",
+        "section": "The gates, in order",
+        "heading": "The gates, in order"
+      },
+      {
+        "fact": "The single sharpest cut available on an analytics or insights product, and the one that survives contact with stakeholders best — because it's answerable without data.",
+        "source": "raw/website/artifacts/prioritization-framework.md",
+        "section": "The gates, in order › Gate 1 — Does this change what the user *does*, or only what they *know*?",
+        "heading": "Gate 1 — Does this change what the user *does*, or only what they *know*?"
+      },
+      {
+        "fact": "Above the line features change behavior, while features that only change knowledge are below the line unless they feed something in the left column.",
+        "source": "raw/website/artifacts/prioritization-framework.md",
+        "section": "The gates, in order › Gate 1 — Does this change what the user *does*, or only what they *know*?",
+        "heading": "Gate 1 — Does this change what the user *does*, or only what they *know*?"
+      },
+      {
+        "fact": "Not a reason to kill a feature, but a reason to *sequence* it deliberately rather than accidentally.",
+        "source": "raw/website/artifacts/prioritization-framework.md",
+        "section": "The gates, in order › Gate 2 — Does shipping this depend on a team I don't control?",
+        "heading": "Gate 2 — Does shipping this depend on a team I don't control?"
+      },
+      {
+        "fact": "A feature requiring a ten-minute focused session is mis-designed for an interrupted user regardless of how much value it would deliver in that session.",
+        "source": "raw/website/artifacts/prioritization-framework.md",
+        "section": "The gates, in order › Gate 3 — Does it survive the user's real context?",
+        "heading": "Gate 3 — Does it survive the user's real context?"
+      },
+      {
+        "fact": "Whatever survives the first three gates is largely comparable, which is exactly the condition under which scoring is actually meaningful.",
+        "source": "raw/website/artifacts/prioritization-framework.md",
+        "section": "The gates, in order › Gate 4 — Only now, score reach × impact ÷ effort",
+        "heading": "Gate 4 — Only now, score reach × impact ÷ effort"
+      },
+      {
+        "fact": "Three additions that prevent re-litigation of a ranked list are publishing the below-the-line list, stating the gate each cut item failed, and naming what would change the ranking.",
+        "source": "raw/website/artifacts/prioritization-framework.md",
+        "section": "What I make explicit alongside the ranked list",
+        "heading": "What I make explicit alongside the ranked list"
+      },
+      {
+        "fact": "A process that treats every request as a one-off spends its life re-answering the same question; one that separates *one-off asks* from *repeated asks*, and promotes the second kind into the roadmap, stops paying that cost twice.",
+        "source": "raw/website/artifacts/prioritization-framework.md",
+        "section": "The one that generalizes",
+        "heading": "The one that generalizes"
+      }
+    ],
+    "related": [
+      {
+        "title": "Action Hub",
+        "why": "The prioritization framework was used on the AWS Sales insights platform, which is related to Action Hub."
+      },
+      {
+        "title": "GenAI Adoption Program",
+        "why": "Both notes involve designing programs or frameworks to drive adoption or prioritize features."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Prioritization Gates",
+        "why": "The core mechanism of the framework used to filter roadmap items.",
+        "source": "raw/website/artifacts/prioritization-framework.md"
+      },
+      {
+        "name": "Behavior vs Knowledge Change",
+        "why": "A specific criterion used in Gate 1 to determine the fundamental nature of a feature.",
+        "source": "raw/website/artifacts/prioritization-framework.md"
+      },
+      {
+        "name": "Dependency Sequencing",
+        "why": "The approach used in Gate 2 to manage external team requirements.",
+        "source": "raw/website/artifacts/prioritization-framework.md"
+      },
+      {
+        "name": "Contextual Design Review",
+        "why": "The process in Gate 3 of checking feature viability against real user usage scenarios.",
+        "source": "raw/website/artifacts/prioritization-framework.md"
+      }
+    ],
+    "sources": [
+      "raw/website/artifacts/prioritization-framework.md"
+    ],
+    "property_related": [
+      "-",
+      "a",
+      "b",
+      "c",
+      "h",
+      "i",
+      "n",
+      "o",
+      "t",
+      "u"
+    ]
   }
 }

@@ -21,6 +21,15 @@ repo_dir = "src/content/experience/"
 site = "https://easonhanyc.github.io/experience"
 
 [[origin]]
+prefix = "raw/website/artifacts/"
+collection = "Personal website - artifacts"
+author = "Eason Han"
+repo = "https://github.com/easonhanyc/easonhanyc.github.io"
+commit = "e8ea53c3546621c79620bbfa04bd88321fac8ec3"
+repo_dir = "src/content/artifacts/"
+site = "https://easonhanyc.github.io/artifacts"
+
+[[origin]]
 prefix = "raw/course/syllabus.html"
 collection = "MBA 290T course site"
 author = "Alexandre Mas and Pepe Alonso (course instructors)"

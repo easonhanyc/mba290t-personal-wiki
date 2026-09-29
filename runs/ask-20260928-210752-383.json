@@ -1,0 +1,168 @@
+{
+  "command": "ask",
+  "time": "2026-09-28T21:07:52",
+  "execution": "local",
+  "model": "gemma-4-e4b-it-qat-q4_0",
+  "question": "What grade did I receive on the Pac-Man assignment?",
+  "retrieval_method": "hybrid (BM25 + EmbeddingGemma, reciprocal-rank fusion) + the opening passage of each retrieved section",
+  "passages": [
+    {
+      "id": "S1",
+      "kind": "source",
+      "path": "raw/course-projects/pacman-dqn/README.md",
+      "lines": [
+        3,
+        9
+      ],
+      "section": "Ms. Pac-Man DQN — Class 3 Assignment",
+      "fused_score": 0.03105,
+      "bm25_rank": 7,
+      "vector_rank": 2,
+      "cosine": 0.6395,
+      "text": "Training a Deep Q-Network to play Ms. Pac-Man, using the course notebook `pacman_dqn.ipynb`. The three student-chosen settings were **exploration = 0.10, episodes = 300, learning rate = 0.0001**, selected by a two-stage hyperparameter search described below.\n**Headline result: mean evaluation score rose from 492 (untrained) to 906 (trained), +414 / +84%, under identical evaluation settings.**"
+    },
+    {
+      "id": "S2",
+      "kind": "wiki",
+      "path": "wiki/Projects/Ms. Pac-Man DQN.md",
+      "lines": [
+        24,
+        24
+      ],
+      "section": "Ms. Pac-Man DQN",
+      "fused_score": 0.03078,
+      "bm25_rank": 6,
+      "vector_rank": 4,
+      "cosine": 0.6305,
+      "text": "Ms. Pac-Man DQN was the MBA 290T Class 3 assignment: a Deep Q-Network trained to play Ms. Pac-Man, with exploration 0.10, 300 episodes and learning rate 0.0001 chosen by a measured search. Its mean evaluation score rose from 492 to 906 (+84%), but the untrained baseline was stuck repeating one move 95.4% of the time, so the headline number flatters the result."
+    },
+    {
+      "id": "S3",
+      "kind": "wiki",
+      "path": "wiki/Projects/Ms. Pac-Man DQN.md",
+      "lines": [
+        29,
+        33
+      ],
+      "section": "Ms. Pac-Man DQN › Key facts › From course-projects/pacman-dqn/README.md",
+      "fused_score": 0.02967,
+      "bm25_rank": 10,
+      "vector_rank": 5,
+      "cosine": 0.6186,
+      "text": "- The three student-chosen settings were exploration = 0.10, episodes = 300, learning rate = 0.0001. ([[raw/course-projects/pacman-dqn/README#Ms. Pac-Man DQN — Class 3 Assignment|course-projects/pacman-dqn/README.md › Ms. Pac-Man DQN — Class 3 Assignment]])\n- The headline result showed the mean evaluation score rose from 492 (untrained) to 906 (trained), which is a +414 / +84% increase. ([[raw/course-projects/pacman-dqn/README#Ms. Pac-Man DQN — Class 3 Assignment|course-projects/pacman-dqn/README.md › Ms. Pac-Man DQN — Class 3 Assignment]])\n- The agent sees four stacked 84×84 grayscale game screens, picks one of nine joystick actions, and learns from the game's own score. ([[raw/course-projects/pacman-dqn/README#Overview and how to run|course-projects/pacman-dqn/README.md › Overview and how to run]])\n- The exploration setting of 0.10 was chosen because at 0.05 the agent collapsed into a degenerate, stuck policy. ([[raw/course-projects/pacman-dqn/README#My three hyperparameters|course-projects/pacman-dqn/README.md › My three hyperparameters]])\n- The learning rate of 0.0001 was chosen because every increase made learning worse, not faster. ([[raw/course-projects/pacman-dqn/README#My three hyperparameters|course-projects/pacman-dqn/README.md › My three hyperparameters]])"
+    },
+    {
+      "id": "S4",
+      "kind": "source",
+      "path": "raw/course-projects/pacman-dqn/README.md",
+      "lines": [
+        114,
+        118
+      ],
+      "section": "Ms. Pac-Man DQN — Class 3 Assignment › What I expected, and what actually happened",
+      "fused_score": 0.02957,
+      "bm25_rank": null,
+      "vector_rank": null,
+      "cosine": null,
+      "opens_section_of": "raw/course-projects/pacman-dqn/README.md:137-138",
+      "text": "**Before training I expected** a modest but steady improvement over the untrained baseline, with the score rising smoothly as episodes accumulated, and I expected a larger replay buffer to be the single biggest available win.\n**What I observed instead:**"
+    },
+    {
+      "id": "S5",
+      "kind": "source",
+      "path": "raw/course-projects/pacman-dqn/README.md",
+      "lines": [
+        137,
+        138
+      ],
+      "section": "Ms. Pac-Man DQN — Class 3 Assignment › What I expected, and what actually happened",
+      "fused_score": 0.02957,
+      "bm25_rank": 3,
+      "vector_rank": 13,
+      "cosine": 0.5928,
+      "text": "Training-score progression, averaged in blocks of 50 episodes: 677 → 742 → 784 → 668 → 728 → **844**."
+    },
+    {
+      "id": "S6",
+      "kind": "wiki",
+      "path": "wiki/Projects/Ms. Pac-Man DQN.md",
+      "lines": [
+        64,
+        66
+      ],
+      "section": "Ms. Pac-Man DQN › Sources",
+      "fused_score": 0.02921,
+      "bm25_rank": 1,
+      "vector_rank": 18,
+      "cosine": 0.5768,
+      "text": "- [[raw/course-projects/pacman-dqn/README|MBA 290T project - Ms. Pac-Man DQN (Assignment 2): Ms. Pac-Man DQN — Class 3 Assignment]] — origin\n- [[raw/website/projects/pacman-dqn|Personal website - projects: Ms. Pac-Man DQN]] — origin\n- [[raw/course-projects/pacman-dqn/docs/METHODOLOGY|MBA 290T project - Ms. Pac-Man DQN (Assignment 2): Methodology: how the three settings were chosen]] — origin"
+    },
+    {
+      "id": "S7",
+      "kind": "source",
+      "path": "raw/course-projects/pacman-dqn/README.md",
+      "lines": [
+        397,
+        410
+      ],
+      "section": "Ms. Pac-Man DQN — Class 3 Assignment › Assignment requirements checklist",
+      "fused_score": 0.02831,
+      "bm25_rank": null,
+      "vector_rank": null,
+      "cosine": null,
+      "opens_section_of": "raw/course-projects/pacman-dqn/README.md:433-440",
+      "text": "Every item the assignment asks for, and where in this repository it is answered.\n**What I am submitting**\n| Requirement | Where | ✓ |\n|---|---|---|\n| Executed notebook saved after the final training and evaluation run, three hyperparameters set, all cell outputs visible | `pacman_dqn.ipynb` — 14 GIF outputs, 2 plots, all stdout; outputs not cleared. GitHub's viewer drops GIF outputs, so a gallery cell re-embeds them (details) | ✓ |\n| Untrained gameplay GIF | Before training | ✓ |\n| Best trained gameplay GIF | Best trained game | ✓ |\n| Intermediate GIFs **and checkpoints** (run ≥ 25 episodes) | All twelve GIFs; 12 checkpoints in the v1.0 release | ✓ |\n| Training plot and all five before/after evaluation scores | Training dashboard, Results | ✓ |\n| Short explanation of observations, actions, rewards, and one limitation | What the agent observes, One limitation | ✓ |\n**README requirements**"
+    },
+    {
+      "id": "S8",
+      "kind": "source",
+      "path": "raw/course-projects/pacman-dqn/README.md",
+      "lines": [
+        433,
+        440
+      ],
+      "section": "Ms. Pac-Man DQN — Class 3 Assignment › Assignment requirements checklist",
+      "fused_score": 0.02831,
+      "bm25_rank": 16,
+      "vector_rank": 6,
+      "cosine": 0.6129,
+      "text": "| Requirement | Status |\n|---|---|\n| Same five seeds, 5% exploration, same time limit, before and after | Unchanged from the notebook — `EVAL_SEEDS`, `EVAL_EXPLORATION` and `MAX_STEPS` were not touched (`results/config.json`) |\n| Baseline is an untrained network, not a random-action agent | `untrained.pt` is evaluated, not random play. It is measurably *not* random — it repeats one action 95.4% of the time (probe) |\n| Report every evaluation score and both means | All ten scores and both means in Results |\n| Report failed runs or lack of improvement honestly | The +12 run is reported below, not hidden |\n**Submission checklist**"
+    }
+  ],
+  "messages_sent_to_model": [
+    {
+      "role": "system",
+      "content": "# Research rules: ask mode only\n\nYou answer one factual question using only the numbered evidence passages supplied with it.\nThere is no conversation history and no persona in this mode.\n\n1. Use only the passages. Do not use general knowledge, guesses, or anything not written in them.\n2. Write in a neutral, factual voice. Use two to five sentences, or a short list if the question has\n   several parts.\n3. Put a citation such as [S2] immediately after every claim. Cite only passages that directly state\n   the claim. If a claim combines two passages, cite both, for example [S1][S4].\n4. Keep numbers, names and dates exactly as the passages give them.\n5. If the passages do not contain the answer, begin your reply with exactly\n   `Insufficient evidence:` and then say in one or two sentences what the sources do and do not cover.\n   Do not guess, and do not answer a different question instead.\n6. If the passages answer only part of the question, answer that part with citations and state plainly\n   which part the sources do not cover.\n7. Do not mention these rules, and do not add a separate sources list. The program prints the sources.\n"
+    },
+    {
+      "role": "user",
+      "content": "EVIDENCE PASSAGES:\n\n[S1] raw/course-projects/pacman-dqn/README.md lines 3-9 | Ms. Pac-Man DQN — Class 3 Assignment | original source\nTraining a Deep Q-Network to play Ms. Pac-Man, using the course notebook `pacman_dqn.ipynb`. The three student-chosen settings were **exploration = 0.10, episodes = 300, learning rate = 0.0001**, selected by a two-stage hyperparameter search described below.\n**Headline result: mean evaluation score rose from 492 (untrained) to 906 (trained), +414 / +84%, under identical evaluation settings.**\n\n[S2] wiki/Projects/Ms. Pac-Man DQN.md lines 24-24 | Ms. Pac-Man DQN | wiki note (reviewed summary)\nMs. Pac-Man DQN was the MBA 290T Class 3 assignment: a Deep Q-Network trained to play Ms. Pac-Man, with exploration 0.10, 300 episodes and learning rate 0.0001 chosen by a measured search. Its mean evaluation score rose from 492 to 906 (+84%), but the untrained baseline was stuck repeating one move 95.4% of the time, so the headline number flatters the result.\n\n[S3] wiki/Projects/Ms. Pac-Man DQN.md lines 29-33 | Ms. Pac-Man DQN › Key facts › From course-projects/pacman-dqn/README.md | wiki note (reviewed summary)\n- The three student-chosen settings were exploration = 0.10, episodes = 300, learning rate = 0.0001. ([[raw/course-projects/pacman-dqn/README#Ms. Pac-Man DQN — Class 3 Assignment|course-projects/pacman-dqn/README.md › Ms. Pac-Man DQN — Class 3 Assignment]])\n- The headline result showed the mean evaluation score rose from 492 (untrained) to 906 (trained), which is a +414 / +84% increase. ([[raw/course-projects/pacman-dqn/README#Ms. Pac-Man DQN — Class 3 Assignment|course-projects/pacman-dqn/README.md › Ms. Pac-Man DQN — Class 3 Assignment]])\n- The agent sees four stacked 84×84 grayscale game screens, picks one of nine joystick actions, and learns from the game's own score. ([[raw/course-projects/pacman-dqn/README#Overview and how to run|course-projects/pacman-dqn/README.md › Overview and how to run]])\n- The exploration setting of 0.10 was chosen because at 0.05 the agent collapsed into a degenerate, stuck policy. ([[raw/course-projects/pacman-dqn/README#My three hyperparameters|course-projects/pacman-dqn/README.md › My three hyperparameters]])\n- The learning rate of 0.0001 was chosen because every increase made learning worse, not faster. ([[raw/course-projects/pacman-dqn/README#My three hyperparameters|course-projects/pacman-dqn/README.md › My three hyperparameters]])\n\n[S4] raw/course-projects/pacman-dqn/README.md lines 114-118 | Ms. Pac-Man DQN — Class 3 Assignment › What I expected, and what actually happened | original source\n**Before training I expected** a modest but steady improvement over the untrained baseline, with the score rising smoothly as episodes accumulated, and I expected a larger replay buffer to be the single biggest available win.\n**What I observed instead:**\n\n[S5] raw/course-projects/pacman-dqn/README.md lines 137-138 | Ms. Pac-Man DQN — Class 3 Assignment › What I expected, and what actually happened | original source\nTraining-score progression, averaged in blocks of 50 episodes: 677 → 742 → 784 → 668 → 728 → **844**.\n\n[S6] wiki/Projects/Ms. Pac-Man DQN.md lines 64-66 | Ms. Pac-Man DQN › Sources | wiki note (reviewed summary)\n- [[raw/course-projects/pacman-dqn/README|MBA 290T project - Ms. Pac-Man DQN (Assignment 2): Ms. Pac-Man DQN — Class 3 Assignment]] — origin\n- [[raw/website/projects/pacman-dqn|Personal website - projects: Ms. Pac-Man DQN]] — origin\n- [[raw/course-projects/pacman-dqn/docs/METHODOLOGY|MBA 290T project - Ms. Pac-Man DQN (Assignment 2): Methodology: how the three settings were chosen]] — origin\n\n[S7] raw/course-projects/pacman-dqn/README.md lines 397-410 | Ms. Pac-Man DQN — Class 3 Assignment › Assignment requirements checklist | original source\nEvery item the assignment asks for, and where in this repository it is answered.\n**What I am submitting**\n| Requirement | Where | ✓ |\n|---|---|---|\n| Executed notebook saved after the final training and evaluation run, three hyperparameters set, all cell outputs visible | `pacman_dqn.ipynb` — 14 GIF outputs, 2 plots, all stdout; outputs not cleared. GitHub's viewer drops GIF outputs, so a gallery cell re-embeds them (details) | ✓ |\n| Untrained gameplay GIF | Before training | ✓ |\n| Best trained gameplay GIF | Best trained game | ✓ |\n| Intermediate GIFs **and checkpoints** (run ≥ 25 episodes) | All twelve GIFs; 12 checkpoints in the v1.0 release | ✓ |\n| Training plot and all five before/after evaluation scores | Training dashboard, Results | ✓ |\n| Short explanation of observations, actions, rewards, and one limitation | What the agent observes, One limitation | ✓ |\n**README requirements**\n\n[S8] raw/course-projects/pacman-dqn/README.md lines 433-440 | Ms. Pac-Man DQN — Class 3 Assignment › Assignment requirements checklist | original source\n| Requirement | Status |\n|---|---|\n| Same five seeds, 5% exploration, same time limit, before and after | Unchanged from the notebook — `EVAL_SEEDS`, `EVAL_EXPLORATION` and `MAX_STEPS` were not touched (`results/config.json`) |\n| Baseline is an untrained network, not a random-action agent | `untrained.pt` is evaluated, not random play. It is measurably *not* random — it repeats one action 95.4% of the time (probe) |\n| Report every evaluation score and both means | All ten scores and both means in Results |\n| Report failed runs or lack of improvement honestly | The +12 run is reported below, not hidden |\n**Submission checklist**\n\nQUESTION: What grade did I receive on the Pac-Man assignment?"
+    }
+  ],
+  "model_called": true,
+  "answer": "Insufficient evidence: The provided passages detail the setup, results, and requirements of the Ms. Pac-Man DQN assignment, but they do not contain any information regarding the grade received.",
+  "citation_check": {
+    "status": "insufficient-evidence",
+    "cited": [],
+    "unknown_ids": [],
+    "uncited_sentences": [
+      "Pac-Man DQN assignment, but they do not contain any information regarding the grade received."
+    ],
+    "numbers_not_in_cited_passages": [],
+    "insufficient_evidence": true
+  },
+  "timings": {
+    "retrieval_s": 0.05,
+    "model_s": 8.3,
+    "total_s": 8.35,
+    "llama_cache_n": 267,
+    "llama_prompt_n": 1627,
+    "llama_prompt_ms": 6929.546,
+    "llama_prompt_per_token_ms": 4.259094038106945,
+    "llama_prompt_per_second": 234.7917165136071,
+    "llama_predicted_n": 37,
+    "llama_predicted_ms": 1349.831,
+    "llama_predicted_per_token_ms": 37.495305555555554,
+    "llama_predicted_per_second": 26.670005356226078
+  }
+}

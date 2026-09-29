@@ -428,8 +428,45 @@ EDITS["Kickstarter Scraper"] = {
                     "Dame. A link to the re-created 'Agentic AI' note was removed by the merge (fix 10).",
 }
 
+EDITS["Prioritization Framework"] = {
+    "summary": "A four-gate method for cutting a roadmap, written up as a reconstruction of the one Eason used on the AWS Sales "
+               "insights platform (the Action Hub); the example features in the write-up are generic, invented for the portfolio. "
+               "A feature that fails an early gate is never scored, so the room gets a decision instead of an arguable score.",
+    "facts": [
+        ("Most prioritization frameworks fail in practice", "The write-up's starting claim: most prioritization frameworks fail in "
+         "practice because they produce a score when the room needs a decision, and scores are easy to argue with.",
+         "attributed the opinion to the write-up (neutral voice)"),
+        ("Order matters.", "The four gates are applied in order, each cheaper to evaluate than the next, so a feature that fails "
+         "early skips the expensive analysis.", "the fragment 'Order matters.' had no subject"),
+        ("The single sharpest cut available", "Gate 1 asks whether a feature changes what the user does or only what they know; the "
+         "write-up calls it the sharpest cut for an analytics product because it can be answered without data.",
+         "the fragment did not say which gate it described"),
+        ("Above the line features change behavior", "Features that change behavior go above the line; features that only change "
+         "knowledge go below it, unless they feed a behavior-changing feature.", "'the left column' only made sense beside the table"),
+        ("Not a reason to kill a feature", "Gate 2 asks whether shipping depends on a team the author does not control; a dependency "
+         "is a reason to sequence the feature later and raise the dependency as a joint roadmap item now, not to kill it.",
+         "the fragment did not name the gate or the dependency"),
+        ("A feature requiring a ten-minute focused session", "Gate 3 checks the user's real context (uninterrupted time, device and "
+         "posture, what is already open): a feature that needs a ten-minute focused session is mis-designed for an interrupted "
+         "user, however much value it would deliver.", "added what the gate checks, from the same section"),
+        ("Whatever survives the first three gates", "Gate 4 scores reach × impact ÷ effort only for what survived the first three "
+         "gates, because only then is the list comparable enough for scores to mean something.", "named the gate and the formula"),
+        ("A process that treats every request as a one-off", "The rule the write-up says generalizes: a request that shows up three "
+         "times is a missing feature, so repeated asks should be promoted into the roadmap instead of answered one by one.",
+         "led with the rule the section is named for"),
+    ],
+    "related": [("Action Hub", "The write-up says this is the method used on the AWS Sales insights platform, the Action Hub; the "
+                 "Action Hub page links to it as the framework behind its PRD."),
+                ("Amazon Web Services", "The method comes from this role, where it was used to cut the insights platform's roadmap.")],
+    "related_note": "Removed Gemma's link to GenAI Adoption Program ('both involve designing programs or frameworks'): the sources "
+                    "do not connect them. The note was renamed from 'Prioritization Framework Method' with `wiki rename` (the "
+                    "generated title copied the source's kind: Method).",
+}
+
 # Links added to notes that were already reviewed, so the new note has meaningful incoming links.
 ADD_RELATED = {
+    "Action Hub": [("Prioritization Framework", "The four-gate method used to cut this product's roadmap; this page links to it "
+                    "as the framework behind the PRD.")],
     "University of Notre Dame": [("Kickstarter Scraper", "An individual extra-credit project for ITAO 40450 (Spring 2023); listed "
                                   "as related work on this entry.")],
     "Formula 1 Racing Trends": [("Kickstarter Scraper", "Same course (ITAO 40450): a browser-snapshot scrape done three days before "

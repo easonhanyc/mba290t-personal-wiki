@@ -54,8 +54,11 @@ def eval_table(root: Path, label: str) -> str:
     rows += ["", "| Check | Result | Assessment |", "|---|---|---|"]
     for m in data["mode_checks"]:
         c = m["check"]
-        if c["id"] in ("M1", "M2"):
-            res = "; ".join(f"\"{t['user'][:40]}\" → {'notes looked up' if t['route']['retrieve'] else 'no lookup'}" for t in m["turns"])
+        if c["id"] in ("M1", "M2", "M5"):
+            res = "; ".join(f"\"{t['user'][:40]}\" → {'notes looked up' if t['route']['retrieve'] else 'no lookup'}"
+                            + (f" (tags: {t['checks'].get('status')}"
+                               + (", notes listed by the harness" if t["checks"].get("notes_listed_by_harness") else "") + ")"
+                               if t["notes"] else "") for t in m["turns"])
         elif c["id"] == "M3":
             res = f"{len(m['passages'])} original passages, 0 model calls, Gemma running: {m['gemma_server_running_during_search']}"
         else:
@@ -68,7 +71,7 @@ def eval_table(root: Path, label: str) -> str:
 INGEST_NOTES = {
     "20260926-231200": "trial on one small source before the full run (that note was discarded and rebuilt)",
     "concepts": "4 concept notes regenerated after fix #2 in evidence/changes.md",
-    "20260928": "**offline demonstration, Wi-Fi off**: the held-back Kickstarter source (the concept pass also re-created a merged note, fix 10)",
+    "20260928-2106": "**second offline demonstration, Wi-Fi off**: the held-back `prioritization-framework.md` (the note itself took 42 s)",
 }
 
 
@@ -124,7 +127,7 @@ def metrics_table(root: Path, label: str) -> str:
         note_s = re.search(r"-> wiki/\S+ .*?\((\d+) facts\) in (\d+)s", text)
         for m in re.finditer(r"Ingest finished in (\d+)s with (\S+) \((\w+)\): (\d+) ingested", text):
             rows.append(f"| [offline transcript]({t.relative_to(root).as_posix()}) | {m.group(4)} | (record overwritten, fix 12) | "
-                        f"{int(m.group(1)) / 60:.1f} min | — | **offline demonstration, Wi-Fi off**: the held-back Kickstarter "
+                        f"{int(m.group(1)) / 60:.1f} min | — | **first offline demonstration, Wi-Fi off**: the held-back Kickstarter "
                         f"source; the note itself took {note_s.group(2) if note_s else '?'} s, the rest was the concept and link passes |")
     return "\n".join(rows)
 

@@ -90,7 +90,17 @@ def test_chat_retrieval_attaches_notes_but_history_keeps_plain_message(project):
     assert turn.route.retrieve and turn.notes
     assert "NOTES FROM THE WIKI" in model.calls[-1]["messages"][-1]["content"]
     assert session.history[0]["content"] == "What did my Pac-Man agent score?"
-    assert turn.checks["status"] == "ok"
+    assert turn.checks["status"] == "ok" and "Notes used" not in turn.reply
+
+
+def test_chat_lists_notes_when_reply_tags_none(project):
+    """Fix 11: a draft built from notes but with no [N#] tags still shows which notes it used."""
+    idx = _small_index(project)
+    session = harness.ChatSession(model=FakeModel(lambda m, s: "Here is a post about the agent."), index=idx)
+    turn = session.turn("What did my Pac-Man agent score?")
+    assert turn.notes and turn.checks["status"] == "no-citations" and turn.checks["notes_listed_by_harness"]
+    assert "Notes used (not tagged claim by claim): [N1]" in turn.reply
+    assert session.history[-1]["content"] == "Here is a post about the agent."   # history keeps the model's text
 
 
 def test_generic_title_words_do_not_trigger_lookup(project):
@@ -102,3 +112,12 @@ def test_generic_title_words_do_not_trigger_lookup(project):
     session = harness.ChatSession(model=FakeModel(lambda m, s: {"needs_notes": False, "query": ""}), index=idx)
     assert not session.route("Draft a short plan for my week: I need to prep for PM internship applications.").retrieve
     assert session.route("How did the internship at TikTok go?").retrieve
+
+
+def test_note_tags_without_notes_are_removed(project):
+    """Fix 16 (offline-2 M1): a capability answer ended with "[N1]" although no notes were supplied."""
+    idx = _small_index(project)
+    session = harness.ChatSession(model=FakeModel(lambda m, s: "I can check your notes [N1]. Or [N2, N3] too."), index=idx)
+    turn = session.turn("what can you help me with?")
+    assert not turn.notes and turn.reply == "I can check your notes. Or too."
+    assert turn.checks["stray_tags_removed"] == ["[N1]", "[N2, N3]"]

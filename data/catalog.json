@@ -498,6 +498,26 @@
       ],
       "ingested_at": "2026-09-28T14:07:47",
       "model": "gemma-4-e4b-it-qat-q4_0"
+    },
+    "raw/website/artifacts/prioritization-framework.md": {
+      "source_id": "website-artifacts-prioritization-framework-ba375a97",
+      "sha256": "ba375a97db9f4c7cc268f43a5c9eb56b80052076469ed15463ea25f38c41d004",
+      "bytes": 4206,
+      "title": "Prioritization framework",
+      "origin": {
+        "collection": "Personal website - artifacts",
+        "author": "Eason Han",
+        "repo": "https://github.com/easonhanyc/easonhanyc.github.io",
+        "commit": "e8ea53c3546621c79620bbfa04bd88321fac8ec3",
+        "repo_dir": "src/content/artifacts/",
+        "site": "https://easonhanyc.github.io/artifacts",
+        "url": "https://github.com/easonhanyc/easonhanyc.github.io/blob/e8ea53c3546621c79620bbfa04bd88321fac8ec3/src/content/artifacts/prioritization-framework.md"
+      },
+      "notes": [
+        "wiki/Concepts/Prioritization Framework.md"
+      ],
+      "ingested_at": "2026-09-28T21:06:50",
+      "model": "gemma-4-e4b-it-qat-q4_0"
     }
   },
   "notes": {
@@ -572,6 +592,9 @@
     },
     "wiki/Projects/Kickstarter Scraper.md": {
       "title": "Kickstarter Scraper"
+    },
+    "wiki/Concepts/Prioritization Framework.md": {
+      "title": "Prioritization Framework"
     }
   },
   "redirects": {
@@ -593,6 +616,7 @@
     "Formula 1 Racing Trends Analysis": "Formula 1 Racing Trends",
     "GenAI Target Setting Methodology": "GenAI Target Setting",
     "Pull-Request Automation Skill": "Pull-Request Automation",
-    "TripMatch": "TripMatch Rides Board"
+    "TripMatch": "TripMatch Rides Board",
+    "Prioritization Framework Method": "Prioritization Framework"
   }
 }

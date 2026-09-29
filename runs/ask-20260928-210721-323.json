@@ -1,0 +1,138 @@
+{
+  "command": "ask",
+  "time": "2026-09-28T21:07:21",
+  "execution": "local",
+  "model": "gemma-4-e4b-it-qat-q4_0",
+  "question": "What share of the final grade is attendance, and how many classes can be missed without penalty?",
+  "retrieval_method": "hybrid (BM25 + EmbeddingGemma, reciprocal-rank fusion)",
+  "passages": [
+    {
+      "id": "S1",
+      "kind": "source",
+      "path": "raw/course/syllabus.html",
+      "lines": [
+        492,
+        494
+      ],
+      "section": "MBA 290T: Fundamental of Agentic AI › Attendance",
+      "fused_score": 0.03252,
+      "bm25_rank": 1,
+      "vector_rank": 2,
+      "cosine": 0.7095,
+      "text": "Attendance is required and is worth 20% of your grade.\nMuch of this course happens in the room: live coding, debugging together, and working through exercises. Slides alone are a poor substitute.\nYou get one absence with no penalty, no explanation required. Beyond that, each missed session reduces the attendance component. If you know in advance you will miss more than one session, talk to me early."
+    },
+    {
+      "id": "S2",
+      "kind": "source",
+      "path": "raw/course/syllabus.html",
+      "lines": [
+        593,
+        621
+      ],
+      "section": "MBA 290T: Fundamental of Agentic AI › Grading",
+      "fused_score": 0.03252,
+      "bm25_rank": 2,
+      "vector_rank": 1,
+      "cosine": 0.7166,
+      "text": "Performance will be graded as follows:\n| Component | Weight\n| Attendance | 20%\n| Assignments 1–4 (lowest score dropped) | 50%\n| Assignment 5 | 30%\n| Total | 100%\nEach assignment is scored out of 10 points using the shared framework above, applied to the specific assignment brief. For Assignments 1–4, the lowest of the four scores is dropped and the remaining three scores are combined equally to make 50% of the final grade. Assignment 5 makes up 30%; attendance makes up 20%. You get a pass on one missed session in the attendance grade, so you are not penalized for missing a single class.\nEach assignment will have a current Definition of Done in its assignment brief or class deck. That brief may be updated as the course develops; clearly announced updates supersede this syllabus overview. The shared grading categories and the assignment’s overall weight remain the consistent structure."
+    },
+    {
+      "id": "S3",
+      "kind": "wiki",
+      "path": "wiki/Course/MBA 290T Syllabus.md",
+      "lines": [
+        28,
+        36
+      ],
+      "section": "MBA 290T Syllabus › Key facts",
+      "fused_score": 0.0315,
+      "bm25_rank": 4,
+      "vector_rank": 3,
+      "cosine": 0.5994,
+      "text": "- Assignment 5 is the course capstone and spans Classes 6 and 7. ([[raw/course/syllabus.html|course/syllabus.html › Graded Assignments]])\n- Every assignment is scored out of 10 using the same broad framework. ([[raw/course/syllabus.html|course/syllabus.html › How Assignments Are Graded]])\n- Each assignment is scored on deliverable quality (4 points), testing & evaluation (3) and working result (3). ([[raw/course/syllabus.html|course/syllabus.html › How Assignments Are Graded]])\n- The final grade weights attendance 20%, Assignments 1–4 50% (lowest score dropped) and Assignment 5 30%. ([[raw/course/syllabus.html|course/syllabus.html › Grading]])\n- Class 7 is on Tue 10/6 and covers Multi-Agent Systems, Ops & Safety. ([[raw/course/syllabus.html|course/syllabus.html › Class Schedule]])\n- The focus is conceptual fluency that survives the tools. ([[raw/course/syllabus.html|course/syllabus.html › Course Objective]])\n- Assignments are individual. ([[raw/course/syllabus.html|course/syllabus.html › Graded Assignments]])\n- Students are expected to use AI coding agents, and also to understand and be able to explain everything they submit. ([[raw/course/syllabus.html|course/syllabus.html › Graded Assignments]])\n- The distinction this course cares about is not “did a human or an AI write this.” It is “does the person submitting it understand the system well enough to be responsible for it.” ([[raw/course/syllabus.html|course/syllabus.html › AI / LLM Policy]])"
+    },
+    {
+      "id": "S4",
+      "kind": "source",
+      "path": "raw/course/syllabus.html",
+      "lines": [
+        413,
+        418
+      ],
+      "section": "MBA 290T: Fundamental of Agentic AI › Class Schedule",
+      "fused_score": 0.03101,
+      "bm25_rank": 5,
+      "vector_rank": 4,
+      "cosine": 0.5572,
+      "text": "Lectures: Tuesdays 4:00 – 6:00 pm PT in N570\nFirst class: Tuesday, August 25, 2026\nLast class: Tuesday, October 6, 2026\nFinal assignment (Assignment 5) due: Tuesday, October 13, 2026\nSeven Tuesday sessions, beginning with Class 1 on 8/25 and ending with Class 7 on 10/6.\nThere is no final exam and no final presentation. The course is assessed entirely through attendance and five graded assignments."
+    },
+    {
+      "id": "S5",
+      "kind": "wiki",
+      "path": "wiki/Course/MBA 290T Syllabus.md",
+      "lines": [
+        21,
+        27
+      ],
+      "section": "MBA 290T Syllabus › Key facts",
+      "fused_score": 0.03058,
+      "bm25_rank": 3,
+      "vector_rank": 8,
+      "cosine": 0.5079,
+      "text": "- Fundamental of Agentic AI is not a survey course about AI, and it is not a prompt-engineering workshop. ([[raw/course/syllabus.html|course/syllabus.html › Course Objective]])\n- In seven sessions the course goes from “what is a variable” to building and evaluating a tool-using AI agent, covering programming foundations, full-stack software systems, machine learning, deep learning and transformers, LLM behavior and retrieval, and agent architecture. ([[raw/course/syllabus.html|course/syllabus.html › Course Objective]])\n- The course targets Level 2 fluency: you do not need a PhD to reason about AI systems, but knowing how to use ChatGPT is not a differentiator either. ([[raw/course/syllabus.html|course/syllabus.html › Course Objective]])\n- A student who successfully completes this course will be able to read, modify, test, and debug real code, and explain what a program does before running it. ([[raw/course/syllabus.html|course/syllabus.html › Learning Outcomes]])\n- The course is assessed entirely through attendance and five graded assignments. ([[raw/course/syllabus.html|course/syllabus.html › Class Schedule]])\n- Attendance is required and is worth 20% of the grade. ([[raw/course/syllabus.html|course/syllabus.html › Attendance]])\n- Assignments 1–4 are the end-of-class deliverables for Classes 2 through 5. ([[raw/course/syllabus.html|course/syllabus.html › Graded Assignments]])"
+    },
+    {
+      "id": "S6",
+      "kind": "source",
+      "path": "raw/course/syllabus.html",
+      "lines": [
+        498,
+        536
+      ],
+      "section": "MBA 290T: Fundamental of Agentic AI › Graded Assignments",
+      "fused_score": 0.03031,
+      "bm25_rank": 7,
+      "vector_rank": 5,
+      "cosine": 0.5434,
+      "text": "Every class ends with an implementable build. Five of them are graded assignments. Assignments 1–4 are the end-of-class deliverables for Classes 2 through 5. Assignment 5 is the course capstone and spans Classes 6 and 7.\n| # | Assigned | Due (11:59 pm PT)\n| 1 | Class 2 — 9/1 | Tue 9/8\n| 2 | Class 3 — 9/8 | Tue 9/15\n| 3 | Class 4 — 9/15 | Tue 9/22\n| 4 | Class 5 — 9/22 | Tue 9/29\n| 5 | Classes 6 & 7 — 9/29 & 10/6 | Tue 10/13\nAssignments 1–4 are due one week after they are assigned: the following Tuesday at 11:59 pm PT. Assignment 5 spans two classes — part 1 is assigned in Class 6 and part 2 in Class 7 — and the combined deliverable is due one week after Class 7: Tuesday 10/13 at 11:59 pm PT. This creates a consistent weekly submission schedule from 9/8 through 10/13.\nClass 1 has an in-class exercise that is not graded, as do the prediction-model exercise inside Class 3 and the attention-by-hand exercise inside Class 4. They still matter — but you are not submitting them."
+    }
+  ],
+  "messages_sent_to_model": [
+    {
+      "role": "system",
+      "content": "# Research rules: ask mode only\n\nYou answer one factual question using only the numbered evidence passages supplied with it.\nThere is no conversation history and no persona in this mode.\n\n1. Use only the passages. Do not use general knowledge, guesses, or anything not written in them.\n2. Write in a neutral, factual voice. Use two to five sentences, or a short list if the question has\n   several parts.\n3. Put a citation such as [S2] immediately after every claim. Cite only passages that directly state\n   the claim. If a claim combines two passages, cite both, for example [S1][S4].\n4. Keep numbers, names and dates exactly as the passages give them.\n5. If the passages do not contain the answer, begin your reply with exactly\n   `Insufficient evidence:` and then say in one or two sentences what the sources do and do not cover.\n   Do not guess, and do not answer a different question instead.\n6. If the passages answer only part of the question, answer that part with citations and state plainly\n   which part the sources do not cover.\n7. Do not mention these rules, and do not add a separate sources list. The program prints the sources.\n"
+    },
+    {
+      "role": "user",
+      "content": "EVIDENCE PASSAGES:\n\n[S1] raw/course/syllabus.html lines 492-494 | MBA 290T: Fundamental of Agentic AI › Attendance | original source\nAttendance is required and is worth 20% of your grade.\nMuch of this course happens in the room: live coding, debugging together, and working through exercises. Slides alone are a poor substitute.\nYou get one absence with no penalty, no explanation required. Beyond that, each missed session reduces the attendance component. If you know in advance you will miss more than one session, talk to me early.\n\n[S2] raw/course/syllabus.html lines 593-621 | MBA 290T: Fundamental of Agentic AI › Grading | original source\nPerformance will be graded as follows:\n| Component | Weight\n| Attendance | 20%\n| Assignments 1–4 (lowest score dropped) | 50%\n| Assignment 5 | 30%\n| Total | 100%\nEach assignment is scored out of 10 points using the shared framework above, applied to the specific assignment brief. For Assignments 1–4, the lowest of the four scores is dropped and the remaining three scores are combined equally to make 50% of the final grade. Assignment 5 makes up 30%; attendance makes up 20%. You get a pass on one missed session in the attendance grade, so you are not penalized for missing a single class.\nEach assignment will have a current Definition of Done in its assignment brief or class deck. That brief may be updated as the course develops; clearly announced updates supersede this syllabus overview. The shared grading categories and the assignment’s overall weight remain the consistent structure.\n\n[S3] wiki/Course/MBA 290T Syllabus.md lines 28-36 | MBA 290T Syllabus › Key facts | wiki note (reviewed summary)\n- Assignment 5 is the course capstone and spans Classes 6 and 7. ([[raw/course/syllabus.html|course/syllabus.html › Graded Assignments]])\n- Every assignment is scored out of 10 using the same broad framework. ([[raw/course/syllabus.html|course/syllabus.html › How Assignments Are Graded]])\n- Each assignment is scored on deliverable quality (4 points), testing & evaluation (3) and working result (3). ([[raw/course/syllabus.html|course/syllabus.html › How Assignments Are Graded]])\n- The final grade weights attendance 20%, Assignments 1–4 50% (lowest score dropped) and Assignment 5 30%. ([[raw/course/syllabus.html|course/syllabus.html › Grading]])\n- Class 7 is on Tue 10/6 and covers Multi-Agent Systems, Ops & Safety. ([[raw/course/syllabus.html|course/syllabus.html › Class Schedule]])\n- The focus is conceptual fluency that survives the tools. ([[raw/course/syllabus.html|course/syllabus.html › Course Objective]])\n- Assignments are individual. ([[raw/course/syllabus.html|course/syllabus.html › Graded Assignments]])\n- Students are expected to use AI coding agents, and also to understand and be able to explain everything they submit. ([[raw/course/syllabus.html|course/syllabus.html › Graded Assignments]])\n- The distinction this course cares about is not “did a human or an AI write this.” It is “does the person submitting it understand the system well enough to be responsible for it.” ([[raw/course/syllabus.html|course/syllabus.html › AI / LLM Policy]])\n\n[S4] raw/course/syllabus.html lines 413-418 | MBA 290T: Fundamental of Agentic AI › Class Schedule | original source\nLectures: Tuesdays 4:00 – 6:00 pm PT in N570\nFirst class: Tuesday, August 25, 2026\nLast class: Tuesday, October 6, 2026\nFinal assignment (Assignment 5) due: Tuesday, October 13, 2026\nSeven Tuesday sessions, beginning with Class 1 on 8/25 and ending with Class 7 on 10/6.\nThere is no final exam and no final presentation. The course is assessed entirely through attendance and five graded assignments.\n\n[S5] wiki/Course/MBA 290T Syllabus.md lines 21-27 | MBA 290T Syllabus › Key facts | wiki note (reviewed summary)\n- Fundamental of Agentic AI is not a survey course about AI, and it is not a prompt-engineering workshop. ([[raw/course/syllabus.html|course/syllabus.html › Course Objective]])\n- In seven sessions the course goes from “what is a variable” to building and evaluating a tool-using AI agent, covering programming foundations, full-stack software systems, machine learning, deep learning and transformers, LLM behavior and retrieval, and agent architecture. ([[raw/course/syllabus.html|course/syllabus.html › Course Objective]])\n- The course targets Level 2 fluency: you do not need a PhD to reason about AI systems, but knowing how to use ChatGPT is not a differentiator either. ([[raw/course/syllabus.html|course/syllabus.html › Course Objective]])\n- A student who successfully completes this course will be able to read, modify, test, and debug real code, and explain what a program does before running it. ([[raw/course/syllabus.html|course/syllabus.html › Learning Outcomes]])\n- The course is assessed entirely through attendance and five graded assignments. ([[raw/course/syllabus.html|course/syllabus.html › Class Schedule]])\n- Attendance is required and is worth 20% of the grade. ([[raw/course/syllabus.html|course/syllabus.html › Attendance]])\n- Assignments 1–4 are the end-of-class deliverables for Classes 2 through 5. ([[raw/course/syllabus.html|course/syllabus.html › Graded Assignments]])\n\n[S6] raw/course/syllabus.html lines 498-536 | MBA 290T: Fundamental of Agentic AI › Graded Assignments | original source\nEvery class ends with an implementable build. Five of them are graded assignments. Assignments 1–4 are the end-of-class deliverables for Classes 2 through 5. Assignment 5 is the course capstone and spans Classes 6 and 7.\n| # | Assigned | Due (11:59 pm PT)\n| 1 | Class 2 — 9/1 | Tue 9/8\n| 2 | Class 3 — 9/8 | Tue 9/15\n| 3 | Class 4 — 9/15 | Tue 9/22\n| 4 | Class 5 — 9/22 | Tue 9/29\n| 5 | Classes 6 & 7 — 9/29 & 10/6 | Tue 10/13\nAssignments 1–4 are due one week after they are assigned: the following Tuesday at 11:59 pm PT. Assignment 5 spans two classes — part 1 is assigned in Class 6 and part 2 in Class 7 — and the combined deliverable is due one week after Class 7: Tuesday 10/13 at 11:59 pm PT. This creates a consistent weekly submission schedule from 9/8 through 10/13.\nClass 1 has an in-class exercise that is not graded, as do the prediction-model exercise inside Class 3 and the attention-by-hand exercise inside Class 4. They still matter — but you are not submitting them.\n\nQUESTION: What share of the final grade is attendance, and how many classes can be missed without penalty?"
+    }
+  ],
+  "model_called": true,
+  "answer": "Attendance is worth 20% of the final grade [S1][S2][S5]. Students are allowed one absence without penalty, and no explanation is required for that absence [S1][S2].",
+  "citation_check": {
+    "status": "ok",
+    "cited": [
+      1,
+      2,
+      5
+    ],
+    "unknown_ids": [],
+    "uncited_sentences": [],
+    "numbers_not_in_cited_passages": [],
+    "insufficient_evidence": false
+  },
+  "timings": {
+    "retrieval_s": 0.04,
+    "model_s": 10.26,
+    "total_s": 10.3,
+    "llama_cache_n": 0,
+    "llama_prompt_n": 2004,
+    "llama_prompt_ms": 8545.063,
+    "llama_prompt_per_token_ms": 4.2640034930139725,
+    "llama_prompt_per_second": 234.52138386808852,
+    "llama_predicted_n": 45,
+    "llama_predicted_ms": 1654.341,
+    "llama_predicted_per_token_ms": 37.59865909090909,
+    "llama_predicted_per_second": 26.596693184778715
+  }
+}

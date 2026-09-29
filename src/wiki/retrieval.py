@@ -51,6 +51,7 @@ class Hit:
     vector_rank: int | None
     bm25_score: float = 0.0
     cosine: float | None = None
+    opens_section_of: str | None = None   # set when added as the opening passage of a retrieved passage's section
 
 
 # --------------------------------------------------------------------------- chunking
@@ -299,3 +300,28 @@ class Index:
         best = sorted(fused, key=lambda i: -fused[i])[:k]
         return [Hit(chunk=self.chunks[i], score=fused[i], bm25_rank=bm_rank.get(i), vector_rank=vec_rank.get(i),
                     bm25_score=float(bm[i]), cosine=None if cos is None else float(cos[i])) for i in best]
+
+    def add_section_openings(self, hits: list[Hit]) -> list[Hit]:
+        """Put the opening passage of a section right before any later passage of it that was retrieved.
+
+        A long section is split into several passages, and the first one usually states the point
+        ("Three independent mechanisms enforce it: ...") that the later ones elaborate in the source's
+        own vocabulary. Originals only; wiki notes are short. Fix 14 in evidence/changes.md."""
+        if not hasattr(self, "_openings"):
+            self._openings: dict[tuple[str, str], Chunk] = {}
+            for c in self.chunks:
+                first = self._openings.get((c.path, c.section))
+                if first is None or c.line_start < first.line_start:
+                    self._openings[(c.path, c.section)] = c
+        seen = {h.chunk.id for h in hits}
+        out: list[Hit] = []
+        for h in hits:
+            first = self._openings[(h.chunk.path, h.chunk.section)]
+            if h.chunk.kind == "source" and first.id not in seen:
+                out.append(Hit(chunk=first, score=h.score, bm25_rank=None, vector_rank=None,
+                               opens_section_of=h.chunk.location))
+                seen.add(first.id)
+            out.append(h)
+        if len(out) > len(hits):
+            self.last_method += " + the opening passage of each retrieved section"
+        return out

@@ -1,9 +1,10 @@
 """The harness: everything around the model and the retrieval tool.
 
-  ask   question -> retrieve -> research rules + numbered passages + question -> Gemma
-        -> citation check -> answer + sources (no persona, no chat history)
+  ask   question -> retrieve (+ the opening passage of each retrieved section) -> research rules +
+        numbered passages + question -> Gemma -> citation check -> answer + sources (no persona, no history)
   chat  persona + recent conversation (+ wiki notes only when the router says the turn needs them)
-        -> Gemma -> reply, with [N#] tags checked against the notes that were supplied
+        -> Gemma -> reply, with [N#] tags checked against the notes that were supplied; if notes were
+        used but none is tagged, the harness lists them under the reply
   search is not here: it is the retrieval tool on its own (retrieval.Index.search), no model at all.
 
 Every ask and chat turn is saved under runs/ with the exact messages sent to the model.
@@ -120,7 +121,7 @@ def ask(question: str, mode: str = "local", model=None, index: retrieval.Index |
     model.require()
     index = index or retrieval.Index(settings)
     t0 = time.perf_counter()
-    hits = index.search(question, k=k)
+    hits = index.add_section_openings(index.search(question, k=k))
     t_retrieval = time.perf_counter() - t0
     passages = select_within(hits, cfg["evidence_token_budget"])
     messages = [
@@ -147,7 +148,8 @@ def hit_record(h: retrieval.Hit, tag: str) -> dict:
     c = h.chunk
     return {"id": tag, "kind": c.kind, "path": c.path, "lines": [c.line_start, c.line_end], "section": c.section,
             "fused_score": round(h.score, 5), "bm25_rank": h.bm25_rank, "vector_rank": h.vector_rank,
-            "cosine": None if h.cosine is None else round(h.cosine, 4), "text": c.text}
+            "cosine": None if h.cosine is None else round(h.cosine, 4),
+            **({"opens_section_of": h.opens_section_of} if h.opens_section_of else {}), "text": c.text}
 
 
 def save_ask(r: AskResult) -> Path:
@@ -197,6 +199,8 @@ _PERSONAL = re.compile(
     r"title|job|project|projects|course|class|assignment|assignments|deadline|due|grade|learn|learned|use|used|chose|choose)\b"
     r"|\b(my notes|my wiki|according to|in my|from my|what did i|when did i|where did i|which of my)\b", re.I)
 _FOLLOWUP = re.compile(r"\b(it|that|this|those|they|them|its|their)\b", re.I)
+
+_NOTE_TAG = re.compile(r"\[N\d+(?:\s*[,;]\s*N?\d+)*\]")
 
 ROUTER_PROMPT = """Decide whether the user's latest message needs facts from their personal wiki (their projects,
 jobs, school, courses, results, dates). Casual talk, opinions, general knowledge, drafting or editing text
@@ -310,10 +314,23 @@ class ChatSession:
                     {"role": "user", "content": user_content}]
         reply = self.model.chat(messages, max_tokens=self.cfg["max_answer_tokens"], temperature=self.cfg["temperature"])
         checks = check_citations(reply.text, notes, "N") if notes else {"status": "no notes used"}
+        shown = reply.text
+        if not notes and _NOTE_TAG.search(shown):
+            # A tag with no notes behind it cites nothing (fix 16, offline-2 M1): remove it and say so.
+            checks["stray_tags_removed"] = _NOTE_TAG.findall(shown)
+            shown = re.sub(r"[ \t]*" + _NOTE_TAG.pattern, "", shown)
+        if notes and not checks["cited"]:
+            # The model used notes but tagged none of its claims (fix 11): list them, so the reply stays traceable.
+            checks["notes_listed_by_harness"] = True
+            groups: dict[str, list[int]] = {}
+            for i, h in enumerate(notes, 1):
+                groups.setdefault(h.chunk.title + (" (original)" if h.chunk.kind == "source" else ""), []).append(i)
+            shown += "\n\nNotes used (not tagged claim by claim): " + "; ".join(
+                "".join(f"[N{i}]" for i in ids) + f" {title}" for title, ids in groups.items())
         # History keeps what was said, not the retrieved notes, so old evidence does not crowd the context.
         self.history += [{"role": "user", "content": message}, {"role": "assistant", "content": reply.text}]
         self.turns += 1
-        turn = ChatTurn(message, reply.text, route, notes, checks,
+        turn = ChatTurn(message, shown, route, notes, checks,
                         {"total_s": round(time.perf_counter() - t0, 2), "model_s": round(reply.seconds, 2),
                          **{f"llama_{k}": v for k, v in reply.timings.items()}})
         self.last = turn
@@ -321,7 +338,8 @@ class ChatSession:
             f.write(json.dumps({"command": "chat", "turn": self.turns, "time": datetime.now().isoformat(timespec="seconds"),
                                 "execution": reply.mode, "model": reply.model, "user": message,
                                 "route": route.__dict__, "notes": [hit_record(h, f"N{i}") for i, h in enumerate(notes, 1)],
-                                "messages_sent_to_model": messages, "reply": reply.text, "citation_check": checks,
+                                "messages_sent_to_model": messages, "reply": reply.text, "shown_to_user": shown,
+                                "citation_check": checks,
                                 "timings": turn.timings}, ensure_ascii=False) + "\n")
         return turn
 

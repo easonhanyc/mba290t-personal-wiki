@@ -1,0 +1,134 @@
+{
+  "command": "ask",
+  "time": "2026-09-28T21:13:13",
+  "execution": "local",
+  "model": "gemma-4-e4b-it-qat-q4_0",
+  "question": "What is my favorite programming language?",
+  "retrieval_method": "hybrid (BM25 + EmbeddingGemma, reciprocal-rank fusion)",
+  "passages": [
+    {
+      "id": "S1",
+      "kind": "source",
+      "path": "raw/course/syllabus.html",
+      "lines": [
+        658,
+        659
+      ],
+      "section": "MBA 290T: Fundamental of Agentic AI › What Each Class Covers",
+      "fused_score": 0.03227,
+      "bm25_rank": 3,
+      "vector_rank": 1,
+      "cosine": 0.4583,
+      "text": "Class 1 — Code & Programming Foundations. What code actually is and how it runs. Variables, types, conditionals, loops, and functions. Lists vs. dictionaries, and why data shape is a management decision. Errors, tracebacks, and debugging as hypothesis testing. Tests as executable promises. Programming languages and why Python. The terminal. Clean code: readability as throughput, the WTF-per-minute metric, guard clauses, magic numbers, and comments that explain why. Organizing a project across files, with an entry point that orchestrates and separation of concerns. Git, GitHub, branches, diffs, and pull requests. AI coding agents: plan mode, YOLO mode, and when not to reach for the agent.\nClass 2 — Software Systems. Frontend: HTML, CSS, JavaScript, the DOM, components, and state. Backend: servers, APIs, HTTP methods, status codes, and JSON. Databases: tables, relationships, SQL, transactions, migrations, indexes, and caching. Environment variables and secrets, and why a frontend cannot keep one. Authentication vs. authorization, and OAuth. Cloud platforms and latency. Testing and the test pyramid. CI, deployment, environments, rollback, logs, and alerts. Tech stacks and the tradeoffs behind them."
+    },
+    {
+      "id": "S2",
+      "kind": "source",
+      "path": "raw/course/syllabus.html",
+      "lines": [
+        442,
+        443
+      ],
+      "section": "MBA 290T: Fundamental of Agentic AI › Prerequisites",
+      "fused_score": 0.03202,
+      "bm25_rank": 1,
+      "vector_rank": 4,
+      "cosine": 0.4194,
+      "text": "None. This course assumes no programming background. Class 1 starts at “what is a variable.”\nYou do need to bring a laptop you can install software on (macOS, Windows, or Linux), and a willingness to work in a terminal. Everything else is taught."
+    },
+    {
+      "id": "S3",
+      "kind": "source",
+      "path": "raw/course-projects/custom-llm/README.md",
+      "lines": [
+        1844,
+        1864
+      ],
+      "section": "Building a Custom LLM › 15. Repository map",
+      "fused_score": 0.02822,
+      "bm25_rank": 8,
+      "vector_rank": 14,
+      "cosine": 0.4084,
+      "text": "```\ncustom_llm.ipynb                    the starter notebook, unexecuted (run it yourself)\nnanogpt_model.py                    Karpathy's nanoGPT, pinned commit 3adf61e, unmodified\nrun_evals.py  chat.py               the starter's eval runner and chat interface, unmodified\nevals/language_evals.json           the 48 fixed cases, unmodified (sha256 e8affcd7…)\nevals/heldout_language_evals.json   my 16 held-out cases, written after the corpus was first frozen\ncorpus/                             experiment B's teaching material - 4 categories\ncorpus_seven/                       experiments C and D - 7 categories\ncorpus_unpaired/                    experiment E - 7 categories, unpaired relations\ndocs/                               the PDFs' source text, kept OUTSIDE every training input\n\nexperiments/starter/   A: classroom corpus\nexperiments/expanded/  B: classroom + corpus/\nexperiments/seven/     C: classroom + corpus_seven/\nexperiments/tuned/     D: same as C at lr 0.004\nexperiments/unpaired/  E: same as D with corpus_unpaired/\n  custom_llm_*.executed.ipynb         executed notebook, all outputs kept\n  llm_run/                            config, corpus.txt, history, samples/, model.pt,\n                                      model_untrained.pt, checkpoint.json, language_evals/…\n  *_results.zip                       the complete results ZIP\nexperiments/sweep_*/   the five-seed sweeps (summaries; D's also keep per-case results)"
+    },
+    {
+      "id": "S4",
+      "kind": "source",
+      "path": "raw/course-projects/custom-llm/README.md",
+      "lines": [
+        1011,
+        1015
+      ],
+      "section": "Building a Custom LLM › 7. The 48 fixed language evals: all ten result sets › By group",
+      "fused_score": 0.02807,
+      "bm25_rank": 22,
+      "vector_rank": 3,
+      "cosine": 0.4347,
+      "text": "| Group | Cases | A untr. | A trained | B untr. | B trained | C untr. | C trained | D untr. | D trained | E untr. | E trained |\n|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|\n| `starter_patterns` | 16 | 6 | **16** | 6 | **16** | 6 | **16** | 6 | **16** | 6 | **16** |\n| `starter_transfer` | 8 | 3 | **4** | 0 | **8** | 2 | **7** | 2 | **8** | 2 | **8** |\n| `extend_corpus` | 24 | 0 (s0) | **0 (s0)** | 1 (s11) | **10 (s11)** | 6 (s20) | **13 (s20)** | 6 (s20) | **16 (s20)** | 6 (s20) | **13 (s20)** |"
+    },
+    {
+      "id": "S5",
+      "kind": "wiki",
+      "path": "wiki/Concepts/Deep Learning.md",
+      "lines": [
+        31,
+        33
+      ],
+      "section": "Deep Learning › Related notes",
+      "fused_score": 0.02797,
+      "bm25_rank": 11,
+      "vector_rank": 12,
+      "cosine": 0.4101,
+      "text": "- [[Custom LLM with nanoGPT]] — The project these facts come from: a small nanoGPT language model built for MBA 290T.\n- [[Deep Q-Network]] — Another neural-network method in this wiki; there the network estimates action values, not next tokens.\n- [[MBA 290T Syllabus]] — Class 4 of the course covers deep learning and transformers."
+    },
+    {
+      "id": "S6",
+      "kind": "source",
+      "path": "raw/course-projects/custom-llm/README.md",
+      "lines": [
+        976,
+        989
+      ],
+      "section": "Building a Custom LLM › 7. The 48 fixed language evals: all ten result sets",
+      "fused_score": 0.02765,
+      "bm25_rank": 16,
+      "vector_rank": 9,
+      "cosine": 0.4134,
+      "text": "The suite is `evals/language_evals.json`, **unchanged** (sha256 `e8affcd72841e3ed…`, byte-identical to the starter repo's file). The runner is `run_evals.py`, also unchanged. All ten result sets recorded the same `suite_sha256` (`1d7c503f…`, the runner's hash of the parsed suite rather than of the file), which `tools/verify_separation.py` checks.\n**Scoring rules, as implemented in `run_evals.py`:** only the prompt enters the model — never the four choices, the answer or the explanation. The next-token probability is read for each of the four single-word choices; the highest wins; correct = 1, incorrect = 0, an exact tie = 0. Separately, an unconstrained continuation is generated at temperature 0.8 with a fixed per-case seed and a 24-token cap; **that free text is saved and inspected but is not what the score measures.** If any prompt word or answer choice is outside the model's vocabulary the case is marked `out_of_vocabulary` and scores 0 in the all-case rate rather than being dropped — so a model cannot raise its all-case percentage by having a smaller vocabulary. Random guessing would average 25% among scorable cases."
+    }
+  ],
+  "messages_sent_to_model": [
+    {
+      "role": "system",
+      "content": "# Research rules: ask mode only\n\nYou answer one factual question using only the numbered evidence passages supplied with it.\nThere is no conversation history and no persona in this mode.\n\n1. Use only the passages. Do not use general knowledge, guesses, or anything not written in them.\n2. Write in a neutral, factual voice. Use two to five sentences, or a short list if the question has\n   several parts.\n3. Put a citation such as [S2] immediately after every claim. Cite only passages that directly state\n   the claim. If a claim combines two passages, cite both, for example [S1][S4].\n4. Keep numbers, names and dates exactly as the passages give them.\n5. If the passages do not contain the answer, begin your reply with exactly\n   `Insufficient evidence:` and then say in one or two sentences what the sources do and do not cover.\n   Do not guess, and do not answer a different question instead.\n6. If the passages answer only part of the question, answer that part with citations and state plainly\n   which part the sources do not cover.\n7. Do not mention these rules, and do not add a separate sources list. The program prints the sources.\n"
+    },
+    {
+      "role": "user",
+      "content": "EVIDENCE PASSAGES:\n\n[S1] raw/course/syllabus.html lines 658-659 | MBA 290T: Fundamental of Agentic AI › What Each Class Covers | original source\nClass 1 — Code & Programming Foundations. What code actually is and how it runs. Variables, types, conditionals, loops, and functions. Lists vs. dictionaries, and why data shape is a management decision. Errors, tracebacks, and debugging as hypothesis testing. Tests as executable promises. Programming languages and why Python. The terminal. Clean code: readability as throughput, the WTF-per-minute metric, guard clauses, magic numbers, and comments that explain why. Organizing a project across files, with an entry point that orchestrates and separation of concerns. Git, GitHub, branches, diffs, and pull requests. AI coding agents: plan mode, YOLO mode, and when not to reach for the agent.\nClass 2 — Software Systems. Frontend: HTML, CSS, JavaScript, the DOM, components, and state. Backend: servers, APIs, HTTP methods, status codes, and JSON. Databases: tables, relationships, SQL, transactions, migrations, indexes, and caching. Environment variables and secrets, and why a frontend cannot keep one. Authentication vs. authorization, and OAuth. Cloud platforms and latency. Testing and the test pyramid. CI, deployment, environments, rollback, logs, and alerts. Tech stacks and the tradeoffs behind them.\n\n[S2] raw/course/syllabus.html lines 442-443 | MBA 290T: Fundamental of Agentic AI › Prerequisites | original source\nNone. This course assumes no programming background. Class 1 starts at “what is a variable.”\nYou do need to bring a laptop you can install software on (macOS, Windows, or Linux), and a willingness to work in a terminal. Everything else is taught.\n\n[S3] raw/course-projects/custom-llm/README.md lines 1844-1864 | Building a Custom LLM › 15. Repository map | original source\n```\ncustom_llm.ipynb                    the starter notebook, unexecuted (run it yourself)\nnanogpt_model.py                    Karpathy's nanoGPT, pinned commit 3adf61e, unmodified\nrun_evals.py  chat.py               the starter's eval runner and chat interface, unmodified\nevals/language_evals.json           the 48 fixed cases, unmodified (sha256 e8affcd7…)\nevals/heldout_language_evals.json   my 16 held-out cases, written after the corpus was first frozen\ncorpus/                             experiment B's teaching material - 4 categories\ncorpus_seven/                       experiments C and D - 7 categories\ncorpus_unpaired/                    experiment E - 7 categories, unpaired relations\ndocs/                               the PDFs' source text, kept OUTSIDE every training input\n\nexperiments/starter/   A: classroom corpus\nexperiments/expanded/  B: classroom + corpus/\nexperiments/seven/     C: classroom + corpus_seven/\nexperiments/tuned/     D: same as C at lr 0.004\nexperiments/unpaired/  E: same as D with corpus_unpaired/\n  custom_llm_*.executed.ipynb         executed notebook, all outputs kept\n  llm_run/                            config, corpus.txt, history, samples/, model.pt,\n                                      model_untrained.pt, checkpoint.json, language_evals/…\n  *_results.zip                       the complete results ZIP\nexperiments/sweep_*/   the five-seed sweeps (summaries; D's also keep per-case results)\n\n[S4] raw/course-projects/custom-llm/README.md lines 1011-1015 | Building a Custom LLM › 7. The 48 fixed language evals: all ten result sets › By group | original source\n| Group | Cases | A untr. | A trained | B untr. | B trained | C untr. | C trained | D untr. | D trained | E untr. | E trained |\n|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|\n| `starter_patterns` | 16 | 6 | **16** | 6 | **16** | 6 | **16** | 6 | **16** | 6 | **16** |\n| `starter_transfer` | 8 | 3 | **4** | 0 | **8** | 2 | **7** | 2 | **8** | 2 | **8** |\n| `extend_corpus` | 24 | 0 (s0) | **0 (s0)** | 1 (s11) | **10 (s11)** | 6 (s20) | **13 (s20)** | 6 (s20) | **16 (s20)** | 6 (s20) | **13 (s20)** |\n\n[S5] wiki/Concepts/Deep Learning.md lines 31-33 | Deep Learning › Related notes | wiki note (reviewed summary)\n- [[Custom LLM with nanoGPT]] — The project these facts come from: a small nanoGPT language model built for MBA 290T.\n- [[Deep Q-Network]] — Another neural-network method in this wiki; there the network estimates action values, not next tokens.\n- [[MBA 290T Syllabus]] — Class 4 of the course covers deep learning and transformers.\n\n[S6] raw/course-projects/custom-llm/README.md lines 976-989 | Building a Custom LLM › 7. The 48 fixed language evals: all ten result sets | original source\nThe suite is `evals/language_evals.json`, **unchanged** (sha256 `e8affcd72841e3ed…`, byte-identical to the starter repo's file). The runner is `run_evals.py`, also unchanged. All ten result sets recorded the same `suite_sha256` (`1d7c503f…`, the runner's hash of the parsed suite rather than of the file), which `tools/verify_separation.py` checks.\n**Scoring rules, as implemented in `run_evals.py`:** only the prompt enters the model — never the four choices, the answer or the explanation. The next-token probability is read for each of the four single-word choices; the highest wins; correct = 1, incorrect = 0, an exact tie = 0. Separately, an unconstrained continuation is generated at temperature 0.8 with a fixed per-case seed and a 24-token cap; **that free text is saved and inspected but is not what the score measures.** If any prompt word or answer choice is outside the model's vocabulary the case is marked `out_of_vocabulary` and scores 0 in the all-case rate rather than being dropped — so a model cannot raise its all-case percentage by having a smaller vocabulary. Random guessing would average 25% among scorable cases.\n\nQUESTION: What is my favorite programming language?"
+    }
+  ],
+  "model_called": true,
+  "answer": "Insufficient evidence: The provided passages describe course material, project structures, and evaluation methods for a course, but they do not contain any information about the user's favorite programming language.",
+  "citation_check": {
+    "status": "insufficient-evidence",
+    "cited": [],
+    "unknown_ids": [],
+    "uncited_sentences": [],
+    "numbers_not_in_cited_passages": [],
+    "insufficient_evidence": true
+  },
+  "timings": {
+    "retrieval_s": 0.01,
+    "model_s": 9.34,
+    "total_s": 9.35,
+    "llama_cache_n": 0,
+    "llama_prompt_n": 1892,
+    "llama_prompt_ms": 7966.242,
+    "llama_prompt_per_token_ms": 4.210487315010571,
+    "llama_prompt_per_second": 237.502199908062,
+    "llama_predicted_n": 37,
+    "llama_predicted_ms": 1357.947,
+    "llama_predicted_per_token_ms": 37.720749999999995,
+    "llama_predicted_per_second": 26.510607556848687
+  }
+}

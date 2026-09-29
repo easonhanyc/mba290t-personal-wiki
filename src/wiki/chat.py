@@ -24,6 +24,8 @@ def show_turn(turn) -> None:
     else:
         print(ui.dim(f"  (no notes lookup: {r.reason})"))
     print(f"\n{ui.bold('Wren ›')} {turn.reply}\n")
+    if turn.checks.get("stray_tags_removed"):
+        print(ui.dim(f"  (removed {' '.join(turn.checks['stray_tags_removed'])}: no notes were used for this reply)"))
     if turn.notes:
         for i, h in enumerate(turn.notes, 1):
             print(ui.dim(f"  [N{i}] {h.chunk.location} › {h.chunk.section}"))

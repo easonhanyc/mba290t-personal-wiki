@@ -139,7 +139,8 @@ def cmd_ask(args) -> int:
     print(ui.bold("Sources"))
     for i, h in enumerate(r.passages, 1):
         mark = "*" if i in r.checks.get("cited", []) else " "
-        print(f" {mark}[S{i}] {h.chunk.location} › {h.chunk.section}" + ("" if h.chunk.kind == "source" else "  (wiki note)"))
+        print(f" {mark}[S{i}] {h.chunk.location} › {h.chunk.section}" + ("" if h.chunk.kind == "source" else "  (wiki note)")
+              + ("  (opening of this section, added)" if h.opens_section_of else ""))
     print(ui.dim("  * = cited in the answer"))
     c = r.checks
     detail = []

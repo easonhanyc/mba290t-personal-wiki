@@ -10,7 +10,7 @@ generated_by: gemma-4-e4b-it-qat-q4_0 (local, llama.cpp llama-server)
 generated_at: '2026-09-27T01:06:10'
 reviewed: true
 reviewed_by: Claude (Anthropic), for Eason Han; each fact checked against the cited passage
-reviewed_at: 2026-09-27T01:06
+reviewed_at: 2026-09-28T21:29
 ---
 
 # Action Hub
@@ -35,6 +35,7 @@ Action Hub was built to replace a manual sweep across roughly 200 dashboards for
 - [[Amazon Web Services]] — Built in this role at AWS Global Sales Strategy & Analytics.
 - [[Allowlist Data Access App]] — Both scope what each seller may see through the territory and account assignments.
 - [[Job Search Agent]] — Both rank a long list and cap it on purpose: fifty alerts per seller here, two roles per company there.
+- [[Prioritization Framework]] — The four-gate method used to cut this product's roadmap; this page links to it as the framework behind the PRD.
 
 ## Sources
 - [[raw/website/projects/action-hub|Personal website - projects: Action Hub — Ranked Alerts with Next Actions]] — [origin](https://github.com/easonhanyc/easonhanyc.github.io/blob/e8ea53c3546621c79620bbfa04bd88321fac8ec3/src/content/projects/action-hub.md)

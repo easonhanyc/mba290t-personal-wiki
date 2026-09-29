@@ -144,6 +144,9 @@ def run_mode_checks(checks, index, model) -> list[dict]:
                 "ask_checks": r.checks, "ask_run_file": r.run_file,
                 "chat_claim_in_ask_prompt": any(x in sent for x in ("Rust", "favorite programming language is")),
                 "ask_passages": [harness.hit_record(h, f"S{i}") for i, h in enumerate(r.passages, 1)]})
+    if "M5" in by_id:   # added with fix 11 (after the first offline run)
+        s = harness.ChatSession(model=model, index=index)
+        out.append({"check": by_id["M5"], "turns": chat_turns(s, by_id["M5"]["turns"]), "log": config.rel(s.log_path)})
     return out
 
 
@@ -178,9 +181,12 @@ def ask_card(res: dict, meta: dict, assessment: str | None) -> str:
     else:
         lines.append("No source contains the answer (by design). The passages below are what the retriever offered instead.")
     lines += ["", "| Id | Passage | Section | BM25 rank | Vector rank | Expected? |", "|---|---|---|---|---|---|"]
+    ids = {f"{p['path']}:{p['lines'][0]}-{p['lines'][1]}": p["id"] for p in res["passages"]}
     for p in res["passages"]:
+        ranks = (f"{p['bm25_rank'] or '-'} | {p['vector_rank'] or '-'}" if not p.get("opens_section_of") else
+                 f"added: opening of the section of {ids.get(p['opens_section_of'], p['opens_section_of'])} | added")
         lines.append(f"| {p['id']} | `{p['path']}:{p['lines'][0]}-{p['lines'][1]}` | {p['section']} | "
-                     f"{p['bm25_rank'] or '-'} | {p['vector_rank'] or '-'} | {', '.join(p['expected']) or ''} |")
+                     f"{ranks} | {', '.join(p['expected']) or ''} |")
     lines += ["", "<details><summary>Full text of the passages given to Gemma</summary>", ""]
     for p in res["passages"]:
         lines += [f"**[{p['id']}] `{p['path']}:{p['lines'][0]}-{p['lines'][1]}` — {p['section']}**", "", quote(p["text"]), ""]
@@ -225,10 +231,14 @@ def mode_card(results: list[dict], meta: dict, assessments: dict) -> str:
                           f"_Harness routing: {'looked up notes' if route['retrieve'] else 'no notes lookup'} — {route['reason']}"
                           + (f"; {len(t['notes'])} passages" if t['notes'] else "") + f"; {t['timings']['total_s']} s._", "",
                           "**Wren ›**", "", quote(t["reply"]), ""]
+                if t["checks"].get("stray_tags_removed"):
+                    lines += [f"_The harness removed {' '.join(t['checks']['stray_tags_removed'])} from this reply: "
+                              "no notes were supplied, so the tag cited nothing (fix 16)._", ""]
                 for n in t["notes"]:
                     lines.append(f"- [{n['id']}] `{n['path']}:{n['lines'][0]}-{n['lines'][1]}` › {n['section']}")
                 if t["notes"]:
-                    lines += ["", f"Citation check on [N#] tags: {t['checks'].get('status')}", ""]
+                    listed = " (so the harness listed the notes under the reply)" if t["checks"].get("notes_listed_by_harness") else ""
+                    lines += ["", f"Citation check on [N#] tags: {t['checks'].get('status')}{listed}", ""]
             lines.append(f"Chat log with exact messages: `{r['log']}`")
             lines.append("")
         if c["id"] == "M3":

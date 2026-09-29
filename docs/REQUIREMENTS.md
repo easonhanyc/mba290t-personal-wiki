@@ -43,7 +43,7 @@ where this project meets it; the README links the evidence for each.
 | W9 | One subject per note: summary, details, source references, related notes; merge overlapping notes | note template; subject merge in `Ingester.place` |
 | W10 | Meaningful internal links with a reason; no unrelated links for graph density | "Related notes" with one-line reasons; link pass |
 | W11 | Graph useful: filter `path:wiki/`, attachments off, readable labels | `vault/.obsidian/graph.json` preset |
-| W12 | Check in Obsidian: index → topic → related note → source reference; links and source refs resolve | `wiki check` + screenshots |
+| W12 | Check in Obsidian: index → topic → related note → source reference; links and source refs resolve | `wiki check` + screenshots (`evidence/screenshots/obsidian-2026-09-28/`, 5: the trace index → Action Hub → Prioritization Framework → original) |
 | W13 | Review generated summaries against originals; correct the wiki, not the evidence | `evidence/wiki_review.md` |
 | W14 | Cleanup (if needed): back up, rename, merge, update incoming links, index, source mappings, retrieval paths; rebuild index; rerun tests | `wiki rename`, `wiki ingest` |
 | W15 | Re-ingesting the same source updates the intended notes without duplicates or machine-style names | sha256 skip; catalog-mapped paths; re-ingest check |
@@ -53,12 +53,12 @@ where this project meets it; the README links the evidence for each.
 | # | Requirement | Where it is met |
 |---|---|---|
 | T0 | Write three answerable questions + expected source passages + one unanswerable question **before building retrieval** | `tests/questions.yaml` (written before `retrieval.py`) |
-| T1–T3 | Direct question (one source); reworded question; question with known evidence (can connect two sources) | `evidence/offline/ask/T1.md`–`T3.md` |
-| T4 | Plausible question with no answer in the wiki → explicit insufficient-evidence | `evidence/offline/ask/T4.md` |
+| T1–T3 | Direct question (one source); reworded question; question with known evidence (can connect two sources) | `evidence/offline-2/ask/T1.md`–`T3.md` (first offline run kept in `evidence/offline/`) |
+| T4 | Plausible question with no answer in the wiki → explicit insufficient-evidence | `evidence/offline-2/ask/T4.md` |
 | T5 | Keep test expectations outside the searchable wiki | `tests/` is never indexed |
 | T6 | Per test: question, retrieved passages + paths, exact model identity, local/online, answer, citations, assessment | evidence cards |
 | T7 | Inspect retrieval first, then the answer; record missing evidence, irrelevant retrieval, invented details, unsupported citations as failures | `evidence/retrieval/`, card assessments |
-| T8 | Mode checks: casual chat, conversational follow-up, raw search, ask not using chat claims | `evidence/offline/mode_checks.md` |
+| T8 | Mode checks: casual chat, conversational follow-up, raw search, ask not using chat claims | `evidence/offline-2/mode_checks.md` (M1–M4, plus M5: a draft from notes stays traceable) |
 | T9 | If a setting changes after a failure: document it, rerun, keep the earlier result | README › Evidence and change log |
 | T10 | Measure memory use and response time for local ingestion and an answer | `evidence/metrics/` |
 
@@ -67,9 +67,9 @@ where this project meets it; the README links the evidence for each.
 | # | Requirement | Where it is met |
 |---|---|---|
 | O1 | Download weights, packages, tokenizer, embedding model while online; confirm stored locally | `config/models.lock.json` (sha256 verified against Hugging Face) |
-| O2 | Disconnect internet, restart the CLI in local mode, ingest a local source, run all four ask tests and the chat/search checks | `scripts/offline_demo.sh` → `evidence/offline/` |
+| O2 | Disconnect internet, restart the CLI in local mode, ingest a local source, run all four ask tests and the chat/search checks | `scripts/offline_demo.sh`, run twice: `evidence/offline/` and, after fixes 14–17, `evidence/offline-2/` |
 | O3 | No hosted embeddings, remote search or cloud fallback | local endpoints enforced by `llm.assert_local` |
-| O4 | Terminal recording or screenshots + saved evidence cards | `evidence/offline/` transcript + screen recording |
+| O4 | Terminal recording or screenshots + saved evidence cards | transcripts in `evidence/offline/` and `evidence/offline-2/`; 11 Terminal screenshots of the second run in `evidence/offline-2/screenshots/`; evidence cards in both |
 
 ## README must contain
 

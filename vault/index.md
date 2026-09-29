@@ -44,6 +44,7 @@ _Techniques and ideas that show up across several projects._
 
 - [[Deep Learning]] — Deep learning trains layered networks of weights with non-linearities by gradient descent: a loss scores each prediction and the gradient says which way to move every parameter.
 - [[Deep Q-Network]] — A Deep Q-Network (DQN) is a reinforcement-learning method in which a neural network estimates how much future reward each possible action is worth, and the agent takes the highest-valued move.
+- [[Prioritization Framework]] — A four-gate method for cutting a roadmap, written up as a reconstruction of the one Eason used on the AWS Sales insights platform (the Action Hub); the example features in the write-up are generic, invented for the portfolio.
 - [[Time Series Analysis]] — Time-series analysis models how a measurement changes over time; in these sources most of the work is making the points in a series comparable before any model is fitted.
 
-_24 notes. Index rebuilt by `wiki ingest` on 2026-09-28._
+_25 notes. Index rebuilt by `wiki ingest` on 2026-09-28._

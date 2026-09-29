@@ -561,15 +561,20 @@ class Ingester:
             self.concept_pass()
             self.store.save()
             self.link_pass()
+        written = []   # notes whose file actually changed (the concept pass re-renders notes it only re-checked)
         for note_rel in sorted(self.store.notes):
-            if note_rel in self.changed or not (self.vault / note_rel).exists():
+            path = self.vault / note_rel
+            if note_rel in self.changed or not path.exists():
+                before = path.read_bytes() if path.exists() else None
                 self.render(note_rel)
+                if path.read_bytes() != before:
+                    written.append(note_rel)
         self.store.save()
         vault.render_index(self.settings)
         vault.render_catalog(self.store.catalog, self.settings)
         stats = retrieval.build_index(self.settings, log=self.log)
         summary = {"time": datetime.now().isoformat(timespec="seconds"), "files": results,
-                   "notes_changed": sorted(self.changed), "model": self.model.model_id, "mode": self.model.mode,
+                   "notes_changed": written, "model": self.model.model_id, "mode": self.model.mode,
                    "model_calls": len(self.calls), "seconds": round(time.perf_counter() - t0, 1),
                    "dropped_facts": self.dropped, "failures": self.failures, "calls": self.calls, "index": stats}
         runs = self.settings.path("runs")

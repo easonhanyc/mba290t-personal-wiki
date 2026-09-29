@@ -7,18 +7,18 @@ three MBA 290T project reports and the course syllabus) is kept unchanged in an 
 **Gemma 4 E4B** model turns it into linked, human-readable wiki notes; and my own harness answers from it in
 three modes: **chat** (a personal assistant with a voice and memory of the conversation), **ask** (a neutral,
 cited answer or an explicit "insufficient evidence"), and **search** (the original passages, no model).
-The required demonstration (a fresh ingest, the four ask tests and the chat/search checks) ran on a 16 GB
-MacBook Air with Wi-Fi switched off: see [§7](#7-evidence).
+The required demonstration (a fresh ingest, the four ask tests and the chat/search checks) ran twice on a 16 GB
+MacBook Air with Wi-Fi switched off, the second time after fixing what the first run showed: see [§7](#7-evidence).
 
 | Start here | |
 |---|---|
 | CLI and harness code | [`src/wiki/`](src/wiki/) — entry point [`cli.py`](src/wiki/cli.py), core [`harness.py`](src/wiki/harness.py) |
 | The wiki (open this folder in Obsidian) | [`vault/`](vault/) — landing page [`vault/index.md`](vault/index.md), [`Source Catalog`](vault/Source%20Catalog.md) |
 | Setup and commands | [Setup](#2-setup-and-device) · [Commands](#3-commands) |
-| Four ask-mode evidence cards (offline run) | [T1](evidence/offline/ask/T1.md) · [T2](evidence/offline/ask/T2.md) · [T3](evidence/offline/ask/T3.md) · [T4](evidence/offline/ask/T4.md) · [summary](evidence/offline/summary.md) |
-| Chat/search mode checks (offline run) | [evidence/offline/mode_checks.md](evidence/offline/mode_checks.md) |
-| Offline demonstration | [full terminal transcript](evidence/offline/transcript-20260928-140540.txt) (Wi-Fi off, 14:05–15:06 on 2026-09-28) |
-| Obsidian screenshots | [§6](#6-the-wiki-in-obsidian) · [`evidence/screenshots/`](evidence/screenshots/) |
+| Four ask-mode evidence cards (second offline run) | [T1](evidence/offline-2/ask/T1.md) · [T2](evidence/offline-2/ask/T2.md) · [T3](evidence/offline-2/ask/T3.md) · [T4](evidence/offline-2/ask/T4.md) · [summary](evidence/offline-2/summary.md) — first offline run, kept: [summary](evidence/offline/summary.md) |
+| Chat/search mode checks (second offline run) | [evidence/offline-2/mode_checks.md](evidence/offline-2/mode_checks.md) — first run: [evidence/offline/mode_checks.md](evidence/offline/mode_checks.md) |
+| Offline demonstration | Second run: [transcript](evidence/offline-2/transcript-20260928-210530.txt) and [11 screenshots](#the-second-offline-run) (Wi-Fi off, 21:05–21:22). First run: [transcript](evidence/offline/transcript-20260928-140540.txt) (14:05–15:06) |
+| Obsidian screenshots | [§6](#6-the-wiki-in-obsidian) · [`evidence/screenshots/obsidian-2026-09-28/`](evidence/screenshots/obsidian-2026-09-28/) |
 | What went wrong and what I changed | [evidence/changes.md](evidence/changes.md) · wiki review log [evidence/wiki_review.md](evidence/wiki_review.md) |
 | Measured memory and response time | [§2.4](#24-measured-memory-and-response-time) |
 | Requirement-by-requirement checklist | [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) |
@@ -35,6 +35,7 @@ received. The scope is small enough to verify by hand.
 |---|---|---|
 | Personal website: projects | 13 case studies (`website/projects/*.md`; `kickstarter-scraper.md` was held back and ingested during the offline demonstration) | [easonhanyc.github.io](https://easonhanyc.github.io) source repo, commit `e8ea53c` |
 | Personal website: experience | 6 entries (`website/experience/*.md`) | same repo and commit |
+| Personal website: artifacts | `website/artifacts/prioritization-framework.md`, held back and ingested during the second offline run | same repo and commit |
 | MBA 290T course | `course/syllabus.html` | [course site syllabus](https://haas-ai-classes-fall-26.vercel.app/syllabus.html), captured 2026-09-26 (lecture slides deliberately excluded) |
 | MBA 290T projects | Pac-Man DQN (README + methodology), Custom LLM (README), Secure Networking Tracker (README + how-it-works) | my public repos at pinned commits |
 
@@ -140,8 +141,15 @@ Measured 2026-09-27T01:12:52 with `scripts/measure.py` ([raw](evidence/metrics/l
 | [2026-09-26T23:12:00](runs/ingest-20260926-231200.json) | 1 (+0 unchanged) | 1 | 1.0 min | 764 / 489 | trial on one small source before the full run (that note was discarded and rebuilt) |
 | [2026-09-27T00:48:31](runs/ingest-20260927-004831.json) | 24 (+0 unchanged) | 81 | 81.9 min | 132,343 / 35,394 |  |
 | [2026-09-27T00:54:10](runs/ingest-20260927-005410-concepts.json) | 0 (+0 unchanged) | 8 | 4.5 min | 3,471 / 2,457 | 4 concept notes regenerated after fix #2 in evidence/changes.md |
-| [offline transcript](evidence/offline/transcript-20260928-140540.txt) | 1 | (record overwritten, fix 12) | 3.4 min | — | **offline demonstration, Wi-Fi off**: the held-back Kickstarter source; the note itself took 113 s, the rest was the concept and link passes |
+| [2026-09-28T21:06:58](runs/ingest-20260928-210658-465.json) | 1 (+0 unchanged) | 2 | 0.8 min | 3,378 / 934 | **second offline demonstration, Wi-Fi off**: the held-back `prioritization-framework.md` (the note itself took 42 s) |
+| [offline transcript](evidence/offline/transcript-20260928-140540.txt) | 1 | (record overwritten, fix 12) | 3.4 min | — | **first offline demonstration, Wi-Fi off**: the held-back Kickstarter source; the note itself took 113 s, the rest was the concept and link passes |
 <!-- END:metrics -->
+
+The ask timings above were measured on 2026-09-27, before section openings were added (fix 14). In the second offline
+run the four CLI asks, each the first run of its prompt on a freshly restarted server, took 10.3, 13.9, 8.2 and
+8.3 s with prompts of 2,004, 2,062, 1,409 and 1,627 tokens ([transcript](evidence/offline-2/transcript-20260928-210530.txt),
+step 5; records under `runs/ask-20260928-2107*`). Conditions differ between the two days (other apps open, swap), so
+the two sets are reported separately rather than merged.
 
 ## 3. Commands
 
@@ -195,8 +203,9 @@ Errors are specific: a missing file names the path; a stopped model says `Start 
    `GET /health` and otherwise raises `ModelUnavailable` ("Start it with: wiki serve start").
 3. `retrieval.Index.search` tokenizes the question for BM25, embeds it through EmbeddingGemma
    (`task: search result | query: …`), ranks every indexed passage both ways and fuses the top 30 of each.
-4. `harness.select_within` keeps the best passages within a 2,200-token evidence budget and
-   `passage_block` numbers them `[S1]…[S6]` with path, lines and section.
+4. `Index.add_section_openings` puts the opening passage of a section in front of any later passage of that
+   section that was retrieved (fix 14); `harness.select_within` keeps the passages in order within a
+   2,200-token evidence budget, and `passage_block` numbers them `[S1]…` with path, lines and section.
 5. The messages are `system` = `instructions/research-rules.md`, `user` = passages + question. No persona.
 6. `LocalGemma.chat` POSTs them to `http://127.0.0.1:8080/v1/chat/completions` (temperature 0.1, 350 tokens max).
 7. `harness.check_citations` verifies every `[S#]` exists, flags sentences without a citation and numbers
@@ -213,14 +222,24 @@ front matter (title, role, dates, outcomes) becomes one "Properties" passage so 
 searchable. Inline SVG figures are reduced to their `<title>` caption; the raw files are never touched.
 
 **Retrieval.** BM25 keyword search and EmbeddingGemma vectors both run locally and are fused by reciprocal rank
-(k = 60); ask receives the top 6 passages. On the four test questions ([ablation](evidence/retrieval/ablation.md))
+(k = 60); ask receives the top 6 passages (plus section openings, below). On the four test questions ([ablation](evidence/retrieval/ablation.md))
 each method alone lost something the other kept: vectors alone missed the job-title passage for T3 (BM25 found it
 at rank 6), and BM25 alone ranked T2's reworded evidence 4th where vectors ranked it 2nd. The hybrid kept both in
-the top 6. Neither found the "three independent mechanisms" passage for T2 (see §8). If the embedding server is
+the top 6. Neither found the "three independent mechanisms" passage for T2, which led to the next change. If the embedding server is
 down, search says so and uses BM25 alone.
 
+**Section openings (added after the T2 miss, fix 14).** A long section is split into several passages, and its
+first passage usually states the point that the later ones elaborate. When ask retrieves a later passage of a
+section in an original, the harness puts that section's opening passage in front of it (marked "added" in the
+evidence cards, with no rank of its own), then applies the same token budget. On the four tests this recovered T2's
+missing passage at position 3 and left T1 and T3 unchanged
+([retrieval check](evidence/retrieval/section-openings.md)). The alternative I had proposed first, searching the
+best-matching notes' sources only, did not help: the passage stayed at position 30–37
+([experiment](evidence/retrieval/two-level-notes-first.md)). `wiki search` still shows the plain ranking.
+
 **How much text reaches Gemma.** Ask: the research rules (~320 tokens), up to ~2,200 tokens of evidence
-(all 6 passages fit in every test run) and the question; the measured prompts were 1,187–2,004 tokens, with
+(the top 6 passages plus any section openings: 6–8 passages in the test runs, all within the budget) and the
+question; the measured prompts were 1,409–2,062 tokens in the second offline run (1,187–2,004 before fix 14), with
 answers capped at 350. Chat: the persona with its capability list (~680 tokens), the most recent turns up to
 ~2,500 tokens, and up to 4 note passages (~1,400 tokens) only on turns that need them; a first chat turn
 measured ~640 prompt tokens. Ingest: a source up to 1,800 words is sent whole;
@@ -237,7 +256,9 @@ never invents personal facts; tags note-based claims `[N#]`; labels ideas as sug
 ("what can you help me with?", "make that shorter") → no lookup; drafting or planning from what I said → no
 lookup; a question about my own facts or naming a wiki subject (e.g. "Pac-Man", "TripMatch") → lookup;
 anything else → a one-line JSON classification by Gemma. `/notes <topic>` forces a lookup. The history keeps
-only what was said, not the retrieved passages.
+only what was said, not the retrieved passages. If a reply used notes but tagged none of its claims `[N#]` (E4B
+tends to drop tags in creative drafts), the harness lists the notes under the reply, so a draft can always be
+traced to its sources (fix 15).
 
 **Note names and folders.** One subject per note, named the way a person would name the page (2–6 words;
 first heading = file name). Gemma proposes a title; the harness removes subtitles and generic tails
@@ -266,40 +287,56 @@ then read against its originals by hand; corrections are logged in [`evidence/wi
 ## 6. The wiki in Obsidian
 
 <!-- BEGIN:vault -->
-25 originals in `vault/raw/`, 24 notes in `vault/wiki/`. `wiki check`: 420 links, 0 broken or ambiguous, 0 errors, 2 warnings.
+26 originals in `vault/raw/`, 25 notes in `vault/wiki/`. `wiki check`: 436 links, 0 broken or ambiguous, 0 errors, 2 warnings.
 
 | Folder | Notes |
 |---|---|
 | Projects (14) | Action Hub, Allowlist Data Access App, Custom LLM with nanoGPT, DataFest 2023, Formula 1 Racing Trends, GenAI Adoption Program, GenAI Target Setting, Hazardous Asteroid Screening, Job Search Agent, Kickstarter Scraper, Ms. Pac-Man DQN, Pull-Request Automation, Secure Networking Tracker, TripMatch Rides Board |
 | Experience (6) | Amazon Web Services, IDG Capital, Seaside Sustainability, TikTok Internship, UC Berkeley, University of Notre Dame |
 | Course (1) | MBA 290T Syllabus |
-| Concepts (3) | Deep Learning, Deep Q-Network, Time Series Analysis |
+| Concepts (4) | Deep Learning, Deep Q-Network, Prioritization Framework, Time Series Analysis |
 <!-- END:vault -->
 
 Open `vault/` itself as the vault (not the repository). `index.md` is the landing page; `raw/` holds the
 unchanged originals, `wiki/` the reviewed notes in four topic folders. Screenshots from Obsidian 1.13.7, taken on
-2026-09-27, before the offline demonstration added the 24th note (*Kickstarter Scraper*):
+2026-09-28 after the second offline run, so they include the note it added (*Prioritization Framework*); the file
+list is open on the left in each. All 16 are in [`evidence/screenshots/obsidian-2026-09-28/`](evidence/screenshots/obsidian-2026-09-28/); the first set, taken on 2026-09-27 before the
+last two notes existed, is kept in [`evidence/screenshots/`](evidence/screenshots/).
 
-**1. An open note** — the breadcrumb `wiki / Concepts / Deep Q-Network` is the file path and matches the heading;
-every fact ends with a link to the exact section of the original it came from; related notes say why they are linked.
+**1. An open note** — *Prioritization Framework*, written offline by Gemma and then reviewed. The path bar
+`wiki / Concepts / Prioritization Framework` is the file path and matches the heading; machine IDs, checksums and the
+old generated name (`previous_names`) stay in the properties ([1a](evidence/screenshots/obsidian-2026-09-28/1a-note-properties.png)); every fact ends with
+a link to the section of the original it came from; each related note says why it is linked.
 
-![Deep Q-Network note in Obsidian](evidence/screenshots/1-note.png)
+![Key facts with source links](evidence/screenshots/obsidian-2026-09-28/1b-note-key-facts-with-source-links.png)
+![Related notes and sources](evidence/screenshots/obsidian-2026-09-28/1c-note-related-notes-and-sources.png)
 
-**2. The landing page** — `index.md`, grouped by topic with one line per note.
+**2. The landing page** — `index.md`, grouped by topic with one line per note (continued in
+[2b](evidence/screenshots/obsidian-2026-09-28/2b-index-projects-experience.png), [2c](evidence/screenshots/obsidian-2026-09-28/2c-index-experience-course-concepts.png),
+[2d](evidence/screenshots/obsidian-2026-09-28/2d-index-concepts.png)).
 
-![index.md in Obsidian](evidence/screenshots/2-index.png)
+![index.md in Obsidian](evidence/screenshots/obsidian-2026-09-28/2a-index-top.png)
 
-**3. The graph** — filter `path:wiki/` (curated notes only), attachments hidden, colour groups by folder (saved in
-`vault/.obsidian/graph.json`). Every label is a subject name. *Seaside Sustainability* stands alone on purpose:
-Gemma had linked it to AWS and the GenAI programme with false reasons, and nothing else in this wiki shares its
-subject, so those links were removed rather than kept for a denser picture.
+**3. The graph** — all 25 notes. Filter `path:wiki/` (curated notes only), Attachments off, colour groups by folder,
+all visible in the open settings panel (saved in `vault/.obsidian/graph.json`). Every label is a subject name.
+*Seaside Sustainability* stands alone on purpose: Gemma had linked it to AWS and the GenAI programme with false
+reasons, its source lists no related work, and nothing else in this wiki shares its subject, so those links were
+removed rather than kept for a denser picture.
 
-![Graph view filtered to wiki notes](evidence/screenshots/3-graph.png)
+![Graph view filtered to wiki notes](evidence/screenshots/obsidian-2026-09-28/3-graph-path-wiki-filter.png)
 
-**4. Following a source reference** — from the Deep Q-Network note's facts, the link opens the original
-`raw/course-projects/pacman-dqn/README.md` itself (never an edited copy).
+**4. The Source Catalog** — every original with its file, collection, origin (repository at a pinned commit, or URL),
+sha256 and the notes built from it (continued in [4b](evidence/screenshots/obsidian-2026-09-28/4b-source-catalog.png), [4c](evidence/screenshots/obsidian-2026-09-28/4c-source-catalog.png),
+[4d](evidence/screenshots/obsidian-2026-09-28/4d-source-catalog.png)).
 
-![Original Pac-Man README opened from a source link](evidence/screenshots/4-source-trace.png)
+![Source Catalog in Obsidian](evidence/screenshots/obsidian-2026-09-28/4a-source-catalog.png)
+
+**5. Following a trace to the evidence** — `index.md` → *Action Hub* → its related note *Prioritization Framework* →
+a fact's source link, which opens the original `raw/website/artifacts/prioritization-framework.md` itself (path bar
+`raw / website / artifacts / prioritization-framework`; the rest of the file in [5b](evidence/screenshots/obsidian-2026-09-28/5b-trace-original-prd.png),
+[5c](evidence/screenshots/obsidian-2026-09-28/5c-trace-original-prd.png), [5d](evidence/screenshots/obsidian-2026-09-28/5d-trace-original-prd.png)).
+
+![Original PRD opened from a source link](evidence/screenshots/obsidian-2026-09-28/5a-trace-original-prd-opened.png)
 
 **A trace through the wiki:** `index.md` → *Deep Q-Network* → its related note *Ms. Pac-Man DQN* → a fact such as
 "The replay buffer holds only 5,000 transitions — about seven games" → its link opens
@@ -312,89 +349,134 @@ its file name and every note cites at least one original; re-ingesting all sourc
 ## 7. Evidence
 
 <!-- BEGIN:eval -->
-Run `offline` at 2026-09-28T14:12:39; internet **offline**; model `gemma-4-e4b-it-qat-q4_0` (file sha256 matches Hugging Face: True); 514 passages indexed.
+Run `offline-2` at 2026-09-28T21:12:24; internet **offline**; model `gemma-4-e4b-it-qat-q4_0` (file sha256 matches Hugging Face: True); 529 passages indexed.
 
 | Test | Question | Expected evidence retrieved | Answer (first sentence) | Citation check | Time | Assessment |
 |---|---|---|---|---|---|---|
-| [T1](evidence/offline/ask/T1.md) | What share of the final grade is attendance, and how many classes can be missed without penalty? | E1 yes (S1); E2 yes (S2) | Attendance is worth 20% of the final grade [S1][S2][S5]. | ok | 6.24 s | Pass |
-| [T2](evidence/offline/ask/T2.md) | In the app I built to track people I meet, what stops one user from seeing someone else's list? | E1 no; E2 yes (S2) | Ownership is enforced by Postgres through Row Level Security [S1][S2]. | ok | 13.62 s | Pass, but incomplete |
-| [T3](evidence/offline/ask/T3.md) | What was my job title at Amazon Web Services, and by how much did the Action Hub cut sellers' time-to-insight? | E1 yes (S5); E2 yes (S1) | The job title at Amazon Web Services was Business Intelligence Engineer — Global Sales Strategy & Analytics [S3][S5]. | ok | 5.69 s | Pass |
-| [T4](evidence/offline/ask/T4.md) | What grade did I receive on the Pac-Man assignment? | n/a | Insufficient evidence: The provided passages detail the training parameters, results, and methodology for the Ms. Pac-Man DQN assignment, but they do not state what grade was received. | insufficient-evidence | 4.0 s | Pass |
+| [T1](evidence/offline-2/ask/T1.md) | What share of the final grade is attendance, and how many classes can be missed without penalty? | E1 yes (S1); E2 yes (S2) | Attendance is worth 20% of the final grade [S1][S2][S5]. | ok | 1.96 s | Pass |
+| [T2](evidence/offline-2/ask/T2.md) | In the app I built to track people I meet, what stops one user from seeing someone else's list? | E1 yes (S3); E2 yes (S2) | Ownership is enforced by Postgres through Row Level Security (RLS) [S1][S2]. | ok | 5.08 s | Pass; more complete than before, but still not all three mechanisms |
+| [T3](evidence/offline-2/ask/T3.md) | What was my job title at Amazon Web Services, and by how much did the Action Hub cut sellers' time-to-insight? | E1 yes (S5); E2 yes (S1) | The job title at Amazon Web Services was Business Intelligence Engineer — Global Sales Strategy & Analytics [S3][S5]. | ok | 2.35 s | Pass |
+| [T4](evidence/offline-2/ask/T4.md) | What grade did I receive on the Pac-Man assignment? | n/a | Insufficient evidence: The provided passages detail the setup, results, and requirements of the Ms. Pac-Man DQN assignment, but they do not contain any information regarding the grade received. | insufficient-evidence | 1.57 s | Pass |
 
 | Check | Result | Assessment |
 |---|---|---|
-| [M1 casual chat, capabilities](evidence/offline/mode_checks.md) | "what can you help me with?" → no lookup; "what can we do?" → no lookup | Pass |
-| [M2 conversational follow-up](evidence/offline/mode_checks.md) | "Draft a short plan for my week: I need t" → no lookup; "make that shorter" → no lookup | Pass |
-| [M3 raw search](evidence/offline/mode_checks.md) | 6 original passages, 0 model calls, Gemma running: False | Pass |
-| [M4 ask ignores chat history](evidence/offline/mode_checks.md) | ask: "Insufficient evidence: The provided passages describe course…"; chat claim in ask prompt: False | Pass |
+| [M1 casual chat, capabilities](evidence/offline-2/mode_checks.md) | "what can you help me with?" → no lookup; "what can we do?" → no lookup | Partly failed: a stray [N1] tag |
+| [M2 conversational follow-up](evidence/offline-2/mode_checks.md) | "Draft a short plan for my week: I need t" → no lookup; "make that shorter" → no lookup | Pass |
+| [M3 raw search](evidence/offline-2/mode_checks.md) | 6 original passages, 0 model calls, Gemma running: False | Pass |
+| [M4 ask ignores chat history](evidence/offline-2/mode_checks.md) | ask: "Insufficient evidence: The provided passages describe course…"; chat claim in ask prompt: False | Pass |
+| [M5 draft from notes, traceable](evidence/offline-2/mode_checks.md) | "Draft a 3-line LinkedIn post about my Ms" → notes looked up (tags: no-citations, notes listed by the harness); "make that shorter" → no lookup | Pass |
 <!-- END:eval -->
 
-### The offline demonstration
+The table above is the second offline run (529 passages were indexed then; reviewing the note it added brought
+the index to 535). The first offline run's cards are kept unchanged:
+[summary](evidence/offline/summary.md), [T1](evidence/offline/ask/T1.md) · [T2](evidence/offline/ask/T2.md) ·
+[T3](evidence/offline/ask/T3.md) · [T4](evidence/offline/ask/T4.md), [mode checks](evidence/offline/mode_checks.md).
+What changed between them:
 
-Eason switched Wi-Fi off and ran `./scripts/offline_demo.sh`; the whole session is in
-[`transcript-20260928-140540.txt`](evidence/offline/transcript-20260928-140540.txt). In order, it shows:
+| | First offline run (14:05) | Second offline run (21:05) |
+|---|---|---|
+| T2 "three mechanisms" passage | not retrieved | retrieved as S3, a section opening (fix 14); the answer is more complete but still omits two mechanisms that are now in its passages |
+| T1, T3, T4 | Pass | Pass (same answers) |
+| M1 capabilities | Pass | partly failed: a stray `[N1]` with no notes behind it; fixed afterwards (fix 16) and re-run with the internet on ([3 runs](evidence/local-after-fix16/)) |
+| M5 draft from notes (new) | — | Pass: the untagged draft is traced by the notes list the harness adds (fix 15) |
+| Offline ingest | `kickstarter-scraper.md` → *Kickstarter Scraper* | `prioritization-framework.md` → *Prioritization Framework* |
 
-1. **No internet**: `Wi-Fi Power (en0): Off`, no default route, and HTTPS to `1.1.1.1` and `huggingface.co` failing
-   (checked again at the end).
+### The second offline run
+
+After fixes 14–17, Eason switched Wi-Fi off and ran `./scripts/offline_demo.sh` again (evidence label `offline-2`).
+The whole session is in [`transcript-20260928-210530.txt`](evidence/offline-2/transcript-20260928-210530.txt); the
+script paused five times so he could screenshot the Terminal. In order:
+
+1. **No internet**: `Wi-Fi Power (en0): Off`, no default route, HTTPS to `huggingface.co` and `1.1.1.1` failing
+   (checked again at the end, after 1,042 s).
 2. **A fresh start in local mode**: `wiki serve stop` / `start`, `wiki status`, `wiki --help`.
-3. **Errors and search without the model**: with Gemma stopped, `wiki ask` exits with *"Local Gemma is not running
-   … Start it with: wiki serve start (No cloud fallback is used)"* (exit code 3), while `wiki search` still returns
-   original passages.
-4. **Offline ingestion**: the held-back `kickstarter-scraper.md` is copied into `raw/` byte-for-byte and becomes the
-   note *Kickstarter Scraper* in 113 s; ingesting it again and re-ingesting all 25 originals change nothing; `wiki check`
-   finds 0 broken links. This step also exposed a real bug (fix 10 below).
-5. **The four ask tests** through the CLI, then the **chat and search checks**, then `scripts/run_evals.py`, which
-   re-runs them through the same harness code to write the evidence cards above (their times are shorter because
-   the identical prompts had just been run, so llama.cpp reused its prompt cache; the representative figure is the
-   19 s median in §2.4).
-6. **A live chat typed by Eason**: capabilities, a LinkedIn post drafted from the Pac-Man notes (the numbers match
-   the sources), and "make that shorter" rewriting it from the conversation.
+3. **Errors and search without the model**: with Gemma stopped, `wiki ask` exits with the "Local Gemma is not running …
+   No cloud fallback is used" message (exit code 3), while `wiki search` still returns original passages.
+4. **Offline ingestion**: the held-back `prioritization-framework.md` is copied into `raw/website/artifacts/`
+   byte-for-byte and becomes a note in 42 s (50 s with the concept and link passes, 2 model calls); ingesting it again
+   and re-ingesting all 26 originals change nothing (still 25 notes); `wiki check` finds 0 broken links. Gemma named
+   the note *Prioritization Framework Method*, copying the source's `kind: Method`; in review I renamed it with
+   `wiki rename`, which updated the links, catalog and index and recorded a redirect
+   ([review log](evidence/wiki_review.md)).
+5. **The four ask tests** through the CLI, the **chat and search checks** (M1–M5), then `scripts/run_evals.py`, which
+   re-runs them through the same harness code to write the cards above (their times are shorter because llama.cpp
+   reused its prompt cache; the CLI times are in §2.4).
+6. **A live chat typed by Eason**: capabilities (no lookup, no tags), a LinkedIn post about the Action Hub drafted from
+   four retrieved notes (every figure in it, from the 200 dashboards to the 20 interviews, is in those notes; the
+   second option tags `[N2]`–`[N4]`), and "I like option 1, make it shorter", rewritten from the conversation.
 
-An earlier attempt the same afternoon stopped at step 1 even though Wi-Fi was off
-([`transcript-20260928-134059.txt`](evidence/offline/transcript-20260928-134059.txt), kept): the script judged the
-internet by a raw TCP connection to `1.1.1.1:53`, which the Cisco AnyConnect network extension on this Mac answers
-locally. It now requires a real HTTPS request (fix 9). The online dry run that preceded the offline run, with its
-routing bug, is kept in [`evidence/local-dryrun/`](evidence/local-dryrun/summary.md).
+| Screenshot (Terminal, Wi-Fi off) | Captured | Shows |
+|---|---|---|
+| [1](evidence/offline-2/screenshots/1-offline-proof-and-restart.png) | 21:08:59 | Wi-Fi off, no route, HTTPS failing; servers restarted in local mode |
+| [2a](evidence/offline-2/screenshots/2a-ingest-new-source.png) · [2b](evidence/offline-2/screenshots/2b-reingest-no-duplicates-and-check.png) | 21:09:37 · 21:09:39 | the new source ingested; re-ingest with no duplicates; `wiki check` |
+| [3a](evidence/offline-2/screenshots/3a-ask-T1-T2-T3.png) · [3b](evidence/offline-2/screenshots/3b-ask-T3-sources-and-T4.png) | 21:09:59 · 21:10:05 | the four ask answers with their sources (T2 with its added section openings) |
+| [4a](evidence/offline-2/screenshots/4a-chat-M1-M2.png) · [4b](evidence/offline-2/screenshots/4b-chat-M2-and-search-M3.png) · [4c](evidence/offline-2/screenshots/4c-search-M3-chat-M4-and-ask.png) · [4d](evidence/offline-2/screenshots/4d-chat-M5-draft-from-notes.png) | 21:11:40–21:12:06 | chat and search checks M1–M5 |
+| [5a](evidence/offline-2/screenshots/5a-live-chat.png) · [5b](evidence/offline-2/screenshots/5b-live-chat-follow-up.png) | 21:22:42 · 21:22:50 | Eason's live chat and follow-up |
+
+Shots 1–3 were taken at the third pause by scrolling back up; the times are the screenshot files' own.
+
+![Wi-Fi off, HTTPS failing, servers restarted](evidence/offline-2/screenshots/1-offline-proof-and-restart.png)
+![The four ask answers](evidence/offline-2/screenshots/3a-ask-T1-T2-T3.png)
+
+### The first offline run (kept)
+
+Earlier the same day ([`transcript-20260928-140540.txt`](evidence/offline/transcript-20260928-140540.txt), text only)
+the same script showed the same steps with the held-back `kickstarter-scraper.md` (a note in 113 s) and T2 still
+missing its passage. Its ingest also exposed a real bug, a merged note coming back (fix 10). An attempt before it
+stopped at step 1 even though Wi-Fi was off ([`transcript-20260928-134059.txt`](evidence/offline/transcript-20260928-134059.txt),
+kept): the script judged the internet by a raw TCP connection to `1.1.1.1:53`, which the Cisco AnyConnect network
+extension on this Mac answers locally. It now requires a real HTTPS request (fix 9). The online dry run before both,
+with its routing bug, is kept in [`evidence/local-dryrun/`](evidence/local-dryrun/summary.md).
 
 Also kept: retrieval checks before any generation ([baseline](evidence/retrieval/baseline-sources-only.md), with
-reviewed notes [indexed](evidence/retrieval/with-reviewed-notes.md), [ablation](evidence/retrieval/ablation.md)); the
-[wiki review log](evidence/wiki_review.md); the [cleanup log](evidence/cleanup_log.md); and every model call's exact
-prompt under `runs/`.
+reviewed notes [indexed](evidence/retrieval/with-reviewed-notes.md), [ablation](evidence/retrieval/ablation.md)) and
+after the T2 miss ([two-level experiment](evidence/retrieval/two-level-notes-first.md),
+[section openings](evidence/retrieval/section-openings.md), [after the new note was reviewed](evidence/retrieval/after-offline-2-review.md));
+the [wiki review log](evidence/wiki_review.md); the [cleanup log](evidence/cleanup_log.md); and every model call's
+exact prompt under `runs/`.
 
 ## 8. Reflection
 
-**The main limitation: retrieval, not the model, decided T2.** The reworded question *"In the app I built to track
-people I meet, what stops one user from seeing someone else's list?"* never retrieved the passage that states the
-answer in full ("Three independent mechanisms enforce it…"). Among the 520 indexed passages it ranks 80th by BM25
-and 19th by vector similarity, because it is written in the source's vocabulary (JWT, `user_id`, policies) while the
-question uses none of it. Gemma
-did the right thing with most of what it was given: every claim in its answer is supported and it explained Row
-Level Security, but it never saw the first mechanism, the database assigning `user_id`. (The third, the app's 401
-checks, was at the end of one passage; the answer left it out, and the source itself calls it "not what makes the
-data private".) Hosted Gemma 4 26B, given the same six passages, left out the same two (§9), so a larger model
-does not close this gap; retrieval would. A fluent, correct and cited answer can still be incomplete, and only the
-retrieval check makes that visible. **Improvement I would try:** retrieve at two
-levels. First match the question to wiki notes (searching notes only, *Secure Networking Tracker* already ranks 2nd,
-behind *Allowlist*, which is also about who may see which records), then search only within those notes' sources.
-The notes would become an index into the originals, which is what they are for; whether that recovers the missing
-passage is the next thing I would measure with `scripts/retrieval_check.py`.
+**The main limitation: T2, first a retrieval miss, then a model omission.** The reworded question *"In the app I
+built to track people I meet, what stops one user from seeing someone else's list?"* at first never retrieved the
+passage that states the answer in full ("Three independent mechanisms enforce it…"): among 520 passages it ranked
+80th by BM25 and 19th by vector similarity, because it is written in the source's vocabulary (JWT, `user_id`,
+policies) and the question uses none of it. Gemma answered correctly from what it had, and hosted Gemma 4 26B, given
+the same six passages, left out the same mechanisms (§9), so a larger model was not the fix.
+
+I measured two remedies before changing anything. Searching only the best-matching notes' sources, which I had
+proposed first, left the passage at position 30–37 ([experiment](evidence/retrieval/two-level-notes-first.md)). The
+cause was structural: the retrieved passage S4 was the *tail* of the README section whose *opening* passage was the
+missing one. Adding each retrieved section's opening passage (fix 14) brought it in at position 3 without changing
+T1 or T3, and the second offline run confirmed it. The answer is now more complete (RLS enabled and forced, per-user
+policies, the ownership rule), but it still leaves out the database assigning `user_id` and the app's 401 checks,
+although both are now in its passages (S3, S4). The remaining gap is the model summarising, not retrieval.
+**Improvement I would try next:** when a retrieved passage announces a list ("three independent mechanisms"), have
+the research rules ask for every item, and add a check that counts them; then compare E4B with the hosted 26B on the
+new passages.
+
+A second, smaller limitation showed up after the new note was reviewed and indexed: its "Related notes" line
+(naming Action Hub and AWS) now ranks 3rd for T3 and pushes the job-title passage from 5th to 6th, still inside the
+six that ask uses ([check](evidence/retrieval/after-offline-2-review.md)). Navigation sections of notes compete
+with evidence; indexing only a note's summary and facts would stop that.
 
 Other failures are logged with their fixes in [evidence/changes.md](evidence/changes.md). The ones worth knowing:
 
 - **Generated links were the least reliable part of ingestion.** Gemma proposed plausible but false relations
   ("Formula 1 … uses a Deep Q-Network") and concept notes that were really the syllabus. Facts were mostly faithful
   (numbers are checked automatically), but every link needed a human check.
-- **Chat did not cite notes in a creative turn.** Asked to draft LinkedIn posts, Wren used the Pac-Man notes
-  correctly but tagged none of the facts `[N#]`, although its instructions say to; the harness flagged it
-  (`citation check: no-citations`). The fix I would make is in the harness, not the prompt: when notes were used and
-  no tags came back, append a "Based on" line listing the notes, so a drafted post can always be traced.
+- **Chat citations needed the harness, not the prompt.** Asked to draft LinkedIn posts, Wren used the notes
+  correctly but tagged none of the facts `[N#]`, although its instructions say to; now the harness lists the notes
+  under such a reply (fix 15, check M5). The reverse also happened once: a capability answer carried an `[N1]` with
+  no notes behind it; the harness now removes such tags and says so (fix 16).
 - **A merged note came back** during the offline ingest; merges now leave redirects (fix 10).
 
 ## 9. Optional online mode (extension)
 
 Local mode is the default and everything above runs without it. `--mode online` sends the same harness
 prompts to **hosted Gemma 4 26B A4B** (`gemma-4-26b-a4b-it`) through the Gemini API — the MoE model that does
-not fit on this laptop.
+not fit on this laptop. Endpoint: `POST https://generativelanguage.googleapis.com/v1beta/models/gemma-4-26b-a4b-it:generateContent`
+(REST, no SDK; the key goes in the `x-goog-api-key` header; configured in [`config/settings.toml`](config/settings.toml)).
 
 - Select it: `export GEMINI_API_KEY=…` (create a key in Google AI Studio), then `wiki ask "…" --mode online`
   or `wiki chat --mode online`. Without the key the command stops with an explanation; there is never an
@@ -406,7 +488,7 @@ not fit on this laptop.
 
 **Tested on 2026-09-28** with Eason's own key, which the harness reads from `$GEMINI_API_KEY` and never prints, logs
 or saves. `./scripts/online_check.sh` ran the four ask tests through the same `harness.ask` code and the same local
-retrieval ([cards](evidence/online/summary.md)):
+retrieval ([cards](evidence/online/summary.md)). This was before fix 14, so it compares with the first offline run:
 
 <!-- BEGIN:online -->
 Run `online` at 2026-09-28T19:52:29; internet **ONLINE**; model `gemma-4-26b-a4b-it` (hosted: Gemini API (Google AI Studio) — retrieval and embeddings still local); 520 passages indexed.
@@ -421,8 +503,8 @@ Run `online` at 2026-09-28T19:52:29; internet **ONLINE**; model `gemma-4-26b-a4b
 
 What the comparison shows:
 
-- **Same evidence, same verdicts.** For every test, retrieval handed both models the identical six passages, so the
-  only difference is the model. Hosted 26B gave the same results as local E4B: T1, T3 and T4 pass, and T2 is correct
+- **Same evidence, same verdicts.** For every test, retrieval handed both models the identical six passages (the
+  first offline run's), so the only difference is the model. Hosted 26B gave the same results as local E4B: T1, T3 and T4 pass, and T2 is correct
   but incomplete in the same way (§8).
 - **Speed.** 1.1–3.2 s per answer online (one run each, network included), against the local model's 19 s median
   (§2.4). Chat replies took 3–10 s.
@@ -435,11 +517,12 @@ What the comparison shows:
 
 ```bash
 pytest -q                                         # harness logic with a fake model (no Gemma needed)
-python scripts/retrieval_check.py --label now     # retrieval only, for the four ask tests
+python scripts/retrieval_check.py --label now     # retrieval only, for the four ask tests (--no-openings: before fix 14)
+python scripts/retrieval_two_level.py             # the notes-first retrieval experiment (not used by the harness)
 python scripts/run_evals.py --label local         # four ask tests + mode checks -> evidence/local/
 python scripts/measure.py --label local           # memory and response time -> evidence/metrics/
 python scripts/build_readme_tables.py             # refresh the tables in this README from evidence/
 wiki check                                        # vault lint: names, headings, links, source references
 python scripts/review_notes.py                    # each unreviewed note's facts next to the passages they cite
-./scripts/offline_demo.sh                         # with Wi-Fi off: the full offline demonstration
+./scripts/offline_demo.sh                         # with Wi-Fi off: the full offline demonstration (LABEL=… names the evidence folder)
 ```

@@ -76,3 +76,20 @@ def test_index_search_bm25_only_without_embedder(project):
     idx = retrieval.Index()
     hits = idx.search("attendance grade share")
     assert hits[0].chunk.path == "raw/a.md" and "BM25 only" in idx.last_method
+
+
+def test_section_opening_is_added_before_a_later_passage(project):
+    """Fix 14: T2's key passage opened the section whose later passage was retrieved."""
+    filler = " ".join(f"word{i}" for i in range(230))
+    (project / "vault" / "raw" / "app.md").write_text(
+        "# App\n\n## Ownership\n\nThree independent mechanisms protect each list. " + filler + ".\n\n"
+        + filler + " The zebrafish policy filters every statement.\n")
+    retrieval.build_index()
+    idx = retrieval.Index()
+    hits = idx.search("zebrafish", k=1)
+    assert hits[0].chunk.line_start > 5 and "Three independent" not in hits[0].chunk.text
+    both = idx.add_section_openings(hits)
+    assert [h.chunk.text.startswith("Three independent") for h in both] == [True, False]
+    assert both[0].opens_section_of == hits[0].chunk.location and both[0].bm25_rank is None
+    assert "opening passage" in idx.last_method
+    assert idx.add_section_openings(both) == both   # already present: nothing added twice

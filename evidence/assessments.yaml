@@ -41,6 +41,52 @@ offline:
     Pass. The chat acknowledged "my favorite programming language is Rust" without a lookup; the separate ask answered
     "Insufficient evidence", and the claim does not appear anywhere in the ask prompt.
 
+offline-2:
+  T1: >-
+    Pass. The same answer as both earlier runs, from the same six passages (each one opens its section, so none was
+    added). "20% of the final grade" is in the original Attendance [S1] and Grading [S2] sections and in the syllabus
+    note [S5] ("Attendance is required and is worth 20% of the grade"); one absence without penalty and with no
+    explanation required is S1 verbatim, and S2 repeats it.
+  T2: >-
+    Pass; more complete than before, but still not all three mechanisms. The passage that was never retrieved before
+    now arrives as S3, the opening of the README's Authentication and ownership section, added because its later
+    passage S4 was retrieved (fix 14). Every claim is supported: Row Level Security, with each contact belonging to
+    exactly one account and ownership enforced by the database [S1][S2]; RLS enabled and forced on contacts, with
+    policies for authenticated users, so a row belongs to the user whose JWT created it and only that user can read or
+    change it [S3][S6]; a query for all contacts cannot return another user's rows because Postgres reads the user id
+    from the JWT [S5, verbatim]. New compared with the earlier runs: the ownership rule and RLS being enabled and forced
+    with per-user policies. Still left out: the database assigning user_id (NOT NULL DEFAULT auth.user_id(); the API
+    never sends it), which is in S3, and the application's 401 checks, which are in S4. Retrieval now supplies both,
+    so the remaining gap is the model's omission, not retrieval.
+  T3: >-
+    Pass. Correct, fully supported, and it uses both sources. The job title comes from the original experience entry
+    [S5] and its note [S3]; "70% for over 10,000 sellers" from the Action Hub front matter [S1], its note [S4] and the
+    page's opening summary [S6], an added section opening that states "Time-to-insight fell 70% for 10,000+ sellers".
+  T4: >-
+    Pass. The expected refusal, without guessing. Neither the six retrieved Pac-Man passages nor the two added section
+    openings (What I expected, and what actually happened; Assignment requirements checklist) mention a grade.
+  M1: >-
+    Partly failed: a stray [N1] tag. Both turns were answered with no notes lookup, the capabilities were accurate, each
+    ended with a starting point, and neither said "insufficient evidence". But the second answer ended a sentence with
+    "[N1]" although no notes were supplied (the CLI run in step 6 did the same in its first answer): a citation that
+    points at nothing, which this check expects not to see. The dry run, the first offline run and the online run had
+    no stray tags. Fixed afterwards (fix 16): the harness removes a note tag when no notes were supplied and says so.
+    Re-run three times with the local model (internet on, not offline) in evidence/local-after-fix16/: the model
+    emitted [N1] once, and the harness removed it and reported the removal.
+  M2: >-
+    Pass. The week plan was drafted without a notes lookup, and "make that shorter" condensed the same plan (Mon–Wed
+    Assignment 4, Thu–Fri PM applications, weekend buffer) from the conversation.
+  M3: >-
+    Pass. With the Gemma server stopped, search returned six original passages with paths and line numbers in 0.025 s
+    and made zero model calls.
+  M4: >-
+    Pass. The chat acknowledged "my favorite programming language is Rust" without a lookup; the separate ask answered
+    "Insufficient evidence", and the claim does not appear in the ask prompt.
+  M5: >-
+    Pass. The draft looked up notes because it names a wiki subject; every figure in it matches the notes (492 to 906,
+    +84%, and "over 400 points" = +414 in N3). The model tagged no claims, so the harness listed the four notes under
+    the reply (fix 15). "make that shorter" used the conversation with no new lookup and added no new facts.
+
 online:
   T1: >-
     Pass. Correct and fully supported, from the same six passages as the offline run. All four cited passages state

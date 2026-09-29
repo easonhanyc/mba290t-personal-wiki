@@ -4,7 +4,7 @@ Every generated note was read against the original passages it cites (`scripts/r
 
 Reviewed 2026-09-27 01:06 by Claude (Anthropic), for Eason Han; each fact checked against the cited passage.
 
-Totals: 67 facts corrected, 43 facts removed (mostly duplicates after merging sources), 14 summaries rewritten, related links re-checked and re-explained on 23 notes.
+Totals for this first pass: 67 facts corrected, 43 facts removed (mostly duplicates after merging sources), 14 summaries rewritten, related links re-checked and re-explained on 23 notes.
 
 ## Action Hub
 
@@ -409,4 +409,35 @@ Notes reviewed in this pass: Kickstarter Scraper. Reviewer: Claude (Anthropic), 
 ### University of Notre Dame (already reviewed)
 
 - **related link added**: [[Kickstarter Scraper]] — An individual extra-credit project for ITAO 40450 (Spring 2023); listed as related work on this entry.
+
+## Review pass 2026-09-28 21:29
+
+Notes reviewed in this pass: Prioritization Framework. Reviewer: Claude (Anthropic), for Eason Han; each fact checked against the cited passage.
+
+### Prioritization Framework
+
+- **summary rewritten**: This framework uses four ordered gates to cut a roadmap, prioritizing decision-making over generating scores that are ea…  
+  _Why:_ clearer, source-checked summary
+- **fact corrected**: Most prioritization frameworks fail in practice for the same reason: they produce a *score* when what the room actually needs is a *decision*, and scores are easy to argue with. → The write-up's starting claim: most prioritization frameworks fail in practice because they produce a score when the room needs a decision, and scores are easy to argue with.  
+  _Why:_ attributed the opinion to the write-up (neutral voice)
+- **fact corrected**: Order matters. Each gate is cheaper to evaluate than the one after it, so failing early saves the expensive analysis. → The four gates are applied in order, each cheaper to evaluate than the next, so a feature that fails early skips the expensive analysis.  
+  _Why:_ the fragment 'Order matters.' had no subject
+- **fact corrected**: The single sharpest cut available on an analytics or insights product, and the one that survives contact with stakeholders best — because it's answerable without data. → Gate 1 asks whether a feature changes what the user does or only what they know; the write-up calls it the sharpest cut for an analytics product because it can be answered without data.  
+  _Why:_ the fragment did not say which gate it described
+- **fact corrected**: Above the line features change behavior, while features that only change knowledge are below the line unless they feed something in the left column. → Features that change behavior go above the line; features that only change knowledge go below it, unless they feed a behavior-changing feature.  
+  _Why:_ 'the left column' only made sense beside the table
+- **fact corrected**: Not a reason to kill a feature, but a reason to *sequence* it deliberately rather than accidentally. → Gate 2 asks whether shipping depends on a team the author does not control; a dependency is a reason to sequence the feature later and raise the dependency as a joint roadmap item now, not to kill it.  
+  _Why:_ the fragment did not name the gate or the dependency
+- **fact corrected**: A feature requiring a ten-minute focused session is mis-designed for an interrupted user regardless of how much value it would deliver in that session. → Gate 3 checks the user's real context (uninterrupted time, device and posture, what is already open): a feature that needs a ten-minute focused session is mis-designed for an interrupted user, however much value it would deliver.  
+  _Why:_ added what the gate checks, from the same section
+- **fact corrected**: Whatever survives the first three gates is largely comparable, which is exactly the condition under which scoring is actually meaningful. → Gate 4 scores reach × impact ÷ effort only for what survived the first three gates, because only then is the list comparable enough for scores to mean something.  
+  _Why:_ named the gate and the formula
+- **fact corrected**: A process that treats every request as a one-off spends its life re-answering the same question; one that separates *one-off asks* from *repeated asks*, and promotes the second kind into the roadmap, stops paying that cost twice. → The rule the write-up says generalizes: a request that shows up three times is a missing feature, so repeated asks should be promoted into the roadmap instead of answered one by one.  
+  _Why:_ led with the rule the section is named for
+- **related links replaced**: Action Hub, Amazon Web Services  
+  _Why:_ Removed Gemma's link to GenAI Adoption Program ('both involve designing programs or frameworks'): the sources do not connect them. The note was renamed from 'Prioritization Framework Method' with `wiki rename` (the generated title copied the source's kind: Method).
+
+### Action Hub (already reviewed)
+
+- **related link added**: [[Prioritization Framework]] — The four-gate method used to cut this product's roadmap; this page links to it as the framework behind the PRD.
 

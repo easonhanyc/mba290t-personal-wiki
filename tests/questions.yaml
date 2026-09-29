@@ -79,3 +79,9 @@ mode_checks:
     chat_turns: ["By the way, my favorite programming language is Rust."]
     ask: "What is my favorite programming language?"
     expected: ask reports insufficient evidence; the saved ask prompt contains no chat text
+
+  - id: M5
+    name: draft from notes, traceable
+    mode: chat
+    turns: ["Draft a 3-line LinkedIn post about my Ms. Pac-Man project.", "make that shorter"]
+    expected: the draft looks up notes (it needs personal facts) and its facts match them, tagged [N#] or, if the model tags none, listed by the harness under the reply; "make that shorter" uses the conversation with no new lookup

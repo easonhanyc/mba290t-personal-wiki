@@ -44,8 +44,10 @@ def test_ingest_twice_no_duplicates_and_readable_name(project):
     assert "[[raw/projects/demo#Security|" in note.body
     calls_after_first = len(model.calls)
     s2 = ingest.ingest(model=model, log=lambda *_: None)
+    assert s1["notes_changed"] == ["wiki/Projects/Demo Tracker.md"]
     assert s2["files"] == {"raw/projects/demo.md": "unchanged"}
     assert len(model.calls) == calls_after_first
+    assert s2["notes_changed"] == []   # only files whose bytes changed are reported
     again = sorted(p.relative_to(project / "vault").as_posix() for p in (project / "vault" / "wiki").rglob("*.md"))
     assert again == notes
     index = (project / "vault" / "index.md").read_text()

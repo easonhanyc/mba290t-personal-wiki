@@ -1,0 +1,43 @@
+{
+  "time": "2026-09-28T21:06:58",
+  "files": {
+    "raw/website/artifacts/prioritization-framework.md": "ingested"
+  },
+  "notes_changed": [
+    "wiki/Concepts/Prioritization Framework Method.md"
+  ],
+  "model": "gemma-4-e4b-it-qat-q4_0",
+  "mode": "local",
+  "model_calls": 2,
+  "seconds": 50.5,
+  "dropped_facts": [],
+  "failures": [],
+  "calls": [
+    {
+      "stage": "note",
+      "source": "raw/website/artifacts/prioritization-framework.md",
+      "seconds": 42.0,
+      "prompt_tokens": 2293,
+      "output_tokens": 847,
+      "finish": "stop",
+      "attempt": 1
+    },
+    {
+      "stage": "links",
+      "source": "wiki/Concepts/Prioritization Framework Method.md",
+      "seconds": 7.9,
+      "prompt_tokens": 1085,
+      "output_tokens": 87,
+      "finish": "stop",
+      "attempt": 1
+    }
+  ],
+  "index": {
+    "passages": 529,
+    "sources": 26,
+    "wiki_notes": 24,
+    "embedded_new": 9,
+    "reused_vectors": 520,
+    "vectors": true
+  }
+}

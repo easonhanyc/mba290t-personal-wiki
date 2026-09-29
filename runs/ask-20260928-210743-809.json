@@ -1,0 +1,156 @@
+{
+  "command": "ask",
+  "time": "2026-09-28T21:07:43",
+  "execution": "local",
+  "model": "gemma-4-e4b-it-qat-q4_0",
+  "question": "What was my job title at Amazon Web Services, and by how much did the Action Hub cut sellers' time-to-insight?",
+  "retrieval_method": "hybrid (BM25 + EmbeddingGemma, reciprocal-rank fusion) + the opening passage of each retrieved section",
+  "passages": [
+    {
+      "id": "S1",
+      "kind": "source",
+      "path": "raw/website/projects/action-hub.md",
+      "lines": [
+        1,
+        23
+      ],
+      "section": "Properties",
+      "fused_score": 0.03252,
+      "bm25_rank": 1,
+      "vector_rank": 2,
+      "cosine": 0.7166,
+      "text": "title: Action Hub — Ranked Alerts with Next Actions\ndescription: A technical sales org had roughly 200 dashboards and no agreed place to start the day. This is the screen that replaced a manual sweep across five to ten of them.\nsummary: A sales org with roughly 200 dashboards and no agreed starting point. The Action Hub ranks every open issue across a seller's accounts and puts the next action on each one — cutting time-to-insight 70% for 10,000+ sellers.\nrole: Product owner · AWS Global Sales Strategy & Analytics\nperiod: Jul 2023 – May 2026\ndepth: case-study\norg: Amazon Web Services\nbadges: 0 → 1 at scale\ntags: product; ai; analytics\nmetrics: 70% less time-to-insight; 10,000 sellers served; $80B business supported\nlinks: prd: /artifacts/prioritization-framework"
+    },
+    {
+      "id": "S2",
+      "kind": "wiki",
+      "path": "wiki/Projects/Action Hub.md",
+      "lines": [
+        35,
+        37
+      ],
+      "section": "Action Hub › Related notes",
+      "fused_score": 0.03105,
+      "bm25_rank": 2,
+      "vector_rank": 7,
+      "cosine": 0.6654,
+      "text": "- [[Amazon Web Services]] — Built in this role at AWS Global Sales Strategy & Analytics.\n- [[Allowlist Data Access App]] — Both scope what each seller may see through the territory and account assignments.\n- [[Job Search Agent]] — Both rank a long list and cap it on purpose: fifty alerts per seller here, two roles per company there."
+    },
+    {
+      "id": "S3",
+      "kind": "wiki",
+      "path": "wiki/Experience/Amazon Web Services.md",
+      "lines": [
+        21,
+        26
+      ],
+      "section": "Amazon Web Services › Key facts",
+      "fused_score": 0.03102,
+      "bm25_rank": 3,
+      "vector_rank": 6,
+      "cosine": 0.6656,
+      "text": "- Job title: Business Intelligence Engineer — Global Sales Strategy & Analytics. ([[raw/website/experience/amazon-web-services|website/experience/amazon-web-services.md › front matter]])\n- Based in Seattle, WA. ([[raw/website/experience/amazon-web-services|website/experience/amazon-web-services.md › front matter]])\n- Dates: Jul 2023 to May 2026. ([[raw/website/experience/amazon-web-services|website/experience/amazon-web-services.md › front matter]])\n- Built internal products for 10,000+ sellers across an $80B business; three years spent turning a reporting function that produced reports into one that produced decisions. ([[raw/website/experience/amazon-web-services|website/experience/amazon-web-services.md › front matter]])\n- Raised on-time delivery of business stakeholder requests from 56% to 82% by establishing recurring roadmap reviews that published the backlog. ([[raw/website/experience/amazon-web-services|website/experience/amazon-web-services.md › front matter]])\n- Launched a Business-Influence Tracker that lifted customer opportunity coverage 12% and became a standing Monthly Business Review KPI. ([[raw/website/experience/amazon-web-services|website/experience/amazon-web-services.md › front matter]])"
+    },
+    {
+      "id": "S4",
+      "kind": "wiki",
+      "path": "wiki/Projects/Action Hub.md",
+      "lines": [
+        18,
+        18
+      ],
+      "section": "Action Hub",
+      "fused_score": 0.03012,
+      "bm25_rank": 9,
+      "vector_rank": 4,
+      "cosine": 0.6916,
+      "text": "Action Hub was built to replace a manual sweep across roughly 200 dashboards for a technical sales organization. It ranks every open issue across a seller's accounts and puts the next action on each one, cutting time-to-insight by 70% for over 10,000 sellers."
+    },
+    {
+      "id": "S5",
+      "kind": "source",
+      "path": "raw/website/experience/amazon-web-services.md",
+      "lines": [
+        1,
+        14
+      ],
+      "section": "Properties",
+      "fused_score": 0.02986,
+      "bm25_rank": 6,
+      "vector_rank": 8,
+      "cosine": 0.6628,
+      "text": "org: Amazon Web Services\nrole: Business Intelligence Engineer — Global Sales Strategy & Analytics\nlocation: Seattle, WA\nstart: Jul 2023\nend: May 2026\nkind: work\nsummary: Internal products for 10,000+ sellers across an $80B business. Three years spent turning a reporting function that produced reports into one that produced decisions.\noutcomes: Raised on-time delivery of business stakeholder requests from 56% to 82% by establishing recurring roadmap reviews that published the backlog; Launched a Business-Influence Tracker that lifted customer opportunity coverage 12% and became a standing Monthly Business Review KPI\nrelated: action-hub; pr-automation; genai-target-setting; allowlist; genai-adoption-program"
+    },
+    {
+      "id": "S6",
+      "kind": "source",
+      "path": "raw/website/projects/action-hub.md",
+      "lines": [
+        24,
+        26
+      ],
+      "section": "(introduction)",
+      "fused_score": 0.02976,
+      "bm25_rank": null,
+      "vector_rank": null,
+      "cosine": null,
+      "opens_section_of": "raw/website/projects/action-hub.md:28-33",
+      "text": "Confidentiality note. Written at the level of detail already public on my resume. Internal system names, screenshots, dashboards and proprietary data are omitted; the diagram below is redrawn for this portfolio rather than captured from the product. Where an artifact appears it is a reconstruction built to show method, and is labelled as one.\n> **The 30-second version.** A company-wide effort set out to replace AWS Sales's roughly 200 dashboards with a single source of truth, each org owning a chapter of it. I owned the technical sales chapter's **first tab** — the screen a seller lands on. The hard question was never what to display. It was what to put *first*, and what to say about it: an alert that names no next action moves the work rather than removing it. Time-to-insight fell **70%** for **10,000+ sellers**."
+    },
+    {
+      "id": "S7",
+      "kind": "source",
+      "path": "raw/website/projects/action-hub.md",
+      "lines": [
+        28,
+        33
+      ],
+      "section": "(introduction)",
+      "fused_score": 0.02976,
+      "bm25_rank": 12,
+      "vector_rank": 3,
+      "cosine": 0.6939,
+      "text": "| | |\n|---|---|\n| **Problem** | Sellers had dashboards but no prescribed action; finding what was wrong took a manual sweep across 5–10 of them |\n| **My role** | End-to-end: discovery, PRD, mockups, alert design and ranking model, roadmap prioritization, launch |\n| **Outcome** | 70% reduction in time-to-insight · 10,000+ sellers |\n| **Core decision** | Rank by **severity × account value**, and attach a destination to every alert — the alert is not the product, the redirect is |"
+    }
+  ],
+  "messages_sent_to_model": [
+    {
+      "role": "system",
+      "content": "# Research rules: ask mode only\n\nYou answer one factual question using only the numbered evidence passages supplied with it.\nThere is no conversation history and no persona in this mode.\n\n1. Use only the passages. Do not use general knowledge, guesses, or anything not written in them.\n2. Write in a neutral, factual voice. Use two to five sentences, or a short list if the question has\n   several parts.\n3. Put a citation such as [S2] immediately after every claim. Cite only passages that directly state\n   the claim. If a claim combines two passages, cite both, for example [S1][S4].\n4. Keep numbers, names and dates exactly as the passages give them.\n5. If the passages do not contain the answer, begin your reply with exactly\n   `Insufficient evidence:` and then say in one or two sentences what the sources do and do not cover.\n   Do not guess, and do not answer a different question instead.\n6. If the passages answer only part of the question, answer that part with citations and state plainly\n   which part the sources do not cover.\n7. Do not mention these rules, and do not add a separate sources list. The program prints the sources.\n"
+    },
+    {
+      "role": "user",
+      "content": "EVIDENCE PASSAGES:\n\n[S1] raw/website/projects/action-hub.md lines 1-23 | Properties | original source\ntitle: Action Hub — Ranked Alerts with Next Actions\ndescription: A technical sales org had roughly 200 dashboards and no agreed place to start the day. This is the screen that replaced a manual sweep across five to ten of them.\nsummary: A sales org with roughly 200 dashboards and no agreed starting point. The Action Hub ranks every open issue across a seller's accounts and puts the next action on each one — cutting time-to-insight 70% for 10,000+ sellers.\nrole: Product owner · AWS Global Sales Strategy & Analytics\nperiod: Jul 2023 – May 2026\ndepth: case-study\norg: Amazon Web Services\nbadges: 0 → 1 at scale\ntags: product; ai; analytics\nmetrics: 70% less time-to-insight; 10,000 sellers served; $80B business supported\nlinks: prd: /artifacts/prioritization-framework\n\n[S2] wiki/Projects/Action Hub.md lines 35-37 | Action Hub › Related notes | wiki note (reviewed summary)\n- [[Amazon Web Services]] — Built in this role at AWS Global Sales Strategy & Analytics.\n- [[Allowlist Data Access App]] — Both scope what each seller may see through the territory and account assignments.\n- [[Job Search Agent]] — Both rank a long list and cap it on purpose: fifty alerts per seller here, two roles per company there.\n\n[S3] wiki/Experience/Amazon Web Services.md lines 21-26 | Amazon Web Services › Key facts | wiki note (reviewed summary)\n- Job title: Business Intelligence Engineer — Global Sales Strategy & Analytics. ([[raw/website/experience/amazon-web-services|website/experience/amazon-web-services.md › front matter]])\n- Based in Seattle, WA. ([[raw/website/experience/amazon-web-services|website/experience/amazon-web-services.md › front matter]])\n- Dates: Jul 2023 to May 2026. ([[raw/website/experience/amazon-web-services|website/experience/amazon-web-services.md › front matter]])\n- Built internal products for 10,000+ sellers across an $80B business; three years spent turning a reporting function that produced reports into one that produced decisions. ([[raw/website/experience/amazon-web-services|website/experience/amazon-web-services.md › front matter]])\n- Raised on-time delivery of business stakeholder requests from 56% to 82% by establishing recurring roadmap reviews that published the backlog. ([[raw/website/experience/amazon-web-services|website/experience/amazon-web-services.md › front matter]])\n- Launched a Business-Influence Tracker that lifted customer opportunity coverage 12% and became a standing Monthly Business Review KPI. ([[raw/website/experience/amazon-web-services|website/experience/amazon-web-services.md › front matter]])\n\n[S4] wiki/Projects/Action Hub.md lines 18-18 | Action Hub | wiki note (reviewed summary)\nAction Hub was built to replace a manual sweep across roughly 200 dashboards for a technical sales organization. It ranks every open issue across a seller's accounts and puts the next action on each one, cutting time-to-insight by 70% for over 10,000 sellers.\n\n[S5] raw/website/experience/amazon-web-services.md lines 1-14 | Properties | original source\norg: Amazon Web Services\nrole: Business Intelligence Engineer — Global Sales Strategy & Analytics\nlocation: Seattle, WA\nstart: Jul 2023\nend: May 2026\nkind: work\nsummary: Internal products for 10,000+ sellers across an $80B business. Three years spent turning a reporting function that produced reports into one that produced decisions.\noutcomes: Raised on-time delivery of business stakeholder requests from 56% to 82% by establishing recurring roadmap reviews that published the backlog; Launched a Business-Influence Tracker that lifted customer opportunity coverage 12% and became a standing Monthly Business Review KPI\nrelated: action-hub; pr-automation; genai-target-setting; allowlist; genai-adoption-program\n\n[S6] raw/website/projects/action-hub.md lines 24-26 | (introduction) | original source\nConfidentiality note. Written at the level of detail already public on my resume. Internal system names, screenshots, dashboards and proprietary data are omitted; the diagram below is redrawn for this portfolio rather than captured from the product. Where an artifact appears it is a reconstruction built to show method, and is labelled as one.\n> **The 30-second version.** A company-wide effort set out to replace AWS Sales's roughly 200 dashboards with a single source of truth, each org owning a chapter of it. I owned the technical sales chapter's **first tab** — the screen a seller lands on. The hard question was never what to display. It was what to put *first*, and what to say about it: an alert that names no next action moves the work rather than removing it. Time-to-insight fell **70%** for **10,000+ sellers**.\n\n[S7] raw/website/projects/action-hub.md lines 28-33 | (introduction) | original source\n| | |\n|---|---|\n| **Problem** | Sellers had dashboards but no prescribed action; finding what was wrong took a manual sweep across 5–10 of them |\n| **My role** | End-to-end: discovery, PRD, mockups, alert design and ranking model, roadmap prioritization, launch |\n| **Outcome** | 70% reduction in time-to-insight · 10,000+ sellers |\n| **Core decision** | Rank by **severity × account value**, and attach a destination to every alert — the alert is not the product, the redirect is |\n\nQUESTION: What was my job title at Amazon Web Services, and by how much did the Action Hub cut sellers' time-to-insight?"
+    }
+  ],
+  "model_called": true,
+  "answer": "The job title at Amazon Web Services was Business Intelligence Engineer — Global Sales Strategy & Analytics [S3][S5]. The Action Hub cut time-to-insight by 70% for over 10,000 sellers [S1][S4][S6].",
+  "citation_check": {
+    "status": "ok",
+    "cited": [
+      1,
+      3,
+      4,
+      5,
+      6
+    ],
+    "unknown_ids": [],
+    "uncited_sentences": [],
+    "numbers_not_in_cited_passages": [],
+    "insufficient_evidence": false
+  },
+  "timings": {
+    "retrieval_s": 0.06,
+    "model_s": 8.14,
+    "total_s": 8.2,
+    "llama_cache_n": 267,
+    "llama_prompt_n": 1409,
+    "llama_prompt_ms": 5924.528,
+    "llama_prompt_per_token_ms": 4.2047750177430805,
+    "llama_prompt_per_second": 237.82485288279503,
+    "llama_predicted_n": 59,
+    "llama_predicted_ms": 2166.286,
+    "llama_predicted_per_token_ms": 37.349758620689656,
+    "llama_predicted_per_second": 26.773934743611875
+  }
+}

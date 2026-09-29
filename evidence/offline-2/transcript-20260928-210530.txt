@@ -1,0 +1,734 @@
+
+================================================================
+== 0. When and where
+================================================================
+
+$ date
+Mon Sep 28 21:05:30 PDT 2026
+[exit code 0]
+
+$ sw_vers
+ProductName:		macOS
+ProductVersion:		26.6.2
+BuildVersion:		25G83
+[exit code 0]
+
+$ sysctl -n machdep.cpu.brand_string
+Apple M2
+[exit code 0]
+RAM: 16 GB unified memory
+
+$ df -h /
+Filesystem        Size    Used   Avail Capacity iused ifree %iused  Mounted on
+/dev/disk3s1s1   460Gi    12Gi    76Gi    14%    459k  794M    0%   /
+[exit code 0]
+
+================================================================
+== 1. Proof the internet is disconnected
+================================================================
+
+$ networksetup -getairportpower en0
+Wi-Fi Power (en0): Off
+[exit code 0]
+
+$ route -n get default
+route: writing to routing socket: not in table
+[exit code 0]
+
+$ curl -sS -m 5 -o /dev/null https://huggingface.co
+curl: (6) Could not resolve host: huggingface.co
+[exit code 6]
+
+$ curl -sS -m 5 -o /dev/null https://1.1.1.1
+curl: (7) Couldn't connect to server
+[exit code 7]
+(for information: a raw TCP connect to 1.1.1.1:53 can be answered locally by a network extension)
+
+$ python -c import socket; socket.create_connection(('1.1.1.1', 53), timeout=3); print('TCP 1.1.1.1:53 answered (locally or remotely)')
+TCP 1.1.1.1:53 answered (locally or remotely)
+[exit code 0]
+OK: no HTTPS request can leave this machine (no route, no DNS). Everything below runs locally.
+
+================================================================
+== 2. Restart the local model servers and the CLI (fresh processes, local mode)
+================================================================
+
+$ wiki serve stop
+  gemma: stopped (pid 29604)
+  embed: stopped (pid 29605)
+[exit code 0]
+
+$ wiki serve start
+  gemma: starting (pid 29881) ...
+  embed: starting (pid 29882) ...
+  gemma: ready
+  embed: ready
+[exit code 0]
+
+$ wiki status
+── wiki status · /Users/easonhan/Desktop/研一上/MBA 290T Fundamentals of Agentic AI/personal-wiki ──
+  local model   gemma-4-e4b-it-qat-q4_0  file /Users/easonhan/models/gemma/gemma-4-E4B_q4_0-it.gguf  (present)
+  embeddings    embeddinggemma-300m-qat-q8_0  (present)
+  gemma         running at http://127.0.0.1:8080
+  embed         running at http://127.0.0.1:8081
+  online model  gemma-4-26b-a4b-it via Gemini API (Google AI Studio) (only with --mode online)
+  vault         25 originals in vault/raw, 24 notes in vault/wiki, 520 indexed passages
+[exit code 0]
+
+################################################################
+##  SCREENSHOT 1 of 5: Wi-Fi off, HTTPS failing, local servers restarted
+##  Press Cmd+Shift+3 now, then press Enter here to continue.
+################################################################
+
+
+$ wiki --help
+usage: wiki [-h] [--version] COMMAND ...
+
+Personal wiki CLI: your own notes + a local Gemma model, fully offline by default.
+
+commands:
+  ingest [PATH...]    read sources, write/update wiki notes with local Gemma, rebuild index.md and the search index
+  search "words"      show matching ORIGINAL passages and their paths (no model, no generated answer)
+  ask "question"      one neutral, cited answer from retrieved evidence, or "Insufficient evidence"
+  chat                talk to Wren, your assistant; remembers the conversation, looks up notes only when needed
+  serve start|stop|status   run the local model servers (Gemma on :8080, EmbeddingGemma on :8081)
+  check               lint the vault: file names, headings, links, source references, index coverage
+  rename OLD NEW      rename a note and update every link, the catalog and the index
+  merge KEEP REMOVE   fold a duplicate note into another (facts, sources, links, catalog)
+  status              show configuration, models, servers and index size
+  help [COMMAND]      this overview, or details for one command
+
+execution setting:
+  --mode local        (default) llama.cpp on 127.0.0.1 with the Gemma file named in config/settings.toml
+  --mode online       optional: hosted Gemma via the Gemini API; needs $GEMINI_API_KEY; never used as a fallback
+
+configuration and inputs:
+  config/settings.toml   model files, endpoints, context size, retrieval and prompt budgets
+  config/sources.toml    where each original came from (repo + commit or URL)
+  instructions/          persona.md (chat), research-rules.md (ask), ingest-rules.md (note writing)
+  vault/raw/             original sources, never modified (.md .txt .html)
+  vault/wiki/            generated notes in topic folders; vault/index.md is the landing page
+  data/ runs/            machine files: catalog, passages, vectors, and a JSON record of every ask/chat/ingest
+
+typical session:
+  wiki serve start
+  wiki ingest vault/raw
+  wiki search "row level security"
+  wiki ask "What share of the final grade is attendance?"
+  wiki chat
+
+positional arguments:
+  COMMAND
+    ingest    read sources and update the wiki
+    search    show original passages (no model)
+    ask       cited factual answer from the sources
+    chat      talk to your assistant
+    serve     start/stop/status of local model servers
+    check     lint the vault
+    merge     merge two notes about the same subject
+    rename    rename a note and update links
+    status    configuration, models, servers, index
+    help      show help
+
+options:
+  -h, --help  show this help message and exit
+  --version   show program's version number and exit
+[exit code 0]
+
+================================================================
+== 3. Useful error when the local model is unavailable (no cloud fallback)
+================================================================
+
+$ wiki serve stop --only gemma
+  gemma: stopped (pid 29881)
+[exit code 0]
+
+$ wiki ask What share of the final grade is attendance, and how many classes can be missed without penalty?
+error: Local Gemma is not running at http://127.0.0.1:8080.
+  Start it with:  wiki serve start
+  (No cloud fallback is used; local mode needs the local server.)
+[exit code 3]
+-- search still works: it is retrieval only, no language model --
+
+$ wiki search row level security -k 3
+── wiki search · hybrid (BM25 + EmbeddingGemma, reciprocal-rank fusion) · no language model ──
+
+[1] raw/course-projects/secure-networking-tracker/docs/how-it-works.md:52-83  (original; BM25 #1 · vector #1)
+    How this app works › 3. The ownership rule › Layer 2 — Row Level Security filters every statement
+    ```sql
+    ALTER TABLE public.contacts ENABLE ROW LEVEL SECURITY;
+    ALTER TABLE public.contacts FORCE  ROW LEVEL SECURITY;
+    ```
+    `ENABLE` turns policies on. `FORCE` also applies them to the table's *owner* — without it, `neondb_owner` would bypass every policy.
+    Four policies, one per operation, all for the `authenticated` role:
+    ```sql
+    CREATE POLICY contacts_select_own ON public.contacts
+      FOR SELECT TO authenticated
+      USING ((SELECT auth.user_id()) = user_id);
+
+    CREATE POLICY contacts_insert_own ON public.contacts
+      FOR INSERT TO authenticated
+      WITH CHECK ((SELECT auth.user_id()) = user_id);
+
+    CREATE POLICY contacts_update_own ON public.contacts
+      FOR UPDATE TO authenticated
+      USING      ((SELECT auth.user_id()) = user_id)
+      WITH CHECK ((SELECT auth.user_id()) = user_id);
+
+    CREATE POLICY contacts_delete_own ON public.contacts
+      FOR DELETE TO authenticated
+      USING ((SELECT auth.user_id()) = user_id);
+    ```
+    **`USING` vs `WITH CHECK` — the distinction to have ready:**
+    - `USING` filters rows that already exist. It answers *"which rows may this statement see or touch?"* It is silently added to `SELECT`, `UPDATE` and `DELETE` as an extra `WHERE` clause.
+    - `WITH CHECK` inspects the row *as it will be after the write*. It answers *"is this row allowed to exist looking like that?"* It applies to `INSERT` and `UPDATE`.
+
+[2] raw/course-projects/secure-networking-tracker/docs/how-it-works.md:85-89  (original; BM25 #4 · vector #2)
+    How this app works › 3. The ownership rule › Layer 2 — Row Level Security filters every statement
+    **Why `UPDATE` needs both.** With only `USING`, a user could target a row they legitimately own and change `user_id` to someone else's id. `USING` was satisfied — they did own it at the start. Nothing would check the result, so the row would silently move into another person's list. That is both a data-loss bug and a way to plant rows in someone else's account. `WITH CHECK` re-evaluates the rule against the *new* row and rejects it.
+    There is also a `BEFORE UPDATE` trigger that resets `NEW.user_id = OLD.user_id`, so ownership is pinned even if a policy were later loosened.
+    **`anonymous` is granted nothing** on this table, so an unauthenticated caller has no privileges to exercise in the first place.
+
+[3] wiki/Projects/Secure Networking Tracker.md:39-42  (wiki note; BM25 #2 · vector #8)
+    Secure Networking Tracker › Key facts › From course-projects/secure-networking-tracker/docs/how-it-works.md
+    - A signed-in user gets a private list of contacts, and the browser never talks to the database. ([[raw/course-projects/secure-networking-tracker/docs/how-it-works#1. The one-paragraph version|course-projects/secure-networking-tracker/docs/how-it-works.md › 1. The one-paragraph version]])
+    - The `user_id` column in the `public.contacts` table is of type `text` and serves as the whole security model. ([[raw/course-projects/secure-networking-tracker/docs/how-it-works#2. The schema|course-projects/secure-networking-tracker/docs/how-it-works.md › 2. The schema]])
+    - The distinction between `USING` and `WITH CHECK` is that `USING` filters existing rows, while `WITH CHECK` inspects the row as it will be after the write. ([[raw/course-projects/secure-networking-tracker/docs/how-it-works#Layer 2 — Row Level Security filters every statement|course-projects/secure-networking-tracker/docs/how-it-works.md › Layer 2 — Row Level Security filters every statement]])
+    - Layer 3 involves the application checking routes and returning 401s, which is defense in depth but not the primary security mechanism. ([[raw/course-projects/secure-networking-tracker/docs/how-it-works#Layer 3 — the application checks too|course-projects/secure-networking-tracker/docs/how-it-works.md › Layer 3 — the application checks too]])
+
+3 passages from 520 indexed. No answer generated; open the paths above to read more.
+[exit code 0]
+
+$ wiki serve start --only gemma
+  gemma: starting (pid 29900) ...
+  gemma: ready
+[exit code 0]
+
+================================================================
+== 4. Ingest a new local source offline, then ingest it again (no duplicates)
+================================================================
+Notes before: 24
+
+$ wiki ingest incoming/prioritization-framework.md --into website/artifacts
+  copied prioritization-framework.md -> vault/raw/website/artifacts/prioritization-framework.md (byte-for-byte; sha256 ba375a97db9f)
++ raw/website/artifacts/prioritization-framework.md: 608 words, 9 sections
+    -> wiki/Concepts/Prioritization Framework Method.md (9 facts) in 42s
+  concept 'Agentic AI' was merged away or renamed earlier; not re-created
+
+Ingest finished in 50s with gemma-4-e4b-it-qat-q4_0 (local): 1 ingested
+Notes written or updated:
+  vault/wiki/Concepts/Prioritization Framework Method.md
+Index: 529 passages (26 sources, 24 reviewed notes); 9 newly embedded. index.md and Source Catalog.md rebuilt.
+[exit code 0]
+Notes after first ingest: 25
+
+$ wiki ingest incoming/prioritization-framework.md --into website/artifacts
+  prioritization-framework.md is already in vault/raw/website/artifacts/prioritization-framework.md (identical)
+= raw/website/artifacts/prioritization-framework.md: unchanged (sha256 ba375a97db9f), notes up to date: Prioritization Framework Method
+
+Ingest finished in 0s with gemma-4-e4b-it-qat-q4_0 (local): 1 unchanged
+Index: 529 passages (26 sources, 24 reviewed notes); 0 newly embedded. index.md and Source Catalog.md rebuilt.
+[exit code 0]
+
+$ wiki ingest vault/raw
+= raw/course/syllabus.html: unchanged (sha256 b400645ca89c), notes up to date: MBA 290T Syllabus, Deep Learning
+= raw/course-projects/custom-llm/README.md: unchanged (sha256 11b5c49c8f48), notes up to date: Custom LLM with nanoGPT, Deep Learning
+= raw/course-projects/pacman-dqn/README.md: unchanged (sha256 4b724349cd4a), notes up to date: Ms. Pac-Man DQN, Deep Learning, Deep Q-Network
+= raw/course-projects/pacman-dqn/docs/METHODOLOGY.md: unchanged (sha256 b14e34e7414b), notes up to date: Ms. Pac-Man DQN
+= raw/course-projects/secure-networking-tracker/README.md: unchanged (sha256 4b2dc6a22bd0), notes up to date: Secure Networking Tracker
+= raw/course-projects/secure-networking-tracker/docs/how-it-works.md: unchanged (sha256 5ab70ce209d7), notes up to date: Secure Networking Tracker
+= raw/website/artifacts/prioritization-framework.md: unchanged (sha256 ba375a97db9f), notes up to date: Prioritization Framework Method
+= raw/website/experience/amazon-web-services.md: unchanged (sha256 6b6451e8b3a0), notes up to date: Amazon Web Services
+= raw/website/experience/clean-shores.md: unchanged (sha256 1fa66d70f081), notes up to date: Seaside Sustainability
+= raw/website/experience/idg-capital.md: unchanged (sha256 a3dca4538202), notes up to date: IDG Capital
+= raw/website/experience/notre-dame.md: unchanged (sha256 3814314d1781), notes up to date: University of Notre Dame
+= raw/website/experience/tiktok.md: unchanged (sha256 506c7ec1a979), notes up to date: TikTok Internship
+= raw/website/experience/uc-berkeley.md: unchanged (sha256 c2a9c5038e7f), notes up to date: UC Berkeley
+= raw/website/projects/action-hub.md: unchanged (sha256 c6c9d5e99239), notes up to date: Action Hub
+= raw/website/projects/allowlist.md: unchanged (sha256 4567a2efe10e), notes up to date: Allowlist Data Access App
+= raw/website/projects/asteroid-screening.md: unchanged (sha256 b2f6998b38c7), notes up to date: Hazardous Asteroid Screening
+= raw/website/projects/datafest-2023.md: unchanged (sha256 308b95c82686), notes up to date: DataFest 2023
+= raw/website/projects/formula-1-trends.md: unchanged (sha256 9c8ef2b2753d), notes up to date: Formula 1 Racing Trends, Time Series Analysis
+= raw/website/projects/genai-adoption-program.md: unchanged (sha256 24dc0351e0af), notes up to date: GenAI Adoption Program
+= raw/website/projects/genai-target-setting.md: unchanged (sha256 e80c6f2cc4f2), notes up to date: GenAI Target Setting, Time Series Analysis
+= raw/website/projects/job-search-agent.md: unchanged (sha256 13c384c532b9), notes up to date: Job Search Agent
+= raw/website/projects/kickstarter-scraper.md: unchanged (sha256 1a197c607927), notes up to date: Kickstarter Scraper
+= raw/website/projects/pacman-dqn.md: unchanged (sha256 6c3cd8aecdb8), notes up to date: Ms. Pac-Man DQN, Deep Learning, Deep Q-Network
+= raw/website/projects/pr-automation.md: unchanged (sha256 cfba08280fda), notes up to date: Pull-Request Automation
+= raw/website/projects/secure-networking-tracker.md: unchanged (sha256 fb3996868f0d), notes up to date: Secure Networking Tracker
+= raw/website/projects/tripmatch.md: unchanged (sha256 c8542a2ca92b), notes up to date: TripMatch Rides Board
+
+Ingest finished in 0s with gemma-4-e4b-it-qat-q4_0 (local): 26 unchanged
+Index: 529 passages (26 sources, 24 reviewed notes); 0 newly embedded. index.md and Source Catalog.md rebuilt.
+[exit code 0]
+Notes after re-ingesting everything: 25 (same as after the first ingest: no duplicates)
+
+$ wiki check
+── wiki check · vault lint ──
+  warn   wiki/Concepts/Prioritization Framework Method.md: no incoming links from other notes (only the index)
+  warn   wiki/Concepts/Prioritization Framework Method.md: not yet reviewed against its sources
+  warn   wiki/Experience/Seaside Sustainability.md: no related-note links
+  warn   wiki/Experience/Seaside Sustainability.md: no incoming links from other notes (only the index)
+
+25 notes, 435 links checked, 0 broken/ambiguous, 0 errors, 4 warnings.
+[exit code 0]
+-- the newest notes (readable names, no hashes) --
+vault/wiki/Concepts/:
+Prioritization Framework Method.md
+Time Series Analysis.md
+Deep Q-Network.md
+Deep Learning.md
+
+vault/wiki/Projects/:
+Formula 1 Racing Trends.md
+Kickstarter Scraper.md
+TripMatch Rides Board.md
+Secure Networking Tracker.md
+Pull-Request Automation.md
+Ms. Pac-Man DQN.md
+Job Search Agent.md
+Hazardous Asteroid Screening.md
+GenAI Target Setting.md
+GenAI Adoption Program.md
+DataFest 2023.md
+Custom LLM with nanoGPT.md
+Allowlist Data Access App.md
+
+################################################################
+##  SCREENSHOT 2 of 5: the new source ingested offline, and re-ingest with no duplicates
+##  Press Cmd+Shift+3 now, then press Enter here to continue.
+################################################################
+
+
+================================================================
+== 5. The four ask-mode tests (standalone, cited, local Gemma)
+================================================================
+
+$ wiki ask What share of the final grade is attendance, and how many classes can be missed without penalty?
+── wiki ask · gemma-4-e4b-it-qat-q4_0 · local (llama.cpp, this machine) ──
+
+Attendance is worth 20% of the final grade [S1][S2][S5]. Students are allowed one absence without penalty, and no explanation is required for that absence [S1][S2].
+
+Sources
+ *[S1] raw/course/syllabus.html:492-494 › MBA 290T: Fundamental of Agentic AI › Attendance
+ *[S2] raw/course/syllabus.html:593-621 › MBA 290T: Fundamental of Agentic AI › Grading
+  [S3] wiki/Course/MBA 290T Syllabus.md:28-36 › MBA 290T Syllabus › Key facts  (wiki note)
+  [S4] raw/course/syllabus.html:413-418 › MBA 290T: Fundamental of Agentic AI › Class Schedule
+ *[S5] wiki/Course/MBA 290T Syllabus.md:21-27 › MBA 290T Syllabus › Key facts  (wiki note)
+  [S6] raw/course/syllabus.html:498-536 › MBA 290T: Fundamental of Agentic AI › Graded Assignments
+  * = cited in the answer
+
+Citation check: ok
+Retrieval: hybrid (BM25 + EmbeddingGemma, reciprocal-rank fusion). Time: 10.3s (retrieval 0.04s). Saved: runs/ask-20260928-210721-323.json
+[exit code 0]
+
+$ wiki ask In the app I built to track people I meet, what stops one user from seeing someone else's list?
+── wiki ask · gemma-4-e4b-it-qat-q4_0 · local (llama.cpp, this machine) ──
+
+Ownership is enforced by Postgres through Row Level Security (RLS) [S2]. Every contact belongs to exactly one account, and this ownership is enforced by the database [S1][S2]. Specifically, RLS policies are enabled and forced on the `contacts` table, with policies for `authenticated` users that ensure a row belongs to the user whose JWT created it, and only that user can read or change it [S3][S6]. A query for "all contacts" physically cannot return another user's rows because Postgres reads the user's ID from the JWT and applies RLS [S5].
+
+Sources
+ *[S1] raw/course-projects/secure-networking-tracker/README.md:3-5 › Secure Networking Tracker
+ *[S2] raw/website/projects/secure-networking-tracker.md:28-30 › (introduction)
+ *[S3] raw/course-projects/secure-networking-tracker/README.md:318-343 › Secure Networking Tracker › Authentication and ownership  (opening of this section, added)
+  [S4] raw/course-projects/secure-networking-tracker/README.md:345-351 › Secure Networking Tracker › Authentication and ownership
+ *[S5] raw/course-projects/secure-networking-tracker/docs/how-it-works.md:9-9 › How this app works › 1. The one-paragraph version
+ *[S6] raw/course-projects/secure-networking-tracker/docs/how-it-works.md:52-83 › How this app works › 3. The ownership rule › Layer 2 — Row Level Security filters every statement  (opening of this section, added)
+  [S7] raw/course-projects/secure-networking-tracker/docs/how-it-works.md:85-89 › How this app works › 3. The ownership rule › Layer 2 — Row Level Security filters every statement
+  [S8] raw/website/projects/secure-networking-tracker.md:77-88 › 2. Where the boundary actually is › The subtle one
+  * = cited in the answer
+
+Citation check: ok
+Retrieval: hybrid (BM25 + EmbeddingGemma, reciprocal-rank fusion) + the opening passage of each retrieved section. Time: 13.9s (retrieval 0.06s). Saved: runs/ask-20260928-210735-396.json
+[exit code 0]
+
+$ wiki ask What was my job title at Amazon Web Services, and by how much did the Action Hub cut sellers' time-to-insight?
+── wiki ask · gemma-4-e4b-it-qat-q4_0 · local (llama.cpp, this machine) ──
+
+The job title at Amazon Web Services was Business Intelligence Engineer — Global Sales Strategy & Analytics [S3][S5]. The Action Hub cut time-to-insight by 70% for over 10,000 sellers [S1][S4][S6].
+
+Sources
+ *[S1] raw/website/projects/action-hub.md:1-23 › Properties
+  [S2] wiki/Projects/Action Hub.md:35-37 › Action Hub › Related notes  (wiki note)
+ *[S3] wiki/Experience/Amazon Web Services.md:21-26 › Amazon Web Services › Key facts  (wiki note)
+ *[S4] wiki/Projects/Action Hub.md:18-18 › Action Hub  (wiki note)
+ *[S5] raw/website/experience/amazon-web-services.md:1-14 › Properties
+ *[S6] raw/website/projects/action-hub.md:24-26 › (introduction)  (opening of this section, added)
+  [S7] raw/website/projects/action-hub.md:28-33 › (introduction)
+  * = cited in the answer
+
+Citation check: ok
+Retrieval: hybrid (BM25 + EmbeddingGemma, reciprocal-rank fusion) + the opening passage of each retrieved section. Time: 8.2s (retrieval 0.06s). Saved: runs/ask-20260928-210743-809.json
+[exit code 0]
+
+$ wiki ask What grade did I receive on the Pac-Man assignment?
+── wiki ask · gemma-4-e4b-it-qat-q4_0 · local (llama.cpp, this machine) ──
+
+Insufficient evidence: The provided passages detail the setup, results, and requirements of the Ms. Pac-Man DQN assignment, but they do not contain any information regarding the grade received.
+
+Sources
+  [S1] raw/course-projects/pacman-dqn/README.md:3-9 › Ms. Pac-Man DQN — Class 3 Assignment
+  [S2] wiki/Projects/Ms. Pac-Man DQN.md:24-24 › Ms. Pac-Man DQN  (wiki note)
+  [S3] wiki/Projects/Ms. Pac-Man DQN.md:29-33 › Ms. Pac-Man DQN › Key facts › From course-projects/pacman-dqn/README.md  (wiki note)
+  [S4] raw/course-projects/pacman-dqn/README.md:114-118 › Ms. Pac-Man DQN — Class 3 Assignment › What I expected, and what actually happened  (opening of this section, added)
+  [S5] raw/course-projects/pacman-dqn/README.md:137-138 › Ms. Pac-Man DQN — Class 3 Assignment › What I expected, and what actually happened
+  [S6] wiki/Projects/Ms. Pac-Man DQN.md:64-66 › Ms. Pac-Man DQN › Sources  (wiki note)
+  [S7] raw/course-projects/pacman-dqn/README.md:397-410 › Ms. Pac-Man DQN — Class 3 Assignment › Assignment requirements checklist  (opening of this section, added)
+  [S8] raw/course-projects/pacman-dqn/README.md:433-440 › Ms. Pac-Man DQN — Class 3 Assignment › Assignment requirements checklist
+  * = cited in the answer
+
+Citation check: insufficient-evidence (1 sentence(s) without a citation)
+Retrieval: hybrid (BM25 + EmbeddingGemma, reciprocal-rank fusion) + the opening passage of each retrieved section. Time: 8.3s (retrieval 0.05s). Saved: runs/ask-20260928-210752-383.json
+[exit code 0]
+
+################################################################
+##  SCREENSHOT 3 of 5: the ask answers with their sources (scroll up to show T2 if you can)
+##  Press Cmd+Shift+3 now, then press Enter here to continue.
+################################################################
+
+
+================================================================
+== 6. Chat and search mode checks
+================================================================
+
+$ wiki chat --script tests/chat_scripts/M1_capabilities.txt
+── wiki chat · gemma-4-e4b-it-qat-q4_0 · local · llama.cpp at http://127.0.0.1:8080 ──
+Wren here, your chief of staff. Ask me anything, or type /help. /exit to quit.
+
+you › what can you help me with?
+  (no notes lookup: casual, capability or edit request: answered from the conversation)
+
+Wren › I'm here to help you manage your work and academic life at Haas. Think of me as your organized sounding board.
+
+I can help you with:
+
+*   **Brainstorming and Drafting:** We can flesh out project ideas, draft emails, or outline papers.
+*   **Organization:** I can help structure your thoughts and keep track of what we've discussed in this session.
+*   **Information Retrieval:** If you want me to look up specific details from your notes on projects, MBA 290T, or work, I can pull those up for you [N1].
+
+Just let me know what's on your plate. A concrete next step is always helpful.
+
+  8.3s
+you › what can we do?
+  (no notes lookup: casual, capability or edit request: answered from the conversation)
+
+Wren › We can do a lot, depending on what you need right now. Since I'm running on your notes, I'm best at supporting your existing work.
+
+Here are a few options:
+
+*   **Project Deep Dive:** We can review a specific project from your notes and brainstorm the next logical step.
+*   **Content Drafting:** If you have an idea or a set of bullet points, I can draft an email, memo, or section of a paper based on that.
+*   **Note Review:** If you're feeling scattered, you can ask me to search your notes on a specific topic (e.g., `/notes Project X`).
+
+What's the most pressing thing on your list today?
+
+  6.3s
+  chat log: /Users/easonhan/Desktop/研一上/MBA 290T Fundamentals of Agentic AI/personal-wiki/runs/chat-20260928-211007-928.jsonl
+[exit code 0]
+
+$ wiki chat --script tests/chat_scripts/M2_followup.txt
+── wiki chat · gemma-4-e4b-it-qat-q4_0 · local · llama.cpp at http://127.0.0.1:8080 ──
+Wren here, your chief of staff. Ask me anything, or type /help. /exit to quit.
+
+you › Draft a short plan for my week: I need to finish Assignment 4 and prep for PM internship applications.
+  (no notes lookup: drafting/planning from what you said: no personal facts needed)
+
+Wren › Here is a draft plan. I've blocked out time for both priorities, assuming a standard work week. We can adjust the timing once you give me more detail on the assignment scope or application deadlines.
+
+**Weekly Focus:** Assignment 4 Completion & PM Internship Application Prep
+
+*   **M/T:** Deep Work Block - Assignment 4 Drafting/Refining.
+*   **W:** Review/Self-Correction Block for Assignment 4. Begin PM application research (identify 3 target companies).
+*   **Th:** Dedicated PM Application Prep (Tailor 1-2 applications/write cover letters).
+*   **F:** Final review of Assignment 4. Light PM prep (networking/LinkedIn updates).
+
+What are the hard deadlines for Assignment 4, and what is your general availability like this week?
+
+  7.0s
+you › make that shorter
+  (no notes lookup: casual, capability or edit request: answered from the conversation)
+
+Wren › Here is a more compressed version:
+
+*   **M-W:** Focus on completing Assignment 4.
+*   **Th-F:** Dedicated to PM internship application preparation (research, tailoring, and submission).
+
+Does that feel more manageable, or should we prioritize one over the other?
+
+  2.7s
+  chat log: /Users/easonhan/Desktop/研一上/MBA 290T Fundamentals of Agentic AI/personal-wiki/runs/chat-20260928-211022-690.jsonl
+[exit code 0]
+
+$ wiki search row level security -k 3
+── wiki search · hybrid (BM25 + EmbeddingGemma, reciprocal-rank fusion) · no language model ──
+
+[1] raw/course-projects/secure-networking-tracker/docs/how-it-works.md:52-83  (original; BM25 #1 · vector #1)
+    How this app works › 3. The ownership rule › Layer 2 — Row Level Security filters every statement
+    ```sql
+    ALTER TABLE public.contacts ENABLE ROW LEVEL SECURITY;
+    ALTER TABLE public.contacts FORCE  ROW LEVEL SECURITY;
+    ```
+    `ENABLE` turns policies on. `FORCE` also applies them to the table's *owner* — without it, `neondb_owner` would bypass every policy.
+    Four policies, one per operation, all for the `authenticated` role:
+    ```sql
+    CREATE POLICY contacts_select_own ON public.contacts
+      FOR SELECT TO authenticated
+      USING ((SELECT auth.user_id()) = user_id);
+
+    CREATE POLICY contacts_insert_own ON public.contacts
+      FOR INSERT TO authenticated
+      WITH CHECK ((SELECT auth.user_id()) = user_id);
+
+    CREATE POLICY contacts_update_own ON public.contacts
+      FOR UPDATE TO authenticated
+      USING      ((SELECT auth.user_id()) = user_id)
+      WITH CHECK ((SELECT auth.user_id()) = user_id);
+
+    CREATE POLICY contacts_delete_own ON public.contacts
+      FOR DELETE TO authenticated
+      USING ((SELECT auth.user_id()) = user_id);
+    ```
+    **`USING` vs `WITH CHECK` — the distinction to have ready:**
+    - `USING` filters rows that already exist. It answers *"which rows may this statement see or touch?"* It is silently added to `SELECT`, `UPDATE` and `DELETE` as an extra `WHERE` clause.
+    - `WITH CHECK` inspects the row *as it will be after the write*. It answers *"is this row allowed to exist looking like that?"* It applies to `INSERT` and `UPDATE`.
+
+[2] raw/course-projects/secure-networking-tracker/docs/how-it-works.md:85-89  (original; BM25 #4 · vector #2)
+    How this app works › 3. The ownership rule › Layer 2 — Row Level Security filters every statement
+    **Why `UPDATE` needs both.** With only `USING`, a user could target a row they legitimately own and change `user_id` to someone else's id. `USING` was satisfied — they did own it at the start. Nothing would check the result, so the row would silently move into another person's list. That is both a data-loss bug and a way to plant rows in someone else's account. `WITH CHECK` re-evaluates the rule against the *new* row and rejects it.
+    There is also a `BEFORE UPDATE` trigger that resets `NEW.user_id = OLD.user_id`, so ownership is pinned even if a policy were later loosened.
+    **`anonymous` is granted nothing** on this table, so an unauthenticated caller has no privileges to exercise in the first place.
+
+[3] wiki/Projects/Secure Networking Tracker.md:39-42  (wiki note; BM25 #2 · vector #8)
+    Secure Networking Tracker › Key facts › From course-projects/secure-networking-tracker/docs/how-it-works.md
+    - A signed-in user gets a private list of contacts, and the browser never talks to the database. ([[raw/course-projects/secure-networking-tracker/docs/how-it-works#1. The one-paragraph version|course-projects/secure-networking-tracker/docs/how-it-works.md › 1. The one-paragraph version]])
+    - The `user_id` column in the `public.contacts` table is of type `text` and serves as the whole security model. ([[raw/course-projects/secure-networking-tracker/docs/how-it-works#2. The schema|course-projects/secure-networking-tracker/docs/how-it-works.md › 2. The schema]])
+    - The distinction between `USING` and `WITH CHECK` is that `USING` filters existing rows, while `WITH CHECK` inspects the row as it will be after the write. ([[raw/course-projects/secure-networking-tracker/docs/how-it-works#Layer 2 — Row Level Security filters every statement|course-projects/secure-networking-tracker/docs/how-it-works.md › Layer 2 — Row Level Security filters every statement]])
+    - Layer 3 involves the application checking routes and returning 401s, which is defense in depth but not the primary security mechanism. ([[raw/course-projects/secure-networking-tracker/docs/how-it-works#Layer 3 — the application checks too|course-projects/secure-networking-tracker/docs/how-it-works.md › Layer 3 — the application checks too]])
+
+3 passages from 529 indexed. No answer generated; open the paths above to read more.
+[exit code 0]
+
+$ wiki chat --script tests/chat_scripts/M4_claim.txt
+── wiki chat · gemma-4-e4b-it-qat-q4_0 · local · llama.cpp at http://127.0.0.1:8080 ──
+Wren here, your chief of staff. Ask me anything, or type /help. /exit to quit.
+
+you › By the way, my favorite programming language is Rust.
+  (no notes lookup: model router decided no notes needed)
+
+Wren › Got it. Rust. Noted.
+
+Is there anything specific you're working on with it, or anything else I can help you organize today?
+
+  2.8s
+  chat log: /Users/easonhan/Desktop/研一上/MBA 290T Fundamentals of Agentic AI/personal-wiki/runs/chat-20260928-211032-779.jsonl
+[exit code 0]
+
+$ wiki ask What is my favorite programming language?
+── wiki ask · gemma-4-e4b-it-qat-q4_0 · local (llama.cpp, this machine) ──
+
+Insufficient evidence: The provided passages describe course materials, project structures, and technical concepts related to AI and programming, but they do not contain any information about the user's favorite programming language.
+
+Sources
+  [S1] raw/course/syllabus.html:658-659 › MBA 290T: Fundamental of Agentic AI › What Each Class Covers
+  [S2] raw/course/syllabus.html:442-443 › MBA 290T: Fundamental of Agentic AI › Prerequisites
+  [S3] raw/course-projects/custom-llm/README.md:1844-1864 › Building a Custom LLM › 15. Repository map
+  [S4] raw/course-projects/custom-llm/README.md:1011-1015 › Building a Custom LLM › 7. The 48 fixed language evals: all ten result sets › By group
+  [S5] wiki/Concepts/Deep Learning.md:31-33 › Deep Learning › Related notes  (wiki note)
+  [S6] raw/course-projects/custom-llm/README.md:976-989 › Building a Custom LLM › 7. The 48 fixed language evals: all ten result sets
+  * = cited in the answer
+
+Citation check: insufficient-evidence
+Retrieval: hybrid (BM25 + EmbeddingGemma, reciprocal-rank fusion). Time: 9.4s (retrieval 0.02s). Saved: runs/ask-20260928-211045-209.json
+[exit code 0]
+
+$ wiki chat --script tests/chat_scripts/M5_draft_from_notes.txt
+── wiki chat · gemma-4-e4b-it-qat-q4_0 · local · llama.cpp at http://127.0.0.1:8080 ──
+Wren here, your chief of staff. Ask me anything, or type /help. /exit to quit.
+
+you › Draft a 3-line LinkedIn post about my Ms. Pac-Man project.
+  (looked up notes: mentions wiki subject 'Ms. Pac-Man DQN'; query "Draft a 3-line LinkedIn post about my Ms. Pac-Man project." -> 4 passages)
+
+Wren › Here are a couple of options for a 3-line LinkedIn post, depending on the tone you want.
+
+**Option 1 (Results Focused):**
+
+> Just wrapped up a project applying Deep Q-Networks to Ms. Pac-Man. 🕹️
+> By tuning hyperparameters (like setting the learning rate to 0.0001), the agent saw a significant jump in performance.
+> Mean score rose from 492 to 906—a solid 84% improvement! #ReinforcementLearning #AI
+
+**Option 2 (Technical Focus):**
+
+> Diving into RL with Ms. Pac-Man DQN. 🧠
+> Training the agent required careful tuning of exploration (0.10) and episodes (300) to avoid policy collapse.
+> Excited to see how these concepts translate to real-world optimization problems.
+
+Let me know if you want me to draft a longer version or focus on a different aspect.
+
+Notes used (not tagged claim by claim): [N1][N4] Ms. Pac-Man DQN; [N2] Deep Q-Network; [N3] Ms. Pac-Man DQN — Class 3 Assignment (original)
+
+  [N1] wiki/Projects/Ms. Pac-Man DQN.md:64-66 › Ms. Pac-Man DQN › Sources
+  [N2] wiki/Concepts/Deep Q-Network.md:31-31 › Deep Q-Network › Sources
+  [N3] raw/course-projects/pacman-dqn/README.md:3-9 › Ms. Pac-Man DQN — Class 3 Assignment
+  [N4] wiki/Projects/Ms. Pac-Man DQN.md:29-33 › Ms. Pac-Man DQN › Key facts › From course-projects/pacman-dqn/README.md
+  citation check: no-citations
+
+  11.8s
+you › make that shorter
+  (no notes lookup: casual, capability or edit request: answered from the conversation)
+
+Wren › Here is a punchier, shorter version:
+
+> Successfully implemented Deep Q-Learning on Ms. Pac-Man. 🕹️
+> Achieved a significant performance boost by tuning key hyperparameters.
+> RL in action—always a fun challenge! #AI #DeepLearning
+
+Does that hit the mark, or should we trim it further?
+
+  3.9s
+  chat log: /Users/easonhan/Desktop/研一上/MBA 290T Fundamentals of Agentic AI/personal-wiki/runs/chat-20260928-211045-345.jsonl
+[exit code 0]
+
+################################################################
+##  SCREENSHOT 4 of 5: the chat and search checks
+##  Press Cmd+Shift+3 now, then press Enter here to continue.
+################################################################
+
+
+================================================================
+== 7. Evidence cards for the same checks (scripts/run_evals.py, same harness code)
+================================================================
+
+$ python scripts/run_evals.py --label offline-2
+network: {'https://1.1.1.1': 'unreachable (URLError)', 'https://huggingface.co': 'unreachable (URLError)', 'tcp 1.1.1.1:53 (informational)': 'answered', 'internet': 'offline'}
+[ask] T1: What share of the final grade is attendance, and how many classes can be missed without penalty?
+      -> ok in 1.96s
+[ask] T2: In the app I built to track people I meet, what stops one user from seeing someone else's list?
+      -> ok in 5.08s
+[ask] T3: What was my job title at Amazon Web Services, and by how much did the Action Hub cut sellers' time-to-insight?
+      -> ok in 2.35s
+[ask] T4: What grade did I receive on the Pac-Man assignment?
+      -> insufficient-evidence in 1.57s
+[chat] what can you help me with?
+[chat] what can we do?
+[chat] Draft a short plan for my week: I need to finish Assignment 4 and prep for PM internship applications.
+[chat] make that shorter
+[search] row level security (Gemma running: False) -> 6 passages
+[chat] By the way, my favorite programming language is Rust.
+[ask] What is my favorite programming language?
+[chat] Draft a 3-line LinkedIn post about my Ms. Pac-Man project.
+[chat] make that shorter
+cards written to evidence/offline-2
+[exit code 0]
+
+================================================================
+== 8. Your turn: a short live chat (type a few messages, then /exit)
+================================================================
+Suggested: 'what can you help me with?', then ask it to draft something about one of your projects,
+then 'make that shorter', then /exit.
+── wiki chat · gemma-4-e4b-it-qat-q4_0 · local · llama.cpp at http://127.0.0.1:8080 ──
+Wren here, your chief of staff. Ask me anything, or type /help. /exit to quit.
+
+you › what can you help me with?
+  (no notes lookup: casual, capability or edit request: answered from the conversation)
+
+Wren › I'm here to help you manage your work, Eason. Think of me as your organized sounding board.
+
+Specifically, I can:
+
+*   **Brainstorm and Draft:** We can work through ideas, draft emails, outlines, or sections of papers.
+*   **Organize:** I can help structure projects or break down large tasks into actionable steps.
+*   **Retrieve Information:** I can pull data from your existing notes using commands like `/notes <topic>` or `wiki ask "question"`.
+*   **Refine:** If you have something written, I can help you polish it for tone, conciseness, or clarity.
+
+What's on your plate right now?
+
+  5.6s
+you › Crea    Draft a short LinkedIn post about my action hub project
+  (looked up notes: mentions wiki subject 'Action Hub'; query "Draft a short LinkedIn post about my action hub project" -> 4 passages)
+
+Wren › Here are a couple of options for a LinkedIn post, depending on whether you want to be more technical or more impact-focused.
+
+### Option 1: Impact & Problem/Solution Focused (Recommended)
+
+This one leads with the pain point, which usually gets more engagement.
+
+> Faced a classic data sprawl problem: 200+ dashboards, but no clear answer to the daily question, "What should I do today?" 🤯
+>
+> I built **Action Hub**, a tool designed to solve this for a technical sales organization. Instead of manual sweeps across multiple systems, Action Hub ranks every open issue across a seller's accounts and prescribes the *next action* for each one.
+>
+> The result? Cutting time-to-insight by 70% for over 10,000 sellers. It wasn't about data access; it was about translating data into direct action.
+>
+> #ProductManagement #SalesTech #DataVisualization #ActionHub
+
+### Option 2: More Technical/Product Focused
+
+This option is slightly more detailed about the process.
+
+> Great product design starts by framing the right problem. For our technical sales org, the bottleneck wasn't data access—it was the translation between "here is a number" and "here is what to do about it" [N3].
+>
+> We developed **Action Hub** to serve as the "first tab" in our new source of truth, aggregating insights from 200+ dashboards into one prioritized view. By ranking open issues and assigning clear next steps, we achieved a 70% reduction in time-to-insight for 10k+ sellers [N2, N4].
+>
+> Excited to share the journey from 20 user interviews to a fully actionable product.
+>
+> #SaaS #ProductDesign #DataStrategy
+
+Which direction feels better for your network, or would you like me to refine one of these?
+
+  [N1] wiki/Projects/Action Hub.md:40-40 › Action Hub › Sources
+  [N2] wiki/Projects/Action Hub.md:18-18 › Action Hub
+  [N3] raw/website/projects/action-hub.md:49-53 › 1. The problem: two hundred dashboards and no front door
+  [N4] wiki/Projects/Action Hub.md:21-26 › Action Hub › Key facts
+  citation check: some-sentences-uncited
+
+  19.7s
+you › N3
+  (no notes lookup: model router decided no notes needed)
+
+Wren › I see you're referencing [N3]. Could you clarify what you'd like me to do with that note?
+
+For example, do you want me to:
+
+1.  **Use it** to revise one of the drafts?
+2.  **Look it up** to see what it says? (Type `/notes N3` if you want me to pull the content.)
+3.  **Add it** to a specific section of the post?
+
+Let me know the next step.
+
+  7.9s
+you › I like optin on 1, mak  e it shorter
+  (no notes lookup: casual, capability or edit request: answered from the conversation)
+
+Wren › Here is a shorter, punchier version of Option 1:
+
+> 200+ dashboards, zero clear next steps. That was the problem.
+>
+> I built **Action Hub** to solve it. Instead of drowning in data, Action Hub aggregates issues across a seller's accounts and prescribes the *exact next action* for each one.
+>
+> Result? Cut time-to-insight by 70% for over 10,000 sellers. Data is only useful if it tells you what to do.
+>
+> #ProductManagement #SalesTech #ActionHub
+
+Let me know if you want to tweak the tone further, or if you're ready to move on to drafting a different piece.
+
+  6.1s
+you › /exit
+  chat log: /Users/easonhan/Desktop/研一上/MBA 290T Fundamentals of Agentic AI/personal-wiki/runs/chat-20260928-211339-830.jsonl
+
+################################################################
+##  SCREENSHOT 5 of 5: your live chat (before this prompt scrolls away)
+##  Press Cmd+Shift+3 now, then press Enter here to continue.
+################################################################
+
+
+================================================================
+== 9. Still offline at the end?
+================================================================
+
+$ curl -sS -m 5 -o /dev/null https://1.1.1.1
+curl: (7) Couldn't connect to server
+[exit code 7]
+
+$ curl -sS -m 5 -o /dev/null https://huggingface.co
+curl: (6) Could not resolve host: huggingface.co
+[exit code 6]
+Total time: 1042 s
